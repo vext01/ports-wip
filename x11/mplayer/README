@@ -11,9 +11,7 @@ FFMPEG Linkage
 
 We link the shared libraries from the graphics/ffmpeg port. This is what
 --disable-ffmpeg_a does, however we still need the ffmpeg sources in the
-build dir for this to work. We fetch and extract the distfile for the
-ffmpeg port at the same time as the actual mplayer distfile and put it
-in place.
+build dir for this to work, hence we depend upon ffmpeg as a build dependency.
 
 Ensure that ffmpeg was dynamically linked by using ldd on the mplayer
 binary and searching for one of the ffmpeg libs in the listing (eg.
@@ -43,6 +41,9 @@ existence of this bug with this URL:
 http://icecast.version6.net:8888/okul.ogg
 
 When a song ends, mplayer will stall saying it cannot fill the cache.
+
+Bug reported upstream here (it's an ffmpeg bug):
+https://roundup.ffmpeg.org/issue2337
 
 Rolling a Distfile
 ------------------

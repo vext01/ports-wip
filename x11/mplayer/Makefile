@@ -14,8 +14,6 @@ SUBST_VARS += 		PREFIX CONFDIR
 N =			mplayer
 DISTNAME =		mplayer-${V}
 
-DISTFILES = 		${DISTNAME}${EXTRACT_SUFX}
-PKGNAME =		${N}-${V}
 CATEGORIES =		x11 multimedia
 
 HOMEPAGE =		http://www.mplayerhq.hu/
@@ -70,9 +68,8 @@ BUILD_DEPENDS =	net/livemedia \
 		textproc/docbook \
 		textproc/docbook-xsl \
 		audio/ladspa
-# To do dynamic ffmpeg linking, you also need the ffmpeg sources inside
-# the build tree for some obscure reason. This should retrieve the same
-# distfile as graphics/ffmpeg.
+# mplayer uses non-public interfaces to ffmepg, so we still need
+# the ffmpeg source in the mplayer tree at build time.
 BUILD_DEPENDS +=graphics/ffmpeg:patch
 
 .if ${MACHINE_ARCH:Mamd64} || ${MACHINE_ARCH:Mi386}

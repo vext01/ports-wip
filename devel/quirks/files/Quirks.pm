@@ -197,6 +197,7 @@ my $stem_extensions = {
 	'p5-Mojo' => 'p5-Mojolicious',
 	'groff-mdoc' => 'groff',
 	'hudson' => 'jenkins',
+	'py-BeautifulSoup' => 'py-beautifulsoup',
 };
 
 # ->is_base_system($handle, $state):

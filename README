@@ -1,0 +1,10 @@
+Edd Barrett's Ports-WIP Git Repo
+--------------------------------
+
+When I am working on ports, they end up here as a directory suitible for use
+with /usr/ports/mystuff.
+
+The technique is quite meta in that I import the CVS/ directories right into
+git. This makes working with cvs over multiple machines less painful. Once
+things are commited upstream, I remove them from git so that they don't take
+priority over the main tree anymore.

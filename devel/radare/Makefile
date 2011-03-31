@@ -13,34 +13,36 @@ COMMENT =		XXX
 
 DISTNAME =		radare2-0.7
 
-#SHARED_LIBS +=  r_anal                    0.0 # 0.7
-#SHARED_LIBS +=  r_asm                     0.0 # 0.7
-#SHARED_LIBS +=  r_bin                     0.0 # 0.7
-#SHARED_LIBS +=  r_bp                      0.0 # 0.7
-#SHARED_LIBS +=  r_cmd                     0.0 # 0.7
-#SHARED_LIBS +=  r_config                  0.0 # 0.7
-#SHARED_LIBS +=  r_cons                    0.0 # 0.7
-#SHARED_LIBS +=  r_core                    0.0 # 0.7
-#SHARED_LIBS +=  r_crypto                  0.0 # 0.7
-#SHARED_LIBS +=  r_db                      0.0 # 0.7
-#SHARED_LIBS +=  r_debug                   0.0 # 0.7
-#SHARED_LIBS +=  r_diff                    0.0 # 0.7
-#SHARED_LIBS +=  r_flags                   0.0 # 0.7
-#SHARED_LIBS +=  r_fs                      0.0 # 0.7
-#SHARED_LIBS +=  r_hash                    0.0 # 0.7
-#SHARED_LIBS +=  r_io                      0.0 # 0.7
-#SHARED_LIBS +=  r_lang                    0.0 # 0.7
-#SHARED_LIBS +=  r_lib                     0.0 # 0.7
-#SHARED_LIBS +=  r_line                    0.0 # 0.7
-#SHARED_LIBS +=  r_parse                   0.0 # 0.7
-#SHARED_LIBS +=  r_print                   0.0 # 0.7
-#SHARED_LIBS +=  r_reg                     0.0 # 0.7
-#SHARED_LIBS +=  r_search                  0.0 # 0.7
-#SHARED_LIBS +=  r_sign                    0.0 # 0.7
-#SHARED_LIBS +=  r_socket                  0.0 # 0.7
-#SHARED_LIBS +=  r_syscall                 0.0 # 0.7
-#SHARED_LIBS +=  r_th                      0.0 # 0.7
-#SHARED_LIBS +=  r_util                    0.0 # 0.7
+# these should all be 0.0, but i have not figured out how to 
+# make the build listen yet. XXX
+SHARED_LIBS +=  r_anal                    0.7 # 0.7
+SHARED_LIBS +=  r_asm                     0.7 # 0.7
+SHARED_LIBS +=  r_bin                     0.7 # 0.7
+SHARED_LIBS +=  r_bp                      0.7 # 0.7
+SHARED_LIBS +=  r_cmd                     0.7 # 0.7
+SHARED_LIBS +=  r_config                  0.7 # 0.7
+SHARED_LIBS +=  r_cons                    0.7 # 0.7
+SHARED_LIBS +=  r_core                    0.7 # 0.7
+SHARED_LIBS +=  r_crypto                  0.7 # 0.7
+SHARED_LIBS +=  r_db                      0.7 # 0.7
+SHARED_LIBS +=  r_debug                   0.7 # 0.7
+SHARED_LIBS +=  r_diff                    0.7 # 0.7
+SHARED_LIBS +=  r_flags                   0.7 # 0.7
+SHARED_LIBS +=  r_fs                      0.7 # 0.7
+SHARED_LIBS +=  r_hash                    0.7 # 0.7
+SHARED_LIBS +=  r_io                      0.7 # 0.7
+SHARED_LIBS +=  r_lang                    0.7 # 0.7
+SHARED_LIBS +=  r_lib                     0.7 # 0.7
+SHARED_LIBS +=  r_line                    0.7 # 0.7
+SHARED_LIBS +=  r_parse                   0.7 # 0.7
+SHARED_LIBS +=  r_print                   0.7 # 0.7
+SHARED_LIBS +=  r_reg                     0.7 # 0.7
+SHARED_LIBS +=  r_search                  0.7 # 0.7
+SHARED_LIBS +=  r_sign                    0.7 # 0.7
+SHARED_LIBS +=  r_socket                  0.7 # 0.7
+SHARED_LIBS +=  r_syscall                 0.7 # 0.7
+SHARED_LIBS +=  r_th                      0.7 # 0.7
+SHARED_LIBS +=  r_util                    0.7 # 0.7
 
 CATEGORIES =		devel
 

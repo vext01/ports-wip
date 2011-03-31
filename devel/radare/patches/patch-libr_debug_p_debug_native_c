@@ -1,11 +1,14 @@
 $OpenBSD$
---- libr/debug/p/debug_native.c.orig	Thu Mar 10 13:21:08 2011
-+++ libr/debug/p/debug_native.c	Thu Mar 10 13:21:12 2011
-@@ -25,6 +25,19 @@ static int r_debug_native_reg_write(int pid, int tid, 
+--- libr/debug/p/debug_native.c.orig	Fri Jan 21 08:37:25 2011
++++ libr/debug/p/debug_native.c	Thu Mar 31 21:44:49 2011
+@@ -23,6 +23,23 @@ static int r_debug_native_reg_write(int pid, int tid, 
+ #include <sys/ptrace.h>
+ #include <sys/types.h>
  #include <sys/wait.h>
- #define R_DEBUG_REG_T struct reg
- 
++
 +#if defined(__OpenBSD__)
++#include <machine/reg.h>
++
 +#define PTRACE_PEEKTEXT		PT_READ_I
 +#define PTRACE_POKETEXT		PT_WRITE_I
 +#define PTRACE_PEEKDATA		PT_READ_D
@@ -16,8 +19,9 @@ $OpenBSD$
 +#define PTRACE_CONT		PT_CONTINUE
 +#define PTRACE_GETREGS		PT_GETREGS
 +#define PTRACE_SETREGS		PT_SETREGS
++#define PTRACE_SYSCALL		PT_STEP
 +#endif
 +
- #elif __APPLE__
+ #define R_DEBUG_REG_T struct reg
  
- #define MACH_ERROR_STRING(ret) \
+ #elif __APPLE__

@@ -1,0 +1,11 @@
+$OpenBSD$
+--- binr/radare2/Makefile.orig	Thu Mar 31 21:54:56 2011
++++ binr/radare2/Makefile	Thu Mar 31 21:55:40 2011
+@@ -3,6 +3,7 @@ BINDEPS=r_core r_parse r_search r_cons r_lib r_config 
+ BINDEPS+=r_bin r_debug r_anal r_reg r_bp r_io r_cmd r_th r_fs
+ BINDEPS+=r_sign r_print r_lang r_asm r_syscall r_hash r_line r_socket r_flags r_util
+ 
++${BIN}${EXT_EXE}:	LDFLAGS += -pthread
+ include ../binr.mk
+ 
+ sign:

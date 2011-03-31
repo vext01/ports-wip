@@ -1,0 +1,22 @@
+$OpenBSD$
+--- libr/io/p/io_debug.c.orig	Thu Mar 10 09:55:22 2011
++++ libr/io/p/io_debug.c	Thu Mar 10 09:56:21 2011
+@@ -30,7 +30,9 @@
+ #include <mach/vm_map.h>
+ #include <mach-o/loader.h>
+ #include <mach-o/nlist.h>
++#endif
+ 
++#if __APPLE__ || __OpenBSD__
+ static void inferior_abort_handler(int pid) {
+         eprintf ("Inferior received signal SIGABRT. Executing BKPT.\n");
+ }
+@@ -179,7 +181,7 @@ static int fork_and_ptraceme(const char *cmd) {
+ 		perror ("fork_and_ptraceme");
+ 		break;
+ 	case 0:
+-#if __APPLE__
++#if __APPLE__ || __OpenBSD__
+ 		signal (SIGTRAP, SIG_IGN); // SINO NO FUNCIONA EL STEP
+ 		signal (SIGABRT, inferior_abort_handler);
+ 		if (ptrace (PT_TRACE_ME, 0, 0, 0) != 0) {

@@ -1,0 +1,23 @@
+$OpenBSD$
+--- libr/debug/p/debug_native.c.orig	Thu Mar 10 13:21:08 2011
++++ libr/debug/p/debug_native.c	Thu Mar 10 13:21:12 2011
+@@ -25,6 +25,19 @@ static int r_debug_native_reg_write(int pid, int tid, 
+ #include <sys/wait.h>
+ #define R_DEBUG_REG_T struct reg
+ 
++#if defined(__OpenBSD__)
++#define PTRACE_PEEKTEXT		PT_READ_I
++#define PTRACE_POKETEXT		PT_WRITE_I
++#define PTRACE_PEEKDATA		PT_READ_D
++#define PTRACE_POKEDATA		PT_WRITE_D
++#define PTRACE_ATTACH		PT_ATTACH
++#define PTRACE_DETACH		PT_DETACH
++#define PTRACE_SINGLESTEP	PT_STEP
++#define PTRACE_CONT		PT_CONTINUE
++#define PTRACE_GETREGS		PT_GETREGS
++#define PTRACE_SETREGS		PT_SETREGS
++#endif
++
+ #elif __APPLE__
+ 
+ #define MACH_ERROR_STRING(ret) \

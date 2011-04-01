@@ -1,0 +1,12 @@
+$OpenBSD: patch-buildsys_mk_in,v 1.3 2010/12/19 18:19:56 shadchin Exp $
+--- buildsys.mk.in.orig	Thu Aug 26 05:07:49 2010
++++ buildsys.mk.in	Sat Dec  4 19:18:52 2010
+@@ -92,7 +92,7 @@ OBJS += ${OBJS9:.S=.o}
+ 
+ MO_FILES = ${LOCALES:.po=.mo}
+ 
+-.SILENT:
++#.SILENT:
+ .SUFFIXES:
+ .SUFFIXES: .beam .c .cc .cxx .d .dep .erl .mo .m .mm .o .po .py .pyc .xpm .S
+ .PHONY: all subdirs pre-depend depend install install-extra uninstall uninstall-extra clean distclean

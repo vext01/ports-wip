@@ -8,7 +8,8 @@ COMMENT-jack =		jack plugin for audacious
 V =			2.4.4
 DISTNAME =		audacious-plugins-$V
 PKGNAME-main =		${DISTNAME}
-REVISION-main =		0
+REVISION-main =		1
+REVISION-jack =		0
 PKGNAME-jack =		audacious-jack-$V
 
 CATEGORIES =		audio multimedia

@@ -1,0 +1,26 @@
+$OpenBSD: patch-DOCS_man_en_mplayer_1,v 1.5 2011/03/29 20:04:41 edd Exp $
+--- DOCS/man/en/mplayer.1.orig	Thu Mar 24 21:40:29 2011
++++ DOCS/man/en/mplayer.1	Sun Apr  3 23:16:41 2011
+@@ -1286,7 +1286,7 @@ May be negative.
+ .
+ .TP
+ .B \-cdrom\-device <path to device>
+-Specify the CD-ROM device (default: /dev/\:cdrom).
++Specify the CD-ROM device (default: /dev/rcd0c).
+ .
+ .TP
+ .B \-channels <number> (also see \-af channels)
+@@ -7750,11 +7750,11 @@ mplayer tv:// \-tv driver=v4l:width=640:height=480:out
+ .PP
+ .B Play DTS-CD with passthrough:
+ .nf
+-mplayer \-ac hwdts \-rawaudio format=0x2001 \-cdrom\-device /dev/cdrom cdda://
++mplayer \-ac hwdts \-rawaudio format=0x2001 \-cdrom\-device /dev/rcd0c cdda://
+ .fi
+ .br
+ You can also use \-afm hwac3 instead of \-ac hwdts.
+-Adjust '/dev/cdrom' to match the CD-ROM device on your system.
++Adjust '/dev/rcd0c' to match the CD-ROM device on your system.
+ If your external receiver supports decoding raw DTS streams,
+ you can directly play it via cdda:// without setting format, hwac3 or hwdts.
+ .

@@ -1,6 +1,6 @@
 $OpenBSD: patch-stream_tvi_bsdbt848_c,v 1.4 2010/11/08 21:25:44 edd Exp $
 --- stream/tvi_bsdbt848.c.orig	Thu Mar 24 21:40:29 2011
-+++ stream/tvi_bsdbt848.c	Sun Apr  3 23:27:35 2011
++++ stream/tvi_bsdbt848.c	Mon Apr  4 00:01:45 2011
 @@ -54,9 +54,10 @@
  #include <signal.h>
  #include <string.h>
@@ -89,7 +89,7 @@ $OpenBSD: patch-stream_tvi_bsdbt848_c,v 1.4 2010/11/08 21:25:44 edd Exp $
 +#if defined(CONFIG_SNDIO_AUDIO)
 +        if (!sio_stop(priv->hdl))
 +            {
-+            mp_msg(MSGT_TV, MSGL_ERR,MSGTR_TV_Bt848InvalidAudioRate, "sio_stop failed");
++            mp_tmsg(MSGT_TV, MSGL_ERR, "sio_stop failed");
 +            return TVI_CONTROL_FALSE;
 +            }
 +        sio_initpar(&priv->par);
@@ -97,19 +97,19 @@ $OpenBSD: patch-stream_tvi_bsdbt848_c,v 1.4 2010/11/08 21:25:44 edd Exp $
 +        priv->par.round = 4096 / (priv->dspsamplesize/8 * (priv->dspstereo + 1));
 +        if(!sio_setpar(priv->hdl, &priv->par) || !sio_getpar(priv->hdl, &priv->par))
 +            {
-+            mp_msg(MSGT_TV, MSGL_ERR, MSGTR_TV_Bt848InvalidAudioRate, "sio_[s|g]etpar failed");
++            mp_tmsg(MSGT_TV, MSGL_ERR, "sio_[s|g]etpar failed");
 +            return TVI_CONTROL_FALSE;
 +            }
 +        priv->round = priv->par.round * priv->par.bps * priv->par.rchan;
 +        priv->appbufsz = priv->par.appbufsz * priv->par.bps * priv->par.rchan;
 +        if(priv->par.rate != dspspeed)
 +            {
-+            mp_msg(MSGT_TV, MSGL_ERR, MSGTR_TV_Bt848InvalidAudioRate, "returned rate != requested rate");
++            mp_tmsg(MSGT_TV, MSGL_ERR, "returned rate != requested rate");
 +            return TVI_CONTROL_FALSE;
 +            }
 +        if (!sio_start(priv->hdl))
 +            {
-+            mp_msg(MSGT_TV, MSGL_ERR, MSGTR_TV_Bt848InvalidAudioRate, "sio_start failed");
++            mp_tmsg(MSGT_TV, MSGL_ERR, "sio_start failed");
 +            return TVI_CONTROL_FALSE;
 +            }
 +#else
@@ -138,7 +138,7 @@ $OpenBSD: patch-stream_tvi_bsdbt848_c,v 1.4 2010/11/08 21:25:44 edd Exp $
 +
 +if((priv->hdl = sio_open(priv->dspdev, SIO_REC, 0)) == NULL)
 +    {
-+    mp_msg(MSGT_TV, MSGL_ERR, MSGTR_TV_Bt848ErrorOpeningDspDev, "sio_open failed");
++    mp_tmsg(MSGT_TV, MSGL_ERR, "sio_open failed");
 +    priv->dspready = FALSE;
 +    }
 +
@@ -153,7 +153,7 @@ $OpenBSD: patch-stream_tvi_bsdbt848_c,v 1.4 2010/11/08 21:25:44 edd Exp $
 +
 +if(priv->dspready && (!sio_setpar(priv->hdl, &priv->par) || !sio_getpar(priv->hdl, &priv->par)))
 +    {
-+    mp_msg(MSGT_TV, MSGL_ERR, MSGTR_TV_Bt848ErrorConfiguringDsp, "sio_[s|g]etpar failed");
++    mp_tmsg(MSGT_TV, MSGL_ERR, "sio_[s|g]etpar failed");
 +    priv->dspready = FALSE;
 +    }
 +
@@ -162,17 +162,17 @@ $OpenBSD: patch-stream_tvi_bsdbt848_c,v 1.4 2010/11/08 21:25:44 edd Exp $
 +
 +if(priv->par.rchan != priv->dspstereo + 1)
 +    {
-+    mp_msg(MSGT_TV, MSGL_ERR, MSGTR_TV_Bt848ErrorConfiguringDsp, "returned channels != requested channels");
++    mp_tmsg(MSGT_TV, MSGL_ERR, "returned channels != requested channels");
 +    priv->dspready = FALSE;
 +    }
 +if (priv->par.bits != priv->dspsamplesize || priv->par.sig != 1 || priv->par.le != SIO_LE_NATIVE)
 +    {
-+    mp_msg(MSGT_TV, MSGL_ERR, MSGTR_TV_Bt848ErrorConfiguringDsp, "returned format != requested format");
++    mp_tmsg(MSGT_TV, MSGL_ERR, "returned format != requested format");
 +    priv->dspready = FALSE;
 +    }
 +if(priv->par.rate != priv->dspspeed)
 +    {
-+    mp_msg(MSGT_TV, MSGL_ERR, MSGTR_TV_Bt848ErrorConfiguringDsp, "returned rate != requested rate");
++    mp_tmsg(MSGT_TV, MSGL_ERR, "returned rate != requested rate");
 +    // this may be overridden later with command line options, so it's not necessarily a problem
 +    //priv->dspready = FALSE;
 +    }
@@ -184,7 +184,7 @@ $OpenBSD: patch-stream_tvi_bsdbt848_c,v 1.4 2010/11/08 21:25:44 edd Exp $
 +    sio_onmove(priv->hdl, movecb, priv);
 +    if(!sio_start(priv->hdl))
 +        {
-+        mp_msg(MSGT_TV, MSGL_ERR, MSGTR_TV_Bt848ErrorConfiguringDsp, "sio_start failed");
++        mp_tmsg(MSGT_TV, MSGL_ERR, "sio_start failed");
 +        priv->dspready = FALSE;
 +        }
 +    }

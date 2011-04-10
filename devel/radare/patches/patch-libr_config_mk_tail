@@ -1,0 +1,11 @@
+$OpenBSD$
+--- libr/config.mk.tail.orig	Sun Apr 10 23:17:58 2011
++++ libr/config.mk.tail	Sun Apr 10 23:18:17 2011
+@@ -71,5 +71,5 @@ all:
+ endif
+ 
+ LIB=lib${NAME}
+-LIBAR=${LIB}.${EXT_AR}
+-LIBSO=${LIB}.${EXT_SO}
++LIBAR=${LIB}.${EXT_AR}.${RADARE_LIBV}
++LIBSO=${LIB}.${EXT_SO}.${RADARE_LIBV}

@@ -13,36 +13,36 @@ COMMENT =		XXX
 
 DISTNAME =		radare2-0.7
 
-# these should all be 0.0, but i have not figured out how to 
-# make the build listen yet. XXX
-SHARED_LIBS +=  r_anal                    0.7 # 0.7
-SHARED_LIBS +=  r_asm                     0.7 # 0.7
-SHARED_LIBS +=  r_bin                     0.7 # 0.7
-SHARED_LIBS +=  r_bp                      0.7 # 0.7
-SHARED_LIBS +=  r_cmd                     0.7 # 0.7
-SHARED_LIBS +=  r_config                  0.7 # 0.7
-SHARED_LIBS +=  r_cons                    0.7 # 0.7
-SHARED_LIBS +=  r_core                    0.7 # 0.7
-SHARED_LIBS +=  r_crypto                  0.7 # 0.7
-SHARED_LIBS +=  r_db                      0.7 # 0.7
-SHARED_LIBS +=  r_debug                   0.7 # 0.7
-SHARED_LIBS +=  r_diff                    0.7 # 0.7
-SHARED_LIBS +=  r_flags                   0.7 # 0.7
-SHARED_LIBS +=  r_fs                      0.7 # 0.7
-SHARED_LIBS +=  r_hash                    0.7 # 0.7
-SHARED_LIBS +=  r_io                      0.7 # 0.7
-SHARED_LIBS +=  r_lang                    0.7 # 0.7
-SHARED_LIBS +=  r_lib                     0.7 # 0.7
-SHARED_LIBS +=  r_line                    0.7 # 0.7
-SHARED_LIBS +=  r_parse                   0.7 # 0.7
-SHARED_LIBS +=  r_print                   0.7 # 0.7
-SHARED_LIBS +=  r_reg                     0.7 # 0.7
-SHARED_LIBS +=  r_search                  0.7 # 0.7
-SHARED_LIBS +=  r_sign                    0.7 # 0.7
-SHARED_LIBS +=  r_socket                  0.7 # 0.7
-SHARED_LIBS +=  r_syscall                 0.7 # 0.7
-SHARED_LIBS +=  r_th                      0.7 # 0.7
-SHARED_LIBS +=  r_util                    0.7 # 0.7
+# In the radare build, all libs are given a unified version.
+LIBV =		0.0 # 0.7
+SHARED_LIBS +=  r_anal		${LIBV}
+SHARED_LIBS +=  r_asm		${LIBV}
+SHARED_LIBS +=  r_bin		${LIBV}
+SHARED_LIBS +=  r_bp                      ${LIBV}
+SHARED_LIBS +=  r_cmd                     ${LIBV}
+SHARED_LIBS +=  r_config                  ${LIBV}
+SHARED_LIBS +=  r_cons                    ${LIBV}
+SHARED_LIBS +=  r_core                    ${LIBV}
+SHARED_LIBS +=  r_crypto                  ${LIBV}
+SHARED_LIBS +=  r_db                      ${LIBV}
+SHARED_LIBS +=  r_debug                   ${LIBV}
+SHARED_LIBS +=  r_diff                    ${LIBV}
+SHARED_LIBS +=  r_flags                   ${LIBV}
+SHARED_LIBS +=  r_fs                      ${LIBV}
+SHARED_LIBS +=  r_hash                    ${LIBV}
+SHARED_LIBS +=  r_io                      ${LIBV}
+SHARED_LIBS +=  r_lang                    ${LIBV}
+SHARED_LIBS +=  r_lib                     ${LIBV}
+SHARED_LIBS +=  r_line                    ${LIBV}
+SHARED_LIBS +=  r_parse                   ${LIBV}
+SHARED_LIBS +=  r_print                   ${LIBV}
+SHARED_LIBS +=  r_reg                     ${LIBV}
+SHARED_LIBS +=  r_search                  ${LIBV}
+SHARED_LIBS +=  r_sign                    ${LIBV}
+SHARED_LIBS +=  r_socket                  ${LIBV}
+SHARED_LIBS +=  r_syscall                 ${LIBV}
+SHARED_LIBS +=  r_th                      ${LIBV}
+SHARED_LIBS +=  r_util                    ${LIBV}
 
 CATEGORIES =		devel
 
@@ -65,11 +65,14 @@ USE_GMAKE =		Yes
 USE_LIBTOOL =		Yes
 CONFIGURE_STYLE =	gnu
 
+# May not be needed in next version
 CONFIGURE_ARGS +=	--with-ostype=linux
 
 #NO_REGRESS =		Yes
 
-MAKE_FLAGS +=		EXT_SO=so
+# May not be needed in next version
+MAKE_FLAGS +=		EXT_SO=so RADARE_LIBV=${LIBV}
+FAKE_FLAGS +=		RADARE_LIBV=${LIBV}
 CFLAGS +=		-D__UNIX__
 
 .include <bsd.port.mk>

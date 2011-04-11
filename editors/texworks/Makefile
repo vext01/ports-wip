@@ -2,8 +2,11 @@
 
 COMMENT =		easy to use LaTeX and ConTeXt editor
 
-DISTNAME =		texworks-0.2.3
-REVISION = 		0
+V =			0.4.0
+DISTNAME =		texworks-${V}-r759
+PKGNAME =		texworks-${V}
+WRKDIST =		${WRKDIR}/texworks-${V}
+
 CATEGORIES =		editors print
 HOMEPAGE =		http://www.tug.org/texworks/
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
@@ -26,11 +29,10 @@ LIB_DEPENDS =		textproc/hunspell \
 RUN_DEPENDS = 		print/texlive/base
 
 USE_GMAKE =		Yes
-
 NO_REGRESS =		Yes
 
 pre-configure:
-	${SUBST_CMD} ${WRKSRC}/src/TWUtils.cpp
+	${SUBST_CMD} ${WRKSRC}/TeXworks.pro
 
 do-configure:
 	cd ${WRKSRC} && qmake4

@@ -1,0 +1,53 @@
+@comment $OpenBSD: PLIST,v 1.28 2011/03/29 20:04:41 edd Exp $
+@conflict mplayer-*
+@bin bin/mplayer
+@man man/man1/mplayer.1
+share/doc/mplayer/
+share/doc/mplayer/MPlayer.html
+share/doc/mplayer/advaudio-channels.html
+share/doc/mplayer/advaudio-surround.html
+share/doc/mplayer/advaudio-volume.html
+share/doc/mplayer/bugreports.html
+share/doc/mplayer/bugreports_fix.html
+share/doc/mplayer/bugreports_regression_test.html
+share/doc/mplayer/bugreports_report.html
+share/doc/mplayer/bugreports_security.html
+share/doc/mplayer/bugreports_what.html
+share/doc/mplayer/bugreports_where.html
+share/doc/mplayer/codec-installation.html
+share/doc/mplayer/commandline.html
+share/doc/mplayer/control.html
+share/doc/mplayer/dummy.html
+share/doc/mplayer/dvd.html
+share/doc/mplayer/edl.html
+share/doc/mplayer/encoding-guide.html
+share/doc/mplayer/faq.html
+share/doc/mplayer/features.html
+share/doc/mplayer/fonts-osd.html
+share/doc/mplayer/gui.html
+share/doc/mplayer/howtoread.html
+share/doc/mplayer/index.html
+share/doc/mplayer/install.html
+share/doc/mplayer/intro.html
+share/doc/mplayer/mencoder.html
+share/doc/mplayer/ports.html
+share/doc/mplayer/radio.html
+share/doc/mplayer/rtc.html
+share/doc/mplayer/softreq.html
+share/doc/mplayer/streaming.html
+share/doc/mplayer/subosd.html
+share/doc/mplayer/tv-input.html
+share/doc/mplayer/tv-teletext.html
+share/doc/mplayer/usage.html
+share/doc/mplayer/vcd.html
+share/doc/mplayer/video.html
+share/doc/pkg-readmes/${FULLPKGNAME}
+share/examples/mplayer/
+@sample ${CONFDIR}/
+share/examples/mplayer/codecs.conf
+share/examples/mplayer/input.conf
+@sample ${CONFDIR}/input.conf
+share/examples/mplayer/menu.conf
+@sample ${CONFDIR}/menu.conf
+share/examples/mplayer/mplayer.conf
+@extraunexec rm -rf ${CONFDIR}

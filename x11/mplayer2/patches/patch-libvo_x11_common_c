@@ -1,0 +1,12 @@
+$OpenBSD: patch-libvo_x11_common_c,v 1.4 2010/11/08 21:25:44 edd Exp $
+--- libvo/x11_common.c.orig	Thu Mar 24 21:40:29 2011
++++ libvo/x11_common.c	Sun Apr  3 23:16:42 2011
+@@ -709,7 +709,7 @@ void vo_x11_classhint(struct vo *vo, Window window, co
+     struct MPOpts *opts = vo->opts;
+     struct vo_x11_state *x11 = vo->x11;
+     XClassHint wmClass;
+-    pid_t pid = getpid();
++    long pid = getpid();
+ 
+     wmClass.res_name = opts->vo_winname ? opts->vo_winname : name;
+     wmClass.res_class = "MPlayer";

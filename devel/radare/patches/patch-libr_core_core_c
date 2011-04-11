@@ -1,0 +1,11 @@
+$OpenBSD$
+--- libr/core/core.c.orig	Thu Mar 31 21:49:10 2011
++++ libr/core/core.c	Thu Mar 31 21:48:42 2011
+@@ -1,5 +1,7 @@
+ /* radare - LGPL - Copyright 2009-2011 pancake<nopcode.org> */
+ 
++#include <signal.h>
++
+ #include <r_core.h>
+ #include <r_socket.h>
+ #include "../config.h"

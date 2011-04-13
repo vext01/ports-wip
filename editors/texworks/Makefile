@@ -17,8 +17,12 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB +=		QtDBus QtGui QtXml c dbus-1 hunspell-1.2 m poppler \
-			poppler-qt4 pthread stdc++ z
+WANTLIB +=		QtDBus QtGui QtScript QtScriptTools QtXml c \
+			hunspell-1.2 m poppler poppler-qt4 pthread stdc++ z
+
+# XXX multi package this
+#WANTLIB-python =	python2.6
+#WANTLIB-lua =		lua
 
 MASTER_SITES =		http://texworks.googlecode.com/files/
 
@@ -31,13 +35,30 @@ RUN_DEPENDS = 		print/texlive/base
 USE_GMAKE =		Yes
 NO_REGRESS =		Yes
 
+SUBST_VARS +=		WRKINST
+
 pre-configure:
 	${SUBST_CMD} ${WRKSRC}/TeXworks.pro
+	#${SUBST_CMD} ${WRKSRC}/plugins-src/TWPythonPlugin/TWPythonPlugin.pro
 
+PLUGIN_SRC =		${WRKSRC}/plugins-src
 do-configure:
+	cd ${PLUGIN_SRC}/TWPythonPlugin && qmake4	
+	cd ${PLUGIN_SRC}/TWLuaPlugin && qmake4	
 	cd ${WRKSRC} && qmake4
 
-do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/texworks ${PREFIX}/bin
+# build plugins first
+pre-build:
+	cd ${PLUGIN_SRC}/TWPythonPlugin && gmake
+	cd ${PLUGIN_SRC}/TWLuaPlugin && gmake
+	
+# install extra bits
+# XXX scripts?
+post-install:
+	${INSTALL_DATA_DIR} ${PREFIX}/lib/texworks
+	${INSTALL_DATA} ${PLUGIN_SRC}/TWPythonPlugin/libTWPythonPlugin.so \
+		${PREFIX}/lib/texworks/
+	${INSTALL_DATA} ${PLUGIN_SRC}/TWLuaPlugin/libTWLuaPlugin.so \
+		${PREFIX}/lib/texworks/
 
 .include <bsd.port.mk>

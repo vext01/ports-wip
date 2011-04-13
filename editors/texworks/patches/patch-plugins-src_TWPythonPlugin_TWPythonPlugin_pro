@@ -1,0 +1,14 @@
+$OpenBSD$
+--- plugins-src/TWPythonPlugin/TWPythonPlugin.pro.orig	Wed Apr 13 10:10:02 2011
++++ plugins-src/TWPythonPlugin/TWPythonPlugin.pro	Wed Apr 13 10:11:08 2011
+@@ -59,6 +59,10 @@ unix:!macx { # on Unix-ish platforms we should rely on
+ 	INSTALLS	+= target
+ }
+ 
++openbsd-g++* {
++	INCLUDEPATH	+= ${LOCALBASE}/include/python2.6/
++}
++
+ win32 { # paths here are specific to my setup
+ 	INCLUDEPATH += c:/MinGW514/local/include
+ 	INCLUDEPATH += c:/Python26/include

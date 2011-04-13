@@ -1,6 +1,6 @@
 $OpenBSD$
 --- TeXworks.pro.orig	Sat Mar 19 16:12:51 2011
-+++ TeXworks.pro	Mon Apr 11 11:14:37 2011
++++ TeXworks.pro	Wed Apr 13 11:09:57 2011
 @@ -96,6 +96,10 @@ unix:!macx { # on Unix-ish platforms we rely on pkgcon
  	# gets expanded to " in the c++ code)
  	QMAKE_CXXFLAGS += -DTW_HELPPATH=\\\"/usr/local/share/texworks-help\\\"
@@ -25,3 +25,13 @@ $OpenBSD$
  }
  
  win32 { # paths here are specific to my setup
+@@ -223,6 +228,9 @@ TRANSLATIONS	+=	trans/TeXworks_af.ts \
+ 					trans/TeXworks_sl.ts \
+ 					trans/TeXworks_tr.ts \
+ 					trans/TeXworks_zh_CN.ts
++
++# OpenBSD ports specific
++INSTALL_PREFIX = ${WRKINST}/${PREFIX}
+ 
+ unix:!macx { # installation on Unix-ish platforms
+ 	isEmpty(INSTALL_PREFIX):INSTALL_PREFIX = /usr/local

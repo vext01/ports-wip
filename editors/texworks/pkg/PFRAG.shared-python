@@ -1,3 +1,2 @@
 @comment $OpenBSD$
-lib/texworks/libTWLuaPlugin.so
 lib/texworks/libTWPythonPlugin.so

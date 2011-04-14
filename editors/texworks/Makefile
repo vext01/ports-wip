@@ -1,11 +1,14 @@
 # $OpenBSD: Makefile,v 1.9 2010/11/15 23:22:07 espie Exp $
 
-COMMENT =		easy to use LaTeX and ConTeXt editor
+COMMENT-main =		easy to use LaTeX and ConTeXt editor
+COMMENT-python =	Python scripting for TeXworks
+COMMENT-lua =		Lua scripting for TeXworks
 
 V =			0.4.0
 DISTNAME =		texworks-${V}-r759
 PKGNAME =		texworks-${V}
 WRKDIST =		${WRKDIR}/texworks-${V}
+PKGNAME-main =		texworks-${V}
 
 CATEGORIES =		editors print
 HOMEPAGE =		http://www.tug.org/texworks/
@@ -17,8 +20,13 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
+SHARED_ONLY =		Yes
 WANTLIB +=		QtDBus QtGui QtScript QtScriptTools QtXml c \
 			hunspell-1.2 m poppler poppler-qt4 pthread stdc++ z
+WANTLIB-lua =
+WANTLIB-python =
+
+MULTI_PACKAGES =	-main -lua -python
 
 # XXX multi package this
 #WANTLIB-python =	python2.6

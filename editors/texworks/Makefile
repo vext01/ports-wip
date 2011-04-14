@@ -1,5 +1,7 @@
 # $OpenBSD: Makefile,v 1.9 2010/11/15 23:22:07 espie Exp $
 
+# XXX manuals in the right place
+
 COMMENT-main =		easy to use LaTeX and ConTeXt editor
 COMMENT-python =	Python scripting for TeXworks
 COMMENT-lua =		Lua scripting for TeXworks
@@ -23,22 +25,21 @@ PERMIT_DISTFILES_FTP =	Yes
 SHARED_ONLY =		Yes
 WANTLIB +=		QtDBus QtGui QtScript QtScriptTools QtXml c \
 			hunspell-1.2 m poppler poppler-qt4 pthread stdc++ z
-WANTLIB-lua =
-WANTLIB-python =
+WANTLIB-lua =		lua m stdc++
+WANTLIB-python =	QtCore QtGui QtXml python2.6 stdc++ m
 
 MULTI_PACKAGES =	-main -lua -python
-
-# XXX multi package this
-#WANTLIB-python =	python2.6
-#WANTLIB-lua =		lua
 
 MASTER_SITES =		http://texworks.googlecode.com/files/
 
 MODULES =		x11/qt4
-LIB_DEPENDS =		textproc/hunspell \
+LIB_DEPENDS-main +=	${LIB_DEPENDS} \
+			textproc/hunspell \
 			x11/dbus \
 			print/poppler,-qt4
-RUN_DEPENDS = 		print/texlive/base
+RUN_DEPENDS-main = 	print/texlive/base
+RUN_DEPENDS-lua =	editors/texworks
+RUN_DEPENDS-python =	editors/texworks
 
 USE_GMAKE =		Yes
 NO_REGRESS =		Yes
@@ -47,7 +48,6 @@ SUBST_VARS +=		WRKINST
 
 pre-configure:
 	${SUBST_CMD} ${WRKSRC}/TeXworks.pro
-	#${SUBST_CMD} ${WRKSRC}/plugins-src/TWPythonPlugin/TWPythonPlugin.pro
 
 PLUGIN_SRC =		${WRKSRC}/plugins-src
 do-configure:
@@ -61,7 +61,6 @@ pre-build:
 	cd ${PLUGIN_SRC}/TWLuaPlugin && gmake
 	
 # install extra bits
-# XXX scripts?
 post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/lib/texworks
 	${INSTALL_DATA} ${PLUGIN_SRC}/TWPythonPlugin/libTWPythonPlugin.so \

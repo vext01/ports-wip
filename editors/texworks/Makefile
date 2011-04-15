@@ -32,7 +32,7 @@ SHARED_ONLY =		Yes
 WANTLIB +=		QtDBus QtGui QtScript QtScriptTools QtXml c \
 			hunspell-1.2 m poppler poppler-qt4 pthread stdc++ z
 WANTLIB-lua =		QtCore QtGui QtXml lua m stdc++
-WANTLIB-python =	QtCore QtGui QtXml python2.6 stdc++ m
+WANTLIB-python =	QtCore QtGui QtXml ${MODPY_WANTLIB} stdc++ m
 
 MULTI_PACKAGES =	-main -lua -python
 
@@ -48,10 +48,8 @@ LIB_DEPENDS-python =	${MODQT4_LIB_DEPENDS} \
 			${MODPY_LIB_DEPENDS}
 
 RUN_DEPENDS-main = 	print/texlive/base
-RUN_DEPENDS-lua =	editors/texworks,-main \
-			lang/lua
-RUN_DEPENDS-python =	editors/texworks,-main \
-			${MODPY_RUN_DEPENDS}
+RUN_DEPENDS-lua =	editors/texworks,-main
+RUN_DEPENDS-python =	editors/texworks,-main
 
 USE_GMAKE =		Yes
 NO_REGRESS =		Yes

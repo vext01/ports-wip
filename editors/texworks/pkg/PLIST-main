@@ -1,4 +1,5 @@
 @comment $OpenBSD$
+@pkgpath editors/texworks
 @bin bin/texworks
 lib/texworks/
 share/applications/
@@ -6,8 +7,6 @@ share/applications/texworks.desktop
 share/doc/texworks/
 share/doc/texworks/COPYING
 share/doc/texworks/README
-man/
-man/man1/
 @man man/man1/texworks.1
 share/pixmaps/
 share/pixmaps/TeXworks.png

@@ -6,9 +6,12 @@ COMMENT-lua =		Lua scripting for TeXworks
 
 V =			0.4.0
 DISTNAME =		texworks-${V}-r759
-PKGNAME =		texworks-${V}
-WRKDIST =		${WRKDIR}/texworks-${V}
+
 PKGNAME-main =		texworks-${V}
+PKGNAME-lua =		texworks-lua-${V}
+PKGNAME-python =	texworks-python-${V}
+
+WRKDIST =		${WRKDIR}/texworks-${V}
 
 CATEGORIES =		editors print
 HOMEPAGE =		http://www.tug.org/texworks/
@@ -34,18 +37,20 @@ MASTER_SITES =		http://texworks.googlecode.com/files/
 
 BUILD_DEPENDS +=	lang/lua \
 			lang/python/2.6
-LIB_DEPENDS-main +=	${LIB_DEPENDS} \
-			textproc/hunspell \
+
+LIB_DEPENDS-main +=	textproc/hunspell \
 			x11/dbus \
 			print/poppler,-qt4
-LIB_DEPENDS-lua +=	lang/lua
-LIB_DEPENDS-python +=	lang/python/2.6
+LIB_DEPENDS-lua +=	${MODQT4_LIB_DEPENDS} lang/lua
+LIB_DEPENDS-python +=	${MODQT4_LIB_DEPENDS} lang/python/2.6
+
 RUN_DEPENDS-main = 	print/texlive/base
 RUN_DEPENDS-lua =	editors/texworks,-main
 RUN_DEPENDS-python =	editors/texworks,-main
 
 USE_GMAKE =		Yes
 NO_REGRESS =		Yes
+VMEM_WARNING = 		Yes
 
 SUBST_VARS +=		WRKINST
 

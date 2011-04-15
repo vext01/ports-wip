@@ -57,10 +57,11 @@ VMEM_WARNING = 		Yes
 
 SUBST_VARS +=		WRKINST
 
+PLUGIN_SRC =		${WRKSRC}/plugins-src
 pre-configure:
 	${SUBST_CMD} ${WRKSRC}/TeXworks.pro
+	${SUBST_CMD} ${PLUGIN_SRC}/TWPythonPlugin/TWPythonPlugin.pro
 
-PLUGIN_SRC =		${WRKSRC}/plugins-src
 do-configure:
 	cd ${PLUGIN_SRC}/TWPythonPlugin && qmake4	
 	cd ${PLUGIN_SRC}/TWLuaPlugin && qmake4	

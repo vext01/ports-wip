@@ -6,7 +6,7 @@ $OpenBSD$
  }
  
 +openbsd-g++* {
-+	INCLUDEPATH	+= ${LOCALBASE}/include/python2.6/
++	INCLUDEPATH	+= ${LOCALBASE}/include/python${MODPY_VERSION}/
 +}
 +
  win32 { # paths here are specific to my setup

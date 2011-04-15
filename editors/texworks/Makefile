@@ -23,7 +23,10 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-MODULES =		x11/qt4
+CONFIGURE_STYLE =	simple
+MODULES =		x11/qt4 \
+			lang/python \
+			lang/lua
 
 SHARED_ONLY =		Yes
 WANTLIB +=		QtDBus QtGui QtScript QtScriptTools QtXml c \
@@ -35,18 +38,20 @@ MULTI_PACKAGES =	-main -lua -python
 
 MASTER_SITES =		http://texworks.googlecode.com/files/
 
-BUILD_DEPENDS +=	lang/lua \
-			lang/python/2.6
-
-LIB_DEPENDS-main +=	textproc/hunspell \
+LIB_DEPENDS-main =	${MODQT4_LIB_DEPENDS} \
+			textproc/hunspell \
 			x11/dbus \
 			print/poppler,-qt4
-LIB_DEPENDS-lua +=	${MODQT4_LIB_DEPENDS} lang/lua
-LIB_DEPENDS-python +=	${MODQT4_LIB_DEPENDS} lang/python/2.6
+LIB_DEPENDS-lua =	${MODQT4_LIB_DEPENDS} \
+			lang/lua
+LIB_DEPENDS-python =	${MODQT4_LIB_DEPENDS} \
+			${MODPY_LIB_DEPENDS}
 
 RUN_DEPENDS-main = 	print/texlive/base
-RUN_DEPENDS-lua =	editors/texworks,-main
-RUN_DEPENDS-python =	editors/texworks,-main
+RUN_DEPENDS-lua =	editors/texworks,-main \
+			lang/lua
+RUN_DEPENDS-python =	editors/texworks,-main \
+			${MODPY_RUN_DEPENDS}
 
 USE_GMAKE =		Yes
 NO_REGRESS =		Yes

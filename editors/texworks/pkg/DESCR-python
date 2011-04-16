@@ -1,3 +1,1 @@
-Python scripting backend for TeXworks. Current uses range from simple
-formatting over automation tasks to the implementation of new dialogs
-and auto-completion methods.
+Python scripting backend for TeXworks.

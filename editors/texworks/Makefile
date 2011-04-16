@@ -38,7 +38,7 @@ MULTI_PACKAGES =	-main -lua -python
 
 MASTER_SITES =		http://texworks.googlecode.com/files/
 
-LIB_DEPENDS-main =	${MODQT4_LIB_DEPENDS} \
+LIB_DEPENDS-main =	qt4->=4.7.2:${MODQT4_LIB_DEPENDS} \
 			textproc/hunspell \
 			x11/dbus \
 			print/poppler,-qt4
@@ -47,7 +47,8 @@ LIB_DEPENDS-lua =	${MODQT4_LIB_DEPENDS} \
 LIB_DEPENDS-python =	${MODQT4_LIB_DEPENDS} \
 			${MODPY_LIB_DEPENDS}
 
-RUN_DEPENDS-main = 	print/texlive/base
+RUN_DEPENDS-main = 	print/texlive/base \
+			devel/desktop-file-utils
 RUN_DEPENDS-lua =	editors/texworks,-main
 RUN_DEPENDS-python =	editors/texworks,-main
 
@@ -69,15 +70,27 @@ do-configure:
 
 # build plugins first
 pre-build:
-	cd ${PLUGIN_SRC}/TWPythonPlugin && gmake
-	cd ${PLUGIN_SRC}/TWLuaPlugin && gmake
+	cd ${PLUGIN_SRC}/TWPythonPlugin && ${MAKE_PROGRAM}
+	cd ${PLUGIN_SRC}/TWLuaPlugin && ${MAKE_PROGRAM}
 	
 # install extra bits
-post-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/lib/texworks
-	${INSTALL_DATA} ${PLUGIN_SRC}/TWPythonPlugin/libTWPythonPlugin.so \
-		${PREFIX}/lib/texworks/
-	${INSTALL_DATA} ${PLUGIN_SRC}/TWLuaPlugin/libTWLuaPlugin.so \
-		${PREFIX}/lib/texworks/
+INSTALL_PATHS = ${WRKSRC} \
+		${PLUGIN_SRC}/TWPythonPlugin \
+		${PLUGIN_SRC}/TWLuaPlugin
+
+do-install:
+	for i in ${INSTALL_PATHS}; do \
+		cd $$i && env -i ${MAKE_ENV} && \
+		PREFIX=${WRKINST}${PREFIX} ${DESTDIRNAME}=${WRKINST} \
+		TRUEPREFIX=${PREFIX} ${MAKE_PROGRAM} ${ALL_FAKE_FLAGS} \
+		-f ${MAKE_FILE} ${FAKE_TARGET} \
+	;done
+
+#post-install:
+#	${INSTALL_DATA_DIR} ${PREFIX}/lib/texworks
+#	${INSTALL_DATA} ${PLUGIN_SRC}/TWPythonPlugin/libTWPythonPlugin.so \
+#		${PREFIX}/lib/texworks/
+#	${INSTALL_DATA} ${PLUGIN_SRC}/TWLuaPlugin/libTWLuaPlugin.so \
+#		${PREFIX}/lib/texworks/
 
 .include <bsd.port.mk>

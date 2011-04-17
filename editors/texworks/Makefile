@@ -61,6 +61,7 @@ SUBST_VARS +=		WRKINST
 PLUGIN_SRC =		${WRKSRC}/plugins-src
 pre-configure:
 	${SUBST_CMD} ${WRKSRC}/TeXworks.pro
+	${SUBST_CMD} ${PLUGIN_SRC}/TWLuaPlugin/TWLuaPlugin.pro
 	${SUBST_CMD} ${PLUGIN_SRC}/TWPythonPlugin/TWPythonPlugin.pro
 
 do-configure:
@@ -73,24 +74,15 @@ pre-build:
 	cd ${PLUGIN_SRC}/TWPythonPlugin && ${MAKE_PROGRAM}
 	cd ${PLUGIN_SRC}/TWLuaPlugin && ${MAKE_PROGRAM}
 	
-# install extra bits
+# install main stuff and then plugins
 INSTALL_PATHS = ${WRKSRC} \
 		${PLUGIN_SRC}/TWPythonPlugin \
 		${PLUGIN_SRC}/TWLuaPlugin
 
+# note: install does not depend upon fake env or fake flags
 do-install:
 	for i in ${INSTALL_PATHS}; do \
-		cd $$i && env -i ${MAKE_ENV} && \
-		PREFIX=${WRKINST}${PREFIX} ${DESTDIRNAME}=${WRKINST} \
-		TRUEPREFIX=${PREFIX} ${MAKE_PROGRAM} ${ALL_FAKE_FLAGS} \
-		-f ${MAKE_FILE} ${FAKE_TARGET} \
-	;done
-
-#post-install:
-#	${INSTALL_DATA_DIR} ${PREFIX}/lib/texworks
-#	${INSTALL_DATA} ${PLUGIN_SRC}/TWPythonPlugin/libTWPythonPlugin.so \
-#		${PREFIX}/lib/texworks/
-#	${INSTALL_DATA} ${PLUGIN_SRC}/TWLuaPlugin/libTWLuaPlugin.so \
-#		${PREFIX}/lib/texworks/
+		cd $$i && ${MAKE_PROGRAM} -f ${MAKE_FILE} ${FAKE_TARGET}; \
+	done
 
 .include <bsd.port.mk>

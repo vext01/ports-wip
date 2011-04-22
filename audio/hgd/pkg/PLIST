@@ -11,6 +11,7 @@
 @bin sbin/hgd-playd
 share/doc/hgd/
 share/doc/hgd/README
+share/examples/hgd/
 share/examples/hgd/hgd.rc
 share/examples/hgd/hgdc.rc
 @rcscript ${RCDIR}/hgd_netd

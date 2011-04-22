@@ -18,5 +18,3 @@ share/examples/hgd/hgdc.rc
 @owner _hgd
 @group _hgd
 @sample /var/hgd/
-@owner
-@group

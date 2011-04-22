@@ -11,8 +11,11 @@
 @bin sbin/hgd-playd
 share/doc/hgd/
 share/doc/hgd/README
-@rcscript ${RCDIR}/hgd_netd
-@rcscript ${RCDIR}/hgd_playd
 @owner _hgd
 @group _hgd
 @sample /var/hgd/
+@owner
+@group
+share/examples/hgd/
+share/examples/hgd/hgd.rc
+share/examples/hgd/hgdc.rc

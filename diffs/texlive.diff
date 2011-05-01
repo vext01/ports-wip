@@ -1,0 +1,309 @@
+? base/lsr
+Index: README
+===================================================================
+RCS file: /cvs/ports/print/texlive/README,v
+retrieving revision 1.1
+diff -u -p -r1.1 README
+--- README	8 Mar 2011 00:09:42 -0000	1.1
++++ README	1 May 2011 21:30:19 -0000
+@@ -22,6 +22,7 @@ TeX Live 2010 - Porting progress.
+    -> fix $HOME ls-R owned root bug:	done
+    -> make fmtutil.cnf configs:		not needed this year
+  * Implement remaining @xxx directives:	done
++ * emulate texlinks			done
+  * Test lots:				done (several months)
+  * Link to build as print/texlive:	done
+ 
+Index: base/Makefile
+===================================================================
+RCS file: /cvs/ports/print/texlive/base/Makefile,v
+retrieving revision 1.46
+diff -u -p -r1.46 Makefile
+--- base/Makefile	9 Mar 2011 14:43:59 -0000	1.46
++++ base/Makefile	1 May 2011 21:30:19 -0000
+@@ -4,7 +4,7 @@ COMMENT =		base binaries for TeXLive typ
+ 
+ DISTNAME = 		texlive-${DIST_V}-source
+ PKGNAME =		texlive_base-${V}
+-REVISION =		0
++REVISION =		1
+ 
+ SHARED_LIBS =		kpathsea	3.0
+ SHARED_LIBS +=		ptexenc		0.0
+@@ -106,6 +106,19 @@ SUBST_VARS +=		TRUEPREFIX LOCALBASE
+ pre-install:
+ 	mkdir ${WRKSRC}/inst
+ 
++# symlinks that would have been installed by texlinks.
++# texlinks can not do this itself in the fake dir, as it requires
++# a fully hashed texmf tree and working kpse configuration.
++ALEPH_LN =	lamed 
++LUATEX_LN =	dvilualatex dviluatex lualatex
++MPOST_LN =	metafun mfplain
++PDFTEX_LN =	amstex cslatex csplain eplain etex jadetex latex mex \
++		mllatex mltex pdfcslatex pdfcsplain pdfetex pdfjadetex \
++		pdflatex pdfmex pdfxmltex physe phyzzx texsis utf8mex \
++		xmltex
++PTEX_LN =	platex
++XETEX_LN =	xelatex
++
+ post-install:
+ 	rm -Rf ${WRKSRC}/inst
+ 
+@@ -121,4 +134,25 @@ post-install:
+ 		fi \
+ 	done
+ 
++	# emulate texlinks
++	for i in ${ALEPH_LN}; do \
++		ln -s ${TRUEPREFIX}/bin/aleph ${PREFIX}/bin/$$i; \
++	done
++	for i in ${LUATEX_LN}; do \
++		ln -s ${TRUEPREFIX}/bin/luatex ${PREFIX}/bin/$$i; \
++	done
++	for i in ${MPOST_LN}; do \
++		ln -s ${TRUEPREFIX}/bin/mpost ${PREFIX}/bin/$$i; \
++	done
++	for i in ${PDFTEX_LN}; do \
++		ln -s ${TRUEPREFIX}/bin/pdftex ${PREFIX}/bin/$$i; \
++	done
++	for i in ${PTEX_LN}; do \
++		ln -s ${TRUEPREFIX}/bin/ptex ${PREFIX}/bin/$$i; \
++	done
++	for i in ${XETEX_LN}; do \
++		ln -s ${TRUEPREFIX}/bin/xetex ${PREFIX}/bin/$$i; \
++	done
++
+ .include <bsd.port.mk>
++
+Index: base/pkg/PLIST
+===================================================================
+RCS file: /cvs/ports/print/texlive/base/pkg/PLIST,v
+retrieving revision 1.16
+diff -u -p -r1.16 PLIST
+--- base/pkg/PLIST	8 Mar 2011 00:09:42 -0000	1.16
++++ base/pkg/PLIST	1 May 2011 21:30:19 -0000
+@@ -3,9 +3,8 @@
+ @conflict ht-<2
+ @pkgpath print/teTeX/base
+ @pkgpath print/teTeX/base,-fmt
+-@comment mptopdf must be before texlinks -u
+-bin/mptopdf
+-@unexec texlinks -u
++%%SHARED%%
++%%xindy%%
+ bin/a2ping
+ bin/afm2afm
+ @bin bin/afm2pl
+@@ -14,6 +13,7 @@ bin/afm2afm
+ bin/allcm
+ bin/allec
+ bin/allneeded
++bin/amstex
+ bin/arlatex
+ bin/authorindex
+ bin/autoinst
+@@ -42,6 +42,8 @@ bin/cefspdflatex
+ bin/chkweb
+ bin/cmap2enc
+ bin/context
++bin/cslatex
++bin/csplain
+ @bin bin/ctangle
+ @bin bin/ctie
+ bin/ctxtools
+@@ -64,6 +66,8 @@ bin/dvihp
+ @bin bin/dvilj4
+ @bin bin/dvilj4l
+ bin/dvilj6
++bin/dvilualatex
++bin/dviluatex
+ bin/dvipdfm
+ @bin bin/dvipdfmx
+ bin/dvipdft
+@@ -79,9 +83,11 @@ bin/dvitomp
+ bin/e2pall
+ bin/ebb
+ bin/ebong
++bin/eplain
+ bin/epspdf
+ bin/epspdftk
+ bin/epstopdf
++bin/etex
+ @bin bin/extconv
+ bin/extractbb
+ bin/fig4latex
+@@ -106,6 +112,7 @@ bin/httex
+ bin/httexi
+ bin/htxelatex
+ bin/htxetex
++bin/jadetex
+ @bin bin/kpseaccess
+ bin/kpsepath
+ @bin bin/kpsereadlink
+@@ -115,12 +122,15 @@ bin/kpsewhere
+ @bin bin/kpsewhich
+ bin/kpsexpand
+ @bin bin/lacheck
++bin/lamed
++bin/latex
+ bin/latex2man
+ bin/latexdiff
+ bin/latexdiff-vc
+ @comment bin/latexmk
+ bin/latexrevise
+ bin/listings-ext.sh
++bin/lualatex
+ @bin bin/luatex
+ bin/luatools
+ @bin bin/mag
+@@ -129,8 +139,11 @@ bin/makeglossaries
+ @bin bin/makejvf
+ bin/mathspic
+ @bin bin/mendex
++bin/metafun
++bin/mex
+ @bin bin/mf
+ @bin bin/mf-nowin
++bin/mfplain
+ @bin bin/mft
+ bin/mk4ht
+ bin/mkgrkindex
+@@ -145,11 +158,12 @@ bin/mktexlsr
+ bin/mktexmf
+ bin/mktexpk
+ bin/mktextfm
++bin/mllatex
++bin/mltex
+ @bin bin/mmafm
+ @bin bin/mmpfb
+ @bin bin/mpost
+-%%SHARED%%
+-%%xindy%%
++bin/mptopdf
+ bin/mtxrun
+ @bin bin/musixflx
+ @bin bin/odvicopy
+@@ -175,27 +189,37 @@ bin/pdfatfi
+ @comment bin/pdfbook
+ @bin bin/pdfclose
+ bin/pdfcrop
++bin/pdfcslatex
++bin/pdfcsplain
++bin/pdfetex
+ @comment bin/pdfflip
++bin/pdfjadetex
+ @comment bin/pdfjam
+ @comment bin/pdfjam-pocketmod
+ @comment bin/pdfjam-slides3up
+ @comment bin/pdfjam-slides6up
+ @comment bin/pdfjoin
++bin/pdflatex
++bin/pdfmex
+ @comment bin/pdfnup
+ @bin bin/pdfopen
+ @comment bin/pdfpun
+ @bin bin/pdftex
+ bin/pdfthumb
+ @bin bin/pdftosrc
++bin/pdfxmltex
+ @bin bin/pdvitype
+ bin/perltex
+ @bin bin/pfb2pfa
+ bin/pfm2kpx
++bin/physe
++bin/phyzzx
+ @bin bin/pk2bm
+ bin/pkfix
+ bin/pkfix-helper
+ @bin bin/pktogf
+ @bin bin/pktype
++bin/platex
+ @bin bin/pltotf
+ @bin bin/pooltype
+ @bin bin/ppltotf
+@@ -244,11 +268,13 @@ bin/texdoc
+ bin/texdoctk
+ bin/texexec
+ bin/texhash
+-bin/texlinks
++@comment dont allow users to run texlinks.
++@comment bin/texlinks
+ bin/texloganalyser
+ bin/texlua
+ bin/texluac
+ bin/texmfstart
++bin/texsis
+ @bin bin/tftopl
+ bin/thumbpdf
+ @bin bin/tie
+@@ -264,6 +290,7 @@ bin/tpic2pdftex
+ bin/ulqda
+ bin/updmap
+ bin/updmap-sys
++bin/utf8mex
+ @bin bin/vftovp
+ @bin bin/vlna
+ bin/vpe
+@@ -274,7 +301,9 @@ bin/vpl2vpl
+ bin/xdvi
+ @bin bin/xdvi-xaw
+ @bin bin/xdvipdfmx
++bin/xelatex
+ @bin bin/xetex
++bin/xmltex
+ include/kpathsea/
+ include/kpathsea/absolute.h
+ include/kpathsea/c-auto.h
+@@ -484,14 +513,10 @@ lib/libptexenc.la
+ @man man/man1/xdvi.1
+ @comment @man man/man1/xindy.1
+ @man man/man5/fmtutil.cnf.5
+-@man man/man5/synctex.5
++@comment @man man/man5/synctex.5
+ @man man/man5/updmap.cfg.5
+ share/doc/pkg-readmes/${FULLPKGNAME}
+ share/lcdf-typetools-for-tex-live/
+-@exec mktexlsr > /dev/null 2>&1
+-@exec texlinks
+-@extraunexec rm -Rf %D/share/texmf-var/
+-@extraunexec rm -Rf %D/share/texmf-config/
+ @comment share/texmf-dist/bibtex/csf/base/88591lat.csf
+ @comment share/texmf-dist/bibtex/csf/base/88591sca.csf
+ @comment share/texmf-dist/bibtex/csf/base/ascii.csf
+@@ -763,4 +788,5 @@ share/texmf/scripts/texlive/tlmgr.pl
+ @extra share/texmf/ls-R
+ @extra share/texmf-dist/ls-R
+ @extra share/texmf-var/ls-R
+-@extra share/texmf-config/ls-R
++@exec mktexlsr > /dev/null 2>&1
++@extraunexec rm -Rf %D/share/texmf-var/
+Index: texmf/Makefile
+===================================================================
+RCS file: /cvs/ports/print/texlive/texmf/Makefile,v
+retrieving revision 1.18
+diff -u -p -r1.18 Makefile
+--- texmf/Makefile	9 Mar 2011 14:43:59 -0000	1.18
++++ texmf/Makefile	1 May 2011 21:30:19 -0000
+@@ -14,6 +14,7 @@ PKGNAME-full = 		texlive_texmf-full-${V}
+ PKGNAME-docs =	 	texlive_texmf-docs-${V}
+ 
+ REVISION-main =		0
++REVISION-full =		0
+ 
+ NO_BUILD =		Yes
+ NO_REGRESS =		Yes
+Index: texmf/pkg/PLIST-full
+===================================================================
+RCS file: /cvs/ports/print/texlive/texmf/pkg/PLIST-full,v
+retrieving revision 1.11
+diff -u -p -r1.11 PLIST-full
+--- texmf/pkg/PLIST-full	8 Mar 2011 00:09:42 -0000	1.11
++++ texmf/pkg/PLIST-full	1 May 2011 21:30:20 -0000
+@@ -28114,6 +28114,4 @@ share/texmf/xindy/modules/tex/inputenc/l
+ share/texmf/xindy/modules/tex/inputenc/latin2.xdy
+ share/texmf/xindy/modules/tex/inputenc/latin3.xdy
+ @exec mktexlsr > /dev/null 2>&1
+-@exec texlinks
+ @unexec-delete mktexlsr > /dev/null 2>&1
+-@unexec-delete texlinks

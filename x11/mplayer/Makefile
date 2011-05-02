@@ -46,13 +46,10 @@ LIB_DEPENDS =	graphics/png \
 		graphics/ffmpeg>=20110408 \
 		audio/cdparanoia>=3.a9.8 \
 		audio/speex \
-		audio/libmpcdec \
 		audio/libogg \
 		multimedia/xvidcore \
 		audio/lame \
 		multimedia/libdv \
-		multimedia/libdvdnav>=4.1.3 \
-		devel/libdvdread \
 		devel/fribidi \
 		graphics/lcms \
 		graphics/libmng \
@@ -105,6 +102,9 @@ CONFIGURE_ARGS += --disable-alsa \
 # but for now we have to use the internal one.
 #		--disable-dvdread-internal \
 #		--disable-libdvdcss-internal \
+# If re-adding external libdvd*, don't forget the LIB_DEPENDS:
+#		multimedia/libdvdnav>=4.1.3 \
+#		devel/libdvdread \
 # gui is not supported anymore and we have better ones in ports
 CONFIGURE_ARGS += --disable-gui \
 		--disable-ffmpeg_a	# link ffmpeg .so (graphics/ffmpeg)

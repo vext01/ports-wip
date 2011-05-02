@@ -13,7 +13,7 @@ SUBST_VARS += 		PREFIX CONFDIR
 # Distfiles must be hand-rolled, see README
 N =			mplayer
 DISTNAME =		mplayer-${V}
-REVISION =		1
+REVISION =		2
 
 CATEGORIES =		x11 multimedia
 
@@ -30,7 +30,7 @@ WANTLIB =	GL X11 Xext Xinerama Xss Xv Xxf86dga Xxf86vm avcodec avformat \
 		crypto dv faac fontconfig freetype fribidi gsm jpeg lcms \
 		m mng mp3lame ncurses ogg>=5 orc-0.4 png postproc \
 		pthread SDL schroedinger-1.0>=2.0 sndio speex stdc++ \
-		swscale theora theoradec theoraenc ungif util vpx x264>=5 \
+		swscale theoradec theoraenc ungif util vpx x264>=5 \
 		xvidcore z
 
 # we use a snapshot
@@ -45,7 +45,6 @@ LIB_DEPENDS =	graphics/png \
 		graphics/libungif \
 		graphics/ffmpeg>=20110408 \
 		audio/cdparanoia>=3.a9.8 \
-		multimedia/libtheora \
 		audio/speex \
 		audio/libmpcdec \
 		audio/libogg \
@@ -132,7 +131,8 @@ CONFIGURE_ARGS += --disable-smb \
 		--disable-libopenjpeg \
 		--disable-mpg123 \
 		--disable-librtmp \
-		--disable-faad
+		--disable-faad \
+		--disable-theora
 
 # internal tremor, external tremor, external libvorbis all conflict
 # we choose libvorbis to enable encoding to vorbis

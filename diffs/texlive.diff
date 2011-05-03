@@ -1,11 +1,10 @@
-? base/lsr
 Index: README
 ===================================================================
 RCS file: /cvs/ports/print/texlive/README,v
 retrieving revision 1.1
 diff -u -p -r1.1 README
 --- README	8 Mar 2011 00:09:42 -0000	1.1
-+++ README	1 May 2011 21:30:19 -0000
++++ README	3 May 2011 13:17:40 -0000
 @@ -22,6 +22,7 @@ TeX Live 2010 - Porting progress.
     -> fix $HOME ls-R owned root bug:	done
     -> make fmtutil.cnf configs:		not needed this year
@@ -20,7 +19,7 @@ RCS file: /cvs/ports/print/texlive/base/Makefile,v
 retrieving revision 1.46
 diff -u -p -r1.46 Makefile
 --- base/Makefile	9 Mar 2011 14:43:59 -0000	1.46
-+++ base/Makefile	1 May 2011 21:30:19 -0000
++++ base/Makefile	3 May 2011 13:17:40 -0000
 @@ -4,7 +4,7 @@ COMMENT =		base binaries for TeXLive typ
  
  DISTNAME = 		texlive-${DIST_V}-source
@@ -82,7 +81,7 @@ RCS file: /cvs/ports/print/texlive/base/pkg/PLIST,v
 retrieving revision 1.16
 diff -u -p -r1.16 PLIST
 --- base/pkg/PLIST	8 Mar 2011 00:09:42 -0000	1.16
-+++ base/pkg/PLIST	1 May 2011 21:30:19 -0000
++++ base/pkg/PLIST	3 May 2011 13:17:40 -0000
 @@ -3,9 +3,8 @@
  @conflict ht-<2
  @pkgpath print/teTeX/base
@@ -222,14 +221,7 @@ diff -u -p -r1.16 PLIST
  @bin bin/pltotf
  @bin bin/pooltype
  @bin bin/ppltotf
-@@ -244,11 +268,13 @@ bin/texdoc
- bin/texdoctk
- bin/texexec
- bin/texhash
--bin/texlinks
-+@comment dont allow users to run texlinks.
-+@comment bin/texlinks
- bin/texloganalyser
+@@ -249,6 +273,7 @@ bin/texloganalyser
  bin/texlua
  bin/texluac
  bin/texmfstart
@@ -237,7 +229,7 @@ diff -u -p -r1.16 PLIST
  @bin bin/tftopl
  bin/thumbpdf
  @bin bin/tie
-@@ -264,6 +290,7 @@ bin/tpic2pdftex
+@@ -264,6 +289,7 @@ bin/tpic2pdftex
  bin/ulqda
  bin/updmap
  bin/updmap-sys
@@ -245,7 +237,7 @@ diff -u -p -r1.16 PLIST
  @bin bin/vftovp
  @bin bin/vlna
  bin/vpe
-@@ -274,7 +301,9 @@ bin/vpl2vpl
+@@ -274,7 +300,9 @@ bin/vpl2vpl
  bin/xdvi
  @bin bin/xdvi-xaw
  @bin bin/xdvipdfmx
@@ -255,7 +247,7 @@ diff -u -p -r1.16 PLIST
  include/kpathsea/
  include/kpathsea/absolute.h
  include/kpathsea/c-auto.h
-@@ -484,14 +513,10 @@ lib/libptexenc.la
+@@ -484,14 +512,10 @@ lib/libptexenc.la
  @man man/man1/xdvi.1
  @comment @man man/man1/xindy.1
  @man man/man5/fmtutil.cnf.5
@@ -271,7 +263,7 @@ diff -u -p -r1.16 PLIST
  @comment share/texmf-dist/bibtex/csf/base/88591lat.csf
  @comment share/texmf-dist/bibtex/csf/base/88591sca.csf
  @comment share/texmf-dist/bibtex/csf/base/ascii.csf
-@@ -763,4 +788,5 @@ share/texmf/scripts/texlive/tlmgr.pl
+@@ -763,4 +787,5 @@ share/texmf/scripts/texlive/tlmgr.pl
  @extra share/texmf/ls-R
  @extra share/texmf-dist/ls-R
  @extra share/texmf-var/ls-R
@@ -284,22 +276,62 @@ RCS file: /cvs/ports/print/texlive/texmf/Makefile,v
 retrieving revision 1.18
 diff -u -p -r1.18 Makefile
 --- texmf/Makefile	9 Mar 2011 14:43:59 -0000	1.18
-+++ texmf/Makefile	1 May 2011 21:30:19 -0000
-@@ -14,6 +14,7 @@ PKGNAME-full = 		texlive_texmf-full-${V}
++++ texmf/Makefile	3 May 2011 13:17:40 -0000
+@@ -7,13 +7,14 @@ COMMENT-docs =		texlive documentation
+ DISTNAME =		texlive-${DIST_V}-texmf
+ MASTER_SITES0 =		http://theunixzoo.co.uk/distfiles/
+ DISTFILES =		${DISTNAME}${EXTRACT_SUFX} \
+-			texmf-var-pregen-2010${EXTRACT_SUFX}:0
++			texmf-var-pregen-2010.1${EXTRACT_SUFX}:0
+ 
+ PKGNAME-main = 		texlive_texmf-minimal-${V}
+ PKGNAME-full = 		texlive_texmf-full-${V}
  PKGNAME-docs =	 	texlive_texmf-docs-${V}
  
- REVISION-main =		0
+-REVISION-main =		0
++REVISION-main =		1
 +REVISION-full =		0
  
  NO_BUILD =		Yes
  NO_REGRESS =		Yes
+@@ -38,5 +39,7 @@ do-install:
+ 
+ post-install:
+ 	${SUBST_CMD} ${PREFIX}/share/texmf/web2c/texmf.cnf
++	mv ${PREFIX}/share/texmf/web2c/updmap.cfg \
++		${PREFIX}/share/texmf/web2c/updmap.cfg-dist
+ 
+ .include <bsd.port.mk>
+Index: texmf/distinfo
+===================================================================
+RCS file: /cvs/ports/print/texlive/texmf/distinfo,v
+retrieving revision 1.3
+diff -u -p -r1.3 distinfo
+--- texmf/distinfo	8 Mar 2011 00:09:42 -0000	1.3
++++ texmf/distinfo	3 May 2011 13:17:40 -0000
+@@ -1,10 +1,10 @@
+ MD5 (texlive-20100722-texmf.tar.xz) = Et7DoyPE63W5ijFgxi3IZQ==
+-MD5 (texmf-var-pregen-2010.tar.xz) = qNdvyLW7EldON2CP9GxnGQ==
++MD5 (texmf-var-pregen-2010.1.tar.xz) = VrbNMlORaiy5XzdYvPQG/g==
+ RMD160 (texlive-20100722-texmf.tar.xz) = YIwA8D1MDvCOlX7ABxIybnXu4E4=
+-RMD160 (texmf-var-pregen-2010.tar.xz) = i1n0mVovkMvxowFyk0QXro2b+XE=
++RMD160 (texmf-var-pregen-2010.1.tar.xz) = jdgnDV7xK0YCiyuFPn3eN+3tDVQ=
+ SHA1 (texlive-20100722-texmf.tar.xz) = 32ugUJcFkvD184y53TbU0NZx+oA=
+-SHA1 (texmf-var-pregen-2010.tar.xz) = pjLgp19E0fzxB0NQM64Vq3YQMZw=
++SHA1 (texmf-var-pregen-2010.1.tar.xz) = xzw3UZ69w105P/Svq05i20nWVtM=
+ SHA256 (texlive-20100722-texmf.tar.xz) = LTED3JEAqevQDbtQDWeInaLj096J+N8RGA1bSlLgD4U=
+-SHA256 (texmf-var-pregen-2010.tar.xz) = na3foQLh9WAqHvo21+vXu6l8JA+MafsszEonH9zqZWY=
++SHA256 (texmf-var-pregen-2010.1.tar.xz) = 6fDlUuDwbkPTJEntM1REVDs/xNqtrWhjy8p6g+jsLlg=
+ SIZE (texlive-20100722-texmf.tar.xz) = 1137115288
+-SIZE (texmf-var-pregen-2010.tar.xz) = 13799604
++SIZE (texmf-var-pregen-2010.1.tar.xz) = 13086664
 Index: texmf/pkg/PLIST-full
 ===================================================================
 RCS file: /cvs/ports/print/texlive/texmf/pkg/PLIST-full,v
 retrieving revision 1.11
 diff -u -p -r1.11 PLIST-full
 --- texmf/pkg/PLIST-full	8 Mar 2011 00:09:42 -0000	1.11
-+++ texmf/pkg/PLIST-full	1 May 2011 21:30:20 -0000
++++ texmf/pkg/PLIST-full	3 May 2011 13:17:41 -0000
 @@ -28114,6 +28114,4 @@ share/texmf/xindy/modules/tex/inputenc/l
  share/texmf/xindy/modules/tex/inputenc/latin2.xdy
  share/texmf/xindy/modules/tex/inputenc/latin3.xdy
@@ -307,3 +339,76 @@ diff -u -p -r1.11 PLIST-full
 -@exec texlinks
  @unexec-delete mktexlsr > /dev/null 2>&1
 -@unexec-delete texlinks
+Index: texmf/pkg/PLIST-main
+===================================================================
+RCS file: /cvs/ports/print/texlive/texmf/pkg/PLIST-main,v
+retrieving revision 1.8
+diff -u -p -r1.8 PLIST-main
+--- texmf/pkg/PLIST-main	8 Mar 2011 00:09:42 -0000	1.8
++++ texmf/pkg/PLIST-main	3 May 2011 13:17:41 -0000
+@@ -35003,7 +35003,7 @@ share/texmf/web2c/tcvn-t5.tcx
+ share/texmf/web2c/texmf.cnf
+ share/texmf/web2c/texmfcnf.lua
+ share/texmf/web2c/updmap-hdr.cfg
+-@sample share/texmf/web2c/updmap.cfg
++share/texmf/web2c/updmap.cfg
+ share/texmf/web2c/viscii-t5.tcx
+ share/texmf/xdvi/
+ share/texmf/xdvi/XDvi
+@@ -35013,13 +35013,10 @@ share/texmf/xdvi/pixmap/toolbar2.xpm
+ share/texmf/xdvi/xdvi.cfg
+ share/texmf-var/
+ share/texmf-var/web2c/
+-share/texmf-var/web2c/luatex/
+-share/texmf-var/web2c/luatex/dviluatex.fmt
+-share/texmf-var/web2c/luatex/dvilualatex.fmt
+-share/texmf-var/web2c/luatex/lualatex.fmt
+-share/texmf-var/web2c/luatex/luatex.fmt
++share/texmf-var/web2c/aleph/
++share/texmf-var/web2c/aleph/aleph.fmt
++share/texmf-var/web2c/aleph/lamed.fmt
+ share/texmf-var/web2c/pdftex/
+-share/texmf-var/web2c/pdftex/pdfetex.fmt
+ share/texmf-var/web2c/pdftex/amstex.fmt
+ share/texmf-var/web2c/pdftex/cont-en.fmt
+ share/texmf-var/web2c/pdftex/cslatex.fmt
+@@ -35027,6 +35024,8 @@ share/texmf-var/web2c/pdftex/pdfcslatex.
+ share/texmf-var/web2c/pdftex/csplain.fmt
+ share/texmf-var/web2c/pdftex/pdfcsplain.fmt
+ share/texmf-var/web2c/pdftex/eplain.fmt
++share/texmf-var/web2c/pdftex/jadetex.fmt
++share/texmf-var/web2c/pdftex/pdfjadetex.fmt
+ share/texmf-var/web2c/pdftex/latex.fmt
+ share/texmf-var/web2c/pdftex/pdflatex.fmt
+ share/texmf-var/web2c/pdftex/mex.fmt
+@@ -35037,18 +35036,26 @@ share/texmf-var/web2c/pdftex/mllatex.fmt
+ share/texmf-var/web2c/pdftex/mptopdf.fmt
+ share/texmf-var/web2c/pdftex/pdftex.fmt
+ share/texmf-var/web2c/pdftex/etex.fmt
++share/texmf-var/web2c/pdftex/pdfetex.fmt
++share/texmf-var/web2c/pdftex/physe.fmt
++share/texmf-var/web2c/pdftex/phyzzx.fmt
++share/texmf-var/web2c/pdftex/texsis.fmt
++share/texmf-var/web2c/pdftex/xmltex.fmt
++share/texmf-var/web2c/pdftex/pdfxmltex.fmt
+ share/texmf-var/web2c/xetex/
+ share/texmf-var/web2c/xetex/cont-en.fmt
+ share/texmf-var/web2c/xetex/xetex.fmt
+ share/texmf-var/web2c/xetex/xelatex.fmt
+ share/texmf-var/web2c/metapost/
+-share/texmf-var/web2c/metapost/mpost.mem
+ share/texmf-var/web2c/metapost/metafun.mem
++share/texmf-var/web2c/metapost/mpost.mem
+ share/texmf-var/web2c/metapost/mplib-luatex.mem
+ share/texmf-var/web2c/metapost/mfplain.mem
+-share/texmf-var/web2c/aleph/
+-share/texmf-var/web2c/aleph/aleph.fmt
+-share/texmf-var/web2c/aleph/lamed.fmt
++share/texmf-var/web2c/luatex/
++share/texmf-var/web2c/luatex/dvilualatex.fmt
++share/texmf-var/web2c/luatex/lualatex.fmt
++share/texmf-var/web2c/luatex/luatex.fmt
++share/texmf-var/web2c/luatex/dviluatex.fmt
+ share/texmf-var/web2c/metafont/
+ share/texmf-var/web2c/metafont/mf.base
+ share/texmf-var/web2c/ptex/

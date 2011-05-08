@@ -1,0 +1,5 @@
+This is Term::ReadLine::TTYtter. It is a modified version of T::RL::Perl
+with several new nonstandard features specific to TTYtter, but may be
+useful for other applications.  This is Term::ReadLine::TTYtter. It is a
+modified version of T::RL::Perl with several new nonstandard features
+specific to TTYtter, but may be useful for other applications.

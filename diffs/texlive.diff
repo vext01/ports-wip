@@ -4,7 +4,7 @@ RCS file: /cvs/ports/print/texlive/README,v
 retrieving revision 1.1
 diff -u -r1.1 README
 --- README	8 Mar 2011 00:09:42 -0000	1.1
-+++ README	12 May 2011 11:53:29 -0000
++++ README	12 May 2011 13:18:45 -0000
 @@ -22,6 +22,7 @@
     -> fix $HOME ls-R owned root bug:	done
     -> make fmtutil.cnf configs:		not needed this year
@@ -19,7 +19,7 @@ RCS file: /cvs/ports/print/texlive/base/Makefile,v
 retrieving revision 1.47
 diff -u -r1.47 Makefile
 --- base/Makefile	11 May 2011 07:45:53 -0000	1.47
-+++ base/Makefile	12 May 2011 11:53:29 -0000
++++ base/Makefile	12 May 2011 13:18:45 -0000
 @@ -4,7 +4,7 @@
  
  DISTNAME = 		texlive-${DIST_V}-source
@@ -81,7 +81,7 @@ RCS file: /cvs/ports/print/texlive/base/pkg/PLIST,v
 retrieving revision 1.17
 diff -u -r1.17 PLIST
 --- base/pkg/PLIST	11 May 2011 07:45:53 -0000	1.17
-+++ base/pkg/PLIST	12 May 2011 11:53:29 -0000
++++ base/pkg/PLIST	12 May 2011 13:18:45 -0000
 @@ -3,9 +3,6 @@
  @conflict ht-<2
  @pkgpath print/teTeX/base
@@ -264,7 +264,7 @@ RCS file: /cvs/ports/print/texlive/texmf/Makefile,v
 retrieving revision 1.18
 diff -u -r1.18 Makefile
 --- texmf/Makefile	9 Mar 2011 14:43:59 -0000	1.18
-+++ texmf/Makefile	12 May 2011 11:53:29 -0000
++++ texmf/Makefile	12 May 2011 13:18:45 -0000
 @@ -7,13 +7,14 @@
  DISTNAME =		texlive-${DIST_V}-texmf
  MASTER_SITES0 =		http://theunixzoo.co.uk/distfiles/
@@ -288,7 +288,7 @@ RCS file: /cvs/ports/print/texlive/texmf/distinfo,v
 retrieving revision 1.3
 diff -u -r1.3 distinfo
 --- texmf/distinfo	8 Mar 2011 00:09:42 -0000	1.3
-+++ texmf/distinfo	12 May 2011 11:53:29 -0000
++++ texmf/distinfo	12 May 2011 13:18:45 -0000
 @@ -1,10 +1,10 @@
  MD5 (texlive-20100722-texmf.tar.xz) = Et7DoyPE63W5ijFgxi3IZQ==
 -MD5 (texmf-var-pregen-2010.tar.xz) = qNdvyLW7EldON2CP9GxnGQ==
@@ -311,7 +311,7 @@ RCS file: /cvs/ports/print/texlive/texmf/pkg/PLIST-full,v
 retrieving revision 1.11
 diff -u -r1.11 PLIST-full
 --- texmf/pkg/PLIST-full	8 Mar 2011 00:09:42 -0000	1.11
-+++ texmf/pkg/PLIST-full	12 May 2011 11:53:44 -0000
++++ texmf/pkg/PLIST-full	12 May 2011 13:18:56 -0000
 @@ -28114,6 +28114,4 @@
  share/texmf/xindy/modules/tex/inputenc/latin2.xdy
  share/texmf/xindy/modules/tex/inputenc/latin3.xdy
@@ -325,7 +325,7 @@ RCS file: /cvs/ports/print/texlive/texmf/pkg/PLIST-main,v
 retrieving revision 1.8
 diff -u -r1.8 PLIST-main
 --- texmf/pkg/PLIST-main	8 Mar 2011 00:09:42 -0000	1.8
-+++ texmf/pkg/PLIST-main	12 May 2011 11:53:56 -0000
++++ texmf/pkg/PLIST-main	12 May 2011 13:19:08 -0000
 @@ -35003,7 +35003,7 @@
  share/texmf/web2c/texmf.cnf
  share/texmf/web2c/texmfcnf.lua
@@ -392,3 +392,8 @@ diff -u -r1.8 PLIST-main
  share/texmf-var/web2c/metafont/
  share/texmf-var/web2c/metafont/mf.base
  share/texmf-var/web2c/ptex/
+@@ -35076,3 +35083,4 @@
+ share/texmf-var/fonts/map/dvipdfm/updmap/dvipdfm_dl14.map
+ share/texmf-var/fonts/map/dvipdfm/updmap/dvipdfm_ndl14.map
+ share/texmf-var/fonts/map/dvipdfm/updmap/dvipdfm.map
++@extraunexec rm -Rf %D/share/texmf-var/

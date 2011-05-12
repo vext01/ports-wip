@@ -1,0 +1,43 @@
+Index: Makefile
+===================================================================
+RCS file: /cvs/ports/devel/quirks/Makefile,v
+retrieving revision 1.44
+diff -u -r1.44 Makefile
+--- Makefile	6 May 2011 11:28:55 -0000	1.44
++++ Makefile	12 May 2011 14:27:11 -0000
+@@ -5,7 +5,7 @@
+ DISTFILES =
+ 
+ # API.rev
+-PKGNAME = 	quirks-1.42
++PKGNAME = 	quirks-1.43
+ PKG_ARCH =	*
+ MAINTAINER =	Marc Espie <espie@openbsd.org>
+ 
+Index: files/Quirks.pm
+===================================================================
+RCS file: /cvs/ports/devel/quirks/files/Quirks.pm,v
+retrieving revision 1.50
+diff -u -r1.50 Quirks.pm
+--- files/Quirks.pm	6 May 2011 11:28:55 -0000	1.50
++++ files/Quirks.pm	12 May 2011 14:27:11 -0000
+@@ -240,6 +240,19 @@
+ 		    }, 
+ 		    '/usr/local/share/texmf-var');
+ 		quick_add($plist, '/usr/local/share/texmf/web2c/fmtutil.cnf');
++		quick_add($plist, '/usr/local/share/texmf/web2c/updmap.cfg');
++
++		# add links that were outside the plist in tl2009
++		my @links = qw(
++			lamed dvilualatex dviluatex lualatex metafun mfplain
++			amstex cslatex csplain eplain etex jadetex latex mex
++			mllatex mltex pdfcslatex pdfcsplain pdfetex pdfjadetex
++			pdflatex pdfmex pdfxmltex physe phyzzx texsis utf8mex
++			xmltex platex xelatex
++		);
++		foreach (@links) {
++			quick_add($plist, '/usr/local/bin/'.$_);
++		}
+ 		$plist->to_installation;
+ 	}
+ 

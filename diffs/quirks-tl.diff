@@ -4,7 +4,7 @@ RCS file: /cvs/ports/devel/quirks/Makefile,v
 retrieving revision 1.44
 diff -u -r1.44 Makefile
 --- Makefile	6 May 2011 11:28:55 -0000	1.44
-+++ Makefile	12 May 2011 18:32:42 -0000
++++ Makefile	12 May 2011 21:43:01 -0000
 @@ -5,7 +5,7 @@
  DISTFILES =
  
@@ -20,7 +20,7 @@ RCS file: /cvs/ports/devel/quirks/files/Quirks.pm,v
 retrieving revision 1.50
 diff -u -r1.50 Quirks.pm
 --- files/Quirks.pm	6 May 2011 11:28:55 -0000	1.50
-+++ files/Quirks.pm	12 May 2011 18:32:42 -0000
++++ files/Quirks.pm	12 May 2011 21:43:01 -0000
 @@ -226,6 +226,8 @@
  sub is_base_system
  {
@@ -30,11 +30,10 @@ diff -u -r1.50 Quirks.pm
  	if ($handle->pkgname =~ m/^texlive_base-2009/) {
  		# we need to alter its packing-list
  		my $plist = OpenBSD::PackingList->from_installation(
-@@ -240,6 +242,43 @@
+@@ -240,6 +242,38 @@
  		    }, 
  		    '/usr/local/share/texmf-var');
  		quick_add($plist, '/usr/local/share/texmf/web2c/fmtutil.cnf');
-+		quick_add($plist, '/usr/local/share/texmf/web2c/updmap.cfg');
 +
 +		# add links that were outside the plist in tl2009
 +		my @links = qw(
@@ -63,11 +62,7 @@ diff -u -r1.50 Quirks.pm
 +					(($i->{name} =~ /tl-link-config$/) ||
 +					($i->{name} =~ /texlinks -u$/) ||
 +					($i->{name} =~ /texlinks$/))) {
-+				bless $i, "OpenBSD::PackingElement::File";
-+				print "Nullified: " . $i->{name};
-+				# run 'true' program instead
 +				$i->{name} = "/usr/bin/true";
-+				#last;
 +			}
 +		}
 +

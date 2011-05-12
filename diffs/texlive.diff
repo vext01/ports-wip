@@ -2,10 +2,10 @@ Index: README
 ===================================================================
 RCS file: /cvs/ports/print/texlive/README,v
 retrieving revision 1.1
-diff -u -p -u -r1.1 README
+diff -u -r1.1 README
 --- README	8 Mar 2011 00:09:42 -0000	1.1
-+++ README	3 May 2011 15:22:27 -0000
-@@ -22,6 +22,7 @@ TeX Live 2010 - Porting progress.
++++ README	12 May 2011 11:53:29 -0000
+@@ -22,6 +22,7 @@
     -> fix $HOME ls-R owned root bug:	done
     -> make fmtutil.cnf configs:		not needed this year
   * Implement remaining @xxx directives:	done
@@ -16,20 +16,20 @@ diff -u -p -u -r1.1 README
 Index: base/Makefile
 ===================================================================
 RCS file: /cvs/ports/print/texlive/base/Makefile,v
-retrieving revision 1.46
-diff -u -p -u -r1.46 Makefile
---- base/Makefile	9 Mar 2011 14:43:59 -0000	1.46
-+++ base/Makefile	3 May 2011 15:22:27 -0000
-@@ -4,7 +4,7 @@ COMMENT =		base binaries for TeXLive typ
+retrieving revision 1.47
+diff -u -r1.47 Makefile
+--- base/Makefile	11 May 2011 07:45:53 -0000	1.47
++++ base/Makefile	12 May 2011 11:53:29 -0000
+@@ -4,7 +4,7 @@
  
  DISTNAME = 		texlive-${DIST_V}-source
  PKGNAME =		texlive_base-${V}
--REVISION =		0
-+REVISION =		1
+-REVISION =		1
++REVISION =		2
  
  SHARED_LIBS =		kpathsea	3.0
  SHARED_LIBS +=		ptexenc		0.0
-@@ -106,6 +106,19 @@ SUBST_VARS +=		TRUEPREFIX LOCALBASE
+@@ -106,6 +106,19 @@
  pre-install:
  	mkdir ${WRKSRC}/inst
  
@@ -49,7 +49,7 @@ diff -u -p -u -r1.46 Makefile
  post-install:
  	rm -Rf ${WRKSRC}/inst
  
-@@ -121,4 +134,25 @@ post-install:
+@@ -121,4 +134,25 @@
  		fi \
  	done
  
@@ -78,23 +78,21 @@ diff -u -p -u -r1.46 Makefile
 Index: base/pkg/PLIST
 ===================================================================
 RCS file: /cvs/ports/print/texlive/base/pkg/PLIST,v
-retrieving revision 1.16
-diff -u -p -u -r1.16 PLIST
---- base/pkg/PLIST	8 Mar 2011 00:09:42 -0000	1.16
-+++ base/pkg/PLIST	3 May 2011 15:22:27 -0000
-@@ -3,9 +3,8 @@
+retrieving revision 1.17
+diff -u -r1.17 PLIST
+--- base/pkg/PLIST	11 May 2011 07:45:53 -0000	1.17
++++ base/pkg/PLIST	12 May 2011 11:53:29 -0000
+@@ -3,9 +3,6 @@
  @conflict ht-<2
  @pkgpath print/teTeX/base
  @pkgpath print/teTeX/base,-fmt
 -@comment mptopdf must be before texlinks -u
 -bin/mptopdf
 -@unexec texlinks -u
-+%%SHARED%%
-+%%xindy%%
  bin/a2ping
  bin/afm2afm
  @bin bin/afm2pl
-@@ -14,6 +13,7 @@ bin/afm2afm
+@@ -14,6 +11,7 @@
  bin/allcm
  bin/allec
  bin/allneeded
@@ -102,7 +100,7 @@ diff -u -p -u -r1.16 PLIST
  bin/arlatex
  bin/authorindex
  bin/autoinst
-@@ -42,6 +42,8 @@ bin/cefspdflatex
+@@ -42,6 +40,8 @@
  bin/chkweb
  bin/cmap2enc
  bin/context
@@ -111,7 +109,7 @@ diff -u -p -u -r1.16 PLIST
  @bin bin/ctangle
  @bin bin/ctie
  bin/ctxtools
-@@ -64,6 +66,8 @@ bin/dvihp
+@@ -64,6 +64,8 @@
  @bin bin/dvilj4
  @bin bin/dvilj4l
  bin/dvilj6
@@ -120,7 +118,7 @@ diff -u -p -u -r1.16 PLIST
  bin/dvipdfm
  @bin bin/dvipdfmx
  bin/dvipdft
-@@ -79,9 +83,11 @@ bin/dvitomp
+@@ -79,9 +81,11 @@
  bin/e2pall
  bin/ebb
  bin/ebong
@@ -132,7 +130,7 @@ diff -u -p -u -r1.16 PLIST
  @bin bin/extconv
  bin/extractbb
  bin/fig4latex
-@@ -106,6 +112,7 @@ bin/httex
+@@ -106,6 +110,7 @@
  bin/httexi
  bin/htxelatex
  bin/htxetex
@@ -140,7 +138,7 @@ diff -u -p -u -r1.16 PLIST
  @bin bin/kpseaccess
  bin/kpsepath
  @bin bin/kpsereadlink
-@@ -115,12 +122,15 @@ bin/kpsewhere
+@@ -115,12 +120,15 @@
  @bin bin/kpsewhich
  bin/kpsexpand
  @bin bin/lacheck
@@ -156,7 +154,7 @@ diff -u -p -u -r1.16 PLIST
  @bin bin/luatex
  bin/luatools
  @bin bin/mag
-@@ -129,8 +139,11 @@ bin/makeglossaries
+@@ -129,8 +137,11 @@
  @bin bin/makejvf
  bin/mathspic
  @bin bin/mendex
@@ -168,7 +166,7 @@ diff -u -p -u -r1.16 PLIST
  @bin bin/mft
  bin/mk4ht
  bin/mkgrkindex
-@@ -145,11 +158,12 @@ bin/mktexlsr
+@@ -145,11 +156,14 @@
  bin/mktexmf
  bin/mktexpk
  bin/mktextfm
@@ -177,13 +175,13 @@ diff -u -p -u -r1.16 PLIST
  @bin bin/mmafm
  @bin bin/mmpfb
  @bin bin/mpost
--%%SHARED%%
--%%xindy%%
+ %%SHARED%%
+ %%xindy%%
 +bin/mptopdf
  bin/mtxrun
  @bin bin/musixflx
  @bin bin/odvicopy
-@@ -175,27 +189,37 @@ bin/pdfatfi
+@@ -175,27 +189,37 @@
  @comment bin/pdfbook
  @bin bin/pdfclose
  bin/pdfcrop
@@ -221,7 +219,7 @@ diff -u -p -u -r1.16 PLIST
  @bin bin/pltotf
  @bin bin/pooltype
  @bin bin/ppltotf
-@@ -249,6 +273,7 @@ bin/texloganalyser
+@@ -249,11 +273,10 @@
  bin/texlua
  bin/texluac
  bin/texmfstart
@@ -229,7 +227,12 @@ diff -u -p -u -r1.16 PLIST
  @bin bin/tftopl
  bin/thumbpdf
  @bin bin/tie
-@@ -264,6 +289,7 @@ bin/tpic2pdftex
+-@comment bin/tl-link-config
+-@comment bin/tl-link-config.beforesubst
+ @comment bin/tlmgr
+ bin/tpic2pdftex
+ @bin bin/ttf2afm
+@@ -264,6 +287,7 @@
  bin/ulqda
  bin/updmap
  bin/updmap-sys
@@ -237,7 +240,7 @@ diff -u -p -u -r1.16 PLIST
  @bin bin/vftovp
  @bin bin/vlna
  bin/vpe
-@@ -274,7 +300,9 @@ bin/vpl2vpl
+@@ -274,7 +298,9 @@
  bin/xdvi
  @bin bin/xdvi-xaw
  @bin bin/xdvipdfmx
@@ -247,37 +250,22 @@ diff -u -p -u -r1.16 PLIST
  include/kpathsea/
  include/kpathsea/absolute.h
  include/kpathsea/c-auto.h
-@@ -484,14 +512,10 @@ lib/libptexenc.la
- @man man/man1/xdvi.1
- @comment @man man/man1/xindy.1
- @man man/man5/fmtutil.cnf.5
--@man man/man5/synctex.5
-+@comment @man man/man5/synctex.5
- @man man/man5/updmap.cfg.5
+@@ -489,7 +515,6 @@
  share/doc/pkg-readmes/${FULLPKGNAME}
  share/lcdf-typetools-for-tex-live/
--@exec mktexlsr > /dev/null 2>&1
+ @exec mktexlsr > /dev/null 2>&1
 -@exec texlinks
--@extraunexec rm -Rf %D/share/texmf-var/
--@extraunexec rm -Rf %D/share/texmf-config/
+ @extraunexec rm -Rf %D/share/texmf-var/
+ @extraunexec rm -Rf %D/share/texmf-config/
  @comment share/texmf-dist/bibtex/csf/base/88591lat.csf
- @comment share/texmf-dist/bibtex/csf/base/88591sca.csf
- @comment share/texmf-dist/bibtex/csf/base/ascii.csf
-@@ -763,4 +787,5 @@ share/texmf/scripts/texlive/tlmgr.pl
- @extra share/texmf/ls-R
- @extra share/texmf-dist/ls-R
- @extra share/texmf-var/ls-R
--@extra share/texmf-config/ls-R
-+@exec mktexlsr > /dev/null 2>&1
-+@extraunexec rm -Rf %D/share/texmf-var/
 Index: texmf/Makefile
 ===================================================================
 RCS file: /cvs/ports/print/texlive/texmf/Makefile,v
 retrieving revision 1.18
-diff -u -p -u -r1.18 Makefile
+diff -u -r1.18 Makefile
 --- texmf/Makefile	9 Mar 2011 14:43:59 -0000	1.18
-+++ texmf/Makefile	3 May 2011 15:22:27 -0000
-@@ -7,13 +7,14 @@ COMMENT-docs =		texlive documentation
++++ texmf/Makefile	12 May 2011 11:53:29 -0000
+@@ -7,13 +7,14 @@
  DISTNAME =		texlive-${DIST_V}-texmf
  MASTER_SITES0 =		http://theunixzoo.co.uk/distfiles/
  DISTFILES =		${DISTNAME}${EXTRACT_SUFX} \
@@ -298,9 +286,9 @@ Index: texmf/distinfo
 ===================================================================
 RCS file: /cvs/ports/print/texlive/texmf/distinfo,v
 retrieving revision 1.3
-diff -u -p -u -r1.3 distinfo
+diff -u -r1.3 distinfo
 --- texmf/distinfo	8 Mar 2011 00:09:42 -0000	1.3
-+++ texmf/distinfo	3 May 2011 15:22:27 -0000
++++ texmf/distinfo	12 May 2011 11:53:29 -0000
 @@ -1,10 +1,10 @@
  MD5 (texlive-20100722-texmf.tar.xz) = Et7DoyPE63W5ijFgxi3IZQ==
 -MD5 (texmf-var-pregen-2010.tar.xz) = qNdvyLW7EldON2CP9GxnGQ==
@@ -321,10 +309,10 @@ Index: texmf/pkg/PLIST-full
 ===================================================================
 RCS file: /cvs/ports/print/texlive/texmf/pkg/PLIST-full,v
 retrieving revision 1.11
-diff -u -p -u -r1.11 PLIST-full
+diff -u -r1.11 PLIST-full
 --- texmf/pkg/PLIST-full	8 Mar 2011 00:09:42 -0000	1.11
-+++ texmf/pkg/PLIST-full	3 May 2011 15:22:28 -0000
-@@ -28114,6 +28114,4 @@ share/texmf/xindy/modules/tex/inputenc/l
++++ texmf/pkg/PLIST-full	12 May 2011 11:53:44 -0000
+@@ -28114,6 +28114,4 @@
  share/texmf/xindy/modules/tex/inputenc/latin2.xdy
  share/texmf/xindy/modules/tex/inputenc/latin3.xdy
  @exec mktexlsr > /dev/null 2>&1
@@ -335,10 +323,10 @@ Index: texmf/pkg/PLIST-main
 ===================================================================
 RCS file: /cvs/ports/print/texlive/texmf/pkg/PLIST-main,v
 retrieving revision 1.8
-diff -u -p -u -r1.8 PLIST-main
+diff -u -r1.8 PLIST-main
 --- texmf/pkg/PLIST-main	8 Mar 2011 00:09:42 -0000	1.8
-+++ texmf/pkg/PLIST-main	3 May 2011 15:22:28 -0000
-@@ -35003,7 +35003,7 @@ share/texmf/web2c/tcvn-t5.tcx
++++ texmf/pkg/PLIST-main	12 May 2011 11:53:56 -0000
+@@ -35003,7 +35003,7 @@
  share/texmf/web2c/texmf.cnf
  share/texmf/web2c/texmfcnf.lua
  share/texmf/web2c/updmap-hdr.cfg
@@ -347,7 +335,7 @@ diff -u -p -u -r1.8 PLIST-main
  share/texmf/web2c/viscii-t5.tcx
  share/texmf/xdvi/
  share/texmf/xdvi/XDvi
-@@ -35013,13 +35013,10 @@ share/texmf/xdvi/pixmap/toolbar2.xpm
+@@ -35013,13 +35013,10 @@
  share/texmf/xdvi/xdvi.cfg
  share/texmf-var/
  share/texmf-var/web2c/
@@ -364,7 +352,7 @@ diff -u -p -u -r1.8 PLIST-main
  share/texmf-var/web2c/pdftex/amstex.fmt
  share/texmf-var/web2c/pdftex/cont-en.fmt
  share/texmf-var/web2c/pdftex/cslatex.fmt
-@@ -35027,6 +35024,8 @@ share/texmf-var/web2c/pdftex/pdfcslatex.
+@@ -35027,6 +35024,8 @@
  share/texmf-var/web2c/pdftex/csplain.fmt
  share/texmf-var/web2c/pdftex/pdfcsplain.fmt
  share/texmf-var/web2c/pdftex/eplain.fmt
@@ -373,7 +361,7 @@ diff -u -p -u -r1.8 PLIST-main
  share/texmf-var/web2c/pdftex/latex.fmt
  share/texmf-var/web2c/pdftex/pdflatex.fmt
  share/texmf-var/web2c/pdftex/mex.fmt
-@@ -35037,18 +35036,26 @@ share/texmf-var/web2c/pdftex/mllatex.fmt
+@@ -35037,18 +35036,26 @@
  share/texmf-var/web2c/pdftex/mptopdf.fmt
  share/texmf-var/web2c/pdftex/pdftex.fmt
  share/texmf-var/web2c/pdftex/etex.fmt

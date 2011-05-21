@@ -1,0 +1,44 @@
+Index: current.html
+===================================================================
+RCS file: /cvs/www/faq/current.html,v
+retrieving revision 1.265
+diff -u -p -r1.265 current.html
+--- current.html	20 May 2011 22:56:09 -0000	1.265
++++ current.html	21 May 2011 11:28:05 -0000
+@@ -40,6 +40,7 @@
+ <li><a href="#20110428">2011/04/28 - ftp-proxy(8) pf.conf change required</a>
+ <li><a href="#20110505">2011/05/05 - tftp-proxy(8) pf.conf change required</a>
+ <li><a href="#20110520">2011/05/20 - pf.conf 'set skip' now handles groups</a>
++<li><a href="#20110521">2011/05/21 - [ports] TeX Live manual upgrade</a>
+ <!-- New additions go on the bottom, please -->
+ </ul>
+ 
+@@ -202,6 +203,28 @@ mpe and others) default to being in a gr
+ so for these interfaces there will be no change in behaviour unless you
+ have deliberately changed groups, e.g. with '<tt>ifconfig carp456 -group
+ carp</tt>'.
++
++<a name="20110521"></a>
++<h3>2011/05/21 - [ports] Manual TeX Live upgrade</h3>
++
++Upgrading from a TeX Live package prior to 2011/05/21 will fail and requires a
++manual update.
++
++<p>
++First back up anything you have manually installed in the system-wide texmf
++trees (<tt>/usr/local/share/texmf*</tt>). Then you should remove any trace of TeX Live
++from your system:
++
++<blockquote>
++<pre>
++<b>
++pkg_delete /var/db/pkg/*texlive*
++rm -Rf /usr/local/share/texmf*
++</b>
++</pre>
++</blockquote>
++
++Now you may install new TeX Live packages in the normal fashion.
+ 
+ <hr>
+ <a href= "index.html"><img height= "24" width= "24" src= "../images/back.gif" border= "0" alt="[back]"></a>

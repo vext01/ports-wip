@@ -1,27 +1,27 @@
 Index: Makefile
 ===================================================================
 RCS file: /cvs/ports/devel/quirks/Makefile,v
-retrieving revision 1.44
-diff -u -p -u -r1.44 Makefile
---- Makefile	6 May 2011 11:28:55 -0000	1.44
-+++ Makefile	22 May 2011 22:23:17 -0000
+retrieving revision 1.46
+diff -u -p -u -r1.46 Makefile
+--- Makefile	30 May 2011 09:15:16 -0000	1.46
++++ Makefile	8 Jun 2011 19:31:47 -0000
 @@ -5,7 +5,7 @@ CATEGORIES =	devel databases
  DISTFILES =
  
  # API.rev
--PKGNAME = 	quirks-1.42
-+PKGNAME = 	quirks-1.43
+-PKGNAME =	quirks-1.44
++PKGNAME =	quirks-1.45
  PKG_ARCH =	*
  MAINTAINER =	Marc Espie <espie@openbsd.org>
  
 Index: files/Quirks.pm
 ===================================================================
 RCS file: /cvs/ports/devel/quirks/files/Quirks.pm,v
-retrieving revision 1.50
-diff -u -p -u -r1.50 Quirks.pm
---- files/Quirks.pm	6 May 2011 11:28:55 -0000	1.50
-+++ files/Quirks.pm	22 May 2011 22:23:17 -0000
-@@ -226,10 +226,12 @@ sub quick_add
+retrieving revision 1.52
+diff -u -p -u -r1.52 Quirks.pm
+--- files/Quirks.pm	30 May 2011 09:15:16 -0000	1.52
++++ files/Quirks.pm	8 Jun 2011 19:31:47 -0000
+@@ -228,10 +228,12 @@ sub quick_add
  sub is_base_system
  {
  	my ($self, $handle, $state) = @_;
@@ -36,7 +36,7 @@ diff -u -p -u -r1.50 Quirks.pm
  		require File::Find;
  		File::Find::find(
  		    sub {
-@@ -240,7 +242,58 @@ sub is_base_system
+@@ -242,7 +244,59 @@ sub is_base_system
  		    }, 
  		    '/usr/local/share/texmf-var');
  		quick_add($plist, '/usr/local/share/texmf/web2c/fmtutil.cnf');
@@ -70,6 +70,7 @@ diff -u -p -u -r1.50 Quirks.pm
 +	if(($handle->pkgname =~ m/^texlive_.*2009/) ||
 +	    ($handle->pkgname eq "texlive_base-2010p1") ||
 +	    ($handle->pkgname eq "texlive_base-2010p0") ||
++	    ($handle->pkgname eq "texlive_base-2010") ||
 +	    ($handle->pkgname eq "texlive_texmf-full-2010") ||
 +	    ($handle->pkgname eq "texlive_texmf-docs-2010") ||
 +	    ($handle->pkgname eq "texlive_texmf-minimal-2010p0") ||

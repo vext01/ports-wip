@@ -1,0 +1,118 @@
+$OpenBSD$
+--- src/main.c.orig	Tue Jun  1 01:58:52 2010
++++ src/main.c	Mon Jun 13 17:51:15 2011
+@@ -123,51 +123,6 @@ warn_if_no_roms (void)
+ }
+ 
+ static void
+-start (void)
+-{
+-        GError *error = NULL;
+-
+-        if (gva_db_needs_rebuilt ())
+-        {
+-                if (!gva_main_build_database (&error))
+-                {
+-                        gva_error_handle (&error);
+-                        return;
+-                }
+-
+-                if (!gva_main_analyze_roms (&error))
+-                {
+-                        gva_error_handle (&error);
+-                        return;
+-                }
+-        }
+-        else if (gva_audit_detect_changes ())
+-        {
+-                if (!gva_main_analyze_roms (&error))
+-                {
+-                        gva_error_handle (&error);
+-                        return;
+-                }
+-        }
+-
+-        /* Do this after ROMs are analyzed. */
+-        if (!gva_main_init_search_completion (&error))
+-        {
+-                gva_error_handle (&error);
+-                return;
+-        }
+-
+-        gva_ui_unlock ();
+-
+-        gconf_bridge_bind_property (
+-                gconf_bridge_get (), GVA_GCONF_SELECTED_VIEW_KEY,
+-                G_OBJECT (GVA_ACTION_VIEW_AVAILABLE), "current-value");
+-
+-        /* Present a helpful dialog if no ROMs were found. */
+-        warn_if_no_roms ();
+-}
+-
+-static void
+ rompath_changed_cb (GFileMonitor *monitor,
+                     GFile *file,
+                     GFile *other_file,
+@@ -279,6 +234,54 @@ setup_file_monitors (void)
+         g_strfreev (search_paths);
+ }
+ 
++static void
++start (void)
++{
++        GError *error = NULL;
++
++        if (gva_db_needs_rebuilt ())
++        {
++                if (!gva_main_build_database (&error))
++                {
++                        gva_error_handle (&error);
++                        return;
++                }
++
++                if (!gva_main_analyze_roms (&error))
++                {
++                        gva_error_handle (&error);
++                        return;
++                }
++        }
++        else if (gva_audit_detect_changes ())
++        {
++                if (!gva_main_analyze_roms (&error))
++                {
++                        gva_error_handle (&error);
++                        return;
++                }
++        }
++
++        /* Do this after ROMs are analyzed. */
++        if (!gva_main_init_search_completion (&error))
++        {
++                gva_error_handle (&error);
++                return;
++        }
++
++        gva_ui_unlock ();
++
++        gconf_bridge_bind_property (
++                gconf_bridge_get (), GVA_GCONF_SELECTED_VIEW_KEY,
++                G_OBJECT (GVA_ACTION_VIEW_AVAILABLE), "current-value");
++
++        /* Present a helpful dialog if no ROMs were found. */
++        warn_if_no_roms ();
++
++        /* Listen for changes to the 'rompath' directories. */
++        setup_file_monitors ();
++}
++
+ gint
+ main (gint argc, gchar **argv)
+ {
+@@ -403,7 +406,6 @@ main (gint argc, gchar **argv)
+ #endif
+ 
+         gtk_init_add ((GtkFunction) start, NULL);
+-        gtk_init_add ((GtkFunction) setup_file_monitors, NULL);
+ 
+         gtk_main ();
+ 

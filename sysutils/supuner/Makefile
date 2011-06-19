@@ -1,15 +1,11 @@
 # $OpenBSD$
 
-#
-# Very short description of the package, 60 chars max
-#
 COMMENT =		SUPress command stdout / stderr UNless ERror
 
 DISTNAME =		supuner-0.1
 CATEGORIES =		sysutils
 
 HOMEPAGE =		http://tratt.net/laurie/src/supuner/
-
 
 MAINTAINER =		Laurence Tratt <laurie@tratt.net>
 
@@ -22,5 +18,6 @@ PERMIT_DISTFILES_FTP =	Yes
 MASTER_SITES =		${HOMEPAGE}releases/
 
 NO_REGRESS =		Yes
+NO_BUILD =		Yes
 
 .include <bsd.port.mk>

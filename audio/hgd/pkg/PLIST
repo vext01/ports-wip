@@ -14,10 +14,6 @@
 share/doc/hgd/
 share/doc/hgd/README
 share/doc/hgd/pydoc/
-share/doc/hgd/pydoc/html/
-share/doc/hgd/pydoc/html/hgd.doccer.html
-share/doc/hgd/pydoc/html/hgd.playlist.html
-share/doc/hgd/pydoc/html/index.html
 share/doc/hgd/pydoc/txt/
 share/doc/hgd/pydoc/txt/hgd.doccer.txt
 share/doc/hgd/pydoc/txt/hgd.playlist.txt
@@ -36,4 +32,3 @@ share/hgd/pylib/hgd/playlist.py
 @owner _hgd
 @group _hgd
 @sample /var/hgd/
-

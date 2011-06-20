@@ -7,26 +7,14 @@
 @man man/man1/hgd-playd.1
 @man man/man1/hgdc.1
 @man man/man7/hgd-proto.7
-@man man/man7/hgd-scripting.7
 @bin sbin/hgd-admin
 @bin sbin/hgd-netd
 @bin sbin/hgd-playd
 share/doc/hgd/
 share/doc/hgd/README
-share/doc/hgd/pydoc/
-share/doc/hgd/pydoc/txt/
-share/doc/hgd/pydoc/txt/hgd.doccer.txt
-share/doc/hgd/pydoc/txt/hgd.playlist.txt
-share/doc/hgd/pydoc/txt/index.txt
 share/examples/hgd/
 share/examples/hgd/hgd.rc
 share/examples/hgd/hgdc.rc
-share/hgd/
-share/hgd/pylib/
-share/hgd/pylib/hgd/
-share/hgd/pylib/hgd/__init__.py
-share/hgd/pylib/hgd/doccer.py
-share/hgd/pylib/hgd/playlist.py
 @rcscript ${RCDIR}/hgd_netd
 @rcscript ${RCDIR}/hgd_playd
 @owner _hgd

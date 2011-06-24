@@ -25,8 +25,8 @@ PERMIT_PACKAGE_FTP =		Yes
 PERMIT_DISTFILES_CDROM =	Yes
 PERMIT_DISTFILES_FTP =		Yes
 
-WANTLIB =	GL X11 Xext Xinerama Xss Xv Xxf86dga Xxf86vm avcodec avformat \
-		avutil bz2 c cdda_interface cdda_paranoia \
+WANTLIB =	GL X11 Xext Xinerama Xss Xv Xxf86dga Xxf86vm ass avcodec \
+		avformat  avutil bz2 c cdda_interface cdda_paranoia \
 		crypto dv faac fontconfig freetype fribidi gsm jpeg lcms \
 		m mng mp3lame ncurses ogg>=5 orc-0.4 png postproc \
 		pthread SDL schroedinger-1.0>=2.0 sndio speex stdc++ \
@@ -57,7 +57,8 @@ LIB_DEPENDS =	graphics/png \
 		multimedia/schroedinger>=1.0.10 \
 		audio/faac \
 		multimedia/x264>=20101023 \
-		devel/sdl>=1.2.5
+		devel/sdl>=1.2.5 \
+		multimedia/libass
 
 BUILD_DEPENDS =	net/livemedia \
 		audio/rtunes>=0.8 \

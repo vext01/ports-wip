@@ -112,11 +112,12 @@ CONFIGURE_ARGS += --disable-gui \
 		--disable-ffmpeg_a	# link ffmpeg .so (graphics/ffmpeg)
 
 # CONFIGURE_ARGS that enable internal stuff
-CONFIGURE_ARGS += --enable-menu \
-		  --enable-enca
+CONFIGURE_ARGS += --enable-menu
 
 # CONFIGURE_ARGS that enable external stuff
-CONFIGURE_ARGS += --with-sdl-config=${LOCALBASE}/bin/sdl-config
+CONFIGURE_ARGS += --with-sdl-config=${LOCALBASE}/bin/sdl-config \
+		  --enable-enca \
+		  --enable-ass
 
 # CONFIGURE_ARGS that disable external stuff
 CONFIGURE_ARGS += --disable-smb \

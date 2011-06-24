@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.185 2011/05/03 09:37:12 edd Exp $
+# $OpenBSD: Makefile,v 1.188 2011/06/02 13:41:42 ajacoutot Exp $
 
 # May not be hard to add more.
 ONLY_FOR_ARCHS =	alpha amd64 arm i386 mips64 mips64el powerpc sparc64
@@ -13,7 +13,7 @@ SUBST_VARS += 		PREFIX CONFDIR
 # Distfiles must be hand-rolled, see README
 N =			mplayer
 DISTNAME =		mplayer-${V}
-REVISION =		2
+REVISION =		6
 
 CATEGORIES =		x11 multimedia
 
@@ -25,8 +25,8 @@ PERMIT_PACKAGE_FTP =		Yes
 PERMIT_DISTFILES_CDROM =	Yes
 PERMIT_DISTFILES_FTP =		Yes
 
-WANTLIB =	GL X11 Xext Xinerama Xss Xv Xxf86dga Xxf86vm avcodec avformat \
-		avutil bz2 c cdda_interface cdda_paranoia \
+WANTLIB =	GL X11 Xext Xinerama Xss Xv Xxf86dga Xxf86vm ass avcodec \
+		avformat  avutil bz2 c cdda_interface cdda_paranoia \
 		crypto dv faac fontconfig freetype fribidi gsm jpeg lcms \
 		m mng mp3lame ncurses ogg>=5 orc-0.4 png postproc \
 		pthread SDL schroedinger-1.0>=2.0 sndio speex stdc++ \
@@ -57,7 +57,8 @@ LIB_DEPENDS =	graphics/png \
 		multimedia/schroedinger>=1.0.10 \
 		audio/faac \
 		multimedia/x264>=20101023 \
-		devel/sdl>=1.2.5
+		devel/sdl>=1.2.5 \
+		multimedia/libass
 
 BUILD_DEPENDS =	net/livemedia \
 		audio/rtunes>=0.8 \
@@ -132,7 +133,8 @@ CONFIGURE_ARGS += --disable-smb \
 		--disable-mpg123 \
 		--disable-librtmp \
 		--disable-faad \
-		--disable-theora
+		--disable-theora \
+		--disable-enca
 
 # internal tremor, external tremor, external libvorbis all conflict
 # we choose libvorbis to enable encoding to vorbis

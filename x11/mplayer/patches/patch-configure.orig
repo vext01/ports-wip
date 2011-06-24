@@ -1,6 +1,6 @@
 $OpenBSD: patch-configure,v 1.58 2011/03/29 20:04:41 edd Exp $
 --- configure.orig	Wed Mar  9 00:33:03 2011
-+++ configure	Fri Jun 24 12:19:32 2011
++++ configure	Fri Jun 24 12:15:36 2011
 @@ -35,29 +35,33 @@
  #
  #############################################################################
@@ -222,7 +222,15 @@ $OpenBSD: patch-configure,v 1.58 2011/03/29 20:04:41 edd Exp $
      if header_check dvdread/dvd_reader.h $_dvdreadcflags $_dvdreadlibs $_ld_dl ; then
        _dvdread=yes
        extra_cflags="$extra_cflags $_dvdreadcflags"
-@@ -6521,7 +6556,7 @@ echores "$_libmpeg2"
+@@ -6096,6 +6131,7 @@ EOF
+         if cc_check -lass ; then
+             res_comment="external"
+             extra_ldflags="$extra_ldflags -lass"
++	    extra_cflags="$extra_cflags `pkg-config --cflags libass`"
+         elif test "$ass_internal" = auto ; then
+             ass_internal=yes
+         else
+@@ -6521,7 +6557,7 @@ echores "$_libmpeg2"
  echocheck "libdca support"
  if test "$_libdca" = auto ; then
    _libdca=no
@@ -231,7 +239,7 @@ $OpenBSD: patch-configure,v 1.58 2011/03/29 20:04:41 edd Exp $
      statement_check_broken stdint.h dts.h 'dts_init(0)' $_ld_dca $_ld_lm &&
        extra_ldflags="$extra_ldflags $_ld_dca" && _libdca=yes && break
    done
-@@ -7360,6 +7395,8 @@ if test "$_tv_v4l2" = auto ; then
+@@ -7360,6 +7396,8 @@ if test "$_tv_v4l2" = auto ; then
    _tv_v4l2=no
    if test "$_tv" = yes && linux ; then
      header_check_broken sys/time.h linux/videodev2.h && _tv_v4l2=yes
@@ -240,7 +248,7 @@ $OpenBSD: patch-configure,v 1.58 2011/03/29 20:04:41 edd Exp $
    fi
  fi
  if test "$_tv_v4l2" = yes ; then
-@@ -8069,6 +8106,7 @@ SPEEX = $_speex
+@@ -8069,6 +8107,7 @@ SPEEX = $_speex
  STREAM_CACHE = $_stream_cache
  SGIAUDIO = $_sgiaudio
  SUNAUDIO = $_sunaudio
@@ -248,7 +256,7 @@ $OpenBSD: patch-configure,v 1.58 2011/03/29 20:04:41 edd Exp $
  SVGA = $_svga
  TDFXFB = $_tdfxfb
  TDFXVID = $_tdfxvid
-@@ -8445,6 +8483,7 @@ $def_ossaudio_devmixer
+@@ -8445,6 +8484,7 @@ $def_ossaudio_devmixer
  $def_pulse
  $def_sgiaudio
  $def_sunaudio

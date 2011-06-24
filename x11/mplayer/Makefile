@@ -27,7 +27,7 @@ PERMIT_DISTFILES_FTP =		Yes
 
 WANTLIB =	GL X11 Xext Xinerama Xss Xv Xxf86dga Xxf86vm ass avcodec \
 		avformat  avutil bz2 c cdda_interface cdda_paranoia \
-		crypto dv faac fontconfig freetype fribidi gsm jpeg lcms \
+		crypto dv enca faac fontconfig freetype fribidi gsm jpeg lcms \
 		m mng mp3lame ncurses ogg>=5 orc-0.4 png postproc \
 		pthread SDL schroedinger-1.0>=2.0 sndio speex stdc++ \
 		swscale theoradec theoraenc ungif util vpx x264>=5 \
@@ -58,7 +58,8 @@ LIB_DEPENDS =	graphics/png \
 		audio/faac \
 		multimedia/x264>=20101023 \
 		devel/sdl>=1.2.5 \
-		multimedia/libass
+		multimedia/libass \
+		converters/enca
 
 BUILD_DEPENDS =	net/livemedia \
 		audio/rtunes>=0.8 \
@@ -111,7 +112,8 @@ CONFIGURE_ARGS += --disable-gui \
 		--disable-ffmpeg_a	# link ffmpeg .so (graphics/ffmpeg)
 
 # CONFIGURE_ARGS that enable internal stuff
-CONFIGURE_ARGS += --enable-menu
+CONFIGURE_ARGS += --enable-menu \
+		  --enable-enca
 
 # CONFIGURE_ARGS that enable external stuff
 CONFIGURE_ARGS += --with-sdl-config=${LOCALBASE}/bin/sdl-config
@@ -133,8 +135,7 @@ CONFIGURE_ARGS += --disable-smb \
 		--disable-mpg123 \
 		--disable-librtmp \
 		--disable-faad \
-		--disable-theora \
-		--disable-enca
+		--disable-theora
 
 # internal tremor, external tremor, external libvorbis all conflict
 # we choose libvorbis to enable encoding to vorbis

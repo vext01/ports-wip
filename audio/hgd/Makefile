@@ -44,4 +44,10 @@ PKG_ARGS +=		-Dpython=0
 
 NO_REGRESS =		Yes
 
+# sub in correct paths
+pre-configure:
+	${SUBST_CMD} ${WRKSRC}/pydoc/txt/hgd.doccer.txt
+	${SUBST_CMD} ${WRKSRC}/pydoc/txt/hgd.playlist.txt
+	${SUBST_CMD} ${WRKSRC}/pydoc/txt/index.txt
+
 .include <bsd.port.mk>

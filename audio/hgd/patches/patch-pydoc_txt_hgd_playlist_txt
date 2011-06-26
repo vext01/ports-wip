@@ -1,0 +1,12 @@
+$OpenBSD$
+--- pydoc/txt/hgd.playlist.txt.orig	Sun Jun 26 12:52:47 2011
++++ pydoc/txt/hgd.playlist.txt	Sun Jun 26 12:53:16 2011
+@@ -2,7 +2,7 @@ NNAAMMEE
+     hgd.playlist - Module for working with playlist items in HGD
+ 
+ FFIILLEE
+-    /home/edd/source/hgd/pylib/hgd/playlist.py
++    ${PREFIX}/share/hgd/pylib/hgd/playlist.py
+ 
+ CCLLAASSSSEESS
+     __builtin__.object

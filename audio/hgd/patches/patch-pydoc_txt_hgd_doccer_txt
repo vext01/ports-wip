@@ -1,0 +1,12 @@
+$OpenBSD$
+--- pydoc/txt/hgd.doccer.txt.orig	Sun Jun 26 12:50:33 2011
++++ pydoc/txt/hgd.doccer.txt	Sun Jun 26 12:51:43 2011
+@@ -2,7 +2,7 @@ NNAAMMEE
+     hgd.doccer - Generate Python API Docs.
+ 
+ FFIILLEE
+-    /home/edd/source/hgd/pylib/hgd/doccer.py
++    ${PREFIX}/share/hgd/pylib/hgd/doccer.py
+ 
+ DDEESSCCRRIIPPTTIIOONN
+     This class generates docs for the HGD Python API. This is non-trivial, as

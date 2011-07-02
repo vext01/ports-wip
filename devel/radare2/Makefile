@@ -50,7 +50,8 @@ PERMIT_DISTFILES_FTP =	Yes
 
 WANTLIB +=		c m pthread
 
-MASTER_SITES =		${HOMEPAGE}/get/
+#MASTER_SITES =		${HOMEPAGE}/get/
+MASTER_SITES =		http://comstyle.com/source/
 
 USE_GMAKE =		Yes
 USE_LIBTOOL =		Yes
@@ -60,8 +61,8 @@ CONFIGURE_ARGS +=	--with-libversion=${LIBV}
 
 NO_REGRESS =		Yes
 
-# Not needed outside ports, so figure out why needed in ports.
+# These not needed outside ports, so figure out why needed in ports.
 MAKE_FLAGS +=		EXT_SO=so RADARE_LIBV=${LIBV}
-#CFLAGS +=		-D__UNIX__
+CFLAGS +=		-D__UNIX__
 
 .include <bsd.port.mk>

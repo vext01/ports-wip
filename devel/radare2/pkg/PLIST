@@ -115,6 +115,18 @@ lib/radare2/0.7.1/
 lib/radare2/0.7.1/radare.lua
 lib/radare2/0.7.1/radare.py
 lib/radare2/0.7.1/radare.rb
+@man man/man1/r2.1
+@man man/man1/rabin2.1
+@man man/man1/radare2.1
+@man man/man1/radiff2.1
+@man man/man1/rafind2.1
+@man man/man1/rahash2.1
+@man man/man1/ranal2.1
+@man man/man1/rarc2-tool.1
+@man man/man1/rarc2.1
+@man man/man1/rasc2.1
+@man man/man1/rasm2.1
+@man man/man1/rax2.1
 share/doc/radare2/
 share/doc/radare2/bindiff
 share/doc/radare2/changes-from-1.x
@@ -134,17 +146,3 @@ share/doc/radare2/solaris
 share/doc/radare2/static-plugins
 share/doc/radare2/syntax
 share/doc/radare2/windows
-share/man/
-share/man/man1/
-@man share/man/man1/r2.1
-@man share/man/man1/rabin2.1
-@man share/man/man1/radare2.1
-@man share/man/man1/radiff2.1
-@man share/man/man1/rafind2.1
-@man share/man/man1/rahash2.1
-@man share/man/man1/ranal2.1
-@man share/man/man1/rarc2-tool.1
-@man share/man/man1/rarc2.1
-@man share/man/man1/rasc2.1
-@man share/man/man1/rasm2.1
-@man share/man/man1/rax2.1

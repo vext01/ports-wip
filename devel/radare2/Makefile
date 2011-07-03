@@ -57,8 +57,7 @@ USE_GMAKE =		Yes
 USE_LIBTOOL =		Yes
 CONFIGURE_STYLE =	gnu
 
-CONFIGURE_ARGS +=	--with-libversion=${LIBV} \
-			--mandir=${PREFIX}/man
+CONFIGURE_ARGS +=	--with-libversion=${LIBV}
 
 NO_REGRESS =		Yes
 

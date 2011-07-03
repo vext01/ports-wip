@@ -1,0 +1,11 @@
+$OpenBSD$
+--- global.mk.orig	Sat Jul  2 22:27:45 2011
++++ global.mk	Sun Jul  3 23:42:19 2011
+@@ -19,6 +19,7 @@ VERSION=`date '+%Y%m%d'`
+ endif
+ 
+ PFX=${DESTDIR}${PREFIX}
++MDR=${DESTDIR}${MANDIR}
+ 
+ LIBDIR=${PREFIX}/lib
+ 

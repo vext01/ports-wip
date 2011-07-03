@@ -1,0 +1,11 @@
+$OpenBSD$
+--- config-user.mk.acr.orig	Sat Jul  2 22:27:45 2011
++++ config-user.mk.acr	Sun Jul  3 23:42:19 2011
+@@ -2,6 +2,7 @@
+ 
+ DESTDIR=
+ PREFIX=@PREFIX@
++MANDIR=@MANDIR@
+ HAVE_LIB_EWF=@HAVE_LIB_EWF@
+ HAVE_LIB_GMP=@HAVE_LIB_GMP@
+ LIL_ENDIAN=@LIL_ENDIAN@

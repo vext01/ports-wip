@@ -52,7 +52,8 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB-main +=		c m pthread
+WANTLIB-main =		c m pthread
+RUN_DEPENDS-main =	devel/nasm
 RUN_DEPENDS-vala =	devel/radare2,-main \
 			lang/vala
 

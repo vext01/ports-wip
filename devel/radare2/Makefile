@@ -11,7 +11,7 @@ COMMENT-vala =		vala extensions for radare2
 V =			20110705
 DISTNAME =		radare2-c0d29691eeba
 PKGNAME-main =		radare2-${V}
-PKGNAME-vala =		radare2-${V}-vala
+PKGNAME-vala =		radare2-vala-${V}
 
 # In radare, all libs have the same version
 LIBV =	0.0	# 0.7.1
@@ -53,7 +53,7 @@ PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
 WANTLIB-main +=		c m pthread
-LIB_DEPENDS-vala =	devel/radare2,-main \
+RUN_DEPENDS-vala =	devel/radare2,-main \
 			lang/vala
 
 #MASTER_SITES =		${HOMEPAGE}/get/
@@ -72,7 +72,6 @@ MAKE_FLAGS +=		EXT_SO=so RADARE_LIBV=${LIBV}
 CFLAGS +=		-D__UNIX__
 
 # separate configure/install for vala stuff
-#MTREE_FILE =		${FILESDIR}/mtree
 post-configure:
 	cd ${WRKSRC}/r2-bindings && ./${CONFIGURE_SCRIPT}
 

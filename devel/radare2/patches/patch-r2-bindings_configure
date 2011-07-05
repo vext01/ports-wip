@@ -1,0 +1,29 @@
+$OpenBSD$
+--- r2-bindings/configure.orig	Tue Jul  5 10:04:09 2011
++++ r2-bindings/configure	Tue Jul  5 10:05:47 2011
+@@ -363,16 +363,16 @@ else
+ if [ "$HOST_OS" = "darwin" ]; then
+ USEROSTYPE="darwin"; fi; fi; fi; fi; fi; fi
+ printf 'checking pkg-config flags for r_core... '
+-tmp=`pkg-config --cflags r_core 2>/dev/null`
+-if [ $? = 1 ]; then echo no ; HAVE_PKGCFG_R_CORE=0; 
+-echo 'This package is required'
+-exit 1
+-else 
+-FOO=$tmp; 
+-tmp=`pkg-config --libs r_core 2>/dev/null`
+-if [ ! $? = 1 ]; then 
++#tmp=`pkg-config --cflags r_core 2>/dev/null`
++#if [ $? = 1 ]; then echo no ; HAVE_PKGCFG_R_CORE=0; 
++#echo 'This package is required'
++#exit 1
++#else 
++#FOO=$tmp; 
++#tmp=`pkg-config --libs r_core 2>/dev/null`
++#if [ ! $? = 1 ]; then 
+ echo yes; HAVE_PKGCFG_R_CORE=1; 
+-FOO=$tmp; fi; fi
++#FOO=$tmp; fi; fi
+ SEDFLAGS=" -e '"
+ COUNT=0
+ for A in ${ENVWORDS} ; do

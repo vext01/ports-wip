@@ -1,7 +1,6 @@
 # $OpenBSD: Makefile.template,v 1.60 2010/10/24 20:41:23 ajacoutot Exp $
 
-# XXX find out which arches are supported
-#ONLY_FOR_ARCHS =	???
+ONLY_FOR_ARCHS =	i386 amd64 armish zaurus mips ppc sparc sparc64
 
 COMMENT =		reverse engineers disassembler
 

@@ -36,9 +36,7 @@ SHARED_LIBS += r_syscall	${LIBV}
 SHARED_LIBS += r_util		${LIBV}
 
 CATEGORIES =		devel
-
 HOMEPAGE =		http://radare.nopcode.org/
-
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
 # LGPLv3

@@ -4,7 +4,9 @@ ONLY_FOR_ARCHS =	i386 amd64 armish zaurus mips ppc sparc sparc64
 
 COMMENT =		reverse engineers disassembler
 
-DISTNAME =		radare2-20110702
+# hg snaps until release is made
+DISTNAME =		radare2-c0d29691eeba
+PKGNAME =		radare2-20110705
 
 # In radare, all libs have the same version
 LIBV =	0.0	# 0.7.1
@@ -48,7 +50,7 @@ PERMIT_DISTFILES_FTP =	Yes
 WANTLIB +=		c m pthread
 
 #MASTER_SITES =		${HOMEPAGE}/get/
-MASTER_SITES =		http://comstyle.com/source/
+MASTER_SITES =		http://devio.us/~vext01/distfiles/
 
 USE_GMAKE =		Yes
 USE_LIBTOOL =		Yes

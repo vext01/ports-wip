@@ -1,4 +1,4 @@
-@comment $OpenBSD$ test
+@comment $OpenBSD$
 %%SHARED%%
 bin/r2
 @bin bin/rabin2

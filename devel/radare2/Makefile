@@ -71,11 +71,13 @@ NO_REGRESS =		Yes
 MAKE_FLAGS +=		EXT_SO=so RADARE_LIBV=${LIBV}
 CFLAGS +=		-D__UNIX__
 
-# separate configure/install 
+# separate configure/install for vala stuff
+#MTREE_FILE =		${FILESDIR}/mtree
 post-configure:
 	cd ${WRKSRC}/r2-bindings && ./${CONFIGURE_SCRIPT}
 
+# prefix has already been primed with DESTDIR already at this point
 post-install:
-	cd ${WRKSRC}/r2-bindings && ${MAKE_PROGRAM} install-vapi
+	cd ${WRKSRC}/r2-bindings && ${MAKE_PROGRAM} DESTDIR="" install-vapi
 
 .include <bsd.port.mk>

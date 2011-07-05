@@ -1,4 +1,7 @@
 $OpenBSD$
+
+disable check for rcore, as it may not be installed yet
+
 --- r2-bindings/configure.orig	Tue Jul  5 10:04:09 2011
 +++ r2-bindings/configure	Tue Jul  5 10:05:47 2011
 @@ -363,16 +363,16 @@ else

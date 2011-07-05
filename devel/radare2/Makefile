@@ -2,11 +2,16 @@
 
 ONLY_FOR_ARCHS =	i386 amd64 armish zaurus mips ppc sparc sparc64
 
-COMMENT =		reverse engineers disassembler
+MULTI_PACKAGES =	-main -vala
+
+COMMENT-main =		reverse engineers disassembler and debugger
+COMMENT-vala =		vala extensions for radare2
 
 # hg snaps until release is made
+V =			20110705
 DISTNAME =		radare2-c0d29691eeba
-PKGNAME =		radare2-20110705
+PKGNAME-main =		radare2-${V}
+PKGNAME-vala =		radare2-${V}-vala
 
 # In radare, all libs have the same version
 LIBV =	0.0	# 0.7.1
@@ -47,7 +52,9 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB +=		c m pthread
+WANTLIB-main +=		c m pthread
+LIB_DEPENDS-vala =	devel/radare2,-main \
+			lang/vala
 
 #MASTER_SITES =		${HOMEPAGE}/get/
 MASTER_SITES =		http://devio.us/~vext01/distfiles/
@@ -63,5 +70,12 @@ NO_REGRESS =		Yes
 # These not needed outside ports, so figure out why needed in ports.
 MAKE_FLAGS +=		EXT_SO=so RADARE_LIBV=${LIBV}
 CFLAGS +=		-D__UNIX__
+
+# separate configure/install 
+post-configure:
+	cd ${WRKSRC}/r2-bindings && ./${CONFIGURE_SCRIPT}
+
+post-install:
+	cd ${WRKSRC}/r2-bindings && ${MAKE_PROGRAM} install-vapi
 
 .include <bsd.port.mk>

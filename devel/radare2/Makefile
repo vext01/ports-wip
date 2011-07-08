@@ -2,16 +2,12 @@
 
 ONLY_FOR_ARCHS =	i386 amd64 armish zaurus mips ppc sparc sparc64
 
-MULTI_PACKAGES =	-main -vala
-
-COMMENT-main =		reverse engineers disassembler and debugger
-COMMENT-vala =		vala extensions for radare2
+COMMENT =		reverse engineers disassembler and debugger
 
 # hg snaps until release is made
-V =			20110705
-DISTNAME =		radare2-c0d29691eeba
-PKGNAME-main =		radare2-${V}
-PKGNAME-vala =		radare2-vala-${V}
+V =			20110708
+DISTNAME =		radare2-7d0fc19b907f
+PKGNAME =		radare2-${V}
 
 # In radare, all libs have the same version
 LIBV =	0.0	# 0.7.1
@@ -54,8 +50,6 @@ PERMIT_DISTFILES_FTP =	Yes
 
 WANTLIB-main =		c m pthread
 RUN_DEPENDS-main =	devel/nasm
-RUN_DEPENDS-vala =	devel/radare2,-main \
-			lang/vala
 
 #MASTER_SITES =		${HOMEPAGE}/get/
 MASTER_SITES =		http://devio.us/~vext01/distfiles/

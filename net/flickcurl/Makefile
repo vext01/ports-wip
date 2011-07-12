@@ -2,10 +2,9 @@
 
 COMMENT =		flickr API library and utility
 
-DISTNAME =		flickcurl-1.14
-REVISION =		2
+DISTNAME =		flickcurl-1.21
 
-SHARED_LIBS +=  	flickcurl   1.0      # .1.0
+SHARED_LIBS +=  	flickcurl   2.0
 CATEGORIES =		net
 
 HOMEPAGE =		http://librdf.org/flickcurl/
@@ -19,7 +18,7 @@ PERMIT_DISTFILES_FTP =	Yes
 
 MODULES =		devel/gettext
 
-WANTLIB =		c crypto curl>=10 idn>=16 m raptor>=2 ssl \
+WANTLIB =		c crypto curl>=10 idn>=16 m raptor>=3 ssl \
 			xml2>=9 xslt z
 
 MASTER_SITES =		http://download.dajobe.org/flickcurl/

@@ -4,13 +4,12 @@ ONLY_FOR_ARCHS =	i386 amd64 armish zaurus mips ppc sparc sparc64
 
 COMMENT =		reverse engineers disassembler and debugger
 
-# hg snaps until release is made
-V =			20110708
-DISTNAME =		radare2-7d0fc19b907f
-PKGNAME =		radare2-${V}
+V =		0.8
+DISTNAME =	radare2-${V}
+DISTFILES =	${DISTNAME}${EXTRACT_SUFX} r2-bindings-${V}${EXTRACT_SUFX}
 
 # In radare, all libs have the same version
-LIBV =	0.0	# 0.7.1
+LIBV =	0.0	# 0.8
 
 SHARED_LIBS += r_anal		${LIBV}
 SHARED_LIBS += r_asm		${LIBV}
@@ -51,8 +50,7 @@ PERMIT_DISTFILES_FTP =	Yes
 WANTLIB-main =		c m pthread
 RUN_DEPENDS-main =	devel/nasm
 
-#MASTER_SITES =		${HOMEPAGE}/get/
-MASTER_SITES =		http://devio.us/~vext01/distfiles/
+MASTER_SITES =		${HOMEPAGE}/get/
 
 USE_GMAKE =		Yes
 USE_LIBTOOL =		Yes
@@ -68,10 +66,10 @@ CFLAGS +=		-D__UNIX__
 
 # separate configure/install for vala stuff
 post-configure:
-	cd ${WRKSRC}/r2-bindings && ./${CONFIGURE_SCRIPT}
+	cd ${WRKDIR}/r2-bindings-${V} && ./${CONFIGURE_SCRIPT}
 
 # prefix has already been primed with DESTDIR already at this point
 post-install:
-	cd ${WRKSRC}/r2-bindings && ${MAKE_PROGRAM} DESTDIR="" install-vapi
+	cd ${WRKDIR}/r2-bindings-${V} && ${MAKE_PROGRAM} DESTDIR="" install-vapi
 
 .include <bsd.port.mk>

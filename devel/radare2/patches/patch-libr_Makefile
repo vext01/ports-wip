@@ -4,23 +4,6 @@ No library symlinks
 
 --- libr/Makefile.orig	Sat Jul 16 01:30:33 2011
 +++ libr/Makefile	Sat Jul 16 02:02:23 2011
-@@ -44,16 +44,6 @@ install-symlink:
- 			ln -fs ${PWD}/../pkgcfg/$${a} ${PFX}/lib/pkgconfig/$${a} ; \
- 		fi ; \
- 	done
--	for a in ${LIBLIST} ; do \
--		ln -fs ${PWD}/$${a}/libr_$${a}.${EXT_SO} ${PFX}/lib/libr_$${a}.${EXT_SO} ; \
--		ln -fs ${PWD}/$${a}/libr_$${a}.${EXT_SO} ${PFX}/lib/libr_$${a}.${EXT_SO}.${LIBVERSION} ; \
--		ln -fs ${PWD}/$${a}/libr_$${a}.${EXT_AR} ${PFX}/lib/libr_$${a}.${EXT_AR} ; \
--		for b in $${a}/p/*.${EXT_SO} ; do \
--			if [ -e ${PWD}/$${b} ] ; then \
--				ln -fs ${PWD}/$${b} ${PFX}/lib/radare2/${VERSION}/ ; \
--			fi ; \
--		done ; \
--	done
- 
- install: install-includes install-pkgconfig
- 	# TODO :Use INSTALL_DATA_DIR instead of mkdir
 @@ -63,7 +53,6 @@ install: install-includes install-pkgconfig
  	  b=`echo $$a|cut -d / -f 2`; \
  	  echo " ${PFX}/lib/$$b.${LIBVERSION}"; \

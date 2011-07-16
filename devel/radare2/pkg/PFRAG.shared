@@ -1,53 +1,28 @@
 @comment $OpenBSD$
-lib/libr_anal.so
 @lib lib/libr_anal.so.${LIBr_anal_VERSION}
-lib/libr_asm.so
 @lib lib/libr_asm.so.${LIBr_asm_VERSION}
-lib/libr_bin.so
 @lib lib/libr_bin.so.${LIBr_bin_VERSION}
-lib/libr_bp.so
 @lib lib/libr_bp.so.${LIBr_bp_VERSION}
-lib/libr_cmd.so
 @lib lib/libr_cmd.so.${LIBr_cmd_VERSION}
-lib/libr_config.so
 @lib lib/libr_config.so.${LIBr_config_VERSION}
-lib/libr_cons.so
 @lib lib/libr_cons.so.${LIBr_cons_VERSION}
-lib/libr_core.so
 @lib lib/libr_core.so.${LIBr_core_VERSION}
-lib/libr_debug.so
 @lib lib/libr_debug.so.${LIBr_debug_VERSION}
-lib/libr_diff.so
 @lib lib/libr_diff.so.${LIBr_diff_VERSION}
-lib/libr_flags.so
 @lib lib/libr_flags.so.${LIBr_flags_VERSION}
-lib/libr_fs.so
 @lib lib/libr_fs.so.${LIBr_fs_VERSION}
-lib/libr_hash.so
 @lib lib/libr_hash.so.${LIBr_hash_VERSION}
-lib/libr_io.so
 @lib lib/libr_io.so.${LIBr_io_VERSION}
-lib/libr_lang.so
 @lib lib/libr_lang.so.${LIBr_lang_VERSION}
-lib/libr_lib.so
 @lib lib/libr_lib.so.${LIBr_lib_VERSION}
-lib/libr_line.so
 @lib lib/libr_line.so.${LIBr_line_VERSION}
-lib/libr_parse.so
 @lib lib/libr_parse.so.${LIBr_parse_VERSION}
-lib/libr_print.so
 @lib lib/libr_print.so.${LIBr_print_VERSION}
-lib/libr_reg.so
 @lib lib/libr_reg.so.${LIBr_reg_VERSION}
-lib/libr_search.so
 @lib lib/libr_search.so.${LIBr_search_VERSION}
-lib/libr_sign.so
 @lib lib/libr_sign.so.${LIBr_sign_VERSION}
-lib/libr_socket.so
 @lib lib/libr_socket.so.${LIBr_socket_VERSION}
-lib/libr_syscall.so
 @lib lib/libr_syscall.so.${LIBr_syscall_VERSION}
-lib/libr_util.so
 @lib lib/libr_util.so.${LIBr_util_VERSION}
 lib/radare2/0.8/anal_arm.so
 lib/radare2/0.8/anal_avr.so

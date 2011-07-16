@@ -6,7 +6,10 @@ COMMENT =		reverse engineers disassembler and debugger
 
 V =		0.8
 DISTNAME =	radare2-${V}
-DISTFILES =	${DISTNAME}${EXTRACT_SUFX} r2-bindings-${V}${EXTRACT_SUFX}
+
+# Bindings are broken at the moment and there is something iffy with the
+# distfile extraction, so disabled for now.
+#DISTFILES =	${DISTNAME}${EXTRACT_SUFX} r2-bindings-${V}${EXTRACT_SUFX}
 
 # In radare, all libs have the same version
 LIBV =	0.0	# 0.8
@@ -47,8 +50,11 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB-main =		c m pthread
-RUN_DEPENDS-main =	devel/nasm
+WANTLIB =		c crypto m pthread ssl
+RUN_DEPENDS =		devel/nasm
+BUILD_DEPENDS =		archivers/gtar
+
+TAR =			gtar
 
 MASTER_SITES =		${HOMEPAGE}/get/
 
@@ -64,12 +70,20 @@ NO_REGRESS =		Yes
 MAKE_FLAGS +=		EXT_SO=so RADARE_LIBV=${LIBV}
 CFLAGS +=		-D__UNIX__
 
+R2BIND = 		${WRKDIR}/r2-bindings-${V}
+
+# More bindings stuff, see comment above
+
+# just so we can patch r2-bindings
+# post-extract:
+# 	ln -s ${R2BIND} ${WRKSRC}/r2-bindings
+
 # separate configure/install for vala stuff
-post-configure:
-	cd ${WRKDIR}/r2-bindings-${V} && ./${CONFIGURE_SCRIPT}
+# post-configure:
+# 	cd ${R2BIND} && ./${CONFIGURE_SCRIPT}
 
 # prefix has already been primed with DESTDIR already at this point
-post-install:
-	cd ${WRKDIR}/r2-bindings-${V} && ${MAKE_PROGRAM} DESTDIR="" install-vapi
+# post-install:
+# 	cd ${R2BIND} && ${MAKE_PROGRAM} DESTDIR="" install
 
 .include <bsd.port.mk>

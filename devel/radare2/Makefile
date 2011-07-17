@@ -13,32 +13,11 @@ DISTNAME =	radare2-${V}
 
 # In radare, all libs have the same version
 LIBV =	0.0	# 0.8
-
-SHARED_LIBS += r_anal		${LIBV}
-SHARED_LIBS += r_asm		${LIBV}
-SHARED_LIBS += r_bin		${LIBV}
-SHARED_LIBS += r_bp		${LIBV}
-SHARED_LIBS += r_cmd		${LIBV}
-SHARED_LIBS += r_config		${LIBV}
-SHARED_LIBS += r_cons		${LIBV}
-SHARED_LIBS += r_core		${LIBV}
-SHARED_LIBS += r_debug		${LIBV}
-SHARED_LIBS += r_diff		${LIBV}
-SHARED_LIBS += r_flags		${LIBV}
-SHARED_LIBS += r_fs		${LIBV}
-SHARED_LIBS += r_hash		${LIBV}
-SHARED_LIBS += r_io		${LIBV}
-SHARED_LIBS += r_lang		${LIBV}
-SHARED_LIBS += r_lib		${LIBV}
-SHARED_LIBS += r_line		${LIBV}
-SHARED_LIBS += r_parse		${LIBV}
-SHARED_LIBS += r_print		${LIBV}
-SHARED_LIBS += r_reg		${LIBV}
-SHARED_LIBS += r_search		${LIBV}
-SHARED_LIBS += r_sign		${LIBV}
-SHARED_LIBS += r_socket		${LIBV}
-SHARED_LIBS += r_syscall	${LIBV}
-SHARED_LIBS += r_util		${LIBV}
+.for _lib in in r_anal r_asm r_bin r_bp r_cmd r_config r_cons r_core r_debug \
+	r_diff r_flags r_fs r_hash r_io r_lang r_lib r_line r_parse r_print \
+	r_reg r_search r_sign r_socket r_syscall r_util
+SHARED_LIBS+=		${_lib} ${LIBV}
+.endfor
 
 CATEGORIES =		devel
 HOMEPAGE =		http://radare.nopcode.org/

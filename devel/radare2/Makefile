@@ -8,12 +8,12 @@ V =		0.8
 DISTNAME =	radare2-${V}
 
 # Bindings are broken at the moment and there is something iffy with the
-# distfile extraction, so disabled for now.
+# distfile extraction, so disabled for now. Upstream are aware.
 #DISTFILES =	${DISTNAME}${EXTRACT_SUFX} r2-bindings-${V}${EXTRACT_SUFX}
 
 # In radare, all libs have the same version
 LIBV =	0.0	# 0.8
-.for _lib in in r_anal r_asm r_bin r_bp r_cmd r_config r_cons r_core r_debug \
+.for _lib in r_anal r_asm r_bin r_bp r_cmd r_config r_cons r_core r_debug \
 	r_diff r_flags r_fs r_hash r_io r_lang r_lib r_line r_parse r_print \
 	r_reg r_search r_sign r_socket r_syscall r_util
 SHARED_LIBS+=		${_lib} ${LIBV}
@@ -46,7 +46,7 @@ CFLAGS +=		-D__UNIX__
 
 R2BIND = 		${WRKDIR}/r2-bindings-${V}
 
-# More bindings stuff, see comment above
+# More bindings stuff, disabled for now, see comment above
 
 # just so we can patch r2-bindings
 # post-extract:

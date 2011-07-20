@@ -5,7 +5,8 @@ COMMENT =		Vala bindings for Radare2
 DISTNAME =		r2-bindings-${V}
 PKGNAME =		radare-bindings2-${V}
 
-RUN_DEPENDS =		lang/vala
+RUN_DEPENDS =		lang/vala \
+			devel/radare/main
 
 PKG_ARCH =		*
 

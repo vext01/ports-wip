@@ -3,7 +3,7 @@
 # Arches suggested by upstream, unsure which work on OpenBSD for sure.
 ONLY_FOR_ARCHS ?=	i386 amd64 armish zaurus mips ppc sparc sparc64
 
-V ?=			0.8
+V ?=			0.8.1
 
 CATEGORIES ?=		devel
 HOMEPAGE ?=		http://radare.nopcode.org/

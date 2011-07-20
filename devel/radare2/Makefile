@@ -2,6 +2,6 @@
 
 SUBDIR =
 SUBDIR += main
-#SUBDIR += bindings
+SUBDIR += bindings
 
 .include <bsd.port.subdir.mk>

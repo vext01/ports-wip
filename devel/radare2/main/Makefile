@@ -15,9 +15,10 @@ SHARED_LIBS+=		${_lib} ${LIBV}
 WANTLIB =		c crypto m pthread ssl
 RUN_DEPENDS =		devel/nasm
 
-CONFIGURE_ARGS +=	--with-libversion=${LIBV}
+CONFIGURE_ARGS +=	--with-libversion=${LIBV} \
+			--mandir=${PREFIX}/man
 
-MAKE_FLAGS +=		EXT_SO=so RADARE_LIBV=${LIBV}
-CFLAGS +=		-D__UNIX__
+#MAKE_FLAGS +=		EXT_SO=so RADARE_LIBV=${LIBV}
+#CFLAGS +=		-D__UNIX__
 
 .include <bsd.port.mk>

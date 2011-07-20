@@ -1,0 +1,18 @@
+# $OpenBSD: Makefile.template,v 1.60 2010/10/24 20:41:23 ajacoutot Exp $
+
+COMMENT =		Vala bindings for Radare2
+
+DISTNAME =		r2-bindings-${V}
+PKGNAME =		radare-bindings2-${V}
+
+RUN_DEPENDS =		lang/vala
+
+PKG_ARCH =		*
+
+# This would go if we wanted to package other bindings.
+NO_BUILD =		Yes
+
+# Only install vala bindings for now. Maybe more in the future.
+INSTALL_TARGET =	install-vapi
+
+.include <bsd.port.mk>

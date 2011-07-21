@@ -12,7 +12,6 @@ bin/rarc2-tool
 @bin bin/rasc2
 @bin bin/rasm2
 @bin bin/rax2
-@bin bin/rsc2
 include/libr/
 include/libr/btree.h
 include/libr/list.h
@@ -76,17 +75,11 @@ lib/pkgconfig/r_sign.pc
 lib/pkgconfig/r_socket.pc
 lib/pkgconfig/r_syscall.pc
 lib/pkgconfig/r_util.pc
-lib/radare/
-lib/radare/bin/
-lib/radare/bin/intel2att
-lib/radare/bin/manc
-lib/radare/bin/msdn
-lib/radare/bin/srcline
 lib/radare2/
-lib/radare2/0.8/
-lib/radare2/0.8/radare.lua
-lib/radare2/0.8/radare.py
-lib/radare2/0.8/radare.rb
+lib/radare2/0.8.1/
+lib/radare2/0.8.1/radare.lua
+lib/radare2/0.8.1/radare.py
+lib/radare2/0.8.1/radare.rb
 @man man/man1/r2.1
 @man man/man1/rabin2.1
 @man man/man1/radare2.1
@@ -100,6 +93,7 @@ lib/radare2/0.8/radare.rb
 @man man/man1/rasm2.1
 @man man/man1/rax2.1
 @man man/man1/rsc2.1
+share/doc/pkg-readmes/${FULLPKGNAME}
 share/doc/radare2/
 share/doc/radare2/bindiff
 share/doc/radare2/changes-from-1.x

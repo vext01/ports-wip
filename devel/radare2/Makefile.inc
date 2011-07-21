@@ -1,7 +1,7 @@
 # $OpenBSD: Makefile.template,v 1.60 2010/10/24 20:41:23 ajacoutot Exp $
 
 # Arches suggested by upstream, unsure which work on OpenBSD for sure.
-ONLY_FOR_ARCHS ?=	i386 amd64 armish zaurus mips ppc sparc sparc64
+ONLY_FOR_ARCHS ?=	amd64 arm i386 mips64 mips64el powerpc sparc sparc64
 
 V ?=			0.8.1
 

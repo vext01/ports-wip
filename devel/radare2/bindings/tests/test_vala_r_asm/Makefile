@@ -1,9 +1,9 @@
 VALAC =		valac
-SRC =		rasm.vala
+SRC =		rasm
 PKGS =		--pkg=r_asm
 
 all:
-	${VALAC} ${VALAC_FLAGS} ${PKGS} ${SRC}
+	${VALAC} ${VALAC_FLAGS} ${PKGS} ${SRC}.vala
 
 clean:
-	@rm ${SRC}
+	@rm -f ${SRC}

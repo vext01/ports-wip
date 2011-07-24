@@ -1,7 +1,7 @@
 # $OpenBSD: Makefile,v 1.4 2011/04/22 08:21:28 edd Exp $
 
 COMMENT =		music system for hackathons
-DISTNAME =		hgd-0.4.0
+DISTNAME =		hgd-0.4.1
 
 CATEGORIES =		audio net
 HOMEPAGE =		https://github.com/vext01/hgd/
@@ -43,11 +43,5 @@ PKG_ARGS +=		-Dpython=0
 .endif
 
 NO_REGRESS =		Yes
-
-# sub in correct paths
-pre-configure:
-	${SUBST_CMD} ${WRKSRC}/pydoc/txt/hgd.doccer.txt
-	${SUBST_CMD} ${WRKSRC}/pydoc/txt/hgd.playlist.txt
-	${SUBST_CMD} ${WRKSRC}/pydoc/txt/index.txt
 
 .include <bsd.port.mk>

@@ -44,4 +44,7 @@ PKG_ARGS +=		-Dpython=0
 
 NO_REGRESS =		Yes
 
+post-install:
+	${INSTALL_DATA_DIR} ${SYSCONFDIR}/hgd/plugins
+
 .include <bsd.port.mk>

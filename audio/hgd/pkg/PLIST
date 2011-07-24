@@ -16,6 +16,7 @@ share/doc/hgd/README
 share/examples/hgd/
 share/examples/hgd/hgd.rc
 share/examples/hgd/hgdc.rc
+@sample ${SYSCONFDIR}/hgd/plugins/
 @rcscript ${RCDIR}/hgd_netd
 @rcscript ${RCDIR}/hgd_playd
 @owner _hgd

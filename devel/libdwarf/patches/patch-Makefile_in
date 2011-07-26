@@ -1,0 +1,21 @@
+$OpenBSD$
+--- Makefile.in.orig	Thu Feb  4 22:00:43 2010
++++ Makefile.in	Tue Jul 26 15:33:41 2011
+@@ -60,7 +60,7 @@ RANLIB =	@RANLIB@
+ DEFS =		@DEFS@
+ LIBS =		@LIBS@
+ INCLUDES =	-I. -I$(srcdir)
+-CFLAGS =	@CFLAGS@ $(INCLUDES)
++CFLAGS =	@CFLAGS@ $(INCLUDES) @CPPFLAGS@
+ # For more checking add -DWANT_LIBBDWARF_MALLOC_CHECK=1 to CFLAGS
+ LDFLAGS =	@LDFLAGS@
+ 
+@@ -128,7 +128,7 @@ libdwarf.a: dwarf_names.h dwarf_names.c  $(OBJS) dwarf
+ 	$(AR) $(ARFLAGS) $@ $(OBJS)  dwarf_names.o
+ 
+ libdwarf.so: dwarf_names.h dwarf_names.c $(OBJS) dwarf_names.o
+-	$(CC) $(CFLAGS) -shared $(OBJS)  dwarf_names.o -o $@
++	$(CC) $(CFLAGS) -shared $(OBJS)  dwarf_names.o -o libdwarf.so.${LIBdwarf_VERSION}
+ 
+ none:
+ 	echo "do nothing"

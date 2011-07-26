@@ -1,0 +1,2 @@
+Library to access the DWARF debugging information found in ELF object
+files.

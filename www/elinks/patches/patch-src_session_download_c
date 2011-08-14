@@ -1,4 +1,8 @@
 $OpenBSD$
+
+bug 869: fix a buffer overflow segfault in do_type_query
+http://bugzilla.elinks.cz/show_bug.cgi?id=869
+
 --- src/session/download.c.orig	Sat Aug 22 12:15:08 2009
 +++ src/session/download.c	Wed Aug  3 01:14:40 2011
 @@ -1090,10 +1090,7 @@ do_type_query(struct type_query *type_query, unsigned 

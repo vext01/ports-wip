@@ -1,4 +1,9 @@
 $OpenBSD$
+
+mailcap bug 1113: Don't leak values of duplicate fields
+(related to bug 869 patch)
+http://bugzilla.elinks.cz/show_bug.cgi?id=1113
+
 --- src/mime/backend/mailcap.c.orig	Sat Aug 22 12:15:08 2009
 +++ src/mime/backend/mailcap.c	Wed Aug  3 01:14:40 2011
 @@ -289,7 +289,11 @@ parse_optional_fields(struct mailcap_entry *entry, uns

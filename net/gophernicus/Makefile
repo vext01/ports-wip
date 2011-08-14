@@ -1,13 +1,9 @@
 # $OpenBSD: Makefile.template,v 1.60 2010/10/24 20:41:23 ajacoutot Exp $
 
 COMMENT =		BSD licensed Gopher Server
-
 DISTNAME =		gophernicus-1.1
-
 CATEGORIES =		net
-
 HOMEPAGE =		gopher://gophernicus.org
-
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
 # BSD
@@ -21,18 +17,10 @@ WANTLIB =		c
 MASTER_SITES =		http://gophernicus.org/software/gophernicus/server/
 FAKE_FLAGS +=		DESTDIR=${DESTDIR} PREFIX=${PREFIX}
 
-#do-install:
-#	${MAKE_PROGRAM} ${MAKE_FLAGS} ${INSTALL_TARGET}
-
-#MODULES =		???
-#BUILD_DEPENDS =	???
-#RUN_DEPENDS =		???
-#LIB_DEPENDS =		???
-#REGRESS_DEPENDS =	???
-
-#USE_GMAKE =		Yes
-#USE_GROFF =		Yes
-
-#NO_REGRESS =		Yes
+EXAMPLE_DIR =		${PREFIX}/share/examples/gophernicus
+post-install:
+			${INSTALL} -d ${EXAMPLE_DIR}
+			${INSTALL} ${WRKINST}/var/gopher/gophermap \
+				${EXAMPLE_DIR}
 
 .include <bsd.port.mk>

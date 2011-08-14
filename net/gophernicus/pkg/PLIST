@@ -8,6 +8,8 @@ share/doc/gophernicus/README
 share/doc/gophernicus/README.Gophermap
 share/doc/gophernicus/TODO
 share/doc/gophernicus/gophertag
+share/examples/gophernicus/
 @sample /var/gopher/
 @sample /var/gopher/docs/
-@comment /var/gopher/gophermap
+share/examples/gophernicus/gophermap
+@sample /var/gopher/gophermap

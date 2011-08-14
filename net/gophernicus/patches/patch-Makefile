@@ -1,0 +1,26 @@
+$OpenBSD$
+--- Makefile.orig	Sun Aug 14 13:39:30 2011
++++ Makefile	Sun Aug 14 13:41:32 2011
+@@ -17,10 +17,10 @@ DOCS    = LICENSE README INSTALL TODO ChangeLog README
+ 
+ INSTALL = PATH=$$PATH:/usr/sbin ./install-sh -o root -g 0
+ DESTDIR = /usr
+-SBINDIR = $(DESTDIR)/sbin
+-DOCDIR  = $(DESTDIR)/share/doc/$(PACKAGE)
++SBINDIR = $(DESTDIR)/${PREFIX}/sbin
++DOCDIR  = $(DESTDIR)/${PREFIX}/share/doc/$(PACKAGE)
+ 
+-ROOT    = /var/gopher
++ROOT    = $(DESTDIR)/var/gopher
+ OSXROOT = /Library/GopherServer
+ MAP     = gophermap
+ 
+@@ -31,7 +31,7 @@ PLIST   = org.gophernicus.server.plist
+ 
+ DIST    = $(PACKAGE)-$(VERSION)
+ TGZ     = $(DIST).tar.gz
+-RELDIR  = /var/gopher/gophernicus.org/software/gophernicus/server/
++RELDIR  = $(DESTDIR)/var/gopher/gophernicus.org/software/gophernicus/server/
+ 
+ CC      = gcc
+ CFLAGS  = -O2 -Wall

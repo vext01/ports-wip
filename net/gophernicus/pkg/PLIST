@@ -1,0 +1,15 @@
+@comment $OpenBSD$
+@bin sbin/in.gophernicus
+share/doc/gophernicus/
+share/doc/gophernicus/ChangeLog
+share/doc/gophernicus/INSTALL
+share/doc/gophernicus/LICENSE
+share/doc/gophernicus/README
+share/doc/gophernicus/README.Gophermap
+share/doc/gophernicus/TODO
+share/doc/gophernicus/gophertag
+share/examples/gophernicus/
+@sample /var/gopher/
+@sample /var/gopher/docs/
+share/examples/gophernicus/gophermap
+@sample /var/gopher/gophermap

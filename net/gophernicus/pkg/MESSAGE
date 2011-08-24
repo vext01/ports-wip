@@ -1,0 +1,2 @@
+To enable gophernicus, you need a line like this in ${SYSCONFDIR}/inetd.conf:
+gopher  stream  tcp  nowait  gophernicus:gophernicus /usr/local/sbin/in.gophernicus in.gophernicus -h localhost

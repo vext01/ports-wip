@@ -1,4 +1,6 @@
 @comment $OpenBSD$
+@newgroup _gophernicus:682
+@newuser _mpd:682:682:daemon:Gophernicus Gopher Daemon:/var/empty:/sbin/nologin
 @bin sbin/in.gophernicus
 share/doc/gophernicus/
 share/doc/gophernicus/ChangeLog
@@ -9,7 +11,11 @@ share/doc/gophernicus/README.Gophermap
 share/doc/gophernicus/TODO
 share/doc/gophernicus/gophertag
 share/examples/gophernicus/
+@owner _gophernicus
+@group _gophernicus
 @sample /var/gopher/
 @sample /var/gopher/docs/
+@owner
+@group
 share/examples/gophernicus/gophermap
 @sample /var/gopher/gophermap

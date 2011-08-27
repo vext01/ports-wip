@@ -4,10 +4,9 @@ COMMENT =		base binaries for TeXLive typesetting distribution
 
 DISTNAME = 		texlive-${DIST_V}-source
 PKGNAME =		texlive_base-${V}
-REVISION =		3
 
-SHARED_LIBS =		kpathsea	3.0
-SHARED_LIBS +=		ptexenc		0.0
+SHARED_LIBS =		kpathsea	4.0
+SHARED_LIBS +=		ptexenc		1.0
 
 WANTLIB +=		ICE SM X11 Xau Xaw Xdmcp Xext Xmu Xpm Xt c expat
 WANTLIB +=		fontconfig freetype gd jpeg lcms m ncurses
@@ -125,6 +124,7 @@ post-install:
 	# following tradition, texmf is in ${PREFIX}/share
 	mv ${PREFIX}/texmf ${PREFIX}/share/texmf
 	mv ${PREFIX}/texmf-dist ${PREFIX}/share/texmf-dist
+
 	# translate some sylinks from ../texmf* to ../share/texmf*
 	for link in `find ${PREFIX}/bin -type l`; do \
 		dest=`stat -f %Y $${link}`; \

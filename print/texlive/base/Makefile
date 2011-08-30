@@ -19,8 +19,8 @@ RUN_DEPENDS =		print/ghostscript/gnu \
 			print/ps2eps \
 			print/psutils \
 			print/t1utils \
-			texlive_texmf-minimal-${V}:print/texlive/texmf,-main \
 			print/latex-mk
+#texlive_texmf-minimal-${V}:print/texlive/texmf,-main \
 			
 LIB_DEPENDS =		devel/t1lib \
 			graphics/png \

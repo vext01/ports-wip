@@ -151,7 +151,7 @@ bin/mktextfm
 @bin bin/mmpfb
 @bin bin/mpost
 %%SHARED%%
-%%xindy%%
+@comment %%xindy%%
 bin/mptopdf
 bin/mtxrun
 bin/musixflx

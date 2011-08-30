@@ -56,9 +56,10 @@ BUILD_DEPENDS += 	lang/clisp
 LIB_DEPENDS +=		devel/ffcall	# XXX still needed? try build on fresh sys
 CONFIGURE_ARGS +=	--enable-xindy \
 			--disable-xindy-rules
-PKG_ARGS +=		-Dxindy=1
-.else
-PKG_ARGS +=		-Dxindy=0
+# XXX enable when ready
+#PKG_ARGS +=		-Dxindy=1
+#.else
+#PKG_ARGS +=		-Dxindy=0
 .endif
 
 # Do not link with system icu. TeXLive ICU is not vanilla (Yet)!

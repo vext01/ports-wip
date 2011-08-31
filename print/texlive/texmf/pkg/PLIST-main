@@ -35346,7 +35346,6 @@ share/texmf/doc/
 share/texmf/dvipdfm/
 share/texmf/dvipdfm/config/
 share/texmf/dvipdfm/config/config
-share/texmf/dvipdfm/config/config-win32
 share/texmf/dvipdfmx/
 share/texmf/dvipdfmx/dvipdfmx.cfg
 share/texmf/dvips/
@@ -35514,7 +35513,6 @@ share/texmf/scripts/texlive/lua/texlive/utils.tlu
 share/texmf/scripts/texlive/rungs.tlu
 share/texmf/scripts/texlive/test-tlpdb.tlu
 share/texmf/scripts/texlive/texconf.tlu
-share/texmf/scripts/texlive/uninstall-win32.pl
 share/texmf/tex/
 share/texmf/tex/fontinst/
 share/texmf/tex/fontinst/afm2pl/

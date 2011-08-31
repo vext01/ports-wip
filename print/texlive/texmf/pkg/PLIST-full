@@ -27160,8 +27160,6 @@ share/texmf-dist/tex4ht/
 share/texmf-dist/tex4ht/base/
 share/texmf-dist/tex4ht/base/unix/
 share/texmf-dist/tex4ht/base/unix/tex4ht.env
-share/texmf-dist/tex4ht/base/win32/
-share/texmf-dist/tex4ht/base/win32/tex4ht.env
 share/texmf-dist/tex4ht/bin/
 share/texmf-dist/tex4ht/bin/tex4ht.jar
 share/texmf-dist/tex4ht/ht-fonts/
@@ -30855,7 +30853,6 @@ share/texmf/scripts/xindy/
 share/texmf/scripts/xindy/texindy.pl
 share/texmf/scripts/xindy/xindy.pl
 share/texmf/texdoctk/
-share/texmf/texdoctk/texdocrc-win32.defaults
 share/texmf/texdoctk/texdocrc.defaults
 share/texmf/texdoctk/texdoctk.dat
 share/texmf/xindy/

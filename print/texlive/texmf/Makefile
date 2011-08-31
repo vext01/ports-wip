@@ -14,9 +14,6 @@ PKGNAME-main = 		texlive_texmf-minimal-${V}
 PKGNAME-full = 		texlive_texmf-full-${V}
 PKGNAME-docs =	 	texlive_texmf-docs-${V}
 
-REVISION-main =		1
-REVISION-full =		1
-
 NO_BUILD =		Yes
 NO_REGRESS =		Yes
 PKG_ARCH =		*
@@ -32,11 +29,15 @@ MULTI_PACKAGES = 	-main -full -docs
 SUBST_VARS +=		LOCALBASE
 
 do-install:
+	chown -R ${SHAREOWN}:${SHAREGRP} ${WRKDIST}
+	# manuals in the right place
+	mv ${WRKDIST}/texmf/doc/man/man1/*.1 ${PREFIX}/man/man1/
+	mv ${WRKDIST}/texmf/doc/man/man5/*.5 ${PREFIX}/man/man5/
+	# the rest in share/texmf*
 	mv ${WRKDIST}/texmf ${PREFIX}/share
 	mv ${WRKDIST}/texmf-dist ${PREFIX}/share
 # plug in my pregenerated map and formats
 #	mv ${WRKDIR}/texmf-var ${PREFIX}/share
-#	chown -R ${SHAREOWN}:${SHAREGRP} ${PREFIX}/share/*
 
 post-install:
 	${SUBST_CMD} ${PREFIX}/share/texmf/web2c/texmf.cnf

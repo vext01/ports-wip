@@ -227,7 +227,6 @@ share/man/man1/texmfstart.1
 share/man/man1/tftopl.1
 share/man/man1/thumbpdf.1
 share/man/man1/tie.1
-share/man/man1/tlmgr.1
 share/man/man1/tpic2pdftex.1
 share/man/man1/ttf2afm.1
 share/man/man1/ttf2pk.1
@@ -35515,8 +35514,6 @@ share/texmf/scripts/texlive/lua/texlive/utils.tlu
 share/texmf/scripts/texlive/rungs.tlu
 share/texmf/scripts/texlive/test-tlpdb.tlu
 share/texmf/scripts/texlive/texconf.tlu
-share/texmf/scripts/texlive/tlmgr.pl
-share/texmf/scripts/texlive/tlmgrgui.pl
 share/texmf/scripts/texlive/uninstall-win32.pl
 share/texmf/tex/
 share/texmf/tex/fontinst/

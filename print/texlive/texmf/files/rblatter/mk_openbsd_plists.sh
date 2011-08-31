@@ -2,8 +2,13 @@
 # $OpenBSD: mk_openbsd_plists.sh,v 1.2 2011/03/08 00:09:42 edd Exp $
 #
 # This is how the texlive port packing lists were generated.
-# Please be aware that a *full* texmf/texmf-dist and tlpdb from the
+# Please be aware that a *full* texmf/texmf-dist and texlive.tlpdb from the
 # texlive svn are required.
+#
+# texlive.tlpdb does not come in the dist tarball, so you need to get
+# it from svn from the release date. Eg:
+# svn co -r {20110705} svn://tug.org/texlive/trunk/Master/tlpkg
+# You can then copy tlpkg/texlive.tlpdb to ${TARBALL_ROOT}/tlpkg/texlive.tlpdb
 
 if [ "$1" = "" ]; then
 	TMF="/usr/local/share";

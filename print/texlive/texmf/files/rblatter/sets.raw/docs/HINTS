@@ -1,0 +1,230 @@
+Rblatter-$OpenBSD: rblatter,v 1.2 2011/03/08 00:09:42 edd Exp $
+Wed Aug 31 16:40:07 +0100 2011
++scheme-full,doc
+========================================================================
+
+SUMMARY
+----------
+
+includeFiles = 22710
+excludeFiles = 0
+includeMaps = 202
+
+excludeMaps = 0
+includeFormats = 0
+excludeFormats = 0
+
+final = 22710
+finalMaps = 202
+finalFormats = 0
+
+MAP HINTS
+----------
+
+addMixedMap cmextra.map
+addMap fourier.map
+addMixedMap cstext.map
+addMap Carrickc.map
+addMap ArtNouvc.map
+addMixedMap dvng.map
+addMap Eileen.map
+addMap fonetika.map
+addMap yvt.map
+addMap recycle.map
+addMap txfonts.map
+addMap qcs.map
+addMap ybv.map
+addMap GotIn.map
+addMap aurical.map
+addMap yv2.map
+addMap belleek.map
+addMap Rothdn.map
+addMap Konanur.map
+addMixedMap symbols.map
+addMap prodint.map
+addMap PTSans-type1.map
+addMap cmin.map
+addMixedMap vnrtext.map
+addMap yes.map
+addMap norasi-c90.map
+addMap arevvn.map
+addMap boondox.map
+addMap epigrafica.map
+addMap bkaiu.map
+addMixedMap rsfs.map
+addMap gbsnu.map
+addMixedMap cm-super-ts1.map
+addMap txttvn.map
+addMap pbsi.map
+addMap pxfonts.map
+addMap yrd.map
+addMap AnnSton.map
+addMap MnSymbol.map
+addMap knitfont.map
+addMap qhv.map
+addMap qtm.map
+addMap lm.map
+addMap Typocaps.map
+addMap bera.map
+addMixedMap allrunes.map
+addMap cmcyr.map
+addMap SkakNew.map
+addMap archaicprw.map
+addMap concretevn.map
+addMap skt.map
+addMixedMap pltext.map
+addMap qzc.map
+addMap Eichenla.map
+addMap troff-updmap.map
+addMixedMap cm-super-t2a.map
+addMap droid.map
+addMixedMap mflogo.map
+addMap gfscomplutum.map
+addMap cyklop.map
+addMixedMap vnrother.map
+addMap tabvar.map
+addMap starfont.map
+addMixedMap xypic.map
+addMixedMap cbgreek-full.map
+addMap dstroke.map
+addMap yvo.map
+addMap garuda-c90.map
+addMap yv3.map
+addMixedMap stmaryrd.map
+addMap cm-lgc.map
+addMixedMap cm-super-t2b.map
+addMixedMap esint.map
+addMap ocrb.map
+addMap ugq.map
+addMap utopia.map
+addMap gfsartemisia.map
+addMap umj.map
+addMap uaq.map
+addMap qpl.map
+addMap urwvn.map
+addMap oinuit.map
+addMap fi4.map
+addMixedMap ethiop.map
+addMap ybd.map
+addMap Sanremo.map
+addMixedMap pigpen.map
+addMap mdugm.map
+addMap mathpple.map
+addMap dictsym.map
+addMap fge.map
+addMap BulletsADF.map
+addMap gfsporson.map
+addMixedMap mongolian.map
+addMixedMap cyrillic.map
+addMap mdbch.map
+addMap kerkis.map
+addMap ArrowsADF.map
+addMap charter.map
+addMap fourier-utopia-expert.map
+addMap Romantik.map
+addMap mdput.map
+addMap epiolmec.map
+addMap fpls.map
+addMap tfrupee.map
+addMap Kramer.map
+addMap gfsbodoni.map
+addMixedMap bbold.map
+addMap dmj.map
+addMixedMap semaf.map
+addMap gfsneohellenic.map
+addMap dgj.map
+addMap ESSTIX.map
+addMap vntopia.map
+addMap cjhebrew.map
+addMixedMap cmtext-bsr-interpolated.map
+addMap PTSerif-type1.map
+addMixedMap csother.map
+addMap omega.map
+addMap augie.map
+addMap arev.map
+addMap RoyalIn.map
+addMixedMap trajan.map
+addMap linearA.map
+addMap icelandic.map
+addMap iwona.map
+addMap mcj.map
+addMap mrj.map
+addMap foekfont.map
+addMap yfrak.map
+addMap EileenBl.map
+addMap mathabx.map
+addMixedMap latxfont.map
+addMap bsmiu.map
+addMap mc2j.map
+addMixedMap iby.map
+addMap esvect.map
+addMap fdsymbol.map
+addMap ap.map
+addMap chemarrow.map
+addMap cherokee.map
+addMap grotesqvn.map
+addMap mr2j.map
+addMap marvosym.map
+addMixedMap cm.map
+addMap gkaiu.map
+addMixedMap cm-super-t2c.map
+addMap qcr.map
+addMap kpfonts.map
+addMap cantarell.map
+addMap Nouveaud.map
+addMap burmese.map
+addMixedMap hfbright.map
+addMap comfortaa.map
+addMap pazo.map
+addMap Elzevier.map
+addMap MorrisIn.map
+addMixedMap lxfonts.map
+addMap yv1.map
+addMap lato.map
+addMap clm.map
+addMap gfsdidot.map
+addMap qag.map
+addMixedMap ccpl.map
+addMap Starburst.map
+addMap gfssolomos.map
+addMap auncial.map
+addMap Acorn.map
+addMap grverb.map
+addMap cmbrightvn.map
+addMap l7x-urwvn.map
+addMixedMap cm-super-t1.map
+addMap Kinigcap.map
+addMap chartervn.map
+addMap GoudyIn.map
+addMap libertine.map
+addMixedMap cmll.map
+addMap kurier.map
+addMixedMap eurosym.map
+addMixedMap cm-super-x2.map
+addMixedMap plother.map
+addMap Zallman.map
+addMixedMap arabtex.map
+addMap antt.map
+addMap sqrcaps.map
+addMap ccicons.map
+addMixedMap tipa.map
+addMixedMap musix.map
+addMap original-context-symbol.map
+addMap qbk.map
+addMap OrnementsADF.map
+addMap ascii.map
+addMap phaistos.map
+addMap yly.map
+addMap ArtNouv.map
+addMap gptimes.map
+addMixedMap wasy.map
+addMap euler.map
+addMap arabi.map
+addMixedMap manfnt.map
+addMixedMap yhmath.map
+addMap gfsbaskerville.map
+
+FORMAT HINTS
+----------
+
+(No format hints)

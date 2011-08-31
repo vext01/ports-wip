@@ -20038,8 +20038,6 @@ share/texmf-dist/scripts/latexdiff/
 share/texmf-dist/scripts/latexdiff/latexdiff-vc.pl
 share/texmf-dist/scripts/latexdiff/latexdiff.pl
 share/texmf-dist/scripts/latexdiff/latexrevise.pl
-share/texmf-dist/scripts/latexmk/
-share/texmf-dist/scripts/latexmk/latexmk.pl
 share/texmf-dist/scripts/listings-ext/
 share/texmf-dist/scripts/listings-ext/listings-ext.sh
 share/texmf-dist/scripts/lualatex-math/

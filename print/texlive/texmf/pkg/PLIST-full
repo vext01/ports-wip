@@ -1,6 +1,5 @@
 share/man/
 share/man/man1/
-share/man/man1/lacheck.1
 share/man/man1/lacheck.man1.pdf
 share/texmf-dist/
 share/texmf-dist/bibtex/

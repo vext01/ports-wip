@@ -1,3 +1,5 @@
+libdata/perl5/site_perl/TeXLive/
+libdata/perl5/site_perl/TeXLive/TLUtils.pm
 share/man/
 share/man/man1/
 man/man5/fmtutil.cnf.5

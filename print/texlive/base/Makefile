@@ -34,6 +34,7 @@ MODULES =		textproc/intltool converters/libiconv
 CONFIGURE_STYLE =	gnu
 
 # Don't put ${PREFIX}/include in CPPFLAGS or system icu .h's are picked up
+# TeX Live uses a modified version of icu.
 CONFIGURE_ENV +=	TL_MAKE=${GMAKE} \
 			CPPFLAGS="-I${TRUEPREFIX}/include/poppler -I${X11BASE}/include"
 			

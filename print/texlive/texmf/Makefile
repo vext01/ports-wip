@@ -33,7 +33,8 @@ do-install:
 	# manuals in the right place
 	mv ${WRKDIST}/texmf/doc/man/man1/*.1 ${PREFIX}/man/man1/
 	mv ${WRKDIST}/texmf/doc/man/man5/*.5 ${PREFIX}/man/man5/
-	# the rest in share/texmf*
+	# XXX search for scattered manuals, there are some.
+	# The rest go in share/texmf*
 	mv ${WRKDIST}/texmf ${PREFIX}/share
 	mv ${WRKDIST}/texmf-dist ${PREFIX}/share
 # plug in my pregenerated map and formats

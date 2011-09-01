@@ -7,8 +7,8 @@ COMMENT-docs =		texlive documentation
 DISTNAME =		texlive-${DIST_V}-texmf
 MASTER_SITES0 =		http://spacehopper.org/mirrors/ \
 			http://theunixzoo.co.uk/distfiles/
-#DISTFILES =		${DISTNAME}${EXTRACT_SUFX} \
-#			texmf-var-pregen-2010.1${EXTRACT_SUFX}:0
+DISTFILES =		${DISTNAME}${EXTRACT_SUFX} \
+			texmf-var-pregen-2011${EXTRACT_SUFX}:0
 
 PKGNAME-main = 		texlive_texmf-minimal-${V}
 PKGNAME-full = 		texlive_texmf-full-${V}
@@ -44,7 +44,8 @@ do-install:
 	${INSTALL} ${FILESDIR}/TLConfig.pm \
 		${PREFIX}/libdata/perl5/site_perl/TeXLive/
 # plug in my pregenerated map and formats
-#	mv ${WRKDIR}/texmf-var ${PREFIX}/share
+	chown -R ${SHAREOWN}:${SHAREGRP} ${WRKDIR}/texmf-var
+	mv ${WRKDIR}/texmf-var ${PREFIX}/share
 
 post-install:
 	${SUBST_CMD} ${PREFIX}/share/texmf/web2c/texmf.cnf

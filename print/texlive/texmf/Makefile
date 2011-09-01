@@ -37,9 +37,11 @@ do-install:
 	# The rest go in share/texmf*
 	mv ${WRKDIST}/texmf ${PREFIX}/share
 	mv ${WRKDIST}/texmf-dist ${PREFIX}/share
-	# TLUtils.pm is needed for updmap, but not included, silly
+	# Some perl mods needed for updmap, but not included, silly
 	${INSTALL} -d ${PREFIX}/libdata/perl5/site_perl/TeXLive/
 	${INSTALL} ${FILESDIR}/TLUtils.pm \
+		${PREFIX}/libdata/perl5/site_perl/TeXLive/
+	${INSTALL} ${FILESDIR}/TLConfig.pm \
 		${PREFIX}/libdata/perl5/site_perl/TeXLive/
 # plug in my pregenerated map and formats
 #	mv ${WRKDIR}/texmf-var ${PREFIX}/share

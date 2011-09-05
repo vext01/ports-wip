@@ -8,6 +8,7 @@ bin/afm2afm
 bin/allcm
 bin/allec
 bin/allneeded
+bin/amstex
 bin/arlatex
 bin/authorindex
 bin/autoinst
@@ -36,6 +37,8 @@ bin/cefspdflatex
 bin/chkweb
 bin/cmap2enc
 bin/context
+bin/cslatex
+bin/csplain
 @bin bin/ctangle
 @bin bin/ctie
 bin/ctxtools
@@ -58,6 +61,8 @@ bin/dvihp
 @bin bin/dvilj4
 @bin bin/dvilj4l
 bin/dvilj6
+bin/dvilualatex
+bin/dviluatex
 bin/dvipdfm
 @bin bin/dvipdfmx
 bin/dvipdft
@@ -73,10 +78,12 @@ bin/dvitomp
 bin/e2pall
 bin/ebb
 bin/ebong
+bin/eplain
 bin/epspdf
 bin/epspdftk
 bin/epstopdf
 @bin bin/eptex
+bin/etex
 @bin bin/extconv
 bin/extractbb
 bin/fig4latex
@@ -104,6 +111,7 @@ bin/htxetex
 bin/inimf
 bin/initex
 bin/installfont-tl
+bin/jadetex
 @bin bin/kpseaccess
 bin/kpsepath
 @bin bin/kpsereadlink
@@ -113,12 +121,15 @@ bin/kpsewhere
 @bin bin/kpsewhich
 bin/kpsexpand
 @bin bin/lacheck
+bin/lamed
+bin/latex
 bin/latex2man
 bin/latexdiff
 bin/latexdiff-vc
 bin/latexmk
 bin/latexrevise
 bin/listings-ext.sh
+bin/lualatex
 @bin bin/luatex
 bin/luatools
 @bin bin/mag
@@ -127,6 +138,7 @@ bin/makeglossaries
 @bin bin/makejvf
 bin/mathspic
 @bin bin/mendex
+bin/mex
 @bin bin/mf
 @bin bin/mf-nowin
 bin/mfplain
@@ -144,6 +156,8 @@ bin/mktexlsr
 bin/mktexmf
 bin/mktexpk
 bin/mktextfm
+bin/mllatex
+bin/mltex
 @bin bin/mmafm
 @bin bin/mmpfb
 @bin bin/mpost
@@ -174,27 +188,37 @@ bin/pdfatfi
 bin/pdfbook
 @bin bin/pdfclose
 bin/pdfcrop
+bin/pdfcslatex
+bin/pdfcsplain
+bin/pdfetex
 bin/pdfflip
+bin/pdfjadetex
 bin/pdfjam
 bin/pdfjam-pocketmod
 bin/pdfjam-slides3up
 bin/pdfjam-slides6up
 bin/pdfjoin
+bin/pdflatex
+bin/pdfmex
 bin/pdfnup
 @bin bin/pdfopen
 bin/pdfpun
 @bin bin/pdftex
 bin/pdfthumb
 @bin bin/pdftosrc
+bin/pdfxmltex
 @bin bin/pdvitype
 bin/perltex
 @bin bin/pfb2pfa
 bin/pfm2kpx
+bin/physe
+bin/phyzzx
 @bin bin/pk2bm
 bin/pkfix
 bin/pkfix-helper
 @bin bin/pktogf
 @bin bin/pktype
+bin/platex
 @bin bin/pltotf
 @bin bin/pooltype
 @bin bin/ppltotf
@@ -252,6 +276,7 @@ bin/texloganalyser
 bin/texlua
 bin/texluac
 bin/texmfstart
+bin/texsis
 @bin bin/tftopl
 bin/thumbpdf
 @bin bin/tie
@@ -265,6 +290,7 @@ bin/tpic2pdftex
 bin/ulqda
 bin/updmap
 bin/updmap-sys
+bin/utf8mex
 @bin bin/vftovp
 @bin bin/vlna
 bin/vpe
@@ -275,9 +301,11 @@ bin/vpl2vpl
 bin/xdvi
 @bin bin/xdvi-xaw
 @bin bin/xdvipdfmx
+bin/xelatex
 @bin bin/xetex
 bin/xindy
 bin/xindy.mem
+bin/xmltex
 include/kpathsea/
 include/kpathsea/absolute.h
 include/kpathsea/c-auto.h
@@ -339,3 +367,4 @@ lib/libkpathsea.a
 lib/libkpathsea.la
 lib/libptexenc.a
 lib/libptexenc.la
+share/doc/pkg-readmes/${FULLPKGNAME}

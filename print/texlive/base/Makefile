@@ -19,8 +19,8 @@ RUN_DEPENDS =		print/ghostscript/gnu \
 			print/ps2eps \
 			print/psutils \
 			print/t1utils \
-			print/latex-mk
-#texlive_texmf-minimal-${V}:print/texlive/texmf,-main \
+			print/latex-mk \
+			texlive_texmf-minimal-${V}:print/texlive/texmf,-main
 			
 LIB_DEPENDS =		devel/t1lib \
 			graphics/png \
@@ -112,12 +112,11 @@ pre-install:
 # a fully hashed texmf tree and working kpse configuration.
 ALEPH_LN =	lamed 
 LUATEX_LN =	dvilualatex dviluatex lualatex
-MPOST_LN =	metafun mfplain
 PDFTEX_LN =	amstex cslatex csplain eplain etex jadetex latex mex \
 		mllatex mltex pdfcslatex pdfcsplain pdfetex pdfjadetex \
 		pdflatex pdfmex pdfxmltex physe phyzzx texsis utf8mex \
 		xmltex
-PTEX_LN =	platex
+EPTEX_LN =	platex
 XETEX_LN =	xelatex
 
 post-install:
@@ -137,22 +136,22 @@ post-install:
 	done
 
 	# emulate texlinks
-	#for i in ${ALEPH_LN}; do \
+	for i in ${ALEPH_LN}; do \
 		ln -s ${TRUEPREFIX}/bin/aleph ${PREFIX}/bin/$$i; \
 	done
-	#for i in ${LUATEX_LN}; do \
+	for i in ${LUATEX_LN}; do \
 		ln -s ${TRUEPREFIX}/bin/luatex ${PREFIX}/bin/$$i; \
 	done
-	#for i in ${MPOST_LN}; do \
+	for i in ${MPOST_LN}; do \
 		ln -s ${TRUEPREFIX}/bin/mpost ${PREFIX}/bin/$$i; \
 	done
-	#for i in ${PDFTEX_LN}; do \
+	for i in ${PDFTEX_LN}; do \
 		ln -s ${TRUEPREFIX}/bin/pdftex ${PREFIX}/bin/$$i; \
 	done
-	#for i in ${PTEX_LN}; do \
-		ln -s ${TRUEPREFIX}/bin/ptex ${PREFIX}/bin/$$i; \
+	for i in ${EPTEX_LN}; do \
+		ln -s ${TRUEPREFIX}/bin/eptex ${PREFIX}/bin/$$i; \
 	done
-	#for i in ${XETEX_LN}; do \
+	for i in ${XETEX_LN}; do \
 		ln -s ${TRUEPREFIX}/bin/xetex ${PREFIX}/bin/$$i; \
 	done
 

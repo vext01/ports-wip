@@ -2,6 +2,6 @@
 
 SUBDIR =
 SUBDIR += base
-#SUBDIR += texmf
+SUBDIR += texmf
 
 .include <bsd.port.subdir.mk>

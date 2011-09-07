@@ -1,3 +1,10 @@
+@comment $OpenBSD$
+@conflict teTeX_texmf-doc-*
+@conflict texlive_base-<2011
+@conflict texlive_texmf-minimal-<2011
+@conflict texlive_texmf-full-<2011
+@pkgpath print/texlive/texmf-docs
+@pkgpath print/teTeX_texmf,-doc
 share/texmf-dist/
 share/texmf-dist/doc/
 share/texmf-dist/doc/aleph/
@@ -24724,3 +24731,5 @@ share/texmf/scripts/texlive/
 share/texmf/scripts/texlive/NEWS
 share/texmf/scripts/texlive/var/
 share/texmf/scripts/texlive/var/texcatalogue.keywords
+@exec mktexlsr > /dev/null 2>&1
+@unexec-delete mktexlsr > /dev/null 2>&1

@@ -1,4 +1,8 @@
 @comment $OpenBSD$
+@conflict teTeX_base-*
+@conflict ht-<2
+@pkgpath print/teTeX/base
+@pkgpath print/teTeX/base,-fmt
 %%SHARED%%
 bin/a2ping
 bin/afm2afm
@@ -368,3 +372,8 @@ lib/libkpathsea.la
 lib/libptexenc.a
 lib/libptexenc.la
 share/doc/pkg-readmes/${FULLPKGNAME}
+@exec mktexlsr > /dev/null 2>&1
+@extra share/texmf/ls-R
+@extra share/texmf-dist/ls-R
+@extra share/texmf-var/ls-R
+@extra share/texmf-config/ls-R

@@ -5,8 +5,6 @@
 @conflict texlive_texmf-minimal-<2011
 @pkgpath print/texlive/texmf-full
 @pkgpath print/teTeX/texmf
-share/man/
-share/man/man1/
 share/texmf-dist/
 share/texmf-dist/bibtex/
 share/texmf-dist/bibtex/bib/

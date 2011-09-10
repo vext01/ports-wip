@@ -54,13 +54,12 @@ CFLAGS +=	-fPIC
 # clisp limits which arches we can use xindy on
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "amd64"
 BUILD_DEPENDS += 	lang/clisp
-LIB_DEPENDS +=		devel/ffcall	# XXX still needed? try build on fresh sys
+LIB_DEPENDS +=		devel/ffcall
 CONFIGURE_ARGS +=	--enable-xindy \
 			--disable-xindy-rules
-# XXX enable when ready
-#PKG_ARGS +=		-Dxindy=1
-#.else
-#PKG_ARGS +=		-Dxindy=0
+PKG_ARGS +=		-Dxindy=1 # Note. texmf-full required for xindy
+.else
+PKG_ARGS +=		-Dxindy=0
 .endif
 
 # Do not link with system icu. TeXLive ICU is not vanilla (Yet)!

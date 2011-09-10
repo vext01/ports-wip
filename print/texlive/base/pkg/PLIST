@@ -4,6 +4,7 @@
 @pkgpath print/teTeX/base
 @pkgpath print/teTeX/base,-fmt
 %%SHARED%%
+%%xindy%%
 bin/a2ping
 bin/afm2afm
 @bin bin/afm2pl
@@ -261,7 +262,6 @@ bin/svn-multi
 @bin bin/tcdialog
 @bin bin/teckit_compile
 @bin bin/tex
-@bin bin/tex2xindy
 @bin bin/tex4ht
 bin/texconfig
 bin/texconfig-dialog
@@ -274,7 +274,6 @@ bin/texdoc
 bin/texdoctk
 bin/texexec
 bin/texhash
-bin/texindy
 bin/texlinks
 bin/texloganalyser
 bin/texlua
@@ -307,8 +306,6 @@ bin/xdvi
 @bin bin/xdvipdfmx
 bin/xelatex
 @bin bin/xetex
-bin/xindy
-bin/xindy.mem
 bin/xmltex
 include/kpathsea/
 include/kpathsea/absolute.h

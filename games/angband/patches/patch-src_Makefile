@@ -1,0 +1,15 @@
+$OpenBSD$
+
+Remove -O0
+
+--- src/Makefile.orig	Fri Sep  9 12:04:59 2011
++++ src/Makefile	Fri Sep  9 12:05:02 2011
+@@ -9,7 +9,7 @@ SRCS    = ${OBJECTS:.o=.c} ${MAINFILES:.o=.c}
+ SUBDIRS = gtk monster object player
+ PROG    = angband
+ VERSION := $(shell ../scripts/version.sh)
+-CFLAGS += -DBUILD_ID=${VERSION} -I. -std=c99 -Wdeclaration-after-statement -O0
++CFLAGS += -DBUILD_ID=${VERSION} -I. -std=c99 -Wdeclaration-after-statement
+ 
+ # gcov intermediate data
+ GCOBJS = $(OBJECTS:.o=.gcno) $(OBJECTS:.o=.gcda)

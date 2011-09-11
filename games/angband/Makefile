@@ -24,7 +24,7 @@ MASTER_SITES =		${HOMEPAGE}/downloads/${V_DLDIR}/
 			
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-setgid=games \
-			--with-varpath=/var/games/angband \
+			--with-varpath=/var/games/angband/ \
 			--with-configpath=${PREFIX}/share/angband \
 			--bindir=${PREFIX}/bin \
 			--disable-sdl-mixer	# defaults to ON

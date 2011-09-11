@@ -132,5 +132,4 @@ share/angband/xtra/icon/att-512.png
 @sample /var/games/angband/
 @sample /var/games/angband/apex/
 @sample /var/games/angband/save/
-@sample /var/games/angband/data/
-@sample /var/games/angband/bone/
+@sample /var/games/angband/user/

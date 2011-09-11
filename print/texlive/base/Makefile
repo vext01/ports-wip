@@ -29,6 +29,14 @@ LIB_DEPENDS =		devel/t1lib \
 			print/poppler
 
 MODULES =		textproc/intltool converters/libiconv
+# These following two modules are just for variable substitution in patches
+# They are not real dependencies of _base, but of _texmf-full
+MODULES +=		lang/ruby lang/python
+MODRUBY_BUILDDEP =	No
+MODRUBY_RUNDEP =	No
+MODPY_BUILDDEP =	No
+MODPY_RUNDEP =		No
+SUBST_VARS +=		MODRUBY_BINREV MODPY_VERSION
 
 # Never set SEPARATE_BUILD
 CONFIGURE_STYLE =	gnu
@@ -101,6 +109,10 @@ CONFIGURE_ARGS +=	--mandir=${PREFIX}/man \
 			--with-system-xpdf # link poppler instead of internal xpdf
 
 SUBST_VARS +=		TRUEPREFIX LOCALBASE
+
+# substitute ruby and python binary names
+post-patch:
+	${SUBST_CMD} ${WRKSRC}/texk/texlive/context/mtxrun
 
 # just to silence error - never used
 pre-install:

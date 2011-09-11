@@ -21,6 +21,15 @@ PKG_ARCH =		*
 BUILD_DEPENDS =		archivers/xz
 RUN_DEPENDS-full =	texlive_texmf-minimal-${V}:print/texlive/texmf,-main \
 			texlive_base-${V}:print/texlive/base
+# We dont use auto module deps for these, as MODULES is not per SUBPACKAGE
+MODULES +=		lang/ruby lang/python
+MODRUBY_BUILDDEP =	No
+MODRUBY_RUNDEP =	No
+MODPY_BUILDDEP =	No
+MODPY_RUNDEP =		No
+RUN_DEPENDS-full +=	lang/python/${MODPY_VERSION} \
+			lang/ruby/${MODRUBY_REV}
+
 RUN_DEPENDS-docs = 	texlive_base-${V}:print/texlive/base \
 			x11/p5-Tk
 

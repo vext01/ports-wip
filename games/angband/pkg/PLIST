@@ -1,5 +1,9 @@
 @comment $OpenBSD$
+@extraunexec rm /var/games/angband/*/* 2>/dev/null || true
+@group games
+@mode g+s
 @bin bin/angband
+@mode
 share/angband/
 share/angband/edit/
 share/angband/edit/artifact.txt
@@ -124,3 +128,9 @@ share/angband/xtra/icon/att-512.png
 @comment share/angband/xtra/sound/sound.cfg
 @comment share/angband/xtra/sound/thump.wav
 @comment share/angband/xtra/sound/vomit.wav
+@mode 775
+@sample /var/games/angband/
+@sample /var/games/angband/apex/
+@sample /var/games/angband/save/
+@sample /var/games/angband/data/
+@sample /var/games/angband/bone/

@@ -1,6 +1,6 @@
 $OpenBSD$
 
-This patch can be removed once the scroll of light bug is patched.
+Turn off signal handlers so that angband may be debugged
 
 --- src/signals.c.orig	Sun Sep 11 22:18:29 2011
 +++ src/signals.c	Sun Sep 11 22:20:28 2011

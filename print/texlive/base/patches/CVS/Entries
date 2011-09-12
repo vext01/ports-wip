@@ -1,9 +1,9 @@
 /patch-configure/1.4/Sat Aug 27 12:24:33 2011//
 /patch-texk_web2c_Makefile_in/1.4/Sat Aug 27 12:24:33 2011//
 /patch-texk_web2c_pdftexdir_pdftoepdf_cc/1.2/Sat Aug 27 12:24:33 2011//
-/patch-texk_web2c_luatexdir_image_pdftoepdf_cc/1.2/Sat Aug 27 16:25:32 2011//
 /patch-texk_web2c_luatexdir_image_writepng_w/-1.1/dummy timestamp//
 /patch-texk_web2c_pdftexdir_writeimg_c/-1.1/dummy timestamp//
 /patch-texk_web2c_pdftexdir_writepng_c/-1.1/dummy timestamp//
 /patch-texk_web2c_ptexdir_ptex-base_ch/-1.1/dummy timestamp//
+/patch-texk_web2c_luatexdir_image_pdftoepdf_cc/1.2/Tue Aug 30 10:22:35 2011//
 D

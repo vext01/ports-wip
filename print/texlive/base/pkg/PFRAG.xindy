@@ -1,0 +1,5 @@
+@comment $OpenBSD$
+@bin bin/tex2xindy
+bin/texindy
+bin/xindy
+bin/xindy.mem

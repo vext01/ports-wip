@@ -24,7 +24,7 @@ MASTER_SITES =		${HOMEPAGE}/downloads/${V_DLDIR}/
 			
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS+=	--with-setgid=games \
-			--localstatedir=/var \
+			--with-varpath=/var/games/angband/ \
 			--with-configpath=${PREFIX}/share/angband \
 			--bindir=${PREFIX}/bin \
 			--disable-sdl-mixer	# defaults to ON
@@ -41,5 +41,8 @@ CONFIGURE_ARGS+=	--without-x
 CONFIGURE_ARGS+=	--with-x
 WANTLIB+=		ICE SM X11
 .endif
+
+# XXX debug
+CFLAGS += -g
 
 .include <bsd.port.mk>

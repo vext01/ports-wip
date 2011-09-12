@@ -93,19 +93,19 @@ share/angband/xtra/font/8x8x.fon
 share/angband/xtra/font/8x8xb.fon
 share/angband/xtra/font/9x15x.fon
 share/angband/xtra/font/9x15xb.fon
-share/angband/xtra/graf/
-share/angband/xtra/graf/16x16.png
-share/angband/xtra/graf/32x32.png
-share/angband/xtra/graf/8x16.png
-share/angband/xtra/graf/8x8.png
-share/angband/xtra/icon/
-share/angband/xtra/icon/att-128.png
-share/angband/xtra/icon/att-16.png
-share/angband/xtra/icon/att-256.png
-share/angband/xtra/icon/att-32.png
-share/angband/xtra/icon/att-512.png
-@comment --- Sound will be enabled later, needs sdl
+@comment --- Sound/gfx will be enabled later, needs sdl
 @comment --- These would go in a PFRAG.sdl
+@comment share/angband/xtra/graf/
+@comment share/angband/xtra/graf/16x16.png
+@comment share/angband/xtra/graf/32x32.png
+@comment share/angband/xtra/graf/8x16.png
+@comment share/angband/xtra/graf/8x8.png
+@comment share/angband/xtra/icon/
+@comment share/angband/xtra/icon/att-128.png
+@comment share/angband/xtra/icon/att-16.png
+@comment share/angband/xtra/icon/att-256.png
+@comment share/angband/xtra/icon/att-32.png
+@comment share/angband/xtra/icon/att-512.png
 @comment share/angband/xtra/sound/
 @comment share/angband/xtra/sound/breath.wav
 @comment share/angband/xtra/sound/clunk.wav

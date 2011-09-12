@@ -131,7 +131,7 @@ bin/latex
 bin/latex2man
 bin/latexdiff
 bin/latexdiff-vc
-bin/latexmk
+@comment bin/latexmk
 bin/latexrevise
 bin/listings-ext.sh
 bin/lualatex

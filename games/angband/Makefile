@@ -42,4 +42,7 @@ CONFIGURE_ARGS+=	--with-x
 WANTLIB+=		ICE SM X11
 .endif
 
+# XXX debug
+CFLAGS += -g
+
 .include <bsd.port.mk>

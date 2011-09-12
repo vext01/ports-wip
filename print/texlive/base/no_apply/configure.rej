@@ -1,9 +1,0 @@
-@@ -18918,7 +18918,7 @@
- if test "x$with_libpng_includes" != x && test "x$with_libpng_includes" != xyes; then
-   LIBPNG_INCLUDES="-I$with_libpng_includes"
- fi
--LIBPNG_LIBS="-lpng"
-+LIBPNG_LIBS="-lpng -lm"
- if test "x$with_libpng_libdir" != x && test "x$with_libpng_libdir" != xyes; then
-   LIBPNG_LIBS="-L$with_libpng_libdir $LIBPNG_LIBS"
- fi

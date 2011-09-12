@@ -131,7 +131,7 @@ bin/latex
 bin/latex2man
 bin/latexdiff
 bin/latexdiff-vc
-bin/latexmk
+@comment bin/latexmk
 bin/latexrevise
 bin/listings-ext.sh
 bin/lualatex
@@ -283,7 +283,7 @@ bin/texsis
 @bin bin/tftopl
 bin/thumbpdf
 @bin bin/tie
-bin/tlmgr
+@comment bin/tlmgr
 bin/tpic2pdftex
 @bin bin/ttf2afm
 @bin bin/ttf2pk

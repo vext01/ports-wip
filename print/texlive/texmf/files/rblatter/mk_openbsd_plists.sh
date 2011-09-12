@@ -25,27 +25,16 @@ mkdir sets
 
 echo "\nCalculating PLIST of texlive_texmf-minimal (tetex)..."
 ./rblatter -d -v -n -t ${TMF} -p share/ -o sets/tetex +scheme-tetex,run
-cat sets/tetex/PLIST | sed 's/share\/texmf\/doc\/man/share\/man/g' \
-	| sort > sets/tetex/PLIST_final
+cat sets/tetex/PLIST | sort > sets/tetex/PLIST_final
 
 echo "\nCalculating PLIST of texlive_texmf-full..."
 ./rblatter -d -v -n -t ${TMF} -p share/ -o sets/full \
 	+scheme-full,run:-scheme-tetex,doc,src,run
-cat sets/full/PLIST | sed 's/share\/texmf\/doc\/man/share\/man/g' \
-	| sort > sets/full/PLIST_final
+cat sets/full/PLIST | sort > sets/full/PLIST_final
 
 echo "\nCalculating PLIST of texlive_texmf-docs..."
 ./rblatter -d -v -n -t ${TMF} -p share/ -o sets/docs +scheme-full,doc
-cat sets/docs/PLIST | sed 's/share\/texmf\/doc\/man/share\/man/g' \
-	| sort > sets/docs/PLIST_final
-
-# XXX need to figure out how to futher split docs
-#grep -ie '\.1$' -e '\.pdf$' -e '\.html$' -e '\.dvi$' -e '\.ps$' \
-#	sets/docs/PLIST | sed 's/share\/texmf\/doc\/man/share\/man/g' \
-#	| sort > sets/docs/PLIST_final
-#grep -ive '\.1$' -e '\.pdf$' -e '\.html$' -e '\.dvi$' -e '\.ps$' \
-#	sets/docs/PLIST | sed 's/share\/texmf\/doc\/man/share\/man/g' \
-#	| sort > sets/docs/PLIST_final-sources
+cat sets/docs/PLIST | sort > sets/docs/PLIST_final
 
 echo "\ndone - PLISTS in sets/"
 echo "now inspect:"
@@ -54,6 +43,6 @@ echo "  - *.exe obviously a waste of space"
 echo "  - search for 'win32' and 'w32' and 'windows'"
 echo "  - comment out manual pages and include in _base"
 echo "  - bibarts is a DOS program"
-echo "  - Not all texworks related stuff is needed"
-echo "  - make sure no tlpkg/ sneaked in"
+echo "  - not all texworks related stuff is needed"
+echo "  - move the manuals in the right place"
 echo "  - etc..."

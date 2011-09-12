@@ -9,7 +9,7 @@ TeX Live 2011 - Porting progress.
    -> i386					XXX
    -> sparc64					XXX
    -> others, anyone?				XXX
- * Do texmf split:				done
+ * Do texmf split (see texmf/files/rblatter)	done
  * Move manuals and pdf manuals			done
  * Remove external deps				done
    -> texworks					done
@@ -23,6 +23,7 @@ TeX Live 2011 - Porting progress.
  * Implement @xxx in plists			done
  * emulate texlinks				done
  * patch in ruby/python versions for texexec	done
+ * Pull in perl modules needed for updmap	done
  * Generate texmf-var pregen			done
    (all as root) 'mktexlsr', 'fmtutil-sys --all',
      'updmap-sys', rm ls-R and tar up texmf-var

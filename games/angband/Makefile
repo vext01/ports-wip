@@ -42,7 +42,7 @@ CONFIGURE_ARGS+=	--with-x
 WANTLIB+=		ICE SM X11
 .endif
 
-# XXX debug
-CFLAGS += -g
+# DEBUG=-g does not work, do this for debug symbols
+#CFLAGS += -g
 
 .include <bsd.port.mk>

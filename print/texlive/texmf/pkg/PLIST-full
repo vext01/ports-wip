@@ -20057,9 +20057,7 @@ share/texmf-dist/scripts/musixtex/Windows/
 share/texmf-dist/scripts/musixtex/Windows/musixflx.bat
 share/texmf-dist/scripts/musixtex/Windows/musixtex.bat
 share/texmf-dist/scripts/musixtex/doc/
-share/texmf-dist/scripts/musixtex/doc/musixflx.1
 share/texmf-dist/scripts/musixtex/doc/musixflx.pdf
-share/texmf-dist/scripts/musixtex/doc/musixtex.1
 share/texmf-dist/scripts/musixtex/doc/musixtex.pdf
 share/texmf-dist/scripts/musixtex/musixflx.lua
 share/texmf-dist/scripts/musixtex/musixtex.lua

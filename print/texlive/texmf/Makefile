@@ -42,8 +42,21 @@ do-install:
 	# manuals in the right place
 	mv ${WRKDIST}/texmf/doc/man/man1/*.1 ${PREFIX}/man/man1/
 	mv ${WRKDIST}/texmf/doc/man/man5/*.5 ${PREFIX}/man/man5/
-	# XXX search for scattered manuals, there are some.
-	# The rest go in share/texmf*
+	
+	# they really are scattered all over the place
+	for i in texmf-dist/doc/context/scripts/perl/texshow.1 \
+		texmf-dist/doc/latex/changebar/chbar.1 \
+		texmf-dist/doc/latex/eepic/fig2eepic/fig2epic.1 \
+		texmf-dist/doc/latex/mathspic/mathspic.1 \
+		texmf-dist/doc/latex/vxu/vxusymbol.1 \
+		texmf-dist/doc/otherformats/jadetex/base/jadetex.1 \
+		texmf-dist/doc/otherformats/jadetex/base/pdfjadetex.1 \
+		texmf-dist/doc/otherformats/texsis/base/texsis.1 \
+		texmf-dist/scripts/musixtex/doc/musixflx.1 \
+		texmf-dist/scripts/musixtex/doc/musixtex.1; do \
+		mv ${WRKDIST}/$$i ${PREFIX}/man/man1/; done
+
+	# The rest goes in share/texmf*
 	mv ${WRKDIST}/texmf ${PREFIX}/share
 	mv ${WRKDIST}/texmf-dist ${PREFIX}/share
 	# Some perl mods needed for updmap, but not included, silly

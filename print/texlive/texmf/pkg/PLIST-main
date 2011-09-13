@@ -28,6 +28,7 @@ man/man1/cef5conv.1
 man/man1/cefconv.1
 man/man1/cefsconv.1
 man/man1/cfftot1.1
+man/man1/chbar.1
 man/man1/chktex.1
 man/man1/chkweb.1
 man/man1/cmap2enc.1
@@ -75,6 +76,7 @@ man/man1/etex.1
 man/man1/extconv.1
 man/man1/extractbb.1
 man/man1/extractres.1
+man/man1/fig2epic.1
 man/man1/findhyph.1
 man/man1/fixdlsrps.1
 man/man1/fixfmps.1
@@ -97,6 +99,7 @@ man/man1/gsftopk.1
 man/man1/hbf2gf.1
 man/man1/includeres.1
 man/man1/install-tl.1
+man/man1/jadetex.1
 man/man1/kpseaccess.1
 man/man1/kpsepath.1
 man/man1/kpsereadlink.1
@@ -114,6 +117,7 @@ man/man1/latexrevise.1
 man/man1/luatex.1
 man/man1/mag.1
 man/man1/makeindex.1
+man/man1/mathspic.1
 man/man1/mendex.1
 man/man1/mf-nowin.1
 man/man1/mf.1
@@ -153,6 +157,7 @@ man/man1/pdfbook.1
 man/man1/pdfclose.1
 man/man1/pdfetex.1
 man/man1/pdfflip.1
+man/man1/pdfjadetex.1
 man/man1/pdfjam-pocketmod.1
 man/man1/pdfjam-slides3up.1
 man/man1/pdfjam-slides6up.1
@@ -220,6 +225,8 @@ man/man1/texlinks.1
 man/man1/texlua.1
 man/man1/texluac.1
 man/man1/texmfstart.1
+man/man1/texshow.1
+man/man1/texsis.1
 man/man1/tftopl.1
 man/man1/thumbpdf.1
 man/man1/tie.1
@@ -234,6 +241,7 @@ man/man1/updmap.1
 man/man1/vftovp.1
 man/man1/vlna.1
 man/man1/vptovf.1
+man/man1/vxusymbol.1
 man/man1/weave.1
 man/man1/xasy.1
 man/man1/xdvi.1

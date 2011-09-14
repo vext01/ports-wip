@@ -400,7 +400,6 @@ share/texmf-dist/doc/context/manuals/reference/en/typography/glyphs.pdf
 share/texmf-dist/doc/context/manuals/reference/en/typography/glyphs.tex
 share/texmf-dist/doc/context/scripts/
 share/texmf-dist/doc/context/scripts/perl/
-share/texmf-dist/doc/context/scripts/perl/texshow.1
 share/texmf-dist/doc/context/scripts/perl/texshow.html
 share/texmf-dist/doc/context/third/
 share/texmf-dist/doc/context/third/account/
@@ -6787,7 +6786,6 @@ share/texmf-dist/doc/latex/changebar/cbtest2-pdf.pdf
 share/texmf-dist/doc/latex/changebar/cbtest2.tex
 share/texmf-dist/doc/latex/changebar/changebar.bug
 share/texmf-dist/doc/latex/changebar/changebar.pdf
-share/texmf-dist/doc/latex/changebar/chbar.1
 share/texmf-dist/doc/latex/changebar/chbar.sh
 share/texmf-dist/doc/latex/changebar/manifest.txt
 share/texmf-dist/doc/latex/changelayout/
@@ -8143,7 +8141,6 @@ share/texmf-dist/doc/latex/eepic/epic-eg4.tex
 share/texmf-dist/doc/latex/eepic/fig2eepic/
 share/texmf-dist/doc/latex/eepic/fig2eepic/epic-eg3.fig
 share/texmf-dist/doc/latex/eepic/fig2eepic/epic-eg4.fig
-share/texmf-dist/doc/latex/eepic/fig2eepic/fig2epic.1
 share/texmf-dist/doc/latex/eepic/fig2eepic/makefile
 share/texmf-dist/doc/latex/eepic/fig2eepic/readme
 share/texmf-dist/doc/latex/eepic/grafig.shar
@@ -13291,7 +13288,6 @@ share/texmf-dist/doc/latex/mathspic/grabtexdata.tex
 share/texmf-dist/doc/latex/mathspic/mathpic.pl
 share/texmf-dist/doc/latex/mathspic/mathsPICa4.pdf
 share/texmf-dist/doc/latex/mathspic/mathsPICa5.pdf
-share/texmf-dist/doc/latex/mathspic/mathspic.1
 share/texmf-dist/doc/latex/mathspic/mathspic.lib
 share/texmf-dist/doc/latex/mathspic/mathspic.sh
 share/texmf-dist/doc/latex/mathspic/sourcecode.html
@@ -22482,7 +22478,6 @@ share/texmf-dist/doc/latex/vxu/actawex.pdf
 share/texmf-dist/doc/latex/vxu/rfmsi.pdf
 share/texmf-dist/doc/latex/vxu/template.tex
 share/texmf-dist/doc/latex/vxu/vxulicentiate.tex
-share/texmf-dist/doc/latex/vxu/vxusymbol.1
 share/texmf-dist/doc/latex/vxu/vxutentamen.tex
 share/texmf-dist/doc/latex/wallpaper/
 share/texmf-dist/doc/latex/wallpaper/README
@@ -23391,10 +23386,8 @@ share/texmf-dist/doc/otherformats/jadetex/base/docbook.dsl
 share/texmf-dist/doc/otherformats/jadetex/base/index.html
 share/texmf-dist/doc/otherformats/jadetex/base/index.xml
 share/texmf-dist/doc/otherformats/jadetex/base/index.xsl
-share/texmf-dist/doc/otherformats/jadetex/base/jadetex.1
 share/texmf-dist/doc/otherformats/jadetex/base/jadetex.cfg
 share/texmf-dist/doc/otherformats/jadetex/base/logo.png
-share/texmf-dist/doc/otherformats/jadetex/base/pdfjadetex.1
 share/texmf-dist/doc/otherformats/jadetex/base/releasenotes.dsl
 share/texmf-dist/doc/otherformats/jadetex/base/releasenotes.xml
 share/texmf-dist/doc/otherformats/psizzl/
@@ -23448,7 +23441,6 @@ share/texmf-dist/doc/otherformats/texsis/base/index.tex
 share/texmf-dist/doc/otherformats/texsis/base/letr
 share/texmf-dist/doc/otherformats/texsis/base/penguin.eps
 share/texmf-dist/doc/otherformats/texsis/base/penguin2.eps
-share/texmf-dist/doc/otherformats/texsis/base/texsis.1
 share/texmf-dist/doc/otherformats/texsis/base/texsis.el
 share/texmf-dist/doc/otherformats/texsis/base/texsis.lsm
 share/texmf-dist/doc/otherformats/xmltex/

@@ -2,11 +2,10 @@
 
 COMMENT =		Prolog for the real world
 
-V =			5.10.4
+V =			5.10.5
 XV =			6.6.66
 DISTNAME =		pl-$V
 PKGNAME =		swi-prolog-$V
-REVISION =		4
 CATEGORIES =		lang
 
 SHARED_LIBS =		pl	3.0

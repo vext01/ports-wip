@@ -27,6 +27,7 @@ lib/swipl-${V}/lib/${FULLARCH}/streaminfo.so
 lib/swipl-${V}/lib/${FULLARCH}/table.so
 lib/swipl-${V}/lib/${FULLARCH}/time.so
 lib/swipl-${V}/lib/${FULLARCH}/turtle.so
+lib/swipl-${V}/lib/${FULLARCH}/uid.so
 lib/swipl-${V}/lib/${FULLARCH}/unix.so
 lib/swipl-${V}/lib/${FULLARCH}/uri.so
 lib/swipl-${V}/lib/${FULLARCH}/zlib4pl.so

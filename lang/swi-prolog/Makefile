@@ -47,8 +47,8 @@ RUN_DEPENDS =		graphics/jpeg
 LIB_DEPENDS =		devel/gmp \
 			devel/libexecinfo
 
-WANTLIB +=	ICE SM X11 Xext Xft Xinerama Xpm Xt c crypto gmp jpeg m
-WANTLIB +=	ncursesw pthread readline ssl z
+WANTLIB +=	ICE SM X11 Xext Xft Xinerama Xpm Xt c crypto execinfo gmp 
+WANTLIB +=	jpeg m ncursesw pthread readline ssl z
 
 FULLARCH =		${MACHINE_ARCH:S/amd64/x86_64/}-openbsd${OSREV}
 SUBST_VARS =		V XV FULLARCH BOOT

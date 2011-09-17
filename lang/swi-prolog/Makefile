@@ -44,7 +44,8 @@ MAKE_FLAGS =		SONAMEOPT= \
 
 BUILD_DEPENDS =		${RUN_DEPENDS}
 RUN_DEPENDS =		graphics/jpeg
-LIB_DEPENDS =		devel/gmp
+LIB_DEPENDS =		devel/gmp \
+			devel/libexecinfo
 
 WANTLIB +=	ICE SM X11 Xext Xft Xinerama Xpm Xt c crypto gmp jpeg m
 WANTLIB +=	ncursesw pthread readline ssl z

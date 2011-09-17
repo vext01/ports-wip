@@ -62,7 +62,10 @@ pre-patch:
 	done
 
 post-install:
-	cd ${PREFIX}/lib && ln -s swipl-$V/lib/${FULLARCH}/libpl.so.${LIBpl_VERSION}
+	cd ${PREFIX}/lib && \
+		ln -s swipl-$V/lib/${FULLARCH}/libpl.so.${LIBpl_VERSION}
+	mv ${PREFIX}/lib/swipl-${V}/xpce-${XV}/man/xpce-client.1 \
+		${PREFIX}/man/man1/
 
 .include <bsd.port.mk>
 

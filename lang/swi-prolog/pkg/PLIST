@@ -1305,7 +1305,6 @@ lib/swipl-${V}/xpce-${XV}/man/reference/objects.doc
 lib/swipl-${V}/xpce-${XV}/man/reference/predicates.doc
 lib/swipl-${V}/xpce-${XV}/man/reference/tools.doc
 lib/swipl-${V}/xpce-${XV}/man/reference/topics.doc
-lib/swipl-${V}/xpce-${XV}/man/xpce-client.1
 lib/swipl-${V}/xpce-${XV}/pl/
 lib/swipl-${V}/xpce-${XV}/pl/Makefile
 lib/swipl-${V}/xpce-${XV}/pl/swipl.rc
@@ -1703,3 +1702,4 @@ lib/swipl-${V}/xpce-${XV}/prolog/lib/xref/sicstus.pl
 @man man/man1/swipl-ld.1
 @man man/man1/swipl-rc.1
 @man man/man1/swipl.1
+@man man/man1/xpce-client.1

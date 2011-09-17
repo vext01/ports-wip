@@ -67,6 +67,12 @@ post-install:
 	mv ${PREFIX}/lib/swipl-${V}/xpce-${XV}/man/xpce-client.1 \
 		${PREFIX}/man/man1/
 
+# XXX figure out why these tests fail
+######pre-regress:
+######	rm ${WRKBUILD}/src/Tests/thread/agc.pl
+######	rm ${WRKBUILD}/src/Tests/thread/agc2.pl
+
+
 .include <bsd.port.mk>
 
 .for _m in ${MACHINE_ARCH}

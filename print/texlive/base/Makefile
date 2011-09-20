@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.50 2011/06/14 21:11:24 edd Exp $
+# $OpenBSD: Makefile,v 1.51 2011/09/16 11:13:41 espie Exp $
 
 COMMENT =		base binaries for TeXLive typesetting distribution
 

@@ -4,9 +4,8 @@
 COMMENT=		rogue-like game with X11 support
 COMMENT-no_x11=		rogue-like game
 
-V =			3.3.0
+V =			3.3.1
 V_DLDIR =		${V:C/\.[0-9]$//}
-REVISION =		0
 DISTNAME=		angband-v${V}
 PKGNAME=		angband-${V}
 CATEGORIES=     	games

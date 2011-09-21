@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.22 2011/09/13 10:28:38 edd Exp $
+# $OpenBSD: Makefile,v 1.23 2011/09/15 12:30:30 edd Exp $
 # Original from: Robert Ruehlmann
 
 COMMENT=		rogue-like game with X11 support

@@ -1,0 +1,5 @@
+@comment $OpenBSD$
+@bin bin/2gnash
+@bin bin/glrs
+@bin bin/gnash
+@bin bin/gredund

@@ -1,0 +1,12 @@
+$OpenBSD$
+--- Makefile.orig	Fri Sep 23 12:39:09 2011
++++ Makefile	Fri Sep 23 12:59:13 2011
+@@ -10,7 +10,7 @@ VERSION := $(shell cat VERSION)
+ all: byte
+ 
+ byte opt clean install uninstall:
+-	make -C src $@
++	CPPFLAGS=${CPPFLAGS} ${MAKE} -C src $@
+ 
+ distclean: clean
+ 	rm -rf doc

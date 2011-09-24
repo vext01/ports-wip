@@ -22,6 +22,7 @@ WANTLIB =		c
 MASTER_SITES =		http://cgm.cs.mcgill.ca/~avis/C/lrslib/
 
 MAKE_FILE =		makefile
+MAKE_FLAGS =		CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib
 ALL_TARGET =		gmp	# build with arbitrary precision numbers
 
 LIB_DEPENDS =		devel/gmp

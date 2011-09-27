@@ -1,4 +1,7 @@
 $OpenBSD$
+
+Allow us to debug segs and bus errors.
+
 --- src/signals.c.orig	Thu Sep 22 14:04:22 2011
 +++ src/signals.c	Thu Sep 22 14:04:36 2011
 @@ -301,7 +301,7 @@ void signals_init(void)

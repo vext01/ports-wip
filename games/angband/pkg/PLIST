@@ -69,31 +69,6 @@ share/angband/pref/xtra-dvg.prf
 share/angband/pref/xtra-new.prf
 share/angband/pref/xtra-nmd.prf
 share/angband/pref/xtra-xxx.prf
-share/angband/xtra/
-share/angband/xtra/angband.glade
-share/angband/xtra/font/
-share/angband/xtra/font/10x14x.fon
-share/angband/xtra/font/10x14xb.fon
-share/angband/xtra/font/10x20x.fon
-share/angband/xtra/font/12x18x.fon
-share/angband/xtra/font/12x24x.fon
-share/angband/xtra/font/16x16x.fon
-share/angband/xtra/font/16x24x.fon
-share/angband/xtra/font/5x8x.fon
-share/angband/xtra/font/6x10x.fon
-share/angband/xtra/font/6x12x.fon
-share/angband/xtra/font/6x13x.fon
-share/angband/xtra/font/6x13xb.fon
-share/angband/xtra/font/7x13x.fon
-share/angband/xtra/font/7x13xb.fon
-share/angband/xtra/font/8x12x.fon
-share/angband/xtra/font/8x12xb.fon
-share/angband/xtra/font/8x13x.fon
-share/angband/xtra/font/8x16x.fon
-share/angband/xtra/font/8x8x.fon
-share/angband/xtra/font/8x8xb.fon
-share/angband/xtra/font/9x15x.fon
-share/angband/xtra/font/9x15xb.fon
 @mode 775
 @sample /var/games/angband/
 @sample /var/games/angband/apex/

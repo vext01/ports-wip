@@ -62,7 +62,7 @@ CFLAGS +=	-fPIC
 # clisp limits which arches we can use xindy on
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "amd64"
 BUILD_DEPENDS += 	lang/clisp
-LIB_DEPENDS +=		devel/ffcall
+RUN_DEPENDS +=		lang/clisp
 CONFIGURE_ARGS +=	--enable-xindy \
 			--disable-xindy-rules
 PKG_ARGS +=		-Dxindy=1 # Note. texmf-full required for xindy

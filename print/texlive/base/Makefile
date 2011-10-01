@@ -111,7 +111,7 @@ CONFIGURE_ARGS +=	--mandir=${PREFIX}/man \
 SUBST_VARS +=		TRUEPREFIX LOCALBASE
 
 # substitute ruby and python binary names
-post-patch:
+pre-configure:
 	${SUBST_CMD} ${WRKSRC}/texk/texlive/context/mtxrun
 
 # just to silence error - never used

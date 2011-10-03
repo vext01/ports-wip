@@ -17,7 +17,7 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB =		c
+WANTLIB =		c gmp
 
 MASTER_SITES =		http://cgm.cs.mcgill.ca/~avis/C/lrslib/
 

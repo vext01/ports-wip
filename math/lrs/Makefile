@@ -27,13 +27,19 @@ ALL_TARGET =		gmp	# build with arbitrary precision numbers
 
 LIB_DEPENDS =		devel/gmp
 
-NO_REGRESS =		Yes
-
 BINARIES =		2gnash buffer gfourier glrs gnash gredund
 
 do-install:
 .for i in ${BINARIES}
 	${INSTALL_PROGRAM} ${WRKBUILD}/${i} ${PREFIX}/bin/
 .endfor
+
+# A simple test to check it works
+REGRESS_FILES =		test.ine expected_outcome.ine openbsd_regress.sh
+do-regress:
+.for i in ${REGRESS_FILES}
+	cp ${FILESDIR}/${i} ${WRKBUILD}
+.endfor
+	cd ${WRKBUILD} && sh openbsd_regress.sh
 
 .include <bsd.port.mk>

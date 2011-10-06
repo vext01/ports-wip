@@ -29,7 +29,8 @@ LIB_DEPENDS =		devel/gmp
 
 NO_REGRESS =		Yes
 
-BINARIES =		glrs gnash 2gnash gredund
+BINARIES =		2gnash buffer gfourier glrs gnash gredund
+
 do-install:
 .for i in ${BINARIES}
 	${INSTALL_PROGRAM} ${WRKBUILD}/${i} ${PREFIX}/bin/

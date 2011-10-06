@@ -1,5 +1,7 @@
 @comment $OpenBSD$
 @bin bin/2gnash
+@bin bin/buffer
+@bin bin/gfourier
 @bin bin/glrs
 @bin bin/gnash
 @bin bin/gredund

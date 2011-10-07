@@ -6,8 +6,8 @@ TeX Live 2011 - Porting progress.
  * Get base compilers working:			done
  * Test build works.			
    -> amd64					done
-   -> i386					XXX
-   -> sparc64					XXX
+   -> i386					done
+   -> sparc64					done
    -> others, anyone?				XXX
  * Do texmf split (see texmf/files/rblatter)	done
  * Move manuals and pdf manuals			done

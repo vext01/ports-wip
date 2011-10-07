@@ -1,7 +1,19 @@
 $OpenBSD$
---- src/OCamlMakefile.orig	Fri Sep 23 12:50:50 2011
-+++ src/OCamlMakefile	Fri Sep 23 13:00:26 2011
-@@ -214,7 +214,7 @@ endif
+
+ * trick ocamlfind into not updating systemwide ld.conf at fake time
+ * missing linker flags
+
+--- src/OCamlMakefile.orig	Fri Jul  2 16:23:36 2010
++++ src/OCamlMakefile	Fri Oct  7 14:00:00 2011
+@@ -86,6 +86,7 @@ export IDLFLAGS
+ export OCAMLDOCFLAGS
+ 
+ export OCAMLFIND_INSTFLAGS
++OCAMLFIND_INSTFLAGS += -ldconf ld.conf.dummy
+ 
+ export DVIPSFLAGS
+ 
+@@ -214,7 +215,7 @@ endif
  export OCAMLYACC
  
  ifndef OCAMLMKLIB

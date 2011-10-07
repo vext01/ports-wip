@@ -1,0 +1,38 @@
+$OpenBSD$
+
+correct path for config file
+
+--- configure.orig	Fri Oct  7 13:32:05 2011
++++ configure	Fri Oct  7 13:32:51 2011
+@@ -300,18 +300,19 @@ test -n "$ocamlfind_man" || ocamlfind_man="$ocaml_core
+ 
+ # Guess the right directory for the configuration file:
+ 
+-if [ -z "${ocamlfind_config}" ]; then
+-    d="$ocaml_core_bin"
+-    case "$d" in
+-        */bin)
+-	    ocamlfind_config=`dirname "$d"`/etc/findlib.conf
+-	    ;;
+-	*)
+-	    ocamlfind_config=/usr/local/etc/findlib.conf
+-	    # Fallback value
+-	    ;;
+-    esac
+-fi
++#if [ -z "${ocamlfind_config}" ]; then
++#    d="$ocaml_core_bin"
++#    case "$d" in
++#        */bin)
++#	    ocamlfind_config=`dirname "$d"`/etc/findlib.conf
++#	    ;;
++#	*)
++#	    ocamlfind_config=/usr/local/etc/findlib.conf
++#	    # Fallback value
++#	    ;;
++#    esac
++#fi
++ocamlfind_config=${SYSCONFDIR}/findlib.conf
+ 
+ ######################################################################
+ # Test the threading model

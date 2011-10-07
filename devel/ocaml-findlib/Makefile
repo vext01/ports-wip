@@ -21,20 +21,24 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-#WANTLIB =		???
+WANTLIB =		c curses m pthread
 
 MASTER_SITES =		http://download.camlcity.org/download/
 
 MODULES =		lang/ocaml
-#BUILD_DEPENDS =	???
-#RUN_DEPENDS =		???
 LIB_DEPENDS =		devel/glpk
-#REGRESS_DEPENDS =	???
 
 USE_GMAKE =		Yes
 CONFIGURE_STYLE =	simple
 
-#NO_REGRESS =		Yes
-#MAKE_ENV +=		"CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib"
+NO_REGRESS =		Yes
+
+# patch in correct SYSCONFDIR path for config file
+pre-configure:
+	${SUBST_CMD} ${WRKSRC}/configure
+
+post-install:
+	mkdir ${PREFIX}/share/examples/ocaml-findlib/
+	mv ${WRKINST}/${SYSCONFDIR}/findlib.conf ${PREFIX}/share/examples/ocaml-findlib/
 
 .include <bsd.port.mk>

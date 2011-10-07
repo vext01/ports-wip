@@ -54,3 +54,5 @@ lib/ocaml/topfind
 share/examples/ocaml-findlib/
 share/examples/ocaml-findlib/findlib.conf
 @sample ${SYSCONFDIR}/findlib.conf
+@exec touch %D/lib/ocaml/ld.conf
+@unexec rm -f %D/lib/ocaml/ld.conf

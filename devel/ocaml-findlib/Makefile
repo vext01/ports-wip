@@ -2,12 +2,9 @@
 
 COMMENT =		OCaml library manager
 
-# http://download.camlcity.org/download/findlib-1.2.7.tar.gz
 V =			1.2.7
 DISTNAME =		findlib-${V}
 PKGNAME =		ocaml-findlib-${V}
-
-#SHARED_LIBS =		???
 
 CATEGORIES =		devel
 
@@ -15,11 +12,11 @@ HOMEPAGE =		http://ocaml-glpk.sourceforge.net/
 
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
-# XXX
+# MIT/X11
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
-PERMIT_DISTFILES_FTP =	Yes
+PERMIT_DISTFILES_FTiP =	Yes
 
 WANTLIB =		c curses m pthread
 
@@ -39,6 +36,7 @@ pre-configure:
 
 post-install:
 	mkdir ${PREFIX}/share/examples/ocaml-findlib/
-	mv ${WRKINST}/${SYSCONFDIR}/findlib.conf ${PREFIX}/share/examples/ocaml-findlib/
+	mv ${WRKINST}/${SYSCONFDIR}/findlib.conf \
+		${PREFIX}/share/examples/ocaml-findlib/
 
 .include <bsd.port.mk>

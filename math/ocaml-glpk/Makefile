@@ -22,6 +22,7 @@ MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=ocaml-glpk/}
 
 MODULES =		lang/ocaml
 LIB_DEPENDS =		devel/glpk
+BUILD_DEPENDS =		sysutils/findlib
 
 USE_GMAKE =		Yes
 NO_REGRESS =		Yes

@@ -8,5 +8,3 @@ lib/ocaml/site-lib/glpk/glpk.cma
 lib/ocaml/site-lib/glpk/glpk.cmi
 lib/ocaml/site-lib/glpk/glpk.mli
 lib/ocaml/site-lib/glpk/libglpk_stubs.a
-@exec echo "/usr/local/lib/ocaml/site-lib/glpk" >> ${LOCALBASE}/lib/ocaml/ld.conf
-@unexec grep -ve "^\/usr\/local\/lib\/ocaml\/site-lib\/glpk$" ${LOCALBASE}/lib/ocaml/ld.conf | cat > ${LOCALBASE}/lib/ocaml/ld.conf

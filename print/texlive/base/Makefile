@@ -60,7 +60,8 @@ CFLAGS +=	-fPIC
 .endif
 
 # clisp limits which arches we can use xindy on
-.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "amd64"
+.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "amd64" || \
+	${MACHINE} == "powerpc" || ${MACHINE} == "sparc64"
 BUILD_DEPENDS += 	lang/clisp
 RUN_DEPENDS +=		lang/clisp
 CONFIGURE_ARGS +=	--enable-xindy \

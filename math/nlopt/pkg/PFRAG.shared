@@ -1,0 +1,3 @@
+@comment $OpenBSD$
+@lib lib/libnlopt.so.${LIBnlopt_VERSION}
+@lib lib/libnlopt_guile.so.${LIBnlopt_guile_VERSION}

@@ -8,13 +8,17 @@ PKGNAME =		radare-bindings2-${V}
 BUILD_DEPENDS =		devel/radare2/main>=${V}
 RUN_DEPENDS =		lang/vala \
 			devel/radare2/main>=${V}
+MODULES =		lang/python
+
+CONFIGURE_STYLE =	simple
+CONFUGURE_ARGS =	--enable=python
+
+MAKE_FLAGS =		PYTHON_VERSION=${MODPY_VERSION}
 
 PKG_ARCH =		*
 
-# This would go if we wanted to package other bindings.
-NO_BUILD =		Yes
-
-# Only install vala bindings for now. Maybe more in the future.
-INSTALL_TARGET =	install-vapi
+# fails to pick up python
+post-configure:
+	echo "python" >> ${WRKSRC}/supported.langs
 
 .include <bsd.port.mk>

@@ -6,7 +6,7 @@ ONLY_FOR_ARCHS ?=	amd64 i386
 # that don't. We know powerpc is busted.
 #ONLY_FOR_ARCHS ?=	arm mips64 mips64el powerpc sparc sparc64
 
-V ?=			0.8.1
+V ?=			0.8.8
 
 CATEGORIES ?=		devel
 HOMEPAGE ?=		http://radare.nopcode.org/
@@ -18,7 +18,8 @@ PERMIT_PACKAGE_FTP ?=		Yes
 PERMIT_DISTFILES_CDROM ?=	Yes
 PERMIT_DISTFILES_FTP ?=		Yes
 
-MASTER_SITES ?=		${HOMEPAGE}/get/
+#MASTER_SITES ?=		${HOMEPAGE}/get/
+MASTER_SITES =			http://lolcathost.org/b/
 
 USE_GMAKE ?=		Yes
 CONFIGURE_STYLE ?=	simple

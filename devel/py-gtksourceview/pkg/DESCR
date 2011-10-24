@@ -1,0 +1,3 @@
+PyGtkSourceView is a Python wrapper for the GtkSourceView widget
+library.  It offers all the power of GtkSourceView with an interface
+familiar to Python developers, including users of the PyGTK library.

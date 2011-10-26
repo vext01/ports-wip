@@ -1,0 +1,31 @@
+===>  octave-3.4.3 depends on: g77-* - found
+===>  octave-3.4.3 depends on: libf2c-* - found
+===>  octave-3.4.3 depends on: desktop-file-utils-* - found
+===>  octave-3.4.3 depends on: metaauto-* - found
+===>  octave-3.4.3 depends on: autoconf-2.67 - found
+===>  octave-3.4.3 depends on: gmake-* - found
+===>  octave-3.4.3 depends on: groff->=1.21 - found
+===>  octave-3.4.3 depends on: fftw3-* - found
+===>  octave-3.4.3 depends on: lapack-* - found
+===>  octave-3.4.3 depends on: blas-* - found
+===>  octave-3.4.3 depends on: amd-* - found
+===>  octave-3.4.3 depends on: umfpack-* - found
+===>  octave-3.4.3 depends on: pcre-* - found
+===>  octave-3.4.3 depends on: curl-* - found
+===>  Verifying specs: c m ncurses readline stdc++ z g2c  fftw3>=3 lapack>=3 blas>=1 amd umfpack pcre>=1 curl>=6 c m ncurses readline stdc++ z g2c  fftw3>=3 lapack>=3 blas>=1 amd umfpack pcre>=1 curl>=6
+===>  found c.60.1 m.7.0 ncurses.12.1 readline.3.0 stdc++.52.0 z.4.1 g2c.8.1 fftw3.5.0 lapack.5.0 blas.2.0 amd.0.0 umfpack.0.0 pcre.2.5 curl.20.0
+===>  Checking files for octave-3.4.3
+`/usr/ports/distfiles/octave-3.4.3.tar.gz' is up to date.
+>> (SHA256) octave-3.4.3.tar.gz: OK
+===>  Extracting for octave-3.4.3
+===>  Patching for octave-3.4.3
+===>   Applying OpenBSD patch patch-configure_ac
+Hmm...  Looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|$OpenBSD: patch-configure_in,v 1.5 2007/07/28 07:09:19 steven Exp $
+|--- configure.in.orig	Thu Apr 26 21:00:48 2007
+|+++ configure.in	Sat May 26 22:28:32 2007
+--------------------------
+File to patch: 
+No file found--skip this patch? [n] 

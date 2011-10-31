@@ -1,5 +1,0 @@
-@comment $OpenBSD$
-lib/python${MODPY_VERSION}/site-packages/pyudis86-1.0.0-py${MODPY_VERSION}.egg-info
-lib/python${MODPY_VERSION}/site-packages/udis86.so
-share/examples/py-udis86/
-share/examples/py-udis86/sample.py

@@ -3,7 +3,6 @@ lib/python${MODPY_VERSION}/site-packages/r2/
 lib/python${MODPY_VERSION}/site-packages/r2/__init__.py
 lib/python${MODPY_VERSION}/site-packages/r2/_r_asm.so
 lib/python${MODPY_VERSION}/site-packages/r2/_r_bin.so
-lib/python${MODPY_VERSION}/site-packages/r2/_r_core.so
 lib/python${MODPY_VERSION}/site-packages/r2/r_asm.py
 lib/python${MODPY_VERSION}/site-packages/r2/r_bin.py
 lib/python${MODPY_VERSION}/site-packages/r2/r_core.py

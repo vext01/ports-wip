@@ -5,17 +5,18 @@ $OpenBSD$
 +-----------------------------------------------------------------------
 
 Running a Server
-====================
+================
 
 All commands shown here are run as root.
 
 Prepare the Server
 ------------------
 
-First you should create the SQLite database (which needs to be owned by the _hgd user):
+First you should create the SQLite database (which needs to be owned by
+the _hgd user):
   ${TRUEPREFIX}/sbin/hgd-admin db-init && chown _hgd /var/hgd/*
 
-Next you should add a users. For each user you would run:
+Next you should add users. For each user you would run:
   ${TRUEPREFIX}/sbin/hgd-admin user-add <username>
 
 Users can be promoted to admins:
@@ -25,7 +26,7 @@ Start the Server
 ----------------
 
 Start hgd_netd and hgd_playd using the standard rc.d procedures:
-  ${SYSCONFDIR}/rc.d/hgd_netd start && ${SYSCONFDIR}/rc.d/hgd_playd start
+  ${RCDIR}/hgd_netd start && ${RCDIR}/hgd_playd start
 
 Check everything went OK:
   ${TRUEPREFIX}/sbin/hgd-admin status
@@ -38,7 +39,7 @@ You can (for example) queue a track like this:
 
 See the manual pages for more information.
 
-Misecllaneous Notes
+Miscellaneous Notes
 ===================
 
 * Both the client and server are configurable using a config file. See the

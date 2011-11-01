@@ -13,12 +13,13 @@
 @man man/man7/hgd-proto.7
 share/doc/hgd/
 share/doc/hgd/README
+share/doc/pkg-readmes/${FULLPKGNAME}
 share/examples/hgd/
 share/examples/hgd/hgd.rc
 share/examples/hgd/hgdc.rc
-@sample ${SYSCONFDIR}/hgd/plugins/
 @rcscript ${RCDIR}/hgd_netd
 @rcscript ${RCDIR}/hgd_playd
+@sample ${SYSCONFDIR}/hgd/plugins/
 @owner _hgd
 @group _hgd
 @sample /var/hgd/

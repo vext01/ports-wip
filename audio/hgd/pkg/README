@@ -9,36 +9,34 @@ Running a Server
 
 All commands shown here are run as root.
 
-* Create the SQLite Database
+Prepare the Server
+------------------
 
-The database is created under /var/hgd and needs to be owned by the _hgd user:
-
+First you should create the SQLite database (which needs to be owned by the _hgd user):
   ${TRUEPREFIX}/sbin/hgd-admin db-init && chown _hgd /var/hgd/*
 
-* Add Users
-
-For each user you would run:
-
+Next you should add a users. For each user you would run:
   ${TRUEPREFIX}/sbin/hgd-admin user-add <username>
 
 Users can be promoted to admins:
-
   ${TRUEPREFIX}/sbin/hgd-admin user-mkadmin <username>
 
-* Start Daemons
+Start the Server
+----------------
 
 Start hgd_netd and hgd_playd using the standard rc.d procedures:
-
-  ${SYSCONFDIR}/rc.d/hgd_netd && ${SYSCONFDIR}/rc.d/hgd_playd
+  ${SYSCONFDIR}/rc.d/hgd_netd start && ${SYSCONFDIR}/rc.d/hgd_playd start
 
 Check everything went OK:
-
   ${TRUEPREFIX}/sbin/hgd-admin status
 
 Using the HGD Client
 ====================
 
+You can (for example) queue a track like this:
   hgdc -u <username> q <some_media_file>
+
+See the manual pages for more information.
 
 Misecllaneous Notes
 ===================

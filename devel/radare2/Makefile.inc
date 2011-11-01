@@ -18,8 +18,7 @@ PERMIT_PACKAGE_FTP ?=		Yes
 PERMIT_DISTFILES_CDROM ?=	Yes
 PERMIT_DISTFILES_FTP ?=		Yes
 
-#MASTER_SITES ?=		${HOMEPAGE}/get/
-MASTER_SITES =			http://lolcathost.org/b/
+MASTER_SITES ?=		${HOMEPAGE}/get/
 
 USE_GMAKE ?=		Yes
 CONFIGURE_STYLE ?=	simple

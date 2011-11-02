@@ -33,7 +33,8 @@ MODULES=	fortran
 MODFORTRAN_COMPILER = g77
 
 BUILD_DEPENDS=	${MODFORTRAN_BUILD_DEPENDS} \
-		devel/desktop-file-utils
+		devel/desktop-file-utils \
+		devel/flex
 RUN_DEPENDS=	devel/gmake \
 		devel/desktop-file-utils
 LIB_DEPENDS=	${MODFORTRAN_LIB_DEPENDS} \
@@ -57,7 +58,8 @@ CONFIGURE_ARGS=	${CONFIGURE_SHARED} \
 CONFIGURE_ENV=	CPPFLAGS="-I${LOCALBASE}/include -I${X11BASE}/include" \
 		LDFLAGS="-L${LOCALBASE}/lib -L${X11BASE}/lib" \
 		F77=${FC} \
-		SED=/usr/bin/sed
+		SED=/usr/bin/sed \
+		LEX=gflex
 MAKE_ENV=	LIBcruft_VERSION=${LIBcruft_VERSION} \
 		LIBoctave_VERSION=${LIBoctave_VERSION} \
 		LIBoctinterp_VERSION=${LIBoctinterp_VERSION}

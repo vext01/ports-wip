@@ -51,10 +51,13 @@ USE_GMAKE=	Yes
 USE_GROFF =	Yes
 
 CONFIGURE_STYLE=gnu
-CONFIGURE_ARGS=	${CONFIGURE_SHARED} \
-		--with-fftw \
-		--without-mpi \
-		--without-hdf5
+CONFIGURE_ARGS =	${CONFIGURE_SHARED} \
+			--with-fftw \
+			--without-mpi \
+			--without-hdf5
+# Our texinfo is too old to generate the docs. @leq is used which appeared
+# in version 4.12. We can use the precompiled docs.
+CONFIUGRE_ARGS +=	--disable-docs
 CONFIGURE_ENV=	CPPFLAGS="-I${LOCALBASE}/include -I${X11BASE}/include" \
 		LDFLAGS="-L${LOCALBASE}/lib -L${X11BASE}/lib" \
 		F77=${FC} \

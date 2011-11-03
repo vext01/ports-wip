@@ -30,7 +30,7 @@ WANTLIB=	c m ncurses readline stdc++ z ${MODFORTRAN_WANTLIB} \
 MASTER_SITES=	ftp://ftp.gnu.org/gnu/octave/
 
 MODULES=	fortran
-MODFORTRAN_COMPILER = g77
+MODFORTRAN_COMPILER = gfortran
 
 BUILD_DEPENDS=	${MODFORTRAN_BUILD_DEPENDS} \
 		devel/desktop-file-utils \
@@ -59,10 +59,10 @@ CONFIGURE_ARGS =	${CONFIGURE_SHARED} \
 # in version 4.12. We can use the precompiled docs.
 CONFIGURE_ARGS +=	--disable-docs
 CONFIGURE_ENV=	CPPFLAGS="-I${LOCALBASE}/include -I${X11BASE}/include" \
-		LDFLAGS="-L${LOCALBASE}/lib -L${X11BASE}/lib" \
-		F77=${FC} \
+		LDFLAGS="-L${LOCALBASE}/lib -L${X11BASE}/lib -lm -lgfortran" \
 		SED=/usr/bin/sed \
-		LEX=gflex
+		LEX=gflex \
+		F77=gfortran
 MAKE_ENV=	LIBcruft_VERSION=${LIBcruft_VERSION} \
 		LIBoctave_VERSION=${LIBoctave_VERSION} \
 		LIBoctinterp_VERSION=${LIBoctinterp_VERSION}

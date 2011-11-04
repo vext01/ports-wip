@@ -3,9 +3,9 @@
 COMMENT=	library of Fortran 77 linear algebra subroutines
 
 DISTNAME=	lapack-3.1.1
-REVISION=	3
+REVISION=	4
 
-SHARED_LIBS=	lapack 5.0
+SHARED_LIBS=	lapack 6.0
 
 CATEGORIES=	math
 
@@ -26,7 +26,7 @@ LIB_DEPENDS =	math/blas
 WANTLIB =	blas>=1
 
 MODULES=	fortran
-MODFORTRAN_COMPILER = g77
+MODFORTRAN_COMPILER = gfortran
 BUILD_DEPENDS=	${MODFORTRAN_BUILD_DEPENDS}
 
 MAKE_ENV=	SHLIB_MAJOR=${LIBlapack_VERSION:R} \

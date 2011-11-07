@@ -1,6 +1,6 @@
 $OpenBSD$
---- src/sighandlers.cc.orig	Wed Oct 26 18:06:10 2011
-+++ src/sighandlers.cc	Wed Oct 26 18:06:30 2011
+--- src/sighandlers.cc.orig	Thu Sep  1 14:39:19 2011
++++ src/sighandlers.cc	Fri Nov  4 19:56:32 2011
 @@ -81,10 +81,10 @@ static bool octave_signals_caught[NSIG];
  #define BLOCK_SIGNAL(sig, nvar, ovar) \
    do \
@@ -16,3 +16,26 @@ $OpenBSD$
      } \
    while (0)
  
+@@ -93,7 +93,7 @@ static bool octave_signals_caught[NSIG];
+ #endif
+ 
+ #define BLOCK_CHILD(nvar, ovar) BLOCK_SIGNAL (SIGCHLD, nvar, ovar)
+-#define UNBLOCK_CHILD(ovar) gnulib::sigprocmask (SIG_SETMASK, &ovar, 0)
++#define UNBLOCK_CHILD(ovar) sigprocmask (SIG_SETMASK, &ovar, 0)
+ 
+ // Called from octave_quit () to actually do something about the signals
+ // we have caught.
+@@ -222,10 +222,10 @@ octave_set_signal_handler (int sig, sig_handler *handl
+     act.sa_flags |= SA_RESTART;
+ #endif
+ 
+-  gnulib::sigemptyset (&act.sa_mask);
+-  gnulib::sigemptyset (&oact.sa_mask);
++  sigemptyset (&act.sa_mask);
++  sigemptyset (&oact.sa_mask);
+ 
+-  gnulib::sigaction (sig, &act, &oact);
++  sigaction (sig, &act, &oact);
+ 
+   return oact.sa_handler;
+ }

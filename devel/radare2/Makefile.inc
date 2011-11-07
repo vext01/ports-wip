@@ -7,6 +7,7 @@ ONLY_FOR_ARCHS ?=	amd64 i386
 #ONLY_FOR_ARCHS ?=	arm mips64 mips64el powerpc sparc sparc64
 
 V ?=			0.8.8
+SUBST_VARS +=		V
 
 CATEGORIES ?=		devel
 HOMEPAGE ?=		http://radare.nopcode.org/

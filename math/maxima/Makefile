@@ -34,14 +34,13 @@ FLAVORS=		no_x11
 FLAVOR?=
 
 .if !${FLAVOR:L:Mno_x11}
-MODTK_VERSION=		8.4
 MODULES+=		x11/tk
 RUN_DEPENDS+=		${MODTK_RUN_DEPENDS}
 BUILD_DEPENDS +=	${MODTK_RUN_DEPENDS}
 CONFIGURE_ARGS+=	--with-wish=${MODTCL_BIN}
 .endif
 
-post-patch:
+pre-configure:
 	${SUBST_CMD} ${WRKSRC}/configure
 
 .include <bsd.port.mk>

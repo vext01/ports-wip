@@ -1,0 +1,11 @@
+$OpenBSD$
+--- src/syscalls.cc.orig	Wed Nov  9 18:16:24 2011
++++ src/syscalls.cc	Wed Nov  9 18:16:48 2011
+@@ -332,6 +332,7 @@ exit status, it will linger until Octave exits.\n\
+                   pid_t pid;
+ 
+                   pid = octave_syscalls::popen2 (exec_file, arg_list, sync_mode, fildes, msg, interactive);
++		  sleep(1);
+                   if (pid >= 0)
+                     {
+                       FILE *ifile = fdopen (fildes[1], "r");

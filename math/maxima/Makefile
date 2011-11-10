@@ -19,8 +19,9 @@ MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=maxima/}
 USE_GMAKE=		yes
 
 LIB_DEPENDS=		lang/ecl
+RUN_DEPENDS =		math/gnuplot
 # sh whines about line 6100 of configure
-BUILD_DEPENDS =		bash
+BUILD_DEPENDS =		shells/bash
 WANTLIB +=		c gc gmp m pthread ecl
 
 SUBST_VARS=		VERSION
@@ -36,8 +37,11 @@ FLAVOR?=
 MODTK_VERSION=		8.4
 MODULES+=		x11/tk
 RUN_DEPENDS+=		${MODTK_RUN_DEPENDS}
-BUILD_DEPENDS=		${RUN_DEPENDS}
+BUILD_DEPENDS +=	${MODTK_RUN_DEPENDS}
 CONFIGURE_ARGS+=	--with-wish=${MODTCL_BIN}
 .endif
+
+post-patch:
+	${SUBST_CMD} ${WRKSRC}/configure
 
 .include <bsd.port.mk>

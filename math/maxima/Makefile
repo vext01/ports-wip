@@ -19,6 +19,8 @@ MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=maxima/}
 USE_GMAKE=		yes
 
 LIB_DEPENDS=		lang/ecl
+# sh whines about line 6100 of configure
+BUILD_DEPENDS =		bash
 WANTLIB +=		c gc gmp m pthread ecl
 
 SUBST_VARS=		VERSION

@@ -30,10 +30,11 @@ WANTLIB=	c m ncurses readline stdc++ z ${MODFORTRAN_WANTLIB} \
 MASTER_SITES=	ftp://ftp.gnu.org/gnu/octave/
 
 MODULES=	fortran
-MODFORTRAN_COMPILER = g77
+MODFORTRAN_COMPILER = gfortran
 
 BUILD_DEPENDS=	${MODFORTRAN_BUILD_DEPENDS} \
-		devel/desktop-file-utils
+		devel/desktop-file-utils \
+		devel/flex
 RUN_DEPENDS=	devel/gmake \
 		devel/desktop-file-utils
 LIB_DEPENDS=	${MODFORTRAN_LIB_DEPENDS} \
@@ -48,19 +49,27 @@ LIB_DEPENDS=	${MODFORTRAN_LIB_DEPENDS} \
 
 USE_GMAKE=	Yes
 USE_GROFF =	Yes
+USE_LIBTOOL =	Yes
 
 CONFIGURE_STYLE=gnu
-CONFIGURE_ARGS=	${CONFIGURE_SHARED} \
-		--with-fftw \
-		--without-mpi \
-		--without-hdf5
+CONFIGURE_ARGS =	${CONFIGURE_SHARED} \
+			--with-fftw \
+			--without-mpi \
+			--without-hdf5
+# Our texinfo is too old to generate the docs. @leq is used which appeared
+# in version 4.12. We can use the precompiled docs.
+CONFIGURE_ARGS +=	--disable-docs
 CONFIGURE_ENV=	CPPFLAGS="-I${LOCALBASE}/include -I${X11BASE}/include" \
-		LDFLAGS="-L${LOCALBASE}/lib -L${X11BASE}/lib" \
-		F77=${FC} \
-		SED=/usr/bin/sed
+		LDFLAGS="-L${LOCALBASE}/lib -L${X11BASE}/lib -lm -lgfortran" \
+		SED=/usr/bin/sed \
+		LEX=gflex \
+		F77=gfortran \
+		CFLAGS=-O0 \
+		CXXFLAGS=-O0
 MAKE_ENV=	LIBcruft_VERSION=${LIBcruft_VERSION} \
 		LIBoctave_VERSION=${LIBoctave_VERSION} \
 		LIBoctinterp_VERSION=${LIBoctinterp_VERSION}
+MAKE_FLAGS =	GRAPHICS_CFLAGS=-O0
 
 .if ${MACHINE_ARCH} == "alpha"
 CONFIGURE_ENV+=	FFLAGS="${FFLAGS}"
@@ -90,16 +99,16 @@ post-regress:
 	@rm -f /tmp/oct-*
 
 # fix ls-R and install HTML documentation
-HTMLDOCS=	interpreter liboctave
-post-install:
-	@cd ${PREFIX}/share/octave && \
-		perl -pi -e "s,${PREFIX},${TRUEPREFIX}," ls-R
-	@cd ${PREFIX}/libexec/octave && \
-		perl -pi -e "s,${PREFIX},${TRUEPREFIX}," ls-R
-.for d in ${HTMLDOCS}
-	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/octave/${d}
-	${INSTALL_DATA} ${WRKBUILD}/doc/${d}/HTML/*.html \
+#HTMLDOCS=	interpreter liboctave
+#post-install:
+#	@cd ${PREFIX}/share/octave && \
+#		perl -pi -e "s,${PREFIX},${TRUEPREFIX}," ls-R
+#	@cd ${PREFIX}/libexec/octave && \
+#		perl -pi -e "s,${PREFIX},${TRUEPREFIX}," ls-R
+#.for d in ${HTMLDOCS}
+#	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/octave/${d}
+#	${INSTALL_DATA} ${WRKBUILD}/doc/${d}/HTML/*.html \
 		${PREFIX}/share/doc/octave/${d}
-.endfor
+#.endfor
 
 .include <bsd.port.mk>

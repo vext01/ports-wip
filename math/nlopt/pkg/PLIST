@@ -7,14 +7,13 @@ lib/libnlopt.a
 lib/libnlopt.la
 lib/libnlopt_guile.a
 lib/libnlopt_guile.la
-lib/pkgconfig/
 lib/pkgconfig/nlopt.pc
-lib/python2.7/site-packages/_nlopt.a
-lib/python2.7/site-packages/_nlopt.la
-@bin lib/python2.7/site-packages/_nlopt.so.6.2
-lib/python2.7/site-packages/nlopt.py
-lib/python2.7/site-packages/nlopt.pyc
-lib/python2.7/site-packages/nlopt.pyo
+lib/python${MODPY_VERSION}/site-packages/_nlopt.a
+lib/python${MODPY_VERSION}/site-packages/_nlopt.la
+lib/python${MODPY_VERSION}/site-packages/_nlopt.so.6.2
+lib/python${MODPY_VERSION}/site-packages/nlopt.py
+lib/python${MODPY_VERSION}/site-packages/nlopt.pyc
+lib/python${MODPY_VERSION}/site-packages/nlopt.pyo
 libexec/octave/3.0.5/site/oct/x86_64-unknown-openbsd5.0/nlopt_optimize.oct
 @man man/man3/nlopt.3
 share/guile/

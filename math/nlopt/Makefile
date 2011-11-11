@@ -33,4 +33,6 @@ USE_LIBTOOL =		Yes
 CONFIGURE_STYLE =	gnu
 CONFIGURE_ARGS +=	${CONFIGURE_SHARED}
 
+PATCHORIG =		puff
+
 .include <bsd.port.mk>

@@ -23,9 +23,8 @@ WANTLIB +=		glib-2.0 iconv intl pcre usb
 MASTER_SITES =		XXX
 EXTRACT_SUFX =		.tar.bz2
 
-LIB_DEPENDS =		devel/libusb \
-			devel/glib2 \
-			devel/libticables2
+LIB_DEPENDS =		devel/glib2 \
+			devel/libticonv
 
 USE_LIBTOOL =		Yes
 CONFIGURE_STYLE =	gnu

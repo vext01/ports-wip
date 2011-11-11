@@ -1,10 +1,10 @@
 # $OpenBSD: Makefile.template,v 1.60 2010/10/24 20:41:23 ajacoutot Exp $
 
-COMMENT =		conversion library for texas instruments calculators
+COMMENT =		file handler library for texas instruments calculators
 
-DISTNAME =		libticonv-1.1.2
+DISTNAME =		libtifiles2-1.1.4
 
-SHARED_LIBS +=		ticonv	0.0 # 5.4
+SHARED_LIBS +=		tifiles2	0.0 # 7.2
 
 CATEGORIES =		devel
 
@@ -18,16 +18,15 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB +=		glib-2.0 iconv intl pcre
+WANTLIB +=		glib-2.0 iconv intl pcre ticonv z
 
 MASTER_SITES =		XXX
 EXTRACT_SUFX =		.tar.bz2
 
-LIB_DEPENDS =		converters/libiconv \
-			devel/glib2
+LIB_DEPENDS =		devel/glib2 \
+			devel/libticonv
 
 USE_LIBTOOL =		Yes
 CONFIGURE_STYLE =	gnu
-CONFIGURE_ARGS =	CFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib
 
 .include <bsd.port.mk>

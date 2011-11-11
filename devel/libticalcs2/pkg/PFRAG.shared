@@ -1,2 +1,2 @@
 @comment $OpenBSD$
-@lib lib/libticables2.so.${LIBticables2_VERSION}
+@lib lib/libticalcs2.so.${LIBticalcs2_VERSION}

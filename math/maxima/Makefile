@@ -37,7 +37,7 @@ FLAVOR?=
 MODULES+=		x11/tk
 RUN_DEPENDS+=		${MODTK_RUN_DEPENDS}
 BUILD_DEPENDS +=	${MODTK_RUN_DEPENDS}
-CONFIGURE_ARGS+=	--with-wish=${MODTCL_BIN}
+CONFIGURE_ARGS +=	--with-wish=${MODTK_BIN}
 .endif
 
 pre-configure:

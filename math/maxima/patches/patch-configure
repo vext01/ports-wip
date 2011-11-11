@@ -2,8 +2,8 @@ $OpenBSD$
 
 Line 6100 (and a few others) of configure is not portable.
 
---- configure.orig	Thu Nov 10 16:31:28 2011
-+++ configure	Thu Nov 10 16:31:52 2011
+--- configure.orig	Sun Aug 28 17:57:40 2011
++++ configure	Fri Nov 11 10:37:25 2011
 @@ -1,4 +1,4 @@
 -#! /bin/sh
 +#!${LOCALBASE}/bin/bash

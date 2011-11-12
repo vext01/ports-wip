@@ -20,8 +20,6 @@ USE_GMAKE=		yes
 
 LIB_DEPENDS=		lang/ecl
 RUN_DEPENDS =		math/gnuplot
-# sh whines about line 6100 of configure
-BUILD_DEPENDS =		shells/bash
 WANTLIB +=		c gc gmp m pthread ecl
 
 SUBST_VARS=		VERSION

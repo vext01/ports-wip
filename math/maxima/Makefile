@@ -19,7 +19,8 @@ MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=maxima/}
 USE_GMAKE=		yes
 
 LIB_DEPENDS=		lang/ecl
-RUN_DEPENDS =		math/gnuplot
+RUN_DEPENDS =		math/gnuplot \
+			misc/rlwrap
 WANTLIB +=		c gc gmp m pthread ecl
 
 SUBST_VARS=		VERSION

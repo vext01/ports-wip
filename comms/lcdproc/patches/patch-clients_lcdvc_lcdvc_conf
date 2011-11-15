@@ -1,0 +1,12 @@
+$OpenBSD$
+--- clients/lcdvc/lcdvc.conf.orig	Tue Nov 15 15:29:10 2011
++++ clients/lcdvc/lcdvc.conf	Tue Nov 15 15:29:49 2011
+@@ -19,7 +19,7 @@
+ #Foreground=false
+ 
+ # PidFile location when running as daemon [default: /var/run/lcdvc.pid]
+-#PidFile=/var/run/lcdvc.pid
++PidFile=/var/run/lcdproc/lcdvc.pid
+ 
+ # Keys to move the visible area around the screen.
+ #UpKey=Up

@@ -1,0 +1,12 @@
+$OpenBSD$
+--- clients/lcdexec/lcdexec.conf.orig	Tue Nov 15 15:29:58 2011
++++ clients/lcdexec/lcdexec.conf	Tue Nov 15 15:31:21 2011
+@@ -18,7 +18,7 @@ ReportToSyslog=false
+ Foreground=false
+ 
+ # PidFile location when running as daemon [default: /var/run/lcdexec.pid]
+-#PidFile=/var/run/lcdexec.pid
++PidFile=/var/run/lcdproc/lcdexec.pid
+ 
+ # shell to use for executing programsi
+ # [default: $SHELL or /bin/sh; legal: any shell that understands: -c COMMAND]

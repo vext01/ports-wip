@@ -18,10 +18,10 @@ lib/lcdproc/
 @bin sbin/LCDd
 share/examples/lcdproc/
 share/examples/lcdproc/LCDd.conf
-@sample ${SYSCONFDIR}/
+@sample ${SYSCONFDIR}/LCDd.conf
 share/examples/lcdproc/lcdexec.conf
-@sample ${SYSCONFDIR}/
+@sample ${SYSCONFDIR}/lcdexec.conf
 share/examples/lcdproc/lcdproc.conf
-@sample ${SYSCONFDIR}/
+@sample ${SYSCONFDIR}/lcdproc.conf
 share/examples/lcdproc/lcdvc.conf
-@sample ${SYSCONFDIR}/
+@sample ${SYSCONFDIR}/lcdvc.conf

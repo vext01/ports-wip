@@ -31,5 +31,6 @@ post-install:
 	${SUBST_CMD} -c ${WRKBUILD}/clients/lcdexec/lcdexec.conf ${EXAMPLE_DIR}/lcdexec.conf
 	${SUBST_CMD} -c ${WRKBUILD}/clients/lcdproc/lcdproc.conf ${EXAMPLE_DIR}/lcdproc.conf
 	${SUBST_CMD} -c ${WRKBUILD}/clients/lcdvc/lcdvc.conf ${EXAMPLE_DIR}/lcdvc.conf
+	chown -R ${SHAREOWN}:${SHAREGRP} ${EXAMPLE_DIR}
 
 .include <bsd.port.mk>

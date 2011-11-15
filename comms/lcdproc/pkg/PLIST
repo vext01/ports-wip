@@ -1,4 +1,6 @@
 @comment $OpenBSD$
+@newgroup _lcdproc:999
+@newuser _lcdproc:999:999:daemon:LCDproc Daemon:/var/empty:/sbin/nologin
 %%SHARED%%
 bin/fortune.pl
 bin/iosock.pl

@@ -1,0 +1,12 @@
+@comment $OpenBSD$
+lib/lcdproc/CFontz.so
+lib/lcdproc/CFontz633.so
+lib/lcdproc/CwLnx.so
+lib/lcdproc/MtxOrb.so
+lib/lcdproc/bayrad.so
+lib/lcdproc/curses.so
+lib/lcdproc/glk.so
+lib/lcdproc/lb216.so
+lib/lcdproc/lcdm001.so
+lib/lcdproc/pyramid.so
+lib/lcdproc/text.so

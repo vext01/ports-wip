@@ -3,8 +3,10 @@ $OpenBSD$
 OpenBSD path and there is no point in logging to stderr if we use daemon() to daemonise
 (stderr will get closed).
 
+Fix a typo.
+
 --- LCDd.conf.orig	Wed Nov  9 19:50:01 2011
-+++ LCDd.conf	Tue Nov 15 17:07:22 2011
++++ LCDd.conf	Tue Nov 15 17:16:25 2011
 @@ -34,7 +34,7 @@
  #            the driver modules and will thus not be able to
  #            function properly.
@@ -28,3 +30,12 @@ OpenBSD path and there is no point in logging to stderr if we use daemon() to da
  
  # The server will stay in the foreground if set to true.
  #Foreground=no
+@@ -79,7 +79,7 @@ User=nobody
+ #GoodBye="Thanks for using"
+ #GoodBye="   LCDproc!"
+ 
+-# Sets the default time in seconds to displays a screen.
++# Sets the default time in seconds to display a screen.
+ WaitTime=5
+ 
+ # If set to no, LCDd will start with screen rotation disabled. This has the

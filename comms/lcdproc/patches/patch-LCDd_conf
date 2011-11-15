@@ -2,8 +2,8 @@ $OpenBSD$
 
 Driver path.
 
---- LCDd.conf.orig	Tue Nov 15 13:43:37 2011
-+++ LCDd.conf	Tue Nov 15 13:45:05 2011
+--- LCDd.conf.orig	Wed Nov  9 19:50:01 2011
++++ LCDd.conf	Tue Nov 15 15:28:04 2011
 @@ -34,7 +34,7 @@
  #            the driver modules and will thus not be able to
  #            function properly.
@@ -13,3 +13,12 @@ Driver path.
  
  # Tells the server to load the given drivers. Multiple lines can be given.
  # The name of the driver is case sensitive and determines the section
+@@ -66,7 +66,7 @@ Port=13666
+ 
+ # User to run as.  LCDd will drop its root privileges, if any,
+ # and run as this user instead.
+-User=nobody
++User=_lcdproc
+ 
+ # The server will stay in the foreground if set to true.
+ #Foreground=no

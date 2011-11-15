@@ -27,3 +27,11 @@ share/examples/lcdproc/lcdproc.conf
 @sample ${SYSCONFDIR}/lcdproc.conf
 share/examples/lcdproc/lcdvc.conf
 @sample ${SYSCONFDIR}/lcdvc.conf
+@mode 770
+@owner _lcdproc
+@group _lcdproc
+@sample /var/run/lcdproc
+@mode
+@owner
+@group
+@comment XXX @rcscript ${RCDIR}/mpd

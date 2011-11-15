@@ -1,9 +1,10 @@
 $OpenBSD$
 
-Driver path.
+OpenBSD path and there is no point in logging to stderr if we use daemon() to daemonise
+(stderr will get closed).
 
 --- LCDd.conf.orig	Wed Nov  9 19:50:01 2011
-+++ LCDd.conf	Tue Nov 15 15:28:04 2011
++++ LCDd.conf	Tue Nov 15 17:07:22 2011
 @@ -34,7 +34,7 @@
  #            the driver modules and will thus not be able to
  #            function properly.
@@ -13,7 +14,12 @@ Driver path.
  
  # Tells the server to load the given drivers. Multiple lines can be given.
  # The name of the driver is case sensitive and determines the section
-@@ -66,7 +66,7 @@ Port=13666
+@@ -62,11 +62,11 @@ Port=13666
+ #ReportLevel=3
+ 
+ # Should we report to syslog instead of stderr ? [default: no; legal: yes, no]
+-#ReportToSyslog=yes
++ReportToSyslog=yes
  
  # User to run as.  LCDd will drop its root privileges, if any,
  # and run as this user instead.

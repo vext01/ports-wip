@@ -30,7 +30,7 @@ share/examples/lcdproc/lcdvc.conf
 @mode 770
 @owner _lcdproc
 @group _lcdproc
-@sample /var/run/lcdproc
+@sample /var/run/lcdproc/
 @mode
 @owner
 @group

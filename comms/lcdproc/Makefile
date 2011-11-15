@@ -27,9 +27,9 @@ CONFIGURE_STYLE =	gnu
 EXAMPLE_DIR = ${PREFIX}/share/examples/lcdproc
 post-install:
 	${INSTALL_DATA_DIR} ${EXAMPLE_DIR}
-	${SUBST_CMD} -c ${WRKBUILD}/LCDd.conf ${EXAMPLE_DIR}/
-	${SUBST_CMD} -c ${WRKBUILD}/lcdexec/lcdexec.conf ${EXAMPLE_DIR}/
-	${SUBST_CMD} -c ${WRKBUILD}/lcdproc/lcdproc.conf ${EXAMPLE_DIR}/
-	${SUBST_CMD} -c ${WRKBUILD}/lcdvc/lcdvc.conf ${EXAMPLE_DIR}/
+	${SUBST_CMD} -c ${WRKBUILD}/LCDd.conf ${EXAMPLE_DIR}/LCDd.conf
+	${SUBST_CMD} -c ${WRKBUILD}/clients/lcdexec/lcdexec.conf ${EXAMPLE_DIR}/lcdexec.conf
+	${SUBST_CMD} -c ${WRKBUILD}/clients/lcdproc/lcdproc.conf ${EXAMPLE_DIR}/lcdproc.conf
+	${SUBST_CMD} -c ${WRKBUILD}/clients/lcdvc/lcdvc.conf ${EXAMPLE_DIR}/lcdvc.conf
 
 .include <bsd.port.mk>

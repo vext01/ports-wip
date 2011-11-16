@@ -15,7 +15,6 @@ PERMIT_DISTFILES_FTP =	Yes
 LIB_DEPENDS =		devel/libftdi \
 			devel/libusb1 \
 			devel/libhid
-# drivers dlopen, so base WANTLIB is the same for both flavors
 WANTLIB +=		c ftdi hid kvm ncurses pthread usb
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lcdproc/}

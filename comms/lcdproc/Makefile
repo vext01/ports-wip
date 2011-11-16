@@ -1,14 +1,13 @@
 # $OpenBSD: Makefile.template,v 1.60 2010/10/24 20:41:23 ajacoutot Exp $
 
 COMMENT =		interface to various LCD displays
-
 DISTNAME =		lcdproc-0.5.5
-
 CATEGORIES =		comms devel
-
 HOMEPAGE =		http://www.lcdproc.org
-
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
+
+FLAVORS =		no_x11
+FLAVOR ?=
 
 # GPLv2
 PERMIT_PACKAGE_CDROM =	Yes
@@ -19,13 +18,22 @@ PERMIT_DISTFILES_FTP =	Yes
 LIB_DEPENDS =		devel/libftdi \
 			devel/libusb1 \
 			devel/libhid
-WANTLIB +=		c ftdi kvm ncurses usb
+# drivers dlopen, so base WANTLIB is the same for both flavors
+WANTLIB +=		c ftdi hid kvm ncurses pthread usb
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lcdproc/}
 
 CONFIGURE_STYLE =	gnu
-CONFIGURE_ARGS =	--enable-drivers=all
 CONFIGURE_ENV =		CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib
+
+.if ${FLAVOR:L:Mno_x11}
+PKG_ARGS +=		-Dx11=0
+CONFIGURE_ARGS =	--enable-drivers=all,!xosd
+.else
+PKG_ARGS +=		-Dx11=1
+CONFIGURE_ARGS =	--enable-drivers=all
+LIB_DEPENDS +=		x11/xosd
+.endif
 
 EXAMPLE_DIR = ${PREFIX}/share/examples/lcdproc
 post-install:

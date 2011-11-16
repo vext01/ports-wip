@@ -2,6 +2,7 @@
 @newgroup _lcdproc:999
 @newuser _lcdproc:999:999:daemon:LCDproc Daemon:/var/empty:/sbin/nologin
 %%SHARED%%
+%%x11%%
 bin/fortune.pl
 bin/iosock.pl
 @bin bin/lcdexec

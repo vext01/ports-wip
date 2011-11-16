@@ -25,15 +25,9 @@ MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lcdproc/}
 
 CONFIGURE_STYLE =	gnu
 CONFIGURE_ENV =		CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib
-
-.if ${FLAVOR:L:Mno_x11}
-PKG_ARGS +=		-Dx11=0
+# xosd driver is busted
+# http://lists.omnipotent.net/pipermail/lcdproc/2011-November/013871.html
 CONFIGURE_ARGS =	--enable-drivers=all,!xosd
-.else
-PKG_ARGS +=		-Dx11=1
-CONFIGURE_ARGS =	--enable-drivers=all
-LIB_DEPENDS +=		x11/xosd
-.endif
 
 EXAMPLE_DIR = ${PREFIX}/share/examples/lcdproc
 post-install:

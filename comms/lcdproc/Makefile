@@ -6,9 +6,6 @@ CATEGORIES =		comms devel
 HOMEPAGE =		http://www.lcdproc.org
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
-FLAVORS =		no_x11
-FLAVOR ?=
-
 # GPLv2
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes

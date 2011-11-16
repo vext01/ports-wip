@@ -1,1 +1,2 @@
+@comment $OpenBSD$
 lib/lcdproc/xosd.so

@@ -32,7 +32,4 @@ share/examples/lcdproc/lcdvc.conf
 @owner _lcdproc
 @group _lcdproc
 @sample /var/run/lcdproc/
-@mode
-@owner
-@group
 @comment XXX @rcscript ${RCDIR}/mpd

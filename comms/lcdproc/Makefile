@@ -4,8 +4,6 @@ COMMENT =		interface to various LCD displays
 
 DISTNAME =		lcdproc-0.5.5
 
-#SHARED_LIBS =		???
-
 CATEGORIES =		comms devel
 
 HOMEPAGE =		http://www.lcdproc.org
@@ -18,12 +16,16 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB +=		c kvm ncurses
+LIB_DEPENDS =		devel/libftdi \
+			devel/libusb1 \
+			devel/libhid
+WANTLIB +=		c ftdi kvm ncurses usb
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lcdproc/}
 
 CONFIGURE_STYLE =	gnu
 CONFIGURE_ARGS =	--enable-drivers=all
+CONFIGURE_ENV =		CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib
 
 EXAMPLE_DIR = ${PREFIX}/share/examples/lcdproc
 post-install:

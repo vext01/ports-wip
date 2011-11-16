@@ -23,6 +23,7 @@ WANTLIB +=		c kvm ncurses
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lcdproc/}
 
 CONFIGURE_STYLE =	gnu
+CONFIGURE_ARGS =	--enable-drivers=all
 
 EXAMPLE_DIR = ${PREFIX}/share/examples/lcdproc
 post-install:

@@ -8,9 +8,9 @@ CATEGORIES =		comms devel
 
 HOMEPAGE =		http://www.lcdproc.org
 
-#MAINTAINER =		???
+MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
-# XXX
+# GPLv2
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes

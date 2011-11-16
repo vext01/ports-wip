@@ -6,7 +6,7 @@ OpenBSD path and there is no point in logging to stderr if we use daemon() to da
 Fix a typo.
 
 --- LCDd.conf.orig	Wed Nov  9 19:50:01 2011
-+++ LCDd.conf	Tue Nov 15 17:16:25 2011
++++ LCDd.conf	Wed Nov 16 18:10:31 2011
 @@ -34,7 +34,7 @@
  #            the driver modules and will thus not be able to
  #            function properly.
@@ -16,6 +16,15 @@ Fix a typo.
  
  # Tells the server to load the given drivers. Multiple lines can be given.
  # The name of the driver is case sensitive and determines the section
+@@ -50,7 +50,7 @@ DriverPath=server/drivers/
+ #   mdm166a, ms6931, mtc_s16209x, MtxOrb, mx5000, NoritakeVFD, picolcd,
+ #   pyramid, sed1330, sed1520, serialPOS, serialVFD, shuttleVFD, sli,
+ #   stv5730, svga, t6963, text, tyan, ula200, xosd
+-Driver=curses
++Driver=<<<CHOOSE A DRIVER!>>>
+ 
+ # Tells the driver to bind to the given interface
+ Bind=127.0.0.1
 @@ -62,11 +62,11 @@ Port=13666
  #ReportLevel=3
  

@@ -2,7 +2,6 @@
 @newgroup _lcdproc:999
 @newuser _lcdproc:999:999:daemon:LCDproc Daemon:/var/empty:/sbin/nologin
 %%SHARED%%
-%%x11%%
 bin/fortune.pl
 bin/iosock.pl
 @bin bin/lcdexec
@@ -28,4 +27,6 @@ share/examples/lcdproc/lcdproc.conf
 @owner _lcdproc
 @group _lcdproc
 @sample /var/run/lcdproc/
-@comment XXX @rcscript ${RCDIR}/mpd
+@rcscript ${RCDIR}/LCDd
+@rcscript ${RCDIR}/lcdproc
+@rcscript ${RCDIR}/lcdexec

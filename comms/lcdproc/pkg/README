@@ -26,8 +26,14 @@ errors to syslog.
 Using the Curses Output
 =======================
 
-LCDproc provides a curses output driver which is useful for testing. When
-using this driver, you should *not* run LCDd using the bundled rc script.
+LCDproc provides a curses output driver which is useful for testing.
+When using this driver, you should *not* run LCDd using the bundled rc
+script.
 
 Instead, choose the "curses" driver in ${RCDIR}/LCDd.conf and run:
    LCDd -f
+
+Miscellaneous Notes
+===================
+
+ * Network statistics are not yet supported on OpenBSD.

@@ -21,7 +21,7 @@ MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lcdproc/}
 
 CONFIGURE_STYLE =	gnu
 CONFIGURE_ENV =		CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib
-# xosd driver is busted
+# xosd driver is busted, working on it upstream
 # http://lists.omnipotent.net/pipermail/lcdproc/2011-November/013871.html
 CONFIGURE_ARGS =	--enable-drivers=all,!xosd
 
@@ -31,7 +31,9 @@ post-install:
 	${SUBST_CMD} -c ${WRKBUILD}/LCDd.conf ${EXAMPLE_DIR}/LCDd.conf
 	${SUBST_CMD} -c ${WRKBUILD}/clients/lcdexec/lcdexec.conf ${EXAMPLE_DIR}/lcdexec.conf
 	${SUBST_CMD} -c ${WRKBUILD}/clients/lcdproc/lcdproc.conf ${EXAMPLE_DIR}/lcdproc.conf
-	${SUBST_CMD} -c ${WRKBUILD}/clients/lcdvc/lcdvc.conf ${EXAMPLE_DIR}/lcdvc.conf
 	chown -R ${SHAREOWN}:${SHAREGRP} ${EXAMPLE_DIR}
+# lcdvc is a linux specific thing - prevent it appearing in PLIST
+	rm ${PREFIX}/bin/lcdvc
+	rm ${PREFIX}/man/man1/lcdvc.1
 
 .include <bsd.port.mk>

@@ -9,13 +9,11 @@ bin/iosock.pl
 bin/lcdident.pl
 bin/lcdmetar.pl
 @bin bin/lcdproc
-@bin bin/lcdvc
 bin/tail.pl
 bin/x11amp.pl
 lib/lcdproc/
 @man man/man1/lcdexec.1
 @man man/man1/lcdproc.1
-@man man/man1/lcdvc.1
 @man man/man5/lcdproc-config.5
 @man man/man8/LCDd.8
 @bin sbin/LCDd
@@ -26,8 +24,6 @@ share/examples/lcdproc/lcdexec.conf
 @sample ${SYSCONFDIR}/lcdexec.conf
 share/examples/lcdproc/lcdproc.conf
 @sample ${SYSCONFDIR}/lcdproc.conf
-share/examples/lcdproc/lcdvc.conf
-@sample ${SYSCONFDIR}/lcdvc.conf
 @mode 770
 @owner _lcdproc
 @group _lcdproc

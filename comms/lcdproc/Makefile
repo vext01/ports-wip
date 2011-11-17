@@ -15,6 +15,8 @@ PERMIT_DISTFILES_FTP =	Yes
 LIB_DEPENDS =		devel/libftdi \
 			devel/libusb1 \
 			devel/libhid
+BUILD_DEPENDS =		textproc/xmlto \
+			devel/doxygen
 WANTLIB +=		c ftdi hid kvm ncurses pthread usb
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lcdproc/}
@@ -23,7 +25,8 @@ CONFIGURE_STYLE =	gnu
 CONFIGURE_ENV =		CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib
 # xosd driver is busted, working on it upstream
 # http://lists.omnipotent.net/pipermail/lcdproc/2011-November/013871.html
-CONFIGURE_ARGS =	--enable-drivers=all,!xosd
+CONFIGURE_ARGS =	--enable-drivers=all,!xosd \
+			--enable-doxygen
 
 EXAMPLE_DIR = ${PREFIX}/share/examples/lcdproc
 post-install:

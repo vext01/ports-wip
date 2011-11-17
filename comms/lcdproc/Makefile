@@ -20,7 +20,7 @@ WANTLIB +=		c ftdi hid kvm ncurses pthread usb
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lcdproc/}
 
 CONFIGURE_STYLE =	gnu
-CONFIGURE_ENV =		CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib
+CONFIGURE_ENV =		CPPFLAGS=-I${LOCALBASE}/include LDFLAGS="-L${LOCALBASE}/lib -pthread"
 # xosd driver is busted, working on it upstream
 # http://lists.omnipotent.net/pipermail/lcdproc/2011-November/013871.html
 CONFIGURE_ARGS =	--enable-drivers=all,!xosd

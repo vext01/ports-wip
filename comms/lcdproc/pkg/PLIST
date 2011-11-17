@@ -16,6 +16,7 @@ lib/lcdproc/
 @man man/man5/lcdproc-config.5
 @man man/man8/LCDd.8
 @bin sbin/LCDd
+share/doc/pkg-readmes/${FULLPKGNAME}
 share/examples/lcdproc/
 share/examples/lcdproc/LCDd.conf
 @sample ${SYSCONFDIR}/LCDd.conf
@@ -27,6 +28,10 @@ share/examples/lcdproc/lcdproc.conf
 @owner _lcdproc
 @group _lcdproc
 @sample /var/run/lcdproc/
+@owner
+@group
+@mode
 @rcscript ${RCDIR}/LCDd
 @rcscript ${RCDIR}/lcdproc
 @rcscript ${RCDIR}/lcdexec
+

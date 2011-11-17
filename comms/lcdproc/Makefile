@@ -15,9 +15,11 @@ PERMIT_DISTFILES_FTP =	Yes
 LIB_DEPENDS =		devel/libftdi \
 			devel/libusb1 \
 			devel/libhid
-BUILD_DEPENDS =		textproc/xmlto \
-			devel/doxygen
+# XXX If we ever get an xmlto update, we could build some user docs
+#BUILD_DEPENDS =		textproc/xmlto
 WANTLIB +=		c ftdi hid kvm ncurses pthread usb
+
+USE_GMAKE =		Yes
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lcdproc/}
 
@@ -30,6 +32,8 @@ CONFIGURE_ARGS =	--enable-drivers=all,!xosd \
 
 EXAMPLE_DIR = ${PREFIX}/share/examples/lcdproc
 post-install:
+# our xmlto port version is too old
+#	cd ${WRKBUILD} && ${MAKE_PROGRAM} install-html-userguide
 	${INSTALL_DATA_DIR} ${EXAMPLE_DIR}
 	${SUBST_CMD} -c ${WRKBUILD}/LCDd.conf ${EXAMPLE_DIR}/LCDd.conf
 	${SUBST_CMD} -c ${WRKBUILD}/clients/lcdexec/lcdexec.conf ${EXAMPLE_DIR}/lcdexec.conf

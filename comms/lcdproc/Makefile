@@ -27,8 +27,7 @@ CONFIGURE_STYLE =	gnu
 CONFIGURE_ENV =		CPPFLAGS=-I${LOCALBASE}/include LDFLAGS="-L${LOCALBASE}/lib -pthread"
 # xosd driver is busted, working on it upstream
 # http://lists.omnipotent.net/pipermail/lcdproc/2011-November/013871.html
-CONFIGURE_ARGS =	--enable-drivers=all,!xosd \
-			--enable-doxygen
+CONFIGURE_ARGS =	--enable-drivers=all,!xosd
 
 EXAMPLE_DIR = ${PREFIX}/share/examples/lcdproc
 post-install:

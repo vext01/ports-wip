@@ -34,4 +34,3 @@ share/examples/lcdproc/lcdproc.conf
 @rcscript ${RCDIR}/LCDd
 @rcscript ${RCDIR}/lcdproc
 @rcscript ${RCDIR}/lcdexec
-

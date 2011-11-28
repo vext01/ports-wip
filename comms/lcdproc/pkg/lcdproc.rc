@@ -3,6 +3,7 @@
 # $OpenBSD$
 
 daemon="${TRUEPREFIX}/bin/lcdproc"
+daemon_user="_lcdproc"
 
 . /etc/rc.d/rc.subr
 

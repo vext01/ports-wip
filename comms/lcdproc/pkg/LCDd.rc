@@ -4,6 +4,11 @@
 
 daemon="${TRUEPREFIX}/sbin/LCDd"
 
+# actually, LCDd is capable of dropping privs if run as root;
+# it is only the lcd clients which don't drop privs.
+# Let's be consistent and run them all as _lcdproc to start with.
+daemon_user="_lcdproc"
+
 . /etc/rc.d/rc.subr
 
 rc_cmd $1

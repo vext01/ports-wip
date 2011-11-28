@@ -37,5 +37,3 @@ Miscellaneous Notes
 ===================
 
  * Network statistics are not yet supported on OpenBSD.
- * LCDproc will only drop privileges to the _lcdproc user if run as a
-   daemon (this is the default behaviour).

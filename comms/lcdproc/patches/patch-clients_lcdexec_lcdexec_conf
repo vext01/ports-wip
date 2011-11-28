@@ -4,7 +4,7 @@ OpenBSD path and there is no point in logging to stderr if we use daemon() to da
 (stderr will get closed).
 
 --- clients/lcdexec/lcdexec.conf.orig	Mon Dec 27 13:32:55 2010
-+++ clients/lcdexec/lcdexec.conf	Tue Nov 15 17:06:19 2011
++++ clients/lcdexec/lcdexec.conf	Mon Nov 28 20:42:00 2011
 @@ -12,13 +12,13 @@ Port=13666
  ReportLevel=2
  
@@ -17,7 +17,7 @@ OpenBSD path and there is no point in logging to stderr if we use daemon() to da
  
  # PidFile location when running as daemon [default: /var/run/lcdexec.pid]
 -#PidFile=/var/run/lcdexec.pid
-+PidFile=/var/run/lcdproc/lcdexec.pid
++PidFile=/var/lcdproc/lcdexec.pid
  
  # shell to use for executing programsi
  # [default: $SHELL or /bin/sh; legal: any shell that understands: -c COMMAND]

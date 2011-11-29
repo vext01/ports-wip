@@ -35,6 +35,7 @@ MODFORTRAN_COMPILER = gfortran
 BUILD_DEPENDS=	${MODFORTRAN_BUILD_DEPENDS} \
 		devel/desktop-file-utils \
 		devel/flex
+# XXX is flex needed?
 RUN_DEPENDS=	devel/gmake \
 		devel/desktop-file-utils
 LIB_DEPENDS=	${MODFORTRAN_LIB_DEPENDS} \
@@ -56,6 +57,8 @@ CONFIGURE_ARGS =	${CONFIGURE_SHARED} \
 			--with-fftw \
 			--without-mpi \
 			--without-hdf5
+# Use internal lapack and blas - there are difficulties with using in-ports versions
+CONFIGURE_ARGS +=	--without-blas --without-lapack
 # Our texinfo is too old to generate the docs. @leq is used which appeared
 # in version 4.12. We can use the precompiled docs.
 CONFIGURE_ARGS +=	--disable-docs
@@ -66,6 +69,7 @@ CONFIGURE_ENV=	CPPFLAGS="-I${LOCALBASE}/include -I${X11BASE}/include" \
 		F77=gfortran \
 		CFLAGS=-O0 \
 		CXXFLAGS=-O0
+# XXX is flex needed?
 MAKE_ENV=	LIBcruft_VERSION=${LIBcruft_VERSION} \
 		LIBoctave_VERSION=${LIBoctave_VERSION} \
 		LIBoctinterp_VERSION=${LIBoctinterp_VERSION}

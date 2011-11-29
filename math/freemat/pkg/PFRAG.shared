@@ -1,0 +1,2 @@
+@comment $OpenBSD$
+share/FreeMat-${V}/toolbox/test/add.so

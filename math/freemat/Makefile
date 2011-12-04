@@ -38,6 +38,8 @@ NO_REGRESS=	Yes
 SUBST_VARS=	V
 
 #CONFIGURE_ARGS=	-DUSE_LLVM:BOOL=FALSE
+#CONFIGURE_ENV += "CMAKE_INCLUDE_PATH=${X11BASE}/include CMAKE_LIBRARY_PATH=${X11BASE}/lib"
+MAKE_FLAGS +=	CPPFLAGS="-I${X11BASE}/include" LDFLAGS="-L${X11BASE}/lib"
 
 post-extract:
 	@cd ${WRKSRC} && find . -name \*.moc.cpp | xargs rm

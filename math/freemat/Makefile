@@ -38,6 +38,11 @@ NO_REGRESS=	Yes
 
 SUBST_VARS=	V
 
+# Cmake does not find our umfpack and amd includes, and thus tries to build an internal copy.
+# We tell it where to look and external libs are used.
+CONFIGURE_ARGS += -DUMFPACK_SYS_INCLUDE_DIR:PATH=${LOCALBASE}/include/umfpack
+CONFIGURE_ARGS += -DAMD_SYS_INCLUDE_DIR:PATH=${LOCALBASE}/include/amd
+
 post-extract:
 	@cd ${WRKSRC} && find . -name \*.moc.cpp | xargs rm
 

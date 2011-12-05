@@ -1,6 +1,15 @@
 $OpenBSD: patch-CMakeLists_txt,v 1.1 2010/10/24 19:28:50 steven Exp $
 --- CMakeLists.txt.orig	Sun Nov 27 00:27:11 2011
-+++ CMakeLists.txt	Sun Dec  4 13:46:08 2011
++++ CMakeLists.txt	Mon Dec  5 00:45:52 2011
+@@ -170,7 +170,7 @@ endif(MINGW)
+ # UMFPACK Package
+ ######################################################################
+ 
+-FIND_LIBRARY(UMFPACK_SYS_LIBRARY NAMES umfpack DOC "Location of the UMFPACK library" PATHS ${LOCAL_PATH})
++FIND_LIBRARY(UMFPACK_SYS_LIBRARY NAMES umfpack DOC "Location of the UMFPACK library" PATHS ${LOCAL_PATH} ${LOCAL_PATH}/include/umfpack)
+ FIND_PATH(UMFPACK_SYS_INCLUDE_DIR NAMES umfpack.h DOC "Location of umfpack.h" PATHS ${LOCAL_PATH} /usr/include/ufsparse /usr/include/suitesparse)
+ 
+ IF (UMFPACK_SYS_LIBRARY AND UMFPACK_SYS_INCLUDE_DIR)
 @@ -396,7 +396,7 @@ IF( USE_LLVM )
      separate_arguments(LLVM_LIBS)
  # These shouldn't be necessary, but for now... I have added them

@@ -22,6 +22,6 @@ PERMIT_DISTFILES_FTP ?=		Yes
 MASTER_SITES ?=		${HOMEPAGE}/get/
 
 USE_GMAKE ?=		Yes
-CONFIGURE_STYLE ?=	simple
+CONFIGURE_STYLE ?=	simple # acr
 
 NO_REGRESS ?=		Yes

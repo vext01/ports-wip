@@ -17,7 +17,7 @@ WANTLIB =		c crypto gmp m pthread ssl
 
 LIB_DEPENDS =		devel/gmp
 
-# remember, this is acr, no GNU autotools.
+# remember, this is acr, not GNU autotools.
 CONFIGURE_ARGS +=	--with-libversion=${LIBV} \
 			--mandir=${PREFIX}/man \
 			--without-ewf \

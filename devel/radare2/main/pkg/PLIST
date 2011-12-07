@@ -6,10 +6,10 @@ bin/r2
 @bin bin/radiff2
 @bin bin/rafind2
 @bin bin/ragg2
+bin/ragg2-cc
 @bin bin/rahash2
 @bin bin/ranal2
 @bin bin/rarun2
-@bin bin/rasc2
 @bin bin/rasm2
 @bin bin/rax2
 include/libr/
@@ -52,6 +52,22 @@ include/libr/r_types.h
 include/libr/r_types_base.h
 include/libr/r_userconf.h
 include/libr/r_util.h
+include/libr/sflib/
+include/libr/sflib/common/
+include/libr/sflib/common/sfsocketcall.h
+include/libr/sflib/common/sftypes.h
+include/libr/sflib/darwin-x86-32/
+include/libr/sflib/darwin-x86-32/sflib.h
+include/libr/sflib/darwin-x86-32/sfsyscall.h
+include/libr/sflib/darwin-x86-32/sfsysnr.h
+include/libr/sflib/linux-x86-32/
+include/libr/sflib/linux-x86-32/sflib.h
+include/libr/sflib/linux-x86-32/sfsyscall.h
+include/libr/sflib/linux-x86-32/sfsysnr.h
+include/libr/sflib/linux-x86-64/
+include/libr/sflib/linux-x86-64/sflib.h
+include/libr/sflib/linux-x86-64/sfsyscall.h
+include/libr/sflib/linux-x86-64/sfsysnr.h
 lib/libsdb.a
 lib/pkgconfig/
 lib/pkgconfig/r_anal.pc
@@ -113,6 +129,10 @@ lib/radare2/${V}/magic/sniffer
 lib/radare2/${V}/magic/sql
 lib/radare2/${V}/magic/sun
 lib/radare2/${V}/magic/uuencode
+lib/radare2/${V}/opcodes/
+lib/radare2/${V}/opcodes/arm.sdb
+lib/radare2/${V}/opcodes/ppc.sdb
+lib/radare2/${V}/opcodes/x86.sdb
 lib/radare2/${V}/radare.lua
 lib/radare2/${V}/radare.py
 lib/radare2/${V}/radare.rb
@@ -135,11 +155,11 @@ lib/radare2/${V}/syscall/windows-x86-64.sdb
 @man man/man1/radare2.1
 @man man/man1/radiff2.1
 @man man/man1/rafind2.1
+@man man/man1/ragg2-cc.1
 @man man/man1/ragg2.1
 @man man/man1/rahash2.1
 @man man/man1/ranal2.1
 @man man/man1/rarun2.1
-@man man/man1/rasc2.1
 @man man/man1/rasm2.1
 @man man/man1/rax2.1
 @man man/man1/rsc2.1

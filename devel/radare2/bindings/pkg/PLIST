@@ -18,10 +18,13 @@ share/vala/vapi/r_cons.vapi
 share/vala/vapi/r_core.deps
 share/vala/vapi/r_core.vapi
 share/vala/vapi/r_crypto.vapi
+share/vala/vapi/r_db.deps
 share/vala/vapi/r_db.vapi
 share/vala/vapi/r_debug.deps
 share/vala/vapi/r_debug.vapi
 share/vala/vapi/r_diff.vapi
+share/vala/vapi/r_egg.deps
+share/vala/vapi/r_egg.vapi
 share/vala/vapi/r_flags.deps
 share/vala/vapi/r_flags.vapi
 share/vala/vapi/r_fs.deps

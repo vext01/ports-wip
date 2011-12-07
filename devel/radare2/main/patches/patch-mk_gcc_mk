@@ -1,0 +1,16 @@
+$OpenBSD$
+
+acr bugs. reported.
+
+--- mk/gcc.mk.orig	Wed Dec  7 15:33:29 2011
++++ mk/gcc.mk	Wed Dec  7 15:34:58 2011
+@@ -29,3 +29,9 @@ LDFLAGS_SONAME=-Wl,-soname=
+ endif
+ 
+ CC_LIB=${CC} ${LDFLAGS_LIB} -o ${LIBSO}
++
++# OpenBSD
++# Build does not honour CPPFLAGS or allow us to add extra CFLAGS/LDFLAGS
++# hack around it
++CFLAGS += -I${LOCALBASE}/include
++LDFLAGS += -L${LOCALBASE}/lib

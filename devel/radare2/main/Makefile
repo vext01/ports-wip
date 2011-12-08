@@ -13,15 +13,12 @@ LIBV =			2.0	# 0.8.8
 SHARED_LIBS+=		${_lib} ${LIBV}
 .endfor
 
-WANTLIB =		c crypto gmp m pthread ssl
+WANTLIB =		c crypto m pthread ssl
 
-LIB_DEPENDS =		devel/gmp
-
-# remember, this is acr, no GNU autotools.
+# Remember, this is acr, no GNU autotools.
 CONFIGURE_ARGS +=	--with-libversion=${LIBV} \
 			--mandir=${PREFIX}/man \
 			--without-ewf \
-			CPPFLAGS=-I${LOCALBASE}/include \
-			LDFLAGS=-L${LOCALBASE}/lib
+			--disable-gmp # not implemented upstream anyway.
 
 .include <bsd.port.mk>

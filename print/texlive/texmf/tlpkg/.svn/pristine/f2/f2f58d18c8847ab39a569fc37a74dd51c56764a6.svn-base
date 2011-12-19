@@ -1,4 +1,0 @@
-binpattern f bin/${ARCH}/dosepsbin
-docpattern d texmf-dist/doc/support/dosepsbin
-docpattern f texmf/doc/man/man1/dosepsbin.*
-runpattern d texmf-dist/scripts/dosepsbin

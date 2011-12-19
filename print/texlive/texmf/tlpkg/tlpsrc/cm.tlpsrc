@@ -1,3 +1,0 @@
-execute addMixedMap cmtext-bsr-interpolated.map
-runpattern +!d texmf-dist/fonts/afm/public/amsfonts/cm
-runpattern +!d texmf-dist/fonts/type1/public/amsfonts/cm

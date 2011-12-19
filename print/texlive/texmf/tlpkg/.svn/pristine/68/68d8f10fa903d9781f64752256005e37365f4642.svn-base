@@ -1,3 +1,0 @@
-category ConTeXt
-runpattern +f texmf-dist/tex/context/interface/third/t-resume.xml
-depend context

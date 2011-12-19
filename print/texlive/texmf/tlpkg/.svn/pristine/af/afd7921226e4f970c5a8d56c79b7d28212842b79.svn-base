@@ -1,4 +1,0 @@
-category Collection
-shortdesc Serbian documentation
-depend texlive-sr
-depend collection-documentation-base

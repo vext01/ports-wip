@@ -1,5 +1,0 @@
-category TLCore
-runpattern f texmf/doc/man/man1/dvi2tty.*
-binpattern f bin/${ARCH}/disdvi
-binpattern f bin/${ARCH}/dvi2tty
-docpattern f texmf/doc/man/man1/disdvi.*

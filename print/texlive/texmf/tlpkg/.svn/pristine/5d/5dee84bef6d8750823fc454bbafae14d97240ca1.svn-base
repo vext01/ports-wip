@@ -1,8 +1,0 @@
-category TLCore
-shortdesc Cyrillic bibtex and makeindex.
-
-binpattern f bin/${ARCH}/rubibtex
-binpattern f bin/${ARCH}/rumakeindex
-#
-docpattern f texmf/doc/man/man1/rubibtex.*
-docpattern f texmf/doc/man/man1/rumakeindex.*

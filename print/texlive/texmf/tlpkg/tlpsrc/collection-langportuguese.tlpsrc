@@ -1,6 +1,0 @@
-category Collection
-shortdesc Portuguese
-longdesc Support for typesetting Portuguese.
-depend ordinalpt
-depend hyphen-portuguese
-depend collection-basic

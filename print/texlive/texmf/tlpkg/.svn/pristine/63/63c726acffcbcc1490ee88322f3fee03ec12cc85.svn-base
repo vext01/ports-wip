@@ -1,4 +1,0 @@
-category Collection
-shortdesc Turkish documentation
-depend lshort-turkish
-depend collection-documentation-base

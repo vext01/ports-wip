@@ -1,4 +1,0 @@
-execute addMixedMap mongolian.map
-# Needs just a couple characters from Greek, but semi-requested ...
-# See tex-live mail in April 2009.
-depend cbfonts

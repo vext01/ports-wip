@@ -1,3 +1,0 @@
-binpattern f bin/${ARCH}/mkt1font
-binpattern f bin/${ARCH}/vpl2ovp
-binpattern f bin/${ARCH}/vpl2vpl

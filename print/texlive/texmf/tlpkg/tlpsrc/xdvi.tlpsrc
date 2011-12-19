@@ -1,8 +1,0 @@
-category TLCore
-binpattern f bin/${ARCH}/xdvi
-binpattern f bin/${ARCH}/xdvi-*
-#
-runpattern d texmf/xdvi
-runpattern d texmf/xdvi/pixmap
-#
-docpattern f texmf/doc/man/man1/xdvi.*

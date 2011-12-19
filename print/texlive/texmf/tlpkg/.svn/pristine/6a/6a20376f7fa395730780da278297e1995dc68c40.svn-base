@@ -1,5 +1,0 @@
-docpattern f texmf/doc/info/epspdf.info
-docpattern d texmf-dist/doc/support/epspdf
-runpattern d texmf-dist/scripts/epspdf
-binpattern f bin/${ARCH}/epspdf
-binpattern f bin/${ARCH}/epspdftk

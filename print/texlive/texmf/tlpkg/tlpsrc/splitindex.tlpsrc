@@ -1,2 +1,0 @@
-binpattern f bin/${ARCH}/splitindex
-docpattern +f texmf/doc/man/man1/splitindex.*

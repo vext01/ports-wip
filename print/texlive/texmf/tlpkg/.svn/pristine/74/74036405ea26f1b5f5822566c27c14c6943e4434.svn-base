@@ -1,6 +1,0 @@
-runpattern d texmf-dist/fonts/source/public/misc
-runpattern d texmf-dist/fonts/tfm/public/misc
-runpattern d texmf-dist/omega/ocp/misc
-runpattern d texmf-dist/omega/otp/misc
-runpattern d texmf-dist/tex/generic/misc
-runpattern d texmf-dist/tex/plain/misc

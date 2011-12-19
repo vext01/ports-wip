@@ -1,3 +1,0 @@
-runpattern +!d texmf-dist/tex/context/third/fixme
-docpattern +!d texmf-dist/doc/context/third/fixme
-srcpattern +!d texmf-dist/source/context/third/fixme

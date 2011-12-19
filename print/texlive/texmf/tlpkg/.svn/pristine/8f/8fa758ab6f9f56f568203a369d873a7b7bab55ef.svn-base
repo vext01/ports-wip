@@ -1,5 +1,0 @@
-docpattern +f texmf/doc/man/man1/ctangle.*
-docpattern +f texmf/doc/man/man1/cweave.*
-docpattern +f texmf/doc/man/man1/cweb.*
-binpattern f bin/${ARCH}/ctangle
-binpattern f bin/${ARCH}/cweave

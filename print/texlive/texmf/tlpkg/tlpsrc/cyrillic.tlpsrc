@@ -1,6 +1,0 @@
-runpattern +!d texmf-dist/fonts/afm/public/amsfonts/cyrillic
-runpattern +!d texmf-dist/fonts/source/public/amsfonts/cyrillic
-runpattern +!d texmf-dist/fonts/tfm/public/amsfonts/cyrillic
-runpattern +!d texmf-dist/fonts/type1/public/amsfonts/cyrillic
-#
-depend cyrillic-bin

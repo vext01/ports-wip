@@ -1,4 +1,0 @@
-category Collection
-shortdesc Thai documentation
-depend lshort-thai
-depend collection-documentation-base

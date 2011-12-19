@@ -1,4 +1,0 @@
-category Collection
-shortdesc Japanese documentation
-depend lshort-japanese
-depend collection-documentation-base

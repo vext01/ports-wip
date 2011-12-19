@@ -1,3 +1,0 @@
-category TLCore
-docpattern f texmf/doc/man/man1/dvipos.*
-binpattern f bin/${ARCH}/dvipos

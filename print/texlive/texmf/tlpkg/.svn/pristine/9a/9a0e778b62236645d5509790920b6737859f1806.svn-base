@@ -1,3 +1,0 @@
-docpattern +!d texmf-dist/doc/latex/presentations/images/beamer
-depend pgf
-depend xcolor

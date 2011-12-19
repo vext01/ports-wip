@@ -1,5 +1,0 @@
-docpattern +!d texmf-dist/doc/fonts/punknova/documentation
-docpattern +!d texmf-dist/doc/fonts/amiri/documentation
-docpattern +!d texmf-dist/doc/latex/cookybooky/documentation
-docpattern +!d texmf-dist/doc/latex/interactiveworkbook/documentation
-

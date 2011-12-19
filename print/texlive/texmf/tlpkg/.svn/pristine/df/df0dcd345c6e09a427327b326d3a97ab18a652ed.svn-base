@@ -1,3 +1,0 @@
-runpattern +d texmf-dist/tex/context/third/pgfplots
-srcpattern +d texmf-dist/source/context/third/pgfplots
-docpattern +d texmf-dist/doc/context/third/pgfplots

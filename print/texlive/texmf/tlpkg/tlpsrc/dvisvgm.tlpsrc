@@ -1,3 +1,0 @@
-category TLCore
-binpattern f/!mips-irix bin/${ARCH}/dvisvgm
-docpattern f texmf/doc/man/man1/dvisvgm.*

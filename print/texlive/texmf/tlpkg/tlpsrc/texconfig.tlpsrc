@@ -1,7 +1,0 @@
-category TLCore
-runpattern f texmf/texconfig/*
-runpattern f texmf/texconfig/g/*
-runpattern f texmf/texconfig/v/*
-runpattern f texmf/texconfig/x/*
-docpattern f texmf/doc/man/man1/texconfig*
-binpattern f bin/${ARCH}/texconfig

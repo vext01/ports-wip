@@ -1,4 +1,0 @@
-category Collection
-shortdesc Arabic documentation
-depend lshort-persian
-depend collection-documentation-base

@@ -1,6 +1,0 @@
-category TLCore
-binpattern f bin/${ARCH}/afm2pl
-docpattern f texmf/doc/man/man1/afm2pl.*
-runpattern d texmf/fonts/enc/dvips/afm2pl
-runpattern d texmf/fonts/lig/afm2pl
-runpattern d texmf/tex/fontinst/afm2pl

@@ -1,5 +1,0 @@
-category TLCore
-docpattern f texmf/doc/man/man1/dvitype.*
-docpattern f texmf/doc/man/man1/pooltype.*
-binpattern f bin/${ARCH}/dvitype
-binpattern f bin/${ARCH}/pooltype

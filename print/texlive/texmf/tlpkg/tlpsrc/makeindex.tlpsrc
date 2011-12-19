@@ -1,5 +1,0 @@
-binpattern f bin/${ARCH}/makeindex
-binpattern f bin/${ARCH}/mkindex
-runpattern d texmf-dist/makeindex/base
-docpattern +f texmf/doc/man/man1/makeindex.*
-docpattern +f texmf/doc/man/man1/mkindex.*

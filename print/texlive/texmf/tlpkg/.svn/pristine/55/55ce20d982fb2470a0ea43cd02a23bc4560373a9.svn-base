@@ -1,4 +1,0 @@
-binpattern f bin/${ARCH}/mkjobtexmf
-docpattern d texmf-dist/doc/generic/mkjobtexmf
-docpattern f texmf/doc/man/man1/mkjobtexmf.*
-runpattern d texmf-dist/scripts/mkjobtexmf

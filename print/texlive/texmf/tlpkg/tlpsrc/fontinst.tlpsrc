@@ -1,3 +1,0 @@
-binpattern +f bin/${ARCH}/fontinst
-srcpattern +!f texmf-dist/source/latex/eulervm/fontinst/*
-srcpattern +!f texmf-dist/source/latex/pslatex/fontinst/pslatex.tex

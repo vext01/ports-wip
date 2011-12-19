@@ -1,5 +1,0 @@
-category TLCore
-runpattern f texmf/doc/man/man1/dvidvi.*
-binpattern f bin/${ARCH}/dvidvi
-binpattern f/win32 bin/win32/a5bookle
-binpattern f/win32 bin/win32/doubside

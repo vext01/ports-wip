@@ -1,7 +1,0 @@
-category Collection
-shortdesc Mongolian
-longdesc Support for typesetting Mongolian.
-depend collection-basic
-depend hyphen-mongolian
-depend mongolian-babel
-depend montex

@@ -1,2 +1,0 @@
-binpattern f bin/${ARCH}/texdiff
-docpattern +f texmf/doc/man/man1/texdiff.*

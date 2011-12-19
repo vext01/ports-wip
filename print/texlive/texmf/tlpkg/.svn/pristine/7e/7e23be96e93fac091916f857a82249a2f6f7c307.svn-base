@@ -1,9 +1,0 @@
-binpattern a venturis venturis2 venturisold venturissans venturissans2
-docpattern a venturis venturis2 venturisold venturissans venturissans2
-runpattern a venturis venturis2 venturisold venturissans venturissans2
-srcpattern a venturis venturis2 venturisold venturissans venturissans2
-execute addMap yv1.map
-execute addMap yv2.map
-execute addMap yv3.map
-execute addMap yvo.map
-execute addMap yvt.map

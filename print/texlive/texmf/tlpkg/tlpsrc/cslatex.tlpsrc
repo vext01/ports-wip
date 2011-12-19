@@ -1,9 +1,0 @@
-depend latex
-#
-execute AddFormat name=cslatex engine=pdftex \
-                  options="-etex -translate-file=cp227.tcx cslatex.ini"
-execute AddFormat name=pdfcslatex engine=pdftex \
-                  options="-etex -translate-file=cp227.tcx cslatex.ini"
-#
-binpattern f bin/${ARCH}/cslatex
-binpattern f bin/${ARCH}/pdfcslatex

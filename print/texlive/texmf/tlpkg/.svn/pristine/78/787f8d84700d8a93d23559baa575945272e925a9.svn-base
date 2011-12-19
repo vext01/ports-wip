@@ -1,3 +1,0 @@
-docpattern +f texmf/doc/man/man1/arlatex.*
-binpattern f bin/${ARCH}/arlatex
-binpattern f bin/${ARCH}/bundledoc

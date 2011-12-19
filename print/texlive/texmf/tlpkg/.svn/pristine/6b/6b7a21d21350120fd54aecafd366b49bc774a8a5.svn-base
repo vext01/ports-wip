@@ -1,3 +1,0 @@
-binpattern f bin/${ARCH}/musixflx
-binpattern f bin/${ARCH}/musixtex
-docpattern +f texmf/doc/man/man1/musix*

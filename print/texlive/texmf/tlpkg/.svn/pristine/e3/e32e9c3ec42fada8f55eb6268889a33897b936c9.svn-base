@@ -1,2 +1,0 @@
-docpattern +f texmf/doc/man/man1/findhyph.*
-binpattern f bin/${ARCH}/findhyph

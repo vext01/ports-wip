@@ -1,1 +1,0 @@
-@start gswxlua.exe -l psv.wx.lua -p psv_view.ps -sINPUT="%1" %2

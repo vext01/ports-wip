@@ -1,2 +1,0 @@
-docpattern +f texmf/doc/man/man1/pkfix-helper.*
-binpattern f bin/${ARCH}/pkfix-helper

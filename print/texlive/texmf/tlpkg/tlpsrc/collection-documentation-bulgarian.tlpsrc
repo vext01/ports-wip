@@ -1,5 +1,0 @@
-category Collection
-shortdesc Bulgarian documentation
-depend lshort-bulgarian
-depend pst-eucl-translation-bg
-depend collection-documentation-base

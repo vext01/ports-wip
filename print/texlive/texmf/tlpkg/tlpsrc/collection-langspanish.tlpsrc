@@ -1,9 +1,0 @@
-category Collection
-shortdesc Spanish
-longdesc Support for typesetting Spanish.
-depend hyphen-spanish
-depend hyphen-catalan
-depend hyphen-galician
-depend spanish
-depend spanish-mx
-depend collection-basic

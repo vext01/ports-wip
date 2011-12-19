@@ -1,8 +1,0 @@
-depend kpathsea
-srcpattern f ignore
-runpattern d texmf-dist/bibtex/bib/base
-runpattern d texmf-dist/bibtex/bst/base
-docpattern d texmf-dist/doc/bibtex/base
-docpattern d texmf-dist/tex/generic/bibtex
-docpattern f texmf/doc/man/man1/bibtex.*
-binpattern f bin/${ARCH}/bibtex

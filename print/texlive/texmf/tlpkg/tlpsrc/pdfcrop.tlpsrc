@@ -1,2 +1,0 @@
-runpattern d texmf-dist/scripts/pdfcrop
-binpattern f bin/${ARCH}/*pdfcrop

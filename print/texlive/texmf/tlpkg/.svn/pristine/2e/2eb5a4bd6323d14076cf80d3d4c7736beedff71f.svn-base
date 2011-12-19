@@ -1,4 +1,0 @@
-runpattern +!d texmf-dist/fonts/afm/public/amsfonts/cmextra
-runpattern +!d texmf-dist/fonts/source/public/amsfonts/cmextra
-runpattern +!d texmf-dist/fonts/tfm/public/amsfonts/cmextra
-runpattern +!d texmf-dist/fonts/type1/public/amsfonts/cmextra

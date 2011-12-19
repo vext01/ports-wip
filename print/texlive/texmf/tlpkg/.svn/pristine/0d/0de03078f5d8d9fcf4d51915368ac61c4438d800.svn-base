@@ -1,6 +1,0 @@
-category Collection
-shortdesc Finnish
-longdesc Support for typesetting Finnish.
-depend finbib
-depend hyphen-finnish
-depend collection-basic

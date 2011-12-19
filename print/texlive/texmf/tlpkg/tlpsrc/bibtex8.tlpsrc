@@ -1,6 +1,0 @@
-category TLCore
-runpattern d texmf-dist/bibtex/csf/base
-# this should be its own package, but didn't seem worth it. --karl, 9sep08
-runpattern d texmf-dist/bibtex/csf/polish-csf
-docpattern f texmf/doc/bibtex8/*
-binpattern f bin/${ARCH}/bibtex8

@@ -1,8 +1,0 @@
-category Scheme
-shortdesc basic scheme (plain and LaTeX)
-longdesc This is the basic TeX Live scheme: it is a small set of files
-longdesc sufficient to typeset plain TeX or LaTeX documents in PostScript
-longdesc or PDF, using the Computer Modern fonts.  This scheme
-longdesc corresponds to collection-basic and collection-latex.
-depend collection-basic
-depend collection-latex

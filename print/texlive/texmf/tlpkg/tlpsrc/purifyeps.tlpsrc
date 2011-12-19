@@ -1,2 +1,0 @@
-docpattern +f texmf/doc/man/man1/purifyeps.*
-binpattern f bin/${ARCH}/purifyeps

@@ -1,6 +1,0 @@
-category Collection
-shortdesc Polish documentation
-depend lshort-polish
-depend tex-virtual-academy-pl
-depend texlive-pl
-depend collection-documentation-base

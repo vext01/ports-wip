@@ -1,4 +1,0 @@
-category Collection
-shortdesc Slovenian documentation
-depend lshort-slovenian
-depend collection-documentation-base

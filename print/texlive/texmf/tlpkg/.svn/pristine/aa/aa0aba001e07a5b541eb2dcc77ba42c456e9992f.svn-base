@@ -1,2 +1,0 @@
-docpattern +f texmf/doc/man/man1/latexmk.*
-binpattern f bin/${ARCH}/latexmk

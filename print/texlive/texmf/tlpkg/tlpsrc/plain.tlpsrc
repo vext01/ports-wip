@@ -1,5 +1,0 @@
-srcpattern f ignore
-runpattern d texmf-dist/makeindex/plain
-runpattern d texmf-dist/tex/plain/base
-runpattern d texmf-dist/tex/plain/config
-docpattern f ignore

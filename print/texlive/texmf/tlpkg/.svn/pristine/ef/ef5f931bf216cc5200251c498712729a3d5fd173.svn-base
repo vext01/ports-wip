@@ -1,2 +1,0 @@
-# don't get pslatex.man, that's part of pstools.
-docpattern f ignore

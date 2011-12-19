@@ -1,4 +1,0 @@
-category TLCore
-docpattern f texmf/doc/tpic2pdftex/*
-docpattern f texmf/doc/man/man1/tpic2pdftex.*
-binpattern f bin/${ARCH}/tpic2pdftex

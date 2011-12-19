@@ -1,9 +1,0 @@
-category TLCore
-docpattern f texmf/doc/man/man1/pltotf.*
-docpattern f texmf/doc/man/man1/tftopl.*
-docpattern f texmf/doc/man/man1/vftovp.*
-docpattern f texmf/doc/man/man1/vptovf.*
-binpattern f bin/${ARCH}/pltotf
-binpattern f bin/${ARCH}/tftopl
-binpattern f bin/${ARCH}/vftovp
-binpattern f bin/${ARCH}/vptovf

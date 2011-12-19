@@ -1,9 +1,0 @@
-category TLCore
-runpattern f texmf/doc/man/man1/mag.*
-runpattern f texmf/doc/man/man1/pfb2pfa.*
-runpattern f texmf/doc/man/man1/pk2bm.*
-runpattern f texmf/doc/man/man1/ps2pk.*
-binpattern f bin/${ARCH}/mag
-binpattern f bin/${ARCH}/pfb2pfa
-binpattern f bin/${ARCH}/pk2bm
-binpattern f bin/${ARCH}/ps2pk

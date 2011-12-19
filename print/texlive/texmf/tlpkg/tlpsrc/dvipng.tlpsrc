@@ -1,7 +1,0 @@
-category TLCore
-docpattern f texmf/doc/dvipng/*
-docpattern f texmf/doc/info/dvipng.info
-docpattern f texmf/doc/man/man1/dvipng.*
-docpattern f texmf/doc/man/man1/dvigif.*
-binpattern f bin/${ARCH}/dvigif
-binpattern f bin/${ARCH}/dvipng

@@ -1,0 +1,160 @@
+#!/usr/bin/env perl
+# $Id: tlpdb2container 5188 2007-10-14 20:32:44Z karl $
+# Copyright 2007 Norbert Preining
+# This file is licensed under the GNU General Public License version 2
+# or any later version.
+# 
+# Generate a zip file for the packages specified on the cmdline, or
+# for -all
+
+BEGIN {
+  $^W = 1;
+  ($mydir = $0) =~ s,/[^/]*$,,;
+  unshift (@INC, "$mydir/..");
+}
+
+use strict;
+
+use TeXLive::TLConfig;
+use TeXLive::TLPOBJ;
+use TeXLive::TLPDB;
+use TeXLive::TLUtils;
+use Getopt::Long;
+use Pod::Usage;
+use File::Path;
+
+my $opt_all = 0;
+our $mydir;
+my $opt_outputdir = "./archive";
+my $opt_relative = 0;
+my $help = 0;
+
+TeXLive::TLUtils::process_logging_options();
+
+GetOptions("o|outputdir=s"	=> \$opt_outputdir, 
+           "a|all!"         => \$opt_all, 
+           "r|relative!"    => \$opt_relative,
+           "h|help|?"       => \$help) or pod2usage(1);
+
+pod2usage(-exitstatus => 0, -verbose => 2) if $help;
+
+my $srcsplit = 0;
+my $docsplit = 0;
+my $type = "lzma";
+
+exit (&main ());
+
+sub main
+{
+  # get the db.
+  chomp (my $Master = `cd $mydir/../.. && pwd`);  # xx TLPDB should default
+  my $tlpdb = TeXLive::TLPDB->new ("root" => "$Master");
+  die("Cannot find tlpdb in $Master!\n") unless defined($tlpdb);
+  my @packs;
+  if ($opt_all) {
+    @packs = $tlpdb->list_packages;
+  } else {
+    @packs = @ARGV;
+  }
+  # get configuration of package splitting
+  $srcsplit = $tlpdb->config_src_container;
+  $docsplit = $tlpdb->config_doc_container;
+  my $format = $tlpdb->config_container_format;
+  if (($format eq "lzma") || ($format eq "zip")) {
+    $type = $format;
+  } else {
+    info("unknown container format specified in 00texlive.config: $format\nIgnoring and continuing with $type!\n");
+  }
+  # get list of packages.
+  my $last = "";
+  my $src_count = 0;
+  for my $pkg (sort @packs) {
+    next if ($pkg eq "00texlive.config");
+    next if ($pkg eq "00texlive.installer");
+    if ($opt_all) {
+      my $first = lc (substr ($pkg, 0, 1));
+      if ($first ne $last) {
+        print STDERR "$first ";
+        $last = $first;
+      }
+    }
+    my $obj = $tlpdb->get_package ($pkg);
+    die "$0: no TeX Live package named $pkg in $Master.\n" if ! $obj;
+    if ($srcsplit) {
+      my $objsrc = $obj->srcfiles_package;
+      if ($objsrc) {
+        $objsrc->make_container($type,$Master,$opt_outputdir,"$pkg.source",$opt_relative);
+        $src_count++;
+      }
+    }
+    if ($docsplit) {
+      my $objdoc = $obj->docfiles_package;
+      if ($objdoc) {
+        $objdoc->make_container($type,$Master,$opt_outputdir,"$pkg.doc",$opt_relative);
+        $src_count++;
+      }
+    }
+    $obj->make_container($type,$Master,$opt_outputdir,$pkg,$opt_relative);
+    $src_count++;
+  }
+}
+
+
+
+__END__
+
+=head1 NAME
+
+tlpdb2container - generate container files (zip,tar.lzma) of a package
+
+=head1 SYNOPSIS
+
+tlpdb2container [OPTION]... 
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<-all>
+build container file for all packages present in the tlpdb.
+
+=item B<-outputdir> I<outputdir>
+The location where created container files are placed, defaults to ./zip.
+
+=item B<-relative>
+Create a relative package, see TeXLive::TLPOBJ.1 for details.
+
+=back
+
+The standard options C<-help> and C<-debug> are also accepted.
+See the tlpfiles documentation for details.
+
+Note that the format of the containers and the splitting off of source
+and documentation files are controlled by the TLPDB options saved in the
+pseudo package C<00texlive.config>. Please see the documentation for TLPDB
+for details.
+
+
+=head1 DESCRIPTION
+
+To distribute packages over the network and on installation media the 
+packages are wrapped into container files. These container are either 
+simple zip files or tar.lzma file containing all the files of the package.
+
+B<tlpdb2container> generates container files from a TeX Live Database and the
+respective installation.
+
+=head1 AUTHORS AND COPYRIGHT
+
+This script and its documentation were written for the TeX Live
+distribution (L<http://tug.org/texlive>) and both are licensed under the
+GNU General Public License Version 2 or later.
+
+=cut
+
+### Local Variables:
+### perl-indent-level: 2
+### tab-width: 2
+### indent-tabs-mode: nil
+### End:
+# vim:set tabstop=2 expandtab: #

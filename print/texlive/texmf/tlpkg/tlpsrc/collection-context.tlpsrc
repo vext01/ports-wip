@@ -1,0 +1,33 @@
+category Collection
+shortdesc ConTeXt format
+longdesc Hans Hagen's powerful ConTeXt system, http://pragma-ade.com.
+longdesc Also includes third-party ConTeXt packages.
+depend context
+depend jmn
+depend lmextra
+depend context-account
+depend context-algorithmic
+depend context-bnf
+depend context-chromato
+depend context-construction-plan
+depend context-degrade
+depend context-filter
+depend context-fixme
+depend context-french
+depend context-fullpage
+depend context-games
+depend context-gantt
+depend context-gnuplot
+depend context-letter
+depend context-lettrine
+depend context-lilypond
+depend context-mathsets
+depend context-notes-zh-cn
+depend context-rst
+depend context-ruby
+depend context-simplefonts
+depend context-simpleslides
+depend context-typearea
+depend context-typescripts
+depend context-vim
+depend collection-basic

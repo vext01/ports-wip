@@ -1,0 +1,7 @@
+execute addMap charter.map
+execute addMap fpls.map
+execute addMap pazo.map
+execute addMap utopia.map
+
+# for keyval.sty
+depend graphics

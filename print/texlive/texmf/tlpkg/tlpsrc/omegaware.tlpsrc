@@ -1,0 +1,20 @@
+category TLCore
+docpattern f texmf/doc/man/man1/odvi*
+docpattern f texmf/doc/man/man1/ofm2opl.*
+docpattern f texmf/doc/man/man1/opl2ofm.*
+docpattern f texmf/doc/man/man1/otp2ocp.*
+docpattern f texmf/doc/man/man1/otangle.*
+docpattern f texmf/doc/man/man1/outocp*
+docpattern f texmf/doc/man/man1/ovf2ovp.*
+docpattern f texmf/doc/man/man1/ovp2ovf.*
+#
+binpattern f bin/${ARCH}/odvicopy
+binpattern f bin/${ARCH}/odvitype
+binpattern f bin/${ARCH}/ofm2opl
+binpattern f bin/${ARCH}/omfonts
+binpattern f bin/${ARCH}/opl2ofm
+binpattern f bin/${ARCH}/otangle
+binpattern f bin/${ARCH}/otp2ocp
+binpattern f bin/${ARCH}/outocp
+binpattern f bin/${ARCH}/ovf2ovp
+binpattern f bin/${ARCH}/ovp2ovf

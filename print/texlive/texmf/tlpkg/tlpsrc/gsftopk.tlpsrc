@@ -1,0 +1,4 @@
+category TLCore
+runpattern f texmf/dvips/gsftopk/*
+docpattern f texmf/doc/man/man1/gsftopk.*
+binpattern f bin/${ARCH}/gsftopk

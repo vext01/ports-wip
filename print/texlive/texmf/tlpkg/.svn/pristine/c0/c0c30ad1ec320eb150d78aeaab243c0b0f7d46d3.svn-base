@@ -1,0 +1,18 @@
+#
+# what menu items should be create on windows
+#
+# format:
+# 	Destination:Link
+# where Destination starts with either 
+#	Start/		for start/programs menu
+# or	Desktop/	for desktop
+# the rest is considered as dirs/files
+#
+# create a Start -> TeX Live 2008 -> PostScript Viewer
+Start/TeX Live 2008/PostScript Viewer:BINDIR/psv.bat
+# also create a link for the PostScript Viewer on the Desktop
+Desktop/PostScript Viewer:BINDIR/psv.bat
+# GUI for tlmgr in the start menu
+Start/TeX Live 2008/TeX Live Manager:BINDIR/tlmgrgui.bat
+# removal also in the start menu
+Start/TeX Live 2008/Uninstall TeX Live 2008:MASTER/tlpkg/installer/uninst.bat

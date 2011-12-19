@@ -1,0 +1,26 @@
+category TLCore
+#
+runpattern d texmf/xindy
+runpattern d texmf/scripts/xindy
+#
+# Not all platforms provide xindy.
+binpattern f/!amd64-kfreebsd,i386-kfreebsd,mips-irix,sparc-linux \
+           bin/${ARCH}/texindy
+binpattern f/!amd64-kfreebsd,i386-kfreebsd,mips-irix,sparc-linux \
+           bin/${ARCH}/tex2xindy
+binpattern f/!amd64-kfreebsd,i386-kfreebsd,mips-irix,sparc-linux \
+           bin/${ARCH}/xindy
+#
+# cygwin and windows have to use a different name for the clisp executable.
+binpattern f/!amd64-kfreebsd,i386-kfreebsd,i386-cygwin,mips-irix,sparc-linux \
+  bin/${ARCH}/xindy.run
+binpattern f/i386-cygwin,win32 bin/${ARCH}/xindy-lisp.exe
+#
+# universaldarwin has to split the mem file by architecture.
+binpattern f/!amd64-kfreebsd,i386-kfreebsd,mips-irix,sparc-linux,\
+universal-darwin bin/${ARCH}/xindy.mem
+binpattern f/universal-darwin bin/universal-darwin/xindy-i386.mem
+binpattern f/universal-darwin bin/universal-darwin/xindy-ppc.mem
+#
+docpattern f texmf/doc/man/man1/*xindy.*
+docpattern d texmf/doc/xindy

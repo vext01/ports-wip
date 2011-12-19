@@ -1,0 +1,8 @@
+depend tex
+execute AddFormat name=csplain engine=pdftex \
+                  options="-etex -translate-file=cp227.tcx csplain.ini"
+execute AddFormat name=pdfcsplain engine=pdftex \
+                  options="-etex -translate-file=cp227.tcx csplain.ini"
+#
+binpattern f bin/${ARCH}/csplain
+binpattern f bin/${ARCH}/pdfcsplain

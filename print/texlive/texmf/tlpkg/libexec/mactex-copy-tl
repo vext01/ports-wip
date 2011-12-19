@@ -1,0 +1,62 @@
+#!/bin/sh
+# $Id: mactex-copy-tl 16409 2009-12-15 00:08:24Z karl $
+# Public domain.  Originally written by Karl Berry, 2009.
+# Copy TeX Live tree from a SRCDIR to a DESTDIR, using tar.
+# Intended for MacTeX postflight on the DVD, so we don't have two
+# complete copies of TL.
+
+if test $# -ne 2; then
+  echo "Usage: $0 SRCDIR DESTDIR"
+  echo "Copy the TeX Live image in SRCDIR to DESTDIR,"
+  echo "with only the bin/universal-darwin binaries."
+  exit 1
+fi
+
+srcdir=$1
+destdir=$2
+
+if test ! -d "$srcdir"; then
+  echo "$0: $srcdir is not a directory, goodbye." >&2
+  exit 1
+fi
+cd $srcdir || exit 1
+
+bindir=bin/universal-darwin
+if test ! -d $bindir; then
+  echo "$0: $srcdir/$bindir does not exist, goodbye." >&2
+  exit 1
+fi
+
+if test -e "$destdir"; then
+  echo "$0: $destdir already exists, goodbye." >&2
+  exit 1
+fi
+
+mkdir -p "$destdir"
+if test ! -d "$destdir"; then
+  echo "$0: could not make directory $destdir, goodbye." >&2
+  exit 1
+fi
+
+touch "$destdir/testfile"
+if test ! -r "$destdir/testfile"; then
+  echo "$0: could not write in directory $destdir, goodbye." >&2
+  exit 1
+else
+  rm "$destdir/testfile"
+fi
+  
+# texmf-{config,var} don't exist in the DVD image, but in case we want
+# to test from an installed hierarchy ...
+exclude="rr_moved|texmf-config|texmf-var|.*\.bat|bin"
+wantedfiles="$bindir "`\ls -1 | grep -E -v "^($exclude)\$"`
+
+# There should be no filenames with spaces or other untoward characters
+# in that list, because we keep TL that way.
+
+echo "$0: Copying these from $srcdir to $destdir:"
+echo $wantedfiles
+echo "$0: This will take a while."
+
+: ${TL_TAR=tar}
+"$TL_TAR" cf - $wantedfiles | (cd "$destdir" && "$TL_TAR" xf -)

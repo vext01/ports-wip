@@ -1,0 +1,61 @@
+--- /src/TeX/texlive-svn/Master/texmf/scripts/texlive/tlmgrgui/tlmgrgui-real.pl	2008-08-22 15:00:15.000000000 +0200
++++ tlmgrgui-real.pl	2008-08-22 15:28:26.000000000 +0200
+@@ -511,6 +511,9 @@
+       } else {
+         @upgradepkgs = @_;
+       }
++      # note that the list still contains package names with revision
++      # specifications
++      @upgradepkgs = map { m/(^[^ ]+) /; $1; } @upgradepkgs;
+       foreach my $p (@upgradepkgs) {
+         if ($p =~ m/$WinSpecialUpdatePackagesRegexp/) {
+           $updater_needed = 1;
+@@ -521,9 +524,16 @@
+     my @execlist;
+     push @execlist, "tlmgr", "--location", "$location";
+     if ($debugmode) {
+-      push @execlist, "-v";
++      push @execlist, "-v", "update";
++    }
++    # remove the revision information
++    if ($_[0] eq "--all") {
++      push @execlist, "--all";
++    } else {
++      # we got some actual package names, remove the revision info
++      my @foo = map { m/(^[^ ]+) /; $1; } @_;
++      push @execlist, @foo;
+     }
+-    push @execlist, "update", @_;
+     run_program_show_output(@execlist);
+     if (win32() && $updater_needed) {
+       my $t = ___"runupdater";
+@@ -572,6 +582,8 @@
+ sub create_update_list {
+   my @ret = ();
+   my @archret = ();
++  my %localrev;
++  my %remoterev;
+   if (defined($tlmediatlpdb)) {
+     foreach my $lp ($localtlpdb->list_packages) {
+       next if ($lp =~ m/00texlive-installation.config/);
+@@ -589,6 +601,8 @@
+         } else {
+           push @ret, $lp;
+         }
++        $localrev{$lp} = $lrev;
++        $remoterev{$lp} = $urev;
+       } 
+     }
+     foreach my $p (@archret) {
+@@ -598,6 +612,11 @@
+       }
+       push @ret, $p unless $foundparent;
+     }
++    my @realret = ();
++    for my $p (@ret) {
++      push @realret, "$p ($localrev{$p} -> $remoterev{$p})";
++    }
++    @ret = @realret;
+     # issue a warning if no updates are available, the tlmediatlpdb is loaded
+     # and is not from the net
+     if ($#ret < 0) {

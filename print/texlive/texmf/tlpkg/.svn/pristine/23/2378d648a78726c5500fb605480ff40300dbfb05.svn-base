@@ -1,0 +1,86 @@
+Index: install-tl
+===================================================================
+--- install-tl	(revision 19696)
++++ install-tl	(working copy)
+@@ -861,15 +861,13 @@
+ sub do_tlpdb_postactions {
+   info ("running package specific postactions\n");
+   # Run the post installation code in the postaction tlpsrc entries
+-  # For now the option_desktop_integrations maps to both desktop
+-  # and menu entries, but we can split that later
+   my $usedtlpdb = $vars{'from_dvd'} ? $tlpdb : $localtlpdb;
+   foreach my $package ($usedtlpdb->list_packages) {
+     &TeXLive::TLUtils::do_postaction("install",
+                                      $usedtlpdb->get_package($package),
+                                      $vars{'option_file_assocs'},
++                                     $vars{'option_menu_integration'},
+                                      $vars{'option_desktop_integration'},
+-                                     $vars{'option_desktop_integration'},
+                                      $vars{'option_post_code'});
+   }
+   info ("finished with package specific postactions\n");
+@@ -1313,6 +1311,9 @@
+                            && ($tlpdb->option("paper") eq "letter" ? 1 : 0);
+   $vars{'option_desktop_integration'} = $tlpdb->option("desktop_integration");
+   $vars{'option_desktop_integration'} = 1 if win32();
++  # we unconditionally set the menu integration, this will be done in all
++  # cases but portable use, where we sanitize it away
++  $vars{'option_menu_integration'} = 1;
+   $vars{'option_path'} = $tlpdb->option("path");
+   $vars{'option_path'} = 0 if !defined($vars{'option_path'});
+   $vars{'option_path'} = 1 if win32();
+@@ -1496,6 +1497,7 @@
+   $vars{'option_path'}                &&= !$vars{'portable'};
+   $vars{'option_file_assocs'}         &&= !$vars{'portable'};
+   $vars{'option_desktop_integration'} &&= !$vars{'portable'};
++  $vars{'option_menu_integration'}    &&= !$vars{'portable'};
+ }
+ 
+ sub prepare_installation {
+@@ -1635,6 +1637,7 @@
+     $previoustlpdb->option_pkg("00texlive.installation",
+                                "create_formats");
+   $vars{'option_desktop_integration'} = 1 if win32();
++  $vars{'option_menu_integration'} = 1 if win32();
+   $vars{'option_path'} =
+     $previoustlpdb->option_pkg("00texlive.installation",
+                                "path");
+Index: texmf/scripts/texlive/tlmgrgui.pl
+===================================================================
+--- texmf/scripts/texlive/tlmgrgui.pl	(revision 19696)
++++ texmf/scripts/texlive/tlmgrgui.pl	(working copy)
+@@ -1098,7 +1098,7 @@
+ 
+     if (win32()) {
+       push @config_set_l,
+-        $back_config_set->Label(-text => __("Create shortcuts in menu and on desktop"), -anchor => "w");
++        $back_config_set->Label(-text => __("Create shortcuts on the desktop"), -anchor => "w");
+       push @config_set_m,
+         $back_config_set->Label(-textvariable => \$changeddefaults{"desktop_integration"}{'display'});
+       push @config_set_r,
+Index: texmf/scripts/texlive/NEWS
+===================================================================
+--- texmf/scripts/texlive/NEWS	(revision 19696)
++++ texmf/scripts/texlive/NEWS	(working copy)
+@@ -6,6 +6,8 @@
+ <li>set LESS='-R' and unset LESSOPEN and LESSPIPE in the environment
+     before calling pod2usage.
+ <li>don't load the remote db if tlmgr update is called without arguments
++<li>menu shortcuts are installed unconditionally, the desktop_integration
++    option only controls shortcuts on the desktop (W32)
+ 
+ tlmgr rev 19414 (TeX Live 2010 Release Version)
+ 
+Index: tlpkg/TeXLive/TLConfig.pm
+===================================================================
+--- tlpkg/TeXLive/TLConfig.pm	(revision 19696)
++++ tlpkg/TeXLive/TLConfig.pm	(working copy)
+@@ -140,7 +140,7 @@
+       "Create formats on installation" ],
+   "desktop_integration" =>
+     [ "b", 1, "desktop_integration",
+-      "Create shortcuts (menu and desktop) in postinst" ],
++      "Create shortcuts on the desktop in postinst" ],
+   "file_assocs" =>
+     [ "n:0..2", 1, "fileassocs",
+       "Change file associations in postinst" ],

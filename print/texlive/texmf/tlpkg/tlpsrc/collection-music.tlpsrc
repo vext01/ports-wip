@@ -1,0 +1,13 @@
+category Collection
+shortdesc Music typesetting
+longdesc Music-related fonts and packages.
+depend abc
+depend figbas
+depend gchords
+depend guitar
+depend harmony
+depend musixguit
+depend musixtex
+depend musixtex-fonts
+depend songbook
+depend collection-latex

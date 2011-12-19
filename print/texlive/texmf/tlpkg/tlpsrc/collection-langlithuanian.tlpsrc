@@ -1,0 +1,6 @@
+category Collection
+shortdesc Lithuanian
+longdesc Support for typesetting Lithuanian.
+depend lithuanian
+depend hyphen-lithuanian
+depend collection-basic

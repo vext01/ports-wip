@@ -1,0 +1,8 @@
+depend latex
+execute AddFormat name=mllatex engine=pdftex patterns=language.dat \
+                  options="-translate-file=cp227.tcx -mltex mllatex.ini"
+execute AddFormat name=mltex engine=pdftex \
+                  options="-translate-file=cp227.tcx -mltex mltex.ini"
+#
+binpattern f bin/${ARCH}/mllatex
+binpattern f bin/${ARCH}/mltex

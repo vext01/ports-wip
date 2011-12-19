@@ -1,0 +1,16 @@
+Replacement for system('foo <bar >bar') without using a shell.
+Would solve quoting problems once and for all.
+
+includes a test routine with a few tests, lacking tests for stderr redirection
+right now
+
+needs to be tested on windows too!
+
+Ideas for running tests (Unix):
+
+# echo abc > Cin; echo 123 >> Cin
+perl redir.pl # interactive, just keep typing 'y' <ENTER>
+yes | perl redir.pl
+yes | perl redir.pl >Pout 2>Perr
+yes | perl redir.pl >Pcomb 2>&1
+

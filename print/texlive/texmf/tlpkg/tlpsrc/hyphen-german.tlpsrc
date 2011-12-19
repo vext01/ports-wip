@@ -1,0 +1,41 @@
+category TLCore
+depend hyphen-base
+depend hyph-utf8
+shortdesc German hyphenation patterns.
+longdesc Hyphenation patterns for German in T1/EC and UTF-8 encodings,
+longdesc for traditional and reformed spelling, including Swiss German.
+longdesc The package includes the latest patterns from dehyph-exptl
+longdesc (known to TeX under names 'german', 'ngerman' and 'swissgerman'),
+longdesc however 8-bit engines still load old versions of patterns
+longdesc for 'german' and 'ngerman' for backward-compatibility reasons.
+longdesc Swiss German patterns are suitable for Swiss Standard German
+longdesc (Hochdeutsch) not the Alemannic dialects spoken in Switzerland
+longdesc (Schwyzerduetsch).
+longdesc There are no known patterns for written Schwyzerduetsch.
+execute AddHyphen \
+	name=german \
+	lefthyphenmin=2 \
+	righthyphenmin=2 \
+	file=loadhyph-de-1901.tex \
+	file_patterns=hyph-de-1901.pat.txt \
+	file_exceptions=
+execute AddHyphen \
+	name=ngerman \
+	lefthyphenmin=2 \
+	righthyphenmin=2 \
+	file=loadhyph-de-1996.tex \
+	file_patterns=hyph-de-1996.pat.txt \
+	file_exceptions=
+execute AddHyphen \
+	name=swissgerman \
+	lefthyphenmin=2 \
+	righthyphenmin=2 \
+	file=loadhyph-de-ch-1901.tex \
+	file_patterns=hyph-de-ch-1901.pat.txt \
+	file_exceptions=
+
+runpattern f texmf/tex/generic/hyphen/dehypht.tex
+runpattern f texmf/tex/generic/hyphen/dehyphn.tex
+
+runpattern f texmf/tex/generic/hyphen/dehyphtex.tex
+runpattern f texmf/tex/generic/hyphen/ghyphen.README

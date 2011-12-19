@@ -1,0 +1,2 @@
+runpattern +!d texmf-dist/tex/context/third/lettrine
+docpattern +!d texmf-dist/doc/context/third/lettrine

@@ -1,0 +1,6 @@
+execute addMixedMap cm.map
+execute addMixedMap cmextra.map
+execute addMixedMap cyrillic.map
+execute addMap      euler.map
+execute addMixedMap latxfont.map
+execute addMixedMap symbols.map

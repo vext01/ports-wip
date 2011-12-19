@@ -1,0 +1,18 @@
+category Collection
+shortdesc Indic scripts
+longdesc Support for typesetting some Indic scripts.
+depend bangtex
+depend bengali
+depend burmese
+depend devnag
+depend ebong
+depend hyphen-indic
+depend hyphen-sanskrit
+depend itrans
+depend malayalam
+depend sanskrit
+depend velthuis
+depend wnri
+depend wnri-latex
+depend xetex-devanagari
+depend collection-basic

@@ -1,0 +1,10 @@
+category TLCore
+catalogue dvibook
+runpattern f texmf/doc/man/man1/dvibook.*
+runpattern f texmf/doc/man/man1/dviconcat.*
+runpattern f texmf/doc/man/man1/dviselect.*
+runpattern f texmf/doc/man/man1/dvitodvi.*
+binpattern f bin/${ARCH}/dvibook
+binpattern f bin/${ARCH}/dviconcat
+binpattern f bin/${ARCH}/dviselect
+binpattern f bin/${ARCH}/dvitodvi

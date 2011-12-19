@@ -1,0 +1,4 @@
+depend tex
+execute AddFormat name=texsis engine=pdftex \
+                  options="-translate-file=cp227.tcx texsis.ini"
+binpattern f bin/${ARCH}/texsis

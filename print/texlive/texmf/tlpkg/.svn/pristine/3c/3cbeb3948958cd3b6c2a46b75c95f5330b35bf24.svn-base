@@ -1,0 +1,4 @@
+category Collection
+shortdesc Finnish documentation
+depend lshort-finnish
+depend collection-documentation-base

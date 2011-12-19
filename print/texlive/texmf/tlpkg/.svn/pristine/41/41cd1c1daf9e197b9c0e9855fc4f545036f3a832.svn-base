@@ -1,0 +1,2 @@
+binpattern f bin/${ARCH}/texdirflatten
+docpattern f texmf/doc/man/man1/texdirflatten.*

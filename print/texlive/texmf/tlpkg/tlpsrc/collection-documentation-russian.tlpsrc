@@ -1,0 +1,6 @@
+category Collection
+shortdesc Russian documentation
+depend lshort-russian
+depend mpman-ru
+depend texlive-ru
+depend collection-documentation-base

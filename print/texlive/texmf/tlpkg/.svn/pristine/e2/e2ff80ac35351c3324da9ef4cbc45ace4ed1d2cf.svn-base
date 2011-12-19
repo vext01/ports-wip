@@ -1,0 +1,169 @@
+Multi source support in TeX Live v2
+-----------------------------------
+(Work in progress)
+
+[needs dev.merge-tlmedia-into-tlpdb-and-get-rid-of-it !!!! ]
+
+v2 of this patches has changed completely the idea of implementation.
+Background of the new idea is to leave the code base of tlmgr.pl itself
+as untouched as possible, and merge everything into TLPDB. TLPDBs can
+now either be a normal one as before, or a virtual one, collection
+different sources.
+
+(completely independent from generalized revisions)
+[karl: good.]
+
+1) extension of the location part in 00texlive.installation
+-----------------------------------------------------------
+
+The opt_location: line in 00texlive.installation normally gives the
+repository to be used. It can now contain a list of repositories in the
+form
+	repo1[#tag1] repo2[#tag2] ...
+
+Management of these items is thorugh
+	tlmgr repository
+action. 
+	tlmgr repository list
+	tlmgr repository add repo [tag]
+	tlmgr repository remove name
+If no tag is given then internally (but not in the tlpdb) the tag
+and the repo path is the same.
+
+Removing is done by entering the tag (not the repo), but if no tags were
+given that is the same.
+
+
+If there are more than one tag, then there has to be one tagged 
+	main
+which is the main repository.
+
+By default, if you start with only one entry (as before, the main),
+and add a new one, the tag "main" is automatically added to the
+previous tag to make all run smooth.
+
+THe repo at "main" is used for various settings, the main configuration
+options, etc etc. Idea is still that everyone has the main repo CTAN
+(or mirror or ...), and can add some sub-repos.
+
+Old discussion:
+
+[karl: how do these lines get added? tool, manual editing of tlpdb?]
+[norbert: tlmgr location url1 url2=tag1 url3 url4=tag2 ...  
+		# sets url1, url2 with tag tag1, url3, and url4 with tag2
+		# as the list of available locations
+		# backward compatibility with former usage
+          tlmgr location add ...
+	  	# adds locations to the list of available locs
+	  tlmgr location remove ...
+	  	# removes locations ...
+]
+[k2: well, there is no "location" action now, so compatibility isn't an issue.
+having this new action seems like a good idea.  tlmgr option location foo
+will just become a synonm for tlmgr location add foo.  yes?]
+
+2) invocation of tlmgr/installation
+-----------------------------------
+
+Normally tlmgr will install the candidate with the highest revision number.
+
+This is controlled by 
+	TLPDB::virtual_candidate
+For now the policy is the highest rev number, but we can add later 
+different policies.
+
+[karl: ok, given pinning below. otherwise i don't like it.]
+[norbert: Why, can you explain why you don't like that the highest revision 
+  number wins?]
+[k2: because it is random, except in the one case where you want to use
+  it.  that is, i understand that you want to copy a tl package, make
+  some local fixes, and install it locally, keeping track of the rev
+  number.  that's fine for you.  but there's no way most people are
+  going to bother with that.  if mojca sets up a context repo, say,
+  those revision numbers are (should be) completely independent of tl's
+  revision numbers.  therefore, all the context packages should be
+  pinned to the context repo, so the context repo always wins.  without
+  pinning, it would be an unmaintainable situation.]
+
+That will be achieved by
+	tlmgr install package
+
+[FOR NOW THE FOLLOWING IS NOT IMPLEMENTED!!]
+If you want to install a package from a specific mirror you can do
+	tlmgr install package/TAG
+	(tlmgr install package/SOURCE)
+where TAG is the tag given above, and SOURCE is the full source address.
+So continuing the above example we could call
+	tlmgr install package/department
+or
+	tlmgr install package/http://server.local.uni/texlive/packages
+(maybe we don't allow the later form ...?)
+[karl: well, if it's done, then I see no reason not to support it.]
+
+done
+
+[NOT IMPLEMENTED BY NOW]
+3) pinning
+----------
+
+tlmgr will evaluate an additional config file
+	ROOT/tlpkg/pinning
+or the one given via cmdline
+	tlmgr -pins /path/to/pinning/file
+[karl: maybe it should be found in texmf-local/tlpkg? look there
+ before ROOT/tlpkg but allow both? maybe other places too. have to think
+ about it.  Also, the filename should be something clearer, perhaps
+ tlpkgpins.txt.]
+[norbert: agreed, that texmf-local might be a better place. should be
+ thought out]
+
+That file contains lines
+	package:tag:pin
+where package is a package name or * (or regexp? or glob context* eg?)
+[glob is better than regexp in this case I think]
+and tag is [a-z0-9,]+ as for tags above, or *,
+and pin is an integer between 0 and 1000.
+
+Now the evaluation *which* package will be installed will be done as follows:
+
+1) create the list of candidates, i.e., all tlpobj from different sources
+   where the name matches the one to be installed
+[karl: if a package is pinned to a single source (99% case, seems to
+ me), the other sources (e.g., default ctan) won't even be considered, right?]
+
+[norbert: well, it depends. There will be a default pin value of say 500,
+ and you can give pin values lower than 500 to prefer packages from other
+ sources, or higher pin values to prefer these sources]
+
+[k2: I understand there is all this flexibility, but that's not my
+point.  I envision the single most common use of this (by far) to say
+"get package foo from my special location bar", where foo is a local
+font, or tlmgr from tlcritical.  In these cases, the user will set a
+single location.  And then it would be a waste of time for tlmgr to even
+consider looking at the default location (tlnet) for foo.  It should not
+even be a candidate.]
+
+
+2) compute the pins of all the candidates
+
+3) if there are different pins cancel those candidates with a non-maximal pin
+   (i.e., let pin_max = max { pin(candidate) : candidate in candidates },
+    and new candidates are those with pin(candidate) = pin_max)
+
+4) within all the remaining candidates choose the one with the highest
+   revision number
+
+
+========================================
+
+Consequences of the above:
+- no source: part necessary in the revisions
+- packages can be pinned to a specific source, and will not be updated
+  even if another source ships a higher version number
+- no changes to the general server infrastructure are needed
+- default installations continue as before
+- normal installations with multiple sources but without pinning will
+  simply *do*the*right*thing*, namely install the highest revision number.
+[karl: it's unclear to me that that is the right thing, in general, but
+ I can see how it is the right thing in some cases, e.g., yours, so fine.]
+[norbert: see above ... I don't see the wrong point ;-) ]

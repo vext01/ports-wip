@@ -1,0 +1,29 @@
+Rblatter-$OpenBSD: rblatter,v 1.2 2011/03/08 00:09:42 edd Exp $
+Mon Dec 19 12:38:40 +0000 2011
++scheme-context,run:-scheme-full,run
+========================================================================
+
+SUMMARY
+----------
+
+includeFiles = 0
+excludeFiles = 67826
+includeMaps = 0
+
+excludeMaps = 208
+includeFormats = 0
+excludeFormats = 0
+
+final = 0
+finalMaps = 0
+finalFormats = 0
+
+MAP HINTS
+----------
+
+(No map hints)
+
+FORMAT HINTS
+----------
+
+(No format hints)

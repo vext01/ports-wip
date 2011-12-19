@@ -1,0 +1,5 @@
+category Collection
+shortdesc Danish
+longdesc Support for typesetting Danish.
+depend hyphen-danish
+depend collection-basic

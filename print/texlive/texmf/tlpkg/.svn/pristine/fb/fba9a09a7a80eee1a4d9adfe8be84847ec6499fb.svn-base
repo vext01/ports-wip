@@ -1,0 +1,11 @@
+category TLCore
+runpattern d texmf/dvipdfm
+runpattern f texmf/tex/latex/dvipdfm/*
+#
+docpattern f texmf/doc/dvipdfm/*
+docpattern f texmf/doc/man/man1/dvipdfm.*
+docpattern f texmf/doc/man/man1/dvipdft.*
+docpattern f texmf/doc/man/man1/ebb.*
+#
+binpattern f bin/${ARCH}/dvipdfm
+binpattern f bin/${ARCH}/dvipdft

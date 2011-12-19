@@ -1,0 +1,6 @@
+execute addMixedMap cm-super-t1.map
+execute addMixedMap cm-super-t2a.map
+execute addMixedMap cm-super-t2b.map
+execute addMixedMap cm-super-t2c.map
+execute addMixedMap cm-super-ts1.map
+execute addMixedMap cm-super-x2.map

@@ -1,0 +1,2 @@
+category TLCore
+binpattern f bin/${ARCH}/bibtexu

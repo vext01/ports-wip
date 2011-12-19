@@ -1,0 +1,5 @@
+category Collection
+shortdesc Norwegian
+longdesc Support for typesetting Norwegian.
+depend hyphen-norwegian
+depend collection-basic

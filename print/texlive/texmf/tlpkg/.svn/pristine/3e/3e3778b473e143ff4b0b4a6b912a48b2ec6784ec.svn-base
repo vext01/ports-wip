@@ -1,0 +1,6 @@
+depend pdftex
+execute AddFormat name=eplain engine=pdftex patterns=language.dat \
+        options="-translate-file=cp227.tcx *eplain.ini"
+docpattern +f texmf/doc/info/eplain.info
+docpattern +f texmf/doc/man/man1/eplain.*
+binpattern f bin/${ARCH}/eplain

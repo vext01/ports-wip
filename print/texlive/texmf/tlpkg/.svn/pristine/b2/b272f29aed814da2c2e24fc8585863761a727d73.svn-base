@@ -1,0 +1,5 @@
+# separated from oberdiek since it is so basic, and not just latex.
+docpattern f texmf-dist/doc/latex/oberdiek/ifluatex.pdf
+docpattern f texmf-dist/doc/latex/oberdiek/test/ifluatex*
+srcpattern f texmf-dist/source/latex/oberdiek/ifluatex.dtx
+runpattern f texmf-dist/tex/generic/oberdiek/ifluatex.sty

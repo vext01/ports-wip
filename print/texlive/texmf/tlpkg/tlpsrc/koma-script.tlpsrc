@@ -1,0 +1,9 @@
+# not exactly that it's TLCore, but we don't want the default patterns.
+category TLCore
+runpattern t texmf-dist tex koma-script
+# include source and doc files in runpatterns so they are not affected
+# by the source/doc install options.  The koma-script author insists on
+# this.  Although we do not agree with his interpretation of the LPPL,
+# we try to satisfy anyway.
+runpattern t texmf-dist source koma-script
+runpattern t texmf-dist doc koma-script

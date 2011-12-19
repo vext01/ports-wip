@@ -1,0 +1,12 @@
+depend hyphen-base
+depend hyph-utf8
+execute AddHyphen \
+ name=german-x-2011-07-01 synonyms=german-x-latest \
+ lefthyphenmin=2 righthyphenmin=2 \
+ file=dehypht-x-2011-07-01.tex \
+ file_patterns=hyph-de-1901.pat.txt file_exceptions=hyph-de-1901.hyp.txt
+execute AddHyphen \
+ name=ngerman-x-2011-07-01 synonyms=ngerman-x-latest \
+ lefthyphenmin=2 righthyphenmin=2 \
+ file=dehyphn-x-2011-07-01.tex \
+ file_patterns=hyph-de-1996.pat.txt file_exceptions=hyph-de-1996.hyp.txt

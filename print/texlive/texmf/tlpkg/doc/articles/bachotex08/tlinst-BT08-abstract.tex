@@ -1,0 +1,105 @@
+%
+% A new installer for TeX Live
+% Norbert Preining, Reinhard Kotucha, Siep Kroonenberg
+% Article presented on the 16th BachoTeX meeting, Bachotek ?? May 2008
+%
+% Copyright 2007 Norbert Preining at al.
+% You can redistribute and/or modify this document under the terms of the 
+% GNU General Public License as published by the Free Software Foundation; 
+% either version 2 of the License, or (at your option) any later version.
+%
+%\documentclass{arstexnica}
+\documentclass{ltugproc}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{url}
+\usepackage{marvosym}
+\usepackage{listings}
+\lstset{frame=lines,basicstyle=\ttfamily,showspaces=true,prebreak={\Righttorque},postbreak={\Lefttorque},breaklines}
+\usepackage{microtype}
+
+\usepackage{hyperref} % should be loaded last because it patches other
+                      % packages.
+
+\newcommand{\tl}{\TeX~Live}
+\newcommand{\ctan}{CTAN}
+\newcommand{\tpm}{\texttt{tpm}}
+\newcommand{\tpms}{\tpm{}s}
+\newcommand{\tlpsrc}{\texttt{tlpsrc}}
+\newcommand{\tlpsrcs}{\tlpsrc{}s}
+\newcommand{\tlpobj}{\texttt{tlpobj}}
+\newcommand{\tlpobjs}{\tlpobj{}s}
+\newcommand{\tlpdb}{\texttt{tlpdb}}
+\newcommand{\tlpdbs}{\tlpdb{}s}
+
+\hypersetup{pdftitle={A new installer for \tl},
+   pdfauthor={R. Kotucha, S. Kroonenberg, N. Preining},
+   pdfsubject={A new installer for \tl},
+   pdfkeywords={TeX Live, installer, ...}}
+
+\hyphenation{infra-struc-ture}
+
+%\catcode`>=\active
+%\def>#1<{\texttt{#1}}
+\DefineShortVerb{\|}
+\begin{document}
+%\begin{article}
+%\selectlanguage{italian}%
+
+\title{A new installer for \tl}%%%\thanks{%
+%  Article presented on the 16th Bacho\TeX meeting, Bachotek ?? May 2008}}
+
+\author{Reinhard Kotucha}
+\address{Marschnerstr.~25\\
+	30167~Hannover, Germany}
+\netaddress{reinhard.kotucha@web.de}
+
+\author{Siep Kroonenberg}
+\address{Rijksuniversiteit Groningen\\
+	Department of Economics\\
+        P.O.~Box~800\\
+	9700~AV~Groningen, the Netherlands}
+\netaddress{siepo@cybercomm.nl}
+
+\author{Norbert Preining}
+\address{Vienna University of Technology\\
+	Wiedner Hauptstr.\ 10\\
+	1040 Wien, Austria}
+\netaddress{preining@logic.at}
+
+
+\begin{abstract}
+  \tl\ has a new package infrastructure, primarily developed by
+  Norbert Preining, and inspired by the Debian/Linux packaging
+  system.
+
+  We shall present a new \tl\ installer, based on the new package
+  infrastructure. It includes a text based as well a graphical user
+  interface.  Among other new features, installing \tl\ from the
+  internet is now possible. It should work on all platforms
+  supported by \tl.
+\end{abstract}
+
+\maketitle
+
+\end{document}
+%
+% does not work in normal arstexnika mode, needs standalone, I leave
+% this up to the editors
+%\tableofcontents
+
+\section{Introduction}
+\label{sec:intro}
+
+%\bibliographystyle{arstexnica}
+%\bibliography{atsample}
+  
+\end{article}
+
+\end{document}
+
+

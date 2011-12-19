@@ -1,0 +1,10 @@
+category Collection
+shortdesc Chinese documentation
+depend asymptote-faq-zh-cn
+depend asymptote-by-example-zh-cn
+depend asymptote-manual-zh-cn
+depend ctex-faq
+depend latex-notes-zh-cn
+depend lshort-chinese
+depend texlive-zh-cn
+depend collection-documentation-base

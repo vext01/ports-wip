@@ -1,0 +1,3 @@
+catalogue devanagari
+depend xetex-devanagari
+execute addMixedMap dvng.map

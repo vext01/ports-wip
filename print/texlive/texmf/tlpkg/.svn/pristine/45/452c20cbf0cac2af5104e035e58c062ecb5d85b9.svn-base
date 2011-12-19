@@ -1,0 +1,8 @@
+category TLCore
+shortdesc translations of the TeX Live installer and TeX Live Manager
+longdesc This package contains the translated messages of the TeX Live
+longdesc installer and TeX Live Manager.  For information on creating or
+longdesc updating translations, see
+longdesc http://tug.org/texlive/doc.html#install-tl-xlate.
+#
+runpattern d tlpkg/translations

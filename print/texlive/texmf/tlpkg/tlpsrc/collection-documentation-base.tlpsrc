@@ -1,0 +1,5 @@
+category Collection
+shortdesc TeX Live documentation
+depend texlive-common
+depend texlive-docindex
+depend texlive-en

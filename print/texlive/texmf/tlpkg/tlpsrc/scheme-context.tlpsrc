@@ -1,0 +1,28 @@
+category Scheme
+shortdesc ConTeXt scheme
+longdesc This is the TeX Live scheme for installing ConTeXt.
+depend collection-context
+depend collection-metapost
+#
+# Polish fonts are nice to have
+#
+depend tex-gyre
+depend antt
+depend iwona
+depend kurier
+depend poltawski
+#
+# These are needed for TeX Gyre Math
+#
+depend txfonts
+depend pxfonts
+#
+# Fonts used in different scenarios
+#
+depend eulervm
+depend marvosym
+depend wasy
+#
+# just for texnansi.enc
+#
+depend ly1

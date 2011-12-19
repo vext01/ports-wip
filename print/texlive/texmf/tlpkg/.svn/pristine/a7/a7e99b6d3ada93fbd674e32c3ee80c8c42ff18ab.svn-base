@@ -1,0 +1,42 @@
+category Collection
+shortdesc Extra generic packages
+longdesc Extra packages that work with multiple formats, typically both
+longdesc TeX and LaTeX.
+depend abbr
+depend abstyles
+depend barr
+depend borceux
+depend c-pascal
+depend chronosys
+depend colorsep
+depend dinat
+depend dirtree
+depend eijkhout
+depend encxvlna
+depend epigram
+depend fenixpar
+depend fltpoint
+depend fntproof
+depend gates
+depend ifetex
+depend iftex
+depend insbox
+depend lecturer
+depend librarian
+depend mathdots
+depend metatex
+depend mftoeps
+depend midnight
+depend multi
+depend navigator
+depend ofs
+depend pdf-trans
+depend shade
+depend systeme
+depend tabto-generic
+depend texapi
+depend upca
+depend xlop
+depend yax
+#
+depend collection-basic

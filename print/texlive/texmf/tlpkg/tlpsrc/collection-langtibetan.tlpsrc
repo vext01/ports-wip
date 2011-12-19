@@ -1,0 +1,6 @@
+category Collection
+shortdesc Tibetan
+longdesc Support for typesetting Tibetan.
+depend ctib
+depend otibet
+depend collection-basic

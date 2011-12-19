@@ -1,0 +1,11 @@
+category Collection
+shortdesc HTML/SGML/XML support
+longdesc Packages to convert LaTeX to XML/HTML, and typset XML/SGML
+depend jadetex
+depend passivetex
+depend tex4ht
+depend xmlplay
+depend xmltex
+depend collection-basic
+depend collection-fontsrecommended
+depend collection-latex

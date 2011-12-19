@@ -1,0 +1,8 @@
+category Collection
+shortdesc Portuguese documentation
+depend beamer-tut-pt
+depend cursolatex
+depend latexcheat-ptbr
+depend lshort-portuguese
+depend xypic-tut-pt
+depend collection-documentation-base

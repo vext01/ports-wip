@@ -1,0 +1,32 @@
+category Collection
+shortdesc Basic LaTeX packages
+longdesc These packages are mandated by the core LaTeX team, or
+longdesc at least very strongly recommended.
+depend ae
+depend amscls
+depend amsmath
+depend babel
+depend babelbib
+depend carlisle
+depend colortbl
+depend fancyhdr
+depend fix2col
+depend geometry
+depend graphics
+depend hyperref
+depend latex
+depend latex-bin
+depend latex-fonts
+depend latexconfig
+depend ltxmisc
+depend mfnfss
+depend mptopdf
+depend natbib
+depend oberdiek
+depend pdftex-def
+depend pslatex
+depend psnfss
+depend pspicture
+depend tools
+#
+depend collection-basic

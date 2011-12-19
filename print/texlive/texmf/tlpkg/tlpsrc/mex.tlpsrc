@@ -1,0 +1,18 @@
+depend pl
+depend hyphen-polish
+depend pdftex
+depend tex
+execute AddFormat name=mex engine=pdftex patterns=mexconf.tex \
+                  options="-translate-file=cp227.tcx *mex.ini"
+execute AddFormat name=pdfmex engine=pdftex patterns=mexconf.tex \
+                  options="-translate-file=cp227.tcx *pdfmex.ini"
+execute AddFormat name=utf8mex engine=pdftex patterns=mexconf.tex \
+                  options="-enc *utf8mex.ini"
+#
+runpattern +!d texmf-dist/tex/mex/utf8mex
+#
+docpattern +!d texmf-dist/doc/mex/utf8mex
+#
+binpattern f bin/${ARCH}/mex
+binpattern f bin/${ARCH}/pdfmex
+binpattern f bin/${ARCH}/utf8mex

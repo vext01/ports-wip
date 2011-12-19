@@ -1,0 +1,366 @@
+# $Id: TLDownload.pm -1   $
+# TeXLive::TLDownload.pm - module for abstracting the download modes
+# Copyright 2009 Norbert Preining
+#
+# This file is licensed under the GNU General Public License version 2
+# or any later version.
+#
+# TODO:
+# - retrials for opening the connections are now implemented (see
+#   $RETRIES and $SLEEP_BETWEEN_RETRIES)
+#   retrials for getting files are not implemented (and I am not sure
+#   if it makes sense)
+# - re-opening of a dropped connection, detection of dropped connection?
+#   in ftp mode we check that we can send the pwd command before getting
+#   a file. If this does not succeed we try to reopen the connection
+#   In http mode I don't know.
+# - timeout for ftp: default is AFAIR 120sec, that is probably not enough
+#   for a normal user to select all options and go press/enter "i"nstall
+#   either extend timeout or care for reopening of closed connections
+#   See above, for ftp that should be fixed by automatic reopening.
+#
+
+
+package TeXLive::TLDownload;
+
+use TeXLive::TLUtils;
+use File::Temp qw/tempfile/;
+
+my $svnrev = '$Revision: -1 $';
+my $_modulerevision;
+if ($svnrev =~ m/: ([0-9]+) /) {
+  $_modulerevision = $1;
+} else {
+  $_modulerevision = "unknown";
+}
+sub module_revision {
+  return $_modulerevision;
+}
+
+
+my $CONNECT_RETRIES = 5;
+my $SLEEP_BETWEEN_CONNECT_RETRIES = 2; # (in seconds)
+my $GET_RETRIES = 5;
+my $SLEEP_BETWEEN_GET_RETRIES = 10; # (in seconds)
+
+
+# since Net::HTTP and Net::FTP are shipped by the same packages
+# we only test for Net::HTTP, if that fails, let us know ;-)
+our $net_lib_avail = 0;
+eval { require Net::HTTP; };
+if ($@) {
+  debug("Net::HTTP is not available, falling back to wget mode.\n");
+  $net_lib_avail = 0;
+} else {
+  require Net::HTTP;
+  require Net::FTP;
+  require HTTP::Status;
+  $net_lib_avail = 1;
+  debug("Net::HTTP available!\n");
+}
+
+
+sub new
+{
+  my $class = shift;
+  my %params = @_;
+  my $self = {
+    server      => $params{'server'},
+    mode        => defined($params{'mode'}) ? $params{'mode'} : "wget",
+  };
+  if ($self->{'mode'} eq "http" ||
+      $self->{'mode'} eq "ftp") {
+    die "Net::HTTP and Net::FTP is not available, cannot use http/ftp mode."
+      if (!$net_lib_avail);
+  } elsif ($self->{'mode'} eq "wget") {
+    # noting to be done
+  } else {
+    die "Unknown download mode: ", $self->{'mode'};
+  }
+  bless $self, $class;
+  return $self;
+}
+
+
+
+sub start_connection
+{
+  my $self = shift;
+  if ($self->mode eq "wget") {
+    debug("TLDownload::start_connection: no need to call start_connection in wget mode\n");
+    return 1;
+  }
+  if (!defined($self->server)) {
+    die "TLDownload::start_connection: No server defined, cannot start connection.";
+  }
+  if (($self->mode eq "http") || ($self->mode eq "ftp")) {
+    my $handle;
+    for my $tries (1..$CONNECT_RETRIES) {
+      if ($self->mode eq "http") {
+        $handle = Net::HTTP->new(Host => $self->server, KeepAlive => 1);
+      } else {
+        $handle = Net::FTP->new($self->server, Debug => 0);
+      }
+      if ($handle) {
+        debug("TLDownload::start_connection: succeeded.\n");
+        last; # of $tries
+      }
+      sleep($SLEEP_BETWEEN_CONNECT_RETRIES);
+    }
+    # if still not have a handle give up
+    if (!$handle) {
+      tlwarn("TLDownload::start_connection: Could not connect to server " . $self->server . " ($CONNECT_RETRIES trials), giving up.\n");
+      return 0;
+    }
+    if ($self->mode eq "ftp") {
+      # special ftp stuff
+      if (!$handle->login("anonymous",'-texlive@')) {
+        tlwarn("TLDownload::start_connection: Cannot login to server: " . $handle->message . "\n");
+        return 0;
+      }
+      if (!$handle->binary) {
+        tlwarn("TLDownload::start_connection: Cannot set transfer mode to binary: " . $handle->message . "\n");
+        return 0;
+      }
+    }
+    # again for both http and ftp
+    # now we got a handle, save it simply into $self for later reuse
+    $self->{'handle'} = $handle;
+    return 1;
+  }
+  # we are still here, that cannot be
+  return 0;
+}
+
+
+
+sub get_file
+{
+  my ($self, $url, $out, $size) = @_;
+  #
+  # first split the $url into components. we might get a full url
+  # or some relative path
+  my $protocol;
+  my $server;
+  my $path;
+  if ($url =~ m!^(http|ftp)://([^/]*)(/.*)$!i) {
+    $protocol = lc($1);
+    $server = lc($2);
+    $path = $3;
+  } elsif ($url =~ m!^/.*$!) {
+    $path = $url;
+  } else {
+    tlwarn("TLDownload::get_file: do not understand that url: $url\n");
+    return 0;
+  }
+  #
+  # wget case
+  # simple fall back to TLUtils::_download_file
+  #
+  if ($self->mode eq "wget") {
+    if (!defined($protocol)) {
+      tlwarn("TLDownload::get_file: cannot download relative url $url in wget mode.\n");
+      return 0;
+    }
+    my $wget;
+    if (defined($::progs{'wget'})) {
+      $wget = $progs->{'wget'};
+    } else {
+      tlwarn ("TLDownload::get_file: programs not set up, trying literal wget\n");
+      $wget = "wget";
+    }
+    return TeXLive::TLUtils::_download_file($url, $out, $wget);
+  }
+  #
+  # check for incompatible server names or protocols
+  #
+  if (defined($protocol) && ($protocol ne $self->mode)) {
+    tlwarn("TLDownload::get_file: protocols mismatch, url uses $protocol, server " . $self->mode . ".\n");
+    return 0;
+  }
+  if (defined($server) && ($server ne lc($self->server))) {
+    tlwarn("TLDownload::get_file: server mismatch, url uses $server, but current download server is " . $self->server . ".\n");
+    return 0;
+  }
+  #
+  # for both http and ftp we want to support the destination "|" which
+  # should return a file handle.
+  my $realout = $out;
+  if ($out eq "|") {
+    my $outfh = tempfile();
+    $realout = $outfh;
+  }
+  #
+  # ftp mode
+  #
+  if ($self->mode eq "ftp") {
+    # test if handle is alive:
+    if (defined($self->{'handle'})) {
+      if (!$handle->pwd) {
+        # connection droped, time-out or similar ...
+        # delete the handle so that the following code restarts the
+        # connection
+        delete($self->{'handle'});
+      }
+    }
+    if (!defined($self->{'handle'})) {
+      if (!$self->start_connection) {
+        # warnings are already issued by start_connection
+        # which also does retrials
+        return;
+      }
+    }
+    # now we should have a $handle
+    my $handle = $self->{'handle'};
+    my $got_it = 0;
+    for my $tries (1..$GET_RETRIES) {
+      if ($handle->get($path, $realout)) {
+        $got_it = 1;
+        last;
+      }
+      sleep($SLEEP_BETWEEN_GET_RETRIES);
+    }
+    if (!$got_it) {
+      tlwarn("TLDownload::get_file: Could not get $path:\n");
+      tlwarn($handle->message . "\n");
+      tlwarn("($GET_RETRIES trials), giving up.\n");
+      return;
+    }
+    return 1;
+  }
+  #
+  # http mode
+  #
+  if ($self->mode eq "http") {
+    if (!defined($self->{'handle'})) {
+      if (!$self->start_connection) {
+        # start_connection already warns ...
+        return 0;
+      }
+    }
+    # now we should have a $handle
+    my $handle = $self->{'handle'};
+    my $got_it = 0;
+    for my $tries (1..$GET_RETRIES) {
+      if ($handle->write_request(GET => $path, 'User-Agent' => 'texlive (net::http)')) {
+        $got_it = 1;
+        last;
+      }
+      sleep($SLEEP_BETWEEN_GET_RETRIES);
+    }
+    if (!$got_it) {
+      tlwarn("TLDownload::get_file: Could not send GET request.\n");
+      tlwarn("($GET_RETRIES trials), giving up.\n");
+      return;
+    }
+    my ($code, $msg, %h) = $handle->read_response_headers;
+    if (HTTP::Status::is_error($code)) {
+      tlwarn("Problem downloading from server ($code): $msg\n");
+      return;
+    }
+    my $buffer = "";
+    my $bytes_read = 0;
+    while (1) {
+      my $buf;
+      my $n = $handle->read_entity_body($buf, (defined($size) ? $size : 4096));
+      if (!defined($n)) {
+        tlwarn("TLDownload::get_file: Cannot read file from server: $!\n");
+        return 0;
+      }
+      last unless $n;
+      dddebug("- http read got $n bytes\n");
+      $bytes_read += $n;
+      $buffer .= $buf;
+    }
+    if (defined($size) && ($bytes_read != $size)) {
+      tlwarn("TLDownload::get_file: didn't get $size bytes, expect breakage\n");
+    }
+    my $outhandle;
+    if ($out ne "|") {
+      if (!open (OUT, ">$out")) {
+        tlwarn("TLDownload::get_file: cannot open $out for writing: $!\n");
+        return 0;
+      }
+      $outhandle = \*OUT;
+    } else {
+      $outhandle = $realout;
+    }
+    binmode($outhandle);
+    print $outhandle $buffer;
+    if ($out ne "|") {
+      if (!close(OUT)) {
+        tlwarn("TLDownload::get_file: strange, cannot close file handle ...\n");
+      }
+      return 1;
+    } else {
+      # seek to beginning of file
+      seek $outhandle, 0, 0;
+      return $outhandle;
+    }
+  }
+  #
+  # we are still here, strange
+  #
+  tlwarn("TLDownload::get_file: still around, strange, mode = " . $self->mode . "\n");
+  return 0;
+}
+
+
+
+sub mode
+{
+  my $self = shift;
+  if (@_) { $self->{'mode'} = shift }
+  return $self->{'mode'};
+}
+sub server
+{
+  my $self = shift;
+  if (@_) { $self->{'server'} = shift }
+  return $self->{'server'};
+}
+
+1;
+__END__
+
+
+=head1 NAME
+
+C<TeXLive::TLDownload> -- TeX Live Download abstraction module
+
+=head1 SYNOPSIS
+
+  use TeXLive::TLDownload;
+
+  $TeXLive::TLDownload::net_lib_avail
+  my $dl = TeXLive::TLDownload->new(server => "www.foo.com", mode => "http");
+  my $dl = TeXLive::TLDownload->new(server => "www.foo.com", mode => "ftp");
+  my $dl = TeXLive::TLDownload->new(server => "http://www.foo.com", mode => "wget");
+  $dl->start_connection;
+  $dl->get_file($relpath, $output [, $expected_size ]);
+
+=head1 DESCRIPTION
+
+The C<TeXLive::TLDownload> module handles TeX Live Download abstractions
+to make it possible to use persistent network connections instead of
+calling wget for each single file. It depends on the modules Net::HTTP
+and Net::FTP, and will check for these at loading time. If they are
+not present only "wget" mode will be available.
+
+=head1 SEE ALSO
+
+
+=head1 AUTHORS AND COPYRIGHT
+
+This script and its documentation were written for the TeX Live
+distribution (L<http://tug.org/texlive>) and both are licensed under the
+GNU General Public License Version 2 or later.
+
+=cut
+
+### Local Variables:
+### perl-indent-level: 2
+### tab-width: 2
+### indent-tabs-mode: nil
+### End:
+# vim:set tabstop=2 expandtab: #

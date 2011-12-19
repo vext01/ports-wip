@@ -1,0 +1,12 @@
+category Collection
+shortdesc Czech/Slovak
+longdesc Support for typesetting Czech/Slovak.
+depend cs
+depend csbulletin
+depend cslatex
+depend csplain
+depend vlna
+depend hyphen-czech
+depend hyphen-slovak
+depend collection-basic
+depend collection-latex

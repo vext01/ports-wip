@@ -1,0 +1,11 @@
+category TLCore
+runpattern f texmf/tex/generic/config/language.dat
+runpattern f texmf/tex/generic/config/language.dat.lua
+runpattern f texmf/tex/generic/config/language.def
+runpattern f texmf/tex/generic/config/language.us
+runpattern f texmf/tex/generic/config/language.us.def
+runpattern f texmf/tex/generic/config/language.us.lua
+runpattern f texmf/tex/generic/hyphen/dumyhyph.tex
+runpattern f texmf/tex/generic/hyphen/hyphen.tex
+runpattern f texmf/tex/generic/hyphen/hypht1.tex
+runpattern f texmf/tex/generic/hyphen/zerohyph.tex

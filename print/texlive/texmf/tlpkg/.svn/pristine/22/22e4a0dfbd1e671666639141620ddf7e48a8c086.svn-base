@@ -1,0 +1,2 @@
+docpattern +f texmf/doc/info/latex2man.info
+binpattern f bin/${ARCH}/latex2man

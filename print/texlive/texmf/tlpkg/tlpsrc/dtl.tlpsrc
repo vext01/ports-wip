@@ -1,0 +1,5 @@
+category TLCore
+runpattern f texmf/doc/man/man1/dt2dv.*
+runpattern f texmf/doc/man/man1/dv2dt.*
+binpattern f bin/${ARCH}/dt2dv
+binpattern f bin/${ARCH}/dv2dt

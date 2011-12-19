@@ -1,0 +1,8 @@
+category Collection
+shortdesc Spanish documentation
+depend es-tex-faq
+depend l2tabu-spanish
+depend latex2e-help-texinfo-spanish
+depend latexcheat-esmx
+depend lshort-spanish
+depend collection-documentation-base

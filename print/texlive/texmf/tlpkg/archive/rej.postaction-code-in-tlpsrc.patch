@@ -1,0 +1,309 @@
+Index: install-tl
+===================================================================
+--- install-tl	(revision 11393)
++++ install-tl	(working copy)
+@@ -59,12 +59,12 @@
+    which getenv win32 unix info log debug tlwarn ddebug
+    get_system_tmpdir member process_logging_options rmtree
+    mkdirhier make_var_skeleton make_local_skeleton install_package copy
++   run_postinst_code
+    install_packages dirname setup_programs welcome welcome_paths);
+ use TeXLive::TLMedia;
+ use TeXLive::TLPOBJ;
+ use TeXLive::TLPDB;
+ use TeXLive::TLConfig;
+-use TeXLive::TLPostActions;
+ use Pod::Usage;
+ use Cwd 'abs_path';
+ 
+@@ -1034,13 +1034,15 @@
+   }
+ 
+   foreach my $package (sort keys %install) {
+-    if ($install{$package} && defined($PostInstall{$package})) {
+-      info("running post install action for $package\n");
+-      &{$PostInstall{$package}}($TEXDIR, $TEXDIRW, $TEXMFSYSVAR, $TEXMFLOCAL);
++    if ($install{$package}) {
++      my $tlpobj = $tlpdb->get_package($package);
++      next if (!defined($tlpobj)); # should not happen ...
++      run_postinst_code($tlpobj, $TEXDIR, $TEXDIRW, $TEXMFSYSVAR, $TEXMFLOCAL);
+     }
+   }
+   # $opt_portable: no %install but we still want xetex postinstall
+-  &{$PostInstall{'xetex'}}($TEXDIR, $TEXDIRW, $TEXMFSYSVAR, $TEXMFLOCAL)
++  run_postinst_code($tlpdb->get_package("xetex"), 
++                    $TEXDIR, $TEXDIRW, $TEXMFSYSVAR, $TEXMFLOCAL)
+     if $opt_portable;
+   update_assocs() if win32();
+ 
+Index: tlpkg/TeXLive/TLPSRC.pm
+===================================================================
+--- tlpkg/TeXLive/TLPSRC.pm	(revision 11393)
++++ tlpkg/TeXLive/TLPSRC.pm	(working copy)
+@@ -30,6 +30,8 @@
+     srcpatterns => $params{'srcpatterns'},
+     docpatterns => $params{'docpatterns'},
+     binpatterns => $params{'binpatterns'},
++    postinst    => $params{'postinst'},
++    postrm      => $params{'postrm'},
+     executes    => defined($params{'executes'}) ? $params{'executes'} : [],
+     depends     => defined($params{'depends'}) ? $params{'depends'} : [],
+   };
+@@ -65,6 +67,8 @@
+   my $shortdesc = "";
+   my $longdesc= "";
+   my $catalogue = "";
++  my $postinst = "";
++  my $postrm = "";
+   my (@executes, @depends);
+   my (@runpatterns, @docpatterns, @binpatterns, @srcpatterns);
+   my $started = 0;
+@@ -114,6 +118,12 @@
+       } elsif ($line =~ /^catalogue\s+(.*)\s*$/) {
+         $catalogue = $1;
+         next;
++      } elsif ($line =~ /^postinst\s+(.*)\s*$/) {
++        $postinst = $1;
++        next;
++      } elsif ($line =~ /^postrm\s+(.*)\s*$/) {
++        $postrm = $1;
++        next;
+       } elsif ($line =~ /^runpattern\s+(.*)\s*$/) {
+         push @runpatterns, $1 if ($1 ne "");
+         next;
+@@ -143,6 +153,8 @@
+   $self->catalogue($catalogue) if $catalogue;
+   $self->shortdesc($shortdesc) if $shortdesc;
+   $self->longdesc($longdesc) if $longdesc;
++  $self->postinst($postinst) if $postinst;
++  $self->postrm($postrm) if $postrm;
+   $self->srcpatterns(@srcpatterns) if @srcpatterns;
+   $self->runpatterns(@runpatterns) if @runpatterns;
+   $self->binpatterns(@binpatterns) if @binpatterns;
+@@ -161,6 +173,8 @@
+   print $fd "category ", $self->category, "\n";
+   defined($self->{'catalogue'}) && print $fd "catalogue $self->{'catalogue'}\n";
+   defined($self->{'shortdesc'}) && print $fd "shortdesc $self->{'shortdesc'}\n";
++  defined($self->{'postinst'}) && print $fd "postinst $self->{'postinst'}\n";
++  defined($self->{'postrm'}) && print $fd "postrm $self->{'postrm'}\n";
+   if (defined($self->{'longdesc'})) {
+     $_tmp = "$self->{'longdesc'}";
+     write $fd;
+@@ -211,6 +225,8 @@
+   $tlp->category($self->category);
+   $tlp->shortdesc($self->{'shortdesc'}) if (defined($self->{'shortdesc'}));
+   $tlp->longdesc($self->{'longdesc'}) if (defined($self->{'longdesc'}));
++  $tlp->postinst($self->{'postinst'}) if (defined($self->{'postinst'}));
++  $tlp->postrm($self->{'postrm'}) if (defined($self->{'postrm'}));
+   $tlp->catalogue($self->{'catalogue'}) if (defined($self->{'catalogue'}));
+   $tlp->executes(@{$self->{'executes'}}) if (defined($self->{'executes'}));
+   $tlp->depends(@{$self->{'depends'}}) if (defined($self->{'depends'}));
+@@ -476,6 +492,16 @@
+   if (@_) { $self->{'longdesc'} = shift }
+   return $self->{'longdesc'};
+ }
++sub postinst {
++  my $self = shift;
++  if (@_) { $self->{'postinst'} = shift }
++  return $self->{'postinst'};
++}
++sub postrm {
++  my $self = shift;
++  if (@_) { $self->{'postrm'} = shift }
++  return $self->{'postrm'};
++}
+ sub catalogue {
+   my $self = shift;
+   if (@_) { $self->{'catalogue'} = shift }
+@@ -566,6 +592,7 @@
+ I<key> I<value>
+ 
+ where I<key> can be C<name>, C<category>, C<shortdesc>, C<longdesc>,
++C<postinst>, C<postrm>,
+ C<catalogue>, C<runpattern>, C<srcpattern>, C<docpattern>, C<binpattern>,
+ C<execute>, or C<depend>.
+ 
+@@ -691,6 +718,18 @@
+ concatenated into a long text. In TeX Live only used for collections and
+ schemes.
+ 
++=item C<postinst>
++
++a perl sub definition that does not contain the surrounding sub { ... }
++part. This stub will be evaluated after installation of the package.
++Please see the examples in various .tlpsrc files.
++
++=item C<postrm>
++
++a perl sub definition that does not contain the surrounding sub { ... }
++part. This stub will be evaluated after removal of the package.
++Please see the examples in various .tlpsrc files.
++
+ =item C<depend>
+ 
+ gives the list of dependencies, which are just other package names.
+Index: tlpkg/TeXLive/TLPOBJ.pm
+===================================================================
+--- tlpkg/TeXLive/TLPOBJ.pm	(revision 11393)
++++ tlpkg/TeXLive/TLPOBJ.pm	(working copy)
+@@ -24,6 +24,8 @@
+     category    => defined($params{'category'}) ? $params{'category'} : $DefaultCategory,
+     shortdesc   => $params{'shortdesc'},
+     longdesc    => $params{'longdesc'},
++    postinst    => $params{'postinst'},
++    postrm      => $params{'postrm'},
+     catalogue   => $params{'catalogue'},
+     runfiles    => defined($params{'runfiles'}) ? $params{'runfiles'} : [],
+     runsize   => $params{'runsize'},
+@@ -198,6 +200,14 @@
+         $self->catalogue("$1");
+         $lastcmd = "catalogue";
+         next;
++      } elsif ($line =~ /^postinst\s+(.*)\s*/o) {
++        $self->postinst("$1");
++        $lastcmd = "postinst";
++        next;
++      } elsif ($line =~ /^postrm\s+(.*)\s*/o) {
++        $self->postrm("$1");
++        $lastcmd = "postrm";
++        next;
+       } elsif ($line =~ /^(doc|src|run)files\s+/o) {
+         my $type = $1;
+         my @words = split ' ',$line;
+@@ -301,6 +311,8 @@
+   defined($self->{'revision'}) && print $fd "revision $self->{'revision'}\n";
+   defined($self->{'catalogue'}) && print $fd "catalogue $self->{'catalogue'}\n";
+   defined($self->{'shortdesc'}) && print $fd "shortdesc $self->{'shortdesc'}\n";
++  defined($self->{'postinst'}) && print $fd "postinst $self->{'postinst'}\n";
++  defined($self->{'postrm'}) && print $fd "postrm $self->{'postrm'}\n";
+   defined($self->{'license'}) && print $fd "license $self->{'license'}\n";
+   # ugly hack to get rid of use FileHandle; see man perlform
+   #format_name $fd "multilineformat";
+@@ -823,6 +835,16 @@
+   if (@_) { $self->{'longdesc'} = shift }
+   return $self->{'longdesc'};
+ }
++sub postinst {
++  my $self = shift;
++  if (@_) { $self->{'postinst'} = shift }
++  return $self->{'postinst'};
++}
++sub postrm {
++  my $self = shift;
++  if (@_) { $self->{'postrm'} = shift }
++  return $self->{'postrm'};
++}
+ sub revision {
+   my $self = shift;
+   if (@_) { $self->{'revision'} = shift }
+Index: tlpkg/TeXLive/TLUtils.pm
+===================================================================
+--- tlpkg/TeXLive/TLUtils.pm	(revision 11393)
++++ tlpkg/TeXLive/TLUtils.pm	(working copy)
+@@ -64,6 +64,8 @@
+   TeXLive::TLUtils::conv_to_w32_path($path);
+   TeXLive::TLUtils::give_ctan_mirror($path);
+   TeXLive::TLUtils::tlmd5($path);
++  TeXLive::TLUtils::run_postinst_code($tlpobj, @args);
++  TeXLive::TLUtils::run_postrm_code($tlpobj, @args);
+ 
+ =head1 DESCRIPTION
+ 
+@@ -112,6 +114,8 @@
+     &welcome_paths
+     &give_ctan_mirror
+     &tlmd5
++    &run_postinst_code
++    &run_postrm_code
+   );
+   @EXPORT = qw(setup_programs download_file info log debug ddebug dddebug
+                tlwarn process_logging_options win32);
+@@ -1924,6 +1928,26 @@
+   }
+ }
+ 
++sub run_postinst_code {
++  my $tlpobj = shift;
++  _run_code_block($tlpobj->postinst, @_) if $tlpobj->postinst;
++}
++
++sub run_postrm_code {
++  my $tlpobj = shift;
++  _run_code_block($tlpobj->postrm, @_) if $tlpobj->postrm;
++}
++
++sub _run_code_block {
++  my $code = shift;
++  my $fun = "sub temp_fun_texlive_run_code_block { $code } ";
++  eval $fun;
++  my $ret = eval { temp_fun_texlive_run_code_block(@_); };
++  undef &temp_fun_texlive_run_code_block;
++  return $ret;
++}
++
++
+ #############################################
+ #
+ # Taken from Text::ParseWords
+Index: tlpkg/tlpsrc/xetex.tlpsrc
+===================================================================
+--- tlpkg/tlpsrc/xetex.tlpsrc	(revision 11393)
++++ tlpkg/tlpsrc/xetex.tlpsrc	(working copy)
+@@ -23,4 +23,56 @@
+ binpattern f bin/win32/fc-*
+ binpattern f bin/win32/icu*.dll
+ depend xetexconfig
+-
++postinst \
++  my ($texdir, $texdirw, $texmfsysvar) = @_;			\
++  if (!defined($texmfsysvar)) {					\
++    $texmfsysvar = `kpsewhich -var-value=TEXMFSYSVAR`;		\
++    chomp($texmfsysvar);					\
++  }								\
++  if (-r "$texdir/bin/win32/conf/fonts.conf") {			\
++    mkdirhier("$texmfsysvar/fonts");				\
++    TeXLive::TLUtils::rmtree("$texmfsysvar/fonts/conf");	\
++    TeXLive::TLUtils::rmtree("$texmfsysvar/fonts/cache");	\
++    my @cpycmd;							\
++    if (win32()) {						\
++      push @cpycmd, "xcopy", "/e", "/i", "/q", "/y";		\
++    } else {							\
++      push @cpycmd, "cp", "-R";					\
++    }								\
++    system(@cpycmd,						\
++             (win32() ? conv_to_w32_path("$texdir/bin/win32/conf") :	\
++                       "$texdir/bin/win32/conf"),			\
++             (win32() ? conv_to_w32_path("$texmfsysvar/fonts/conf") :	\
++                       "$texmfsysvar/fonts/conf"));			\
++    system(@cpycmd,							\
++             (win32() ? conv_to_w32_path("$texdir/bin/win32/cache") :	\
++                       "$texdir/bin/win32/cache"),			\
++             (win32() ? conv_to_w32_path("$texmfsysvar/fonts/cache") :	\
++                       "$texmfsysvar/fonts/cache"));			\
++    if (open(FONTSCONF, "<$texdir/bin/win32/conf/fonts.conf")) {	\
++      my @lines = <FONTSCONF>;						\
++      close(FONTSCONF);							\
++      if (open(FONTSCONF, ">$texmfsysvar/fonts/conf/fonts.conf")) {	\	
++        my $winfontdir;							\
++        if (win32()) {							\
++          $winfontdir = $ENV{'SystemRoot'}.'/fonts';			\	
++          $winfontdir =~ s!\\!/!g;					\
++          }								\
++        }								\
++        foreach (@lines) {						\
++          $_ =~ s!c:/Program Files/texlive/2008!$texdir!;		\
++          $_ =~ s!c:/windows/fonts!$winfontdir! if win32();		\
++          print FONTSCONF;						\
++        }								\
++        close(FONTSCONF);						\
++      } else {								\
++        warn("Cannot open $texmfsysvar/fonts/conf/fonts.conf for writing\n"); \
++      }									\
++    } else {								\
++      warn("Cannot open $texdir/bin/win32/conf/fonts.conf\n");		\
++    }									\
++  }									\
++  if (win32()) {							\
++    info("Running fc-cache -v -r\n");					\
++    log(`fc-cache -v -r 2>&1`);						\
++  }									

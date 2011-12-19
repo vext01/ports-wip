@@ -1,0 +1,6 @@
+category Collection
+shortdesc Swedish
+longdesc Support for typesetting Swedish.
+depend swebib
+depend hyphen-swedish
+depend collection-basic

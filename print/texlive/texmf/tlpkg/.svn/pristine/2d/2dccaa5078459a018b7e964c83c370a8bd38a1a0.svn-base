@@ -1,0 +1,3 @@
+category TLCore
+docpattern f texmf/doc/man/man1/tcdialog.*
+binpattern f/!amd64-freebsd,i386-freebsd bin/${ARCH}/tcdialog

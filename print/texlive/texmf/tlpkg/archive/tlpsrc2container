@@ -1,0 +1,176 @@
+#!/usr/bin/env perl
+# $Id: tlpsrc2container 11096 2008-10-28 23:50:25Z preining $
+# create container file(s) for all tlpsrc arguments
+# 
+# Copyright 2007, 2008 Norbert Preining
+# This file is licensed under the GNU General Public License version 2
+# or any later version.
+
+BEGIN {
+  $^W = 1;
+  chomp ($mydir = `dirname $0`);
+  unshift (@INC, "$mydir/..");
+}
+
+use strict;
+
+use TeXLive::TLPSRC;
+use TeXLive::TLPOBJ;
+use TeXLive::TLTREE;
+use TeXLive::TLUtils;
+use Cwd;
+use Getopt::Long;
+use Pod::Usage;
+use File::Path;
+
+
+my $opt_all = 0;
+chomp (my $opt_master = `cd $::mydir/../.. && pwd`);
+my $opt_catalogue = "";
+my $opt_type = "zip";
+my $opt_outputdir = "./zip";
+my $help = 0;
+
+TeXLive::TLUtils::process_logging_options();
+
+GetOptions(
+		"all!" => \$opt_all,
+    "master=s" => \$opt_master,	# location of the tree
+    "catalogue=s" => \$opt_catalogue, # location of the TeX Catalogue
+    "outputdir=s" => \$opt_outputdir,
+    "type=s"      => \$opt_type,
+    "help|?" => \$help) or pod2usage(1);
+
+pod2usage(-exitstatus => 0, -verbose => 2) if $help;
+
+exit(&main ());
+
+sub main
+{
+  if (! -d "$opt_master") {
+	  die "$0: Master $opt_master not a directory, goodbye.\n";
+  }
+
+	if (! -d "$opt_outputdir") {
+		mkpath("$opt_outputdir") or die "Cannot mkdir $opt_outputdir!";
+	}
+  # we have an relative zipdir, so we have to make it absolute
+  my $cwd = &getcwd;
+  if ("$opt_outputdir" !~ m@^/@) {
+    $opt_outputdir = "$cwd/$opt_outputdir";
+  }
+
+	my $tlc = undef;
+	if (! -d $opt_catalogue) {
+		info("$0: -c /Cat/a/logue not given, continuing without it.\n");
+	} else {
+		require TeXLive::TeXCatalogue;  # not at compile time, for now anyway.
+		info("$0: reading TeX Catalogue tree $opt_catalogue ...\n");
+		$tlc = TeXLive::TeXCatalogue->new( "location" => $opt_catalogue );
+	}
+	
+	# if we're regenerating the whole thing, get all our tlpsrc files.
+	if ($opt_all) {
+		my $tlpsrc_dir = "$opt_master/tlpkg/tlpsrc";
+		chdir ($tlpsrc_dir) || die "chdir($tlpsrc_dir) failed: $!";
+		@ARGV = glob ("*.tlpsrc");
+	}
+
+	info("$0: reading Master tree $opt_master ...\n");
+	my $tltree = TeXLive::TLTREE->new( "svnroot" => $opt_master );
+	$tltree->init_from_svn;
+
+	my $last = "";
+	my $src_count = 0;
+	foreach my $f (@ARGV) {
+		if ($opt_all) { # progress report
+			my $first = lc (substr ($f, 0, 1));
+			if ($first ne $last) {
+				print STDERR "$first ";
+				$last = $first;
+			}
+			$src_count++;
+		}
+		my $tlsrc = new TeXLive::TLPSRC;
+		$tlsrc->from_file($f);
+		my $tlp = $tlsrc->make_tlpobj($tltree);
+
+		if ($tlc) {
+			# merge TeX Catalogue information
+			$tlp->update_from_catalogue ($tlc);
+		}
+
+		$tlp->make_container($opt_type,$opt_master,$opt_outputdir);
+	}
+	warn "\n";
+
+	return 0;
+}
+
+__END__
+
+=head1 NAME
+
+tlpsrc2container - create container file(s) from tlpsrc files
+
+=head1 SYNOPSIS
+
+tlpsrc2container [OPTION]... [TLPSRC]...
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<-all>
+Generate container files for all .tlpsrc files in C<Master/tlpkg/tlpsrc/*.tlpsrc>.
+
+=item B<-outputdir> I<outputdir>
+The location where created container files are placed, defaults to ./zip.
+
+=item B<-master> I<Master_dir>
+The location given by B<-master> must point to a valid svn repository
+of TeX Live Master direcory. Defaults to C<../..> of C<$0>.
+
+=item B<-catalogue> I<Catalogue_dir>
+The location given by B<-catalogue> must point to a valid TeX Catalogue.
+No default value. If given, the included tlpobj files will contain information
+gathered from the TeX Catalogue.
+
+=item B<-type> I<zip|lzma>
+Specifies the type of container to be used. C<zip> generates zip files,
+while C<lzma> generates .tar.lzma files.
+
+=back
+
+The standard options C<-help> and C<-debug> are also accepted.
+See the tlpfiles documentation for details.
+
+
+=head1 DESCRIPTION
+
+To distribute packages over the network and on installation media the 
+packages are wrapped into container files. These container are either 
+simple zip files or tar.lzma file containing all the files of the package.
+
+B<tlpsrc2container> converts TeX Live Package Source files (tlpsrc) into 
+container files containing all the files in the package.
+
+If a TeX Catalogue hierarchy is specified, additional information from
+the catalogue are merged into the database (see L<TeXLive::TLPOBJ> for
+the list of included information from the TeX Catalogue).
+
+
+=head1 AUTHORS AND COPYRIGHT
+
+This script and its documentation were written for the TeX Live
+distribution (L<http://tug.org/texlive>) and both are licensed under the
+GNU General Public License Version 2 or later.
+
+=cut
+
+### Local Variables:
+### perl-indent-level: 2
+### tab-width: 2
+### indent-tabs-mode: nil
+### End:
+# vim:set tabstop=2 expandtab: #

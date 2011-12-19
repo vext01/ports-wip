@@ -1,0 +1,2 @@
+# this file specifies (non-critical) packages which should not be
+# updated on tlnet for whatever reason.  It's used by tl-update-containers.

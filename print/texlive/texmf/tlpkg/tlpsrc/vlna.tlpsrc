@@ -1,0 +1,4 @@
+category TLCore
+docpattern f texmf/doc/vlna/*
+docpattern f texmf/doc/man/man1/vlna.*
+binpattern f bin/${ARCH}/vlna

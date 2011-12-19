@@ -1,0 +1,3 @@
+binpattern f bin/${ARCH}/perltex
+docpattern +f texmf/doc/man/man1/perltex.*
+

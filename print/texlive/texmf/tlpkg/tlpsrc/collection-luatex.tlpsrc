@@ -1,0 +1,22 @@
+category Collection
+shortdesc LuaTeX packages
+longdesc Packages for LuaTeX, a Unicode-aware extension of pdfTeX, using Lua 
+longdesc as an embedded scripting and extension language. http://luatex.org/
+#
+depend collection-basic
+#
+depend interpreter
+depend luabibentry
+depend luacode
+depend luaindex
+depend luainputenc
+depend lualatex-doc
+depend lualatex-math
+depend lualibs
+depend luamplib
+depend luaotfload
+depend luapersian
+depend luasseq
+depend luatexbase
+depend luatextra
+depend showhyphens

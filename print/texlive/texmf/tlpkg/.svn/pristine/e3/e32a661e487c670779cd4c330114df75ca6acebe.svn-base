@@ -1,0 +1,6 @@
+category Collection
+shortdesc Windows support programs
+longdesc Utilities for Windows, since they are not readily available there:
+longdesc chktex, unzip, wget, xpdf, and the dviout previewer.
+depend wintools.win32
+depend dviout.win32

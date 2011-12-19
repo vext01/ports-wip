@@ -1,0 +1,6 @@
+category Collection
+shortdesc Czech/Slovak documentation
+depend lshort-czech
+depend lshort-slovak
+depend texlive-cz
+depend collection-documentation-base

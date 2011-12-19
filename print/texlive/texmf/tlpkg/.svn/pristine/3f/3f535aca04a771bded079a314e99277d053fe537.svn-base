@@ -1,0 +1,10 @@
+category Collection
+shortdesc GNU Texinfo
+longdesc TeX macros for the GNU Texinfo documentation system.  The programs
+longdesc and documentation are no longer distributed with TeX Live; get
+longdesc the original Texinfo package for your system.
+# Even though collection-texinfo is tiny now, we'll leave it as a
+# separate collection for the benefit of distributors and others who
+# want it, but not all the other random stuff that is in formatsextra.
+depend texinfo
+depend collection-basic

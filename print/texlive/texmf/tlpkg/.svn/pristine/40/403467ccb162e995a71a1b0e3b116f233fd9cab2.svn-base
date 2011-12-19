@@ -1,0 +1,26 @@
+category TLCore
+depend hyphen-base
+depend hyph-utf8
+shortdesc English hyphenation patterns.
+longdesc Additional hyphenation patterns for American and British
+longdesc English in ASCII encoding.  The American English patterns
+longdesc (usenglishmax) greatly extend the standard patterns from Knuth
+longdesc to find many additional hyphenation points.  British English
+longdesc hyphenation is completely different from US English, so has its
+longdesc own set of patterns.
+#catalogue-version 1.0a
+execute AddHyphen \
+	name=ukenglish synonyms=british,UKenglish \
+	lefthyphenmin=2 \
+	righthyphenmin=3 \
+	file=loadhyph-en-gb.tex \
+	file_patterns=hyph-en-gb.pat.txt \
+	file_exceptions=hyph-en-gb.hyp.txt
+execute AddHyphen \
+	name=usenglishmax \
+	lefthyphenmin=2 \
+	righthyphenmin=3 \
+	file=loadhyph-en-us.tex \
+	file_patterns=hyph-en-us.pat.txt \
+	file_exceptions=hyph-en-us.hyp.txt
+

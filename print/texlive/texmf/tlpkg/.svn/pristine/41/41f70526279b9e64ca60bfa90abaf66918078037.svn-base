@@ -1,0 +1,13 @@
+category TLCore
+depend glyphlist
+depend dvipdfmx-def
+postaction script file=tlpkg/tlpostcode/dvipdfmx.pl
+runpattern f tlpkg/tlpostcode/dvipdfmx.pl
+runpattern d texmf/dvipdfmx
+runpattern d texmf/fonts/cmap
+runpattern d texmf/fonts/map/dvipdfmx
+binpattern f bin/${ARCH}/dvipdfmx
+binpattern f bin/${ARCH}/ebb
+binpattern f bin/${ARCH}/extractbb
+docpattern f texmf/doc/man/man1/extractbb*
+docpattern d texmf/doc/dvipdfmx

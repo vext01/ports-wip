@@ -1,0 +1,18 @@
+split-desktop-integration
+
+I have implemented one additional installer option (and support in tlmgr)
+that splits the current
+        desktop_integration
+which currently relates to both shortcuts on the desktop and in the menu
+into two options:
+        desktop_integration
+        menu_integration
+that do one thing.
+
+Support is written for the installer (text, perltk, wizard), and tlmgr
+(changing the settings).
+
+Karl mentioned that both options should be here, but menu_integration
+should *not* be visible for the user at installation time, and should
+only be used by $portable.
+

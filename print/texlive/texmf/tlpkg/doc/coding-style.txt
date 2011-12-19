@@ -1,0 +1,116 @@
+$Id: coding-style.txt 22805 2011-06-05 23:24:35Z karl $
+Public domain.
+
+This is all trying to record our general conventions, not absolute
+rules.  Aside from personal preferences, sometimes exceptions are necessary.
+
+
+* In general, it's best to start scripts #!/usr/bin/env perl.
+
+
+* Start the code with the various require and use statements,
+our variables, etc., and then:
+
+exit (&main ());
+
+sub main {
+  ...
+  return 0;
+}
+
+This avoids the temptation to put an ever-growing amount of code at the
+top level.  It is better to have the top-level code inside a subroutine.
+
+
+* The Perl "unless" keyword is cute but mind-bending.  Use "if !" instead.
+
+
+* Use "/" as the delimiter of first choice for regular expressions.  When
+the regex includes a /, use ",".  When it includes both "/" and ",", use "!".
+
+
+* In the absence of prototypes, try to order routines in a given file
+top-down rather than bottom-up.  So main would come first.
+
+
+* Normal indentation is two spaces per level.
+Put a space around operators (=, =~, +, etc.).
+Put a space between arguments of function calls.
+Karl puts a space before the ( of function calls but no one else does :).
+
+
+* Handle subroutine arguments like this:
+
+sub foo {
+  my ($arg1,$arg2,@rest) = @_;
+  ...
+}
+
+Use this in preference to `shift' even when there is only one argument.
+It takes up only one line, which is good.  And if the number of
+arguments to the function later changes, text changes are minimized.
+
+
+* It looks strange to write hash keys as if they were keywords (although
+it is certainly common Perl practice to do so).  Instead, write them as
+strings:
+    my $foo = $h->{"key"};
+for a reminder that these are not keywords or subroutine names.
+
+OTOH, no need to go so far as to use escaped quotes in already-quoted
+contexts such as
+  print "foo is $h->{key}\n";
+Perl does the right thing here without painful \" constructs, so take
+advantage of it.
+
+
+* In the absence of prototypes, consider writing &foo() instead of foo()
+for user-defined subroutine calls, also to be a reminder that these are
+not Perl keywords.
+
+
+* Similarly, Perl lets you omit parentheses around function calls and/or
+primitives in many situations.  As a rule, don't do this.  It is far
+clearer to use parens when there's a function call.  Exceptions for
+these primitives: exists, defined, die, warn, and print and relatives.
+
+
+* The above is essentially the recommendation of the GNU coding standards
+for C (http://gnu.org/prep/standards).  The one exception is the
+standards' recommendation of putting braces on lines by themselves, thus
+eating up precious vertical space.  Do not do that.
+
+
+* Exporting symbols and keeping namespaces clean:
+
+In general, the only things which should be in @EXPORT are those
+which are needed nearly universally, such as debug and log.  Barewords
+like somefunc are preferable to prefixed &somefunc.
+
+In contrast, EXPORT_OK should list all the "public" symbols (but not
+private ones) of a module.  It is good to list them in the same order as
+they are defined in the file, since that both makes it obvious where a
+new symbol should be added, and provides a sort of check that all and
+only the right symbols are there.  The EXPORT symbols need not and
+should not be listed again in EXPORT_OK.
+
+Then, use TeXLive::SomeModule;
+will import all the EXPORT (but not EXPORT_OK) symbols.
+
+If you need to import a few EXPORT_OK's in addition to the EXPORT's
+use TeXLive::SomeModule (:DEFAULT oksym1 oksym2);
+instead of redundantly listing the @EXPORT symbols.
+
+If you only use a symbol once or twice, don't import it at all.  Just
+use TeXLive::SomeModule::somesym.  This has the advantage that someone
+reading the source will know immediately where it comes from, and that
+it's not local.  This is especially useful with $variables, which our
+brains tend to think of as "local".
+
+If you want to import every single EXPORT_OK symbol,
+use TeXLive::SomeModule (/./);
+should do it (I've never actually tried it).  This is certainly far
+better than explicitly listing every symbol again.
+
+Documentation:
+http://search.cpan.org/~ferreira/Exporter-5.63/lib/Exporter.pm

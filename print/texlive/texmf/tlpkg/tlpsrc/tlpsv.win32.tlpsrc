@@ -1,0 +1,14 @@
+category TLCore
+shortdesc Cross-platform PostScript and PDF previewer (PS_view, psview, psv)
+longdesc See http://psview.sf.net for information and downloads.
+longdesc TeX Live includes executables only for Windows.
+
+# we use runpattern here so that no different binfiles entries for
+# all the archs are created
+binpattern f/win32 bin/win32/psv
+runpattern d tlpkg/tlpsv
+postaction shortcut type=menu name="PS_View" cmd=TEXDIR/bin/win32/psv.exe
+postaction filetype name=TL.PSView.view cmd='"TEXDIR/bin/win32/psv.exe" "%1"'
+postaction fileassoc extension=.eps filetype=TL.PSView.view
+postaction fileassoc extension=.ps filetype=TL.PSView.view
+postaction fileassoc extension=.pdf filetype=TL.PSView.view

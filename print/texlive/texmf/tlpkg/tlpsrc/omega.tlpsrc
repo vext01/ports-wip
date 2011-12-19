@@ -1,0 +1,10 @@
+execute addMap omega.map
+runpattern d texmf-dist/dvips/omega
+runpattern d texmf-dist/tex/generic/omegahyph
+runpattern d texmf-dist/tex/plain/omega
+runpattern f texmf-dist/tex/generic/encodings/*.onm
+runpattern t texmf-dist fonts omega
+runpattern t texmf-dist omega char2uni
+runpattern t texmf-dist omega omega
+runpattern t texmf-dist omega uni2char
+docpattern d texmf-dist/doc/omega/base

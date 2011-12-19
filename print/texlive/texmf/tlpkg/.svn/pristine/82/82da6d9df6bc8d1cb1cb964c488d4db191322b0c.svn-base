@@ -1,0 +1,12 @@
+category Collection
+shortdesc Extra formats
+longdesc Collected TeX `formats', i.e., large-scale macro packages
+longdesc designed to be dumped into .fmt files, other than most common
+longdesc ones, such as latex and context.
+depend edmac
+depend eplain
+depend mltex
+depend psizzl
+depend startex
+depend texsis
+depend collection-basic

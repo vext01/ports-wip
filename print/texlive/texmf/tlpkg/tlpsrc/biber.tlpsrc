@@ -1,0 +1,6 @@
+binpattern  f/!\
+alpha-linux,amd64-kfreebsd,\
+i386-kfreebsd,i386-netbsd,\
+mips-irix,powerpc-aix,powerpc-linux,\
+sparc-linux,sparc-solaris\
+  bin/${ARCH}/biber

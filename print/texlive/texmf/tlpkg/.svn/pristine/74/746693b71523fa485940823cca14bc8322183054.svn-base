@@ -1,0 +1,12 @@
+category TLCore
+shortdesc Internal Perl for Windows.
+longdesc TeX Live includes Perl for Windows, but it is intended only for
+longdesc internal use by TeX Live programs, and should not be used 
+longdesc as a general system program.  Installing your own Perl for
+longdesc that.  See http://perl.org.
+
+runpattern f tlpkg/tlperl/README.TEXLIVE
+runpattern d tlpkg/tlperl/lib
+# we use runpattern here so that no different binfiles entries for
+# all the archs are created
+runpattern d tlpkg/tlperl/bin

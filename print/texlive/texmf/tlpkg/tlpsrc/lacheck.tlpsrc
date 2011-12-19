@@ -1,0 +1,3 @@
+category TLCore
+runpattern f texmf/doc/man/man1/lacheck.*
+binpattern f bin/${ARCH}/lacheck

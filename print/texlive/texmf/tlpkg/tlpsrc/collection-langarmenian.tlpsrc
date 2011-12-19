@@ -1,0 +1,4 @@
+category Collection
+shortdesc Armenian
+longdesc Support for typesetting Armenian.
+depend collection-basic

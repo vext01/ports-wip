@@ -1,0 +1,5 @@
+category Collection
+shortdesc US and UK English
+longdesc Support for typesetting US and UK English.
+depend hyphen-english
+depend collection-basic

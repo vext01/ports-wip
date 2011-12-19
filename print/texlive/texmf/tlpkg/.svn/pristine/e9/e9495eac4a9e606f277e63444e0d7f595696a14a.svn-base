@@ -1,0 +1,4 @@
+category Collection
+shortdesc Korean documentation
+depend lshort-korean
+depend collection-documentation-base

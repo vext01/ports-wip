@@ -1,0 +1,7 @@
+depend tex
+execute AddFormat name=amstex engine=pdftex \
+                  options="-translate-file=cp227.tcx *amstex.ini"
+#
+docpattern +f texmf/doc/man/man1/amstex.*
+#
+binpattern f bin/${ARCH}/amstex

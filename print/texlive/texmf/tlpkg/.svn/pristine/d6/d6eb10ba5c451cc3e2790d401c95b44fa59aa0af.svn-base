@@ -1,0 +1,17 @@
+category Collection
+shortdesc Polish
+longdesc Support for typesetting Polish.
+depend cc-pl
+depend gustlib
+depend gustprog
+depend mex
+depend mwcls
+depend pl
+depend polski
+depend przechlewski-book
+depend qpxqtx
+depend tap
+depend utf8mex
+depend hyphen-polish
+depend collection-latex
+depend collection-basic

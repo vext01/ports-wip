@@ -1,0 +1,2 @@
+binpattern f bin/${ARCH}/mf2pt1
+docpattern +f texmf/doc/info/mf2pt1.info

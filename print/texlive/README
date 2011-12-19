@@ -1,0 +1,38 @@
+$OpenBSD: README,v 1.4 2011/12/05 23:25:46 sthen Exp $
+
+TeX Live 2011 - Porting progress.
+---------------------------------------
+
+ * Get base compilers working:			done
+ * Test build works.			
+   -> amd64					done
+   -> i386					done
+   -> sparc64					done
+   -> others, anyone?				XXX
+ * Do texmf split (see texmf/files/rblatter)	done
+ * Move manuals and pdf manuals			done
+ * Remove external deps				done
+   -> texworks					done
+   -> latexmk					done
+   -> asymptote					done
+ * Remove windows junk				done
+ * Get basic texmf packaging:			done
+ * Re-add depenedencies:			done
+ * Hack configs for subsets:			done
+   -> hack texmf.cnf:				done
+ * Implement @xxx in plists			done
+ * emulate texlinks				done
+ * patch in ruby/python versions for texexec	done
+ * Pull in perl modules needed for updmap	done
+ * Generate texmf-var pregen			done
+   (all as root) 'mktexlsr', 'fmtutil-sys --all',
+     'updmap-sys', rm ls-R and tar up texmf-var
+ * Apply any security/reliability patches	done
+   Search here: http://tug.org/pipermail/tldistro/
+ * Test lots:					XXX
+ * @comment manpages conflicting with t1utils	done
+ * Mark manpages with @man in PLIST		XXX
+
+--- KNOWN ISSUES ---
+
+None *yet*

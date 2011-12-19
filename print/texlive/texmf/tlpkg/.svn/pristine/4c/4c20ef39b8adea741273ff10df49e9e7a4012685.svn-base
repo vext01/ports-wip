@@ -1,0 +1,4 @@
+category TLCore
+binpattern f bin/${ARCH}/synctex
+docpattern f texmf/doc/man/man1/synctex.*
+docpattern f texmf/doc/man/man5/synctex.*

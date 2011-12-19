@@ -1,0 +1,5 @@
+category Collection
+shortdesc Dutch
+longdesc Support for typesetting Dutch.
+depend hyphen-dutch
+depend collection-basic

@@ -1,0 +1,11 @@
+execute addMap dgj.map
+execute addMap dmj.map
+execute addMap mc2j.map
+execute addMap mcj.map
+execute addMap mr2j.map
+execute addMap mrj.map
+#
+# these are part of the cjk package, despite being in a wadalab subdir.
+srcpattern +!d texmf-dist/source/latex/cjk/contrib/wadalab
+runpattern +!d texmf-dist/tex/latex/cjk/contrib/wadalab
+docpattern +!d texmf-dist/source/latex/cjk/contrib/wadalab

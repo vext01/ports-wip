@@ -1,0 +1,6 @@
+category Collection
+shortdesc Hungarian
+longdesc Support for typesetting Hungarian.
+depend magyar
+depend hyphen-hungarian
+depend collection-basic

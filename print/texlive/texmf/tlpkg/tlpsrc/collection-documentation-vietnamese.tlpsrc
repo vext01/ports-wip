@@ -1,0 +1,6 @@
+category Collection
+shortdesc Vietnamese documentation
+depend amsldoc-vn
+depend lshort-vietnamese
+depend ntheorem-vn
+depend collection-documentation-base

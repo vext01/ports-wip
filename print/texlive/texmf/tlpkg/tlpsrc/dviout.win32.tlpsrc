@@ -1,0 +1,8 @@
+category TLCore
+binpattern d/win32 tlpkg/dviout
+binpattern f/win32 bin/win32/dviout
+postaction shortcut type=menu name="DVIOUT DVI viewer" \
+                      cmd=TEXDIR/bin/win32/dviout.exe 
+postaction filetype name=TL.DVIOUT.view \
+                      cmd='"TEXDIR/bin/win32/dviout.exe" "%1"'
+postaction fileassoc extension=.dvi filetype=TL.DVIOUT.view

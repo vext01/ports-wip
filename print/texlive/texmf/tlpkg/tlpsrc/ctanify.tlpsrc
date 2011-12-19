@@ -1,0 +1,2 @@
+docpattern +f texmf/doc/man/man1/ctanify.*
+binpattern f bin/${ARCH}/ctanify

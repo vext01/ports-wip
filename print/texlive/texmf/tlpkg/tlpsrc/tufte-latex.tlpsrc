@@ -1,0 +1,8 @@
+# ordinarily we don't do such detailed package-package dependencies, but
+# since a user (Steve Harris) did all the research, ok.
+depend xifthen
+depend ifmtarg
+depend changepage
+depend paralist
+depend sauerj
+depend placeins

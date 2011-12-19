@@ -1,0 +1,57 @@
+\documentclass{article}
+\pagestyle{empty}
+\parindent 0pt
+\begin{document}
+\tiny
+\begin{verbatim}
+=================> TeX Live installation procedure <================
+
+==> Note: Letters/digits in <angle brackets> indicate menu items <==
+==>       for commands or configurable options                   <==
+
+ Proposed platform: Intel x86_64 with GNU/Linux
+ 
+ <B> binary systems: 1 out of 15
+
+ <S> Installation scheme (scheme-full)
+
+ Customizing installation scheme:
+   <C> standard collections
+   <L> language collections
+   83 collections out of 84, disk space required: 1426 MB
+
+ <D> directories:
+   TEXDIR (the main TeX directory):
+     /usr/local/texlive/2008
+   TEXMFLOCAL (directory for site-wide local files):
+     /usr/local/texlive/texmf-local
+   TEXMFSYSVAR (directory for variable and automatically generated data):
+     /usr/local/texlive/2008/texmf-var
+   TEXMFSYSCONFIG (directory for local config):
+     /usr/local/texlive/2008/texmf-config
+   TEXMFHOME (directory for user-specific files):
+     ~/texmf
+
+ <O> options:
+   [ ] use letter size instead of A4 by default
+   [X] create all format files
+   [X] install macro/font doc tree
+   [X] install macro/font source tree
+   [ ] create symlinks in standard directories
+
+ <V> set up for running from DVD
+
+Other options:
+====================================================================
+ <I> start installation to hard disk
+ <H> help
+ <Q> quit
+
+Enter command:  
+\end{verbatim}
+\end{document}
+
+latex install08text.tex
+dvips -E install08text.dvi
+epstopdf install08text.ps
+

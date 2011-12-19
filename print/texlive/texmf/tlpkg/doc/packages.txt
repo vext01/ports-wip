@@ -1,0 +1,152 @@
+$Id: packages.txt 23925 2011-09-12 23:55:56Z karl $
+Public domain.
+
+See http://tug.org/texlive/pkgupdate.html (and scripts) for information
+on the CTAN-to-TL update process.
+
+To add a new platform:
+- check that the config.guess output maps to our architecture name
+  in the `platform' routine in TeXLive/TLUtils.pm.
+- add the abbreviation to the full-name mapping in `platform_desc'.
+- create directory in Master/bin and add at least one file.
+- add xz, xzdec, maybe wget binaries in Master/tlpkg/installer.
+- update .tlpsrc files if necessary.
+- regenerate tlpdb.
+
+To remove a platform:
+- remove directory in Master/bin.
+- remove xz, xzdec, maybe wget binaries in Master/tlpkg/installer.
+- remove any special cases in Master/tlpkg/tlpsrc.
+- rebuild.
+
+To remake tlcritical from scratch:
+ cd /home/ftp/texlive
+ rm -rf tlcritical
+ mkdir tlcritical
+ tl-update-tlcritical --recreate
+ 
+
+Coordinate schedule with:
+ engine people, LaTeX people, GUST font people
+ general lists
+
+Really test during pretest:
+  .fmt's sharable across endian-different platforms (including luatex).
+  interactive mf '\drawdot (50,50); showit;'
+
+When finalizing sources:
+  version numbers and years and copyright years in:
+  top level version.ac
+  dvips:    configure.ac NEWS dvips.c dvips.h afm2tfm.c dvips.texi
+  kpathsea: configure.ac NEWS kpsewhich.c kpathsea.texi
+  web2c:    NEWS lib/printversion.c web2c.texi
+  ptexenc:  configure.ac
+  texmf.cnf (both Build and Master), texmfcnf.lua (Master)
+  install-tl, tlmgr.pl (copyright only)
+
+Final release:
+  fix release-texlive.txt, .mkisofsrc.
+  in Master: update texinfos, man pages+pdfs.
+  update web pages, including arch list and doc translation list in doc.html.
+  also including portable-anchor.html this year.
+  after: copy bugs.html to historic/YYYY-1/bugs.html, rm tugstyle.css
+  peb + laurens: no commits
+
+
+
+When updating the release version (for testing, in advance of the actual
+release), the default network directory specified in tl-update-tlnet,
+TLConfig.pm, and release-texlive-txt.  Change those.  Then make the new
+directory, copy in tlpkg/texlive.tlpdb but remove the
+00texlive.installer stanza; tl-update-tlnet will make everything else.
+But consider mv-ing the old directory so as not to actually make new
+containers.  Coordinate with CTAN.
+
+
+Making the big release:
+
+- Live unmount:
+umount /home/ftp/texlive/Contents/live
+
+hx=/home/ftp/historic/systems/texlive
+prev=2010
+this=2011
+mkdir $hx/$this
+
+cd /home/ftp/texlive/Images
+cp README.html $hx/$prev/
+mv *.iso* $hx/$prev/
+mv test/*.iso* .
+mv test/texlive*.tar.xz* $hx/$this/  # tar version only from historic
+update README and test/README
+rm texlivetest.iso
+
+cd /home/ftp/texlive/tlnet
+mkdir $hx/$prev/tlnet
+cd /home/ftp/texlive/tlnet
+cp README $hx/$prev/tlnet/
+mv [a-z]* $hx/$prev/tlnet/
+mv ../tlpretest/[a-z]* .
+mv mactex*   # deal with mactex below
+update README and ../tlpretest/README
+
+cd /home/httpd/html/texlive
+mkdir $hx/$prev/web
+cp *.html !$
+
+
+- tug.org stuff:
+do full install to default location.
+rm /usr/local/texlive-rel; ln -s texlive/$this /usr/local/texlive-rel
+create source/ subdir, cp texlive-*-source.tar.xz and w32tex-src.tar.xz
+change /etc/fstab, mount /home/ftp/texlive/Contents/live.
+update ~www/texlive web pages (search for $prev):
+  acquire* - general
+  bugs.html - general
+  doc.html - platform list
+  quickinstall.html - paths
+  w32client.html - new .zip needed
+update historic/systems with final proTeXt and MacTeX, when ready.
+update TUG member area with CTAN snapshot, when ready.
+update TUG home page.
+
+- announcements:
+Dick Koch @ updating MacTeX.
+CTAN @ re-enabling tlnet mirroring.
+Manfred @ making TeX Collection DVD.
+Martin @ torrents.
+pretest mirror admins @ done till next year (~www/texlive/mirmon/tl*.txt).
+
+- make tag + branch:
+svn copy -r 23181 -m'texlive-2011.0 tag based on r23181' svn://tug.org/texlive/trunk svn://tug.org/texlive/tags/texlive-2011.0
+svn copy -r 23181 -m'branch2011 branch based on r23181' svn://tug.org/texlive/trunk svn://tug.org/texlive/branches/branch2011
+
+  It's the same command, just different destinations.
+  http://svnbook.red-bean.com/en/1.5/svn-book.html#svn.branchmerge
+
+  Do both a branch and a tag so that it's possible to easily compare the
+  current state of the branch with its starting point (the tag).
+
+  Then, to check out the branch, so critical source fixes can be applied
+  for the distros:
+cd /home/texlive
+rm -rf branch # if starting a new year on tug
+mkdir branch; cd branch
+svn co file:///home/svn/texlive/branches/branch2011/Build/source . >&out
+
+
+- update ~karl/bin/cron.tl, and reenable when feel ready.
+critical=
+pretest=
+all_frozen=false
+probably wait for net_frozen=false for a couple days
+
+
+
+Different naming convention to branch before a release, for development
+work before we want to switch trunk over:
+svn copy -r 12205 -m'texlive-2009-dev tag based on r12205' svn://tug.org/texlive/trunk svn://tug.org/texlive/tags/texlive-2009-dev
+svn copy -r 12205 -m'branch2009-dev branch based on r12205' svn://tug.org/texlive/trunk svn://tug.org/texlive/branches/branch2009-dev
+
+Use -dev instead of .something because - will sort first, keeping the
+listings in a nice chronological order.

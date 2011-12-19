@@ -1,0 +1,23 @@
+category Collection
+shortdesc Cyrillic
+longdesc Support for typesetting Cyrillic.
+depend cmcyr
+depend cyrillic
+depend cyrillic-bin
+depend cyrplain
+depend disser
+depend eskd
+depend eskdx
+depend gost
+depend lcyw
+depend lh
+depend lhcyr
+depend ruhyphen
+depend russ
+depend t2
+depend ukrhyph
+depend hyphen-bulgarian
+depend hyphen-russian
+depend hyphen-ukrainian
+depend collection-basic
+depend collection-latex

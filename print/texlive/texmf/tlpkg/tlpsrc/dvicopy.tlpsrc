@@ -1,0 +1,3 @@
+category TLCore
+docpattern f texmf/doc/man/man1/dvicopy.*
+binpattern f bin/${ARCH}/dvicopy

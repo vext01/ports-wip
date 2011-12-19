@@ -1,0 +1,4 @@
+srcpattern f ignore
+runpattern d texmf-dist/tex/lambda/base
+runpattern d texmf-dist/tex/lambda/config
+docpattern f ignore

@@ -1,0 +1,35 @@
+depend tex
+depend latex
+depend hyph-utf8
+depend adobemapping
+depend ipaex
+depend japanese
+depend japanese-otf
+#
+execute AddFormat name=ptex   engine=ptex options="ptex.ini"
+execute AddFormat name=eptex  engine=eptex options="*eptex.ini" \
+                              patterns=language.def
+execute AddFormat name=platex engine=eptex options="*platex.ini" \
+                              patterns=language.ptx
+execute addKanjiMap ptex-@kanjiEmbed@.map
+execute addKanjiMap morisawa.map
+#
+binpattern f bin/${ARCH}/eptex
+binpattern f bin/${ARCH}/makejvf
+binpattern f bin/${ARCH}/mendex
+binpattern f bin/${ARCH}/pbibtex
+binpattern f bin/${ARCH}/pdvitype
+binpattern f bin/${ARCH}/platex
+binpattern f bin/${ARCH}/ppltotf
+binpattern f bin/${ARCH}/ptex
+binpattern f bin/${ARCH}/ptftopl
+#
+runpattern +d texmf-dist/pbibtex
+runpattern +d texmf-dist/tex/platex/base
+runpattern +d texmf-dist/tex/platex/config
+runpattern +d texmf-dist/tex/ptexgeneric
+runpattern +!d texmf-dist/tex/generic/hyph-utf8/patterns/ptex
+#
+srcpattern +d texmf-dist/source/platex/base
+#
+docpattern +f texmf/doc/man/man1/mendex.*

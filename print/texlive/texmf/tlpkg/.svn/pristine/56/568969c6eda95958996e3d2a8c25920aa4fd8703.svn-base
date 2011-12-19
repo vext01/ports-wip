@@ -1,0 +1,4 @@
+category Collection
+shortdesc Ukrainian documentation
+depend lshort-ukr
+depend collection-documentation-base

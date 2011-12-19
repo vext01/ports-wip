@@ -1,0 +1,128 @@
+#!/usr/bin/env perl
+# $Id$
+# tlpsrc2tlpobj - convert tlpsrc files (given as arguments) to tlpobj
+# 
+# Copyright 2007, 2008 Norbert Preining
+# This file is licensed under the GNU General Public License version 2
+# or any later version.
+
+BEGIN {
+  $^W = 1;
+  chomp ($mydir = `dirname $0`);
+  unshift (@INC, "$mydir/..");
+}
+
+use strict;
+
+use TeXLive::TLPSRC;
+use TeXLive::TLPOBJ;
+use TeXLive::TLTREE;
+use TeXLive::TLUtils;
+use Getopt::Long;
+use Pod::Usage;
+use File::Path;
+
+my $opt_catalogue = "";
+chomp (my $opt_master = `cd $::mydir/../.. && pwd`);
+my $opt_outputdir = "./tlpobj";
+my $opt_help = 0;
+
+TeXLive::TLUtils::process_logging_options();
+GetOptions(
+    "catalogue=s" => \$opt_catalogue, # location of the TeX Catalogue
+    "master=s" => \$opt_master,	      # location of the tree
+    "outputdir=s" => \$opt_outputdir,
+    "help|?" => \$opt_help) or pod2usage(1);
+pod2usage ('-exitstatus' => 0, '-verbose' => 2) if $opt_help;
+
+die "Master $opt_master not a directory" if ! -d $opt_master;
+if (! -d $opt_outputdir) {
+  mkpath ($opt_outputdir);
+  die "mkdir($opt_outputdir) failed: $!" if ! -d $opt_outputdir;
+}
+
+my $tlc = undef;
+if (! -d "$opt_catalogue") {
+  info ("$0: -d /Cat/a/logue not given, continuing without it.\n");
+} else {
+  require TeXLive::TeXCatalogue;  # not at compile time, for now anyway.
+  $tlc = TeXLive::TeXCatalogue->new ('location' => $opt_catalogue);
+}
+
+my $tltree = TeXLive::TLTREE->new ('svnroot' => $opt_master);
+$tltree->init_from_svn;
+
+foreach my $f (@ARGV) {
+  my $tlsrc = new TeXLive::TLPSRC;
+  $tlsrc->from_file ($f);
+
+  my $tlp = $tlsrc->make_tlpobj ($tltree);
+  if ($tlc) {
+    $tlp->update_from_catalogue ($tlc);
+  }
+
+  my $name = $tlp->name;
+  
+  my $OUT;
+  $OUT = ">$opt_outputdir/$name.tlpobj";
+  open (OUT, $OUT) || die "create($OUT) failed: $!";
+  $tlp->writeout (\*OUT);
+  close (OUT) || warn "close($OUT) failed: $!";
+}
+
+__END__
+
+=head1 NAME
+
+tlpsrc2tlpobj - convert tlpsrc files into tlpobj files
+
+=head1 SYNOPSIS
+
+tlpsrc2tlpobj [OPTION]... [TLPSRC]...
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<-catalogue> I<Catalogue_dir>
+
+The location given by B<-catalogue> must point to a valid TeX Catalogue.
+No default value. If given, the generated tlpobj files will contain
+information gathered from the TeX Catalogue.
+
+=item B<-master> I<Master_dir>
+
+The location given by B<-master> must point to a valid svn repository
+of TeX Live's Master direcory.  Defaults to C<../..> of C<$0>.
+
+=item B<-outputdir> I<output_dir>
+
+Specifies the location where tlpobj files are created; default C<./tlpobj>.
+
+=back
+
+The standard options B<-q>, B<-v>, and B<-logfile>=I<file> are also
+accepted; see the C<process_logging_options> function in
+L<TeXLive::TLUtils> for details.
+
+=head1 DESCRIPTION
+
+B<tlpsrc2tlpobj> converts TeX Live Package Source files (tlpsrc) into 
+TeX Live Package Object files (tlpobj).  The process and the file
+formats are described elsewhere.  See L<TeXLive::TLPSRC> and
+L<TeXLive::TLPOBJ>.
+
+=head1 AUTHORS AND COPYRIGHT
+
+This script and its documentation were written for the TeX Live
+distribution (L<http://tug.org/texlive>) and both are licensed under the
+GNU General Public License Version 2 or later.
+
+=cut
+
+### Local Variables:
+### perl-indent-level: 2
+### tab-width: 2
+### indent-tabs-mode: nil
+### End:
+# vim:set tabstop=2: #

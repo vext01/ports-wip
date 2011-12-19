@@ -1,0 +1,7 @@
+category TLCore
+shortdesc original web programs tangle and weave
+depend kpathsea
+docpattern f texmf/doc/man/man1/tangle.*
+docpattern f texmf/doc/man/man1/weave.*
+binpattern f bin/${ARCH}/tangle
+binpattern f bin/${ARCH}/weave

@@ -1,0 +1,493 @@
+\documentclass{beamer}
+\usefonttheme{serif}
+\usefonttheme{professionalfonts}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hhline,bm,xspace,url}
+\usepackage[expert,seriftt]{lucidabr}
+\renewcommand{\rmdefault}{hlhj}
+\usepackage{fancyvrb}
+\usepackage{url,xcolor}
+\usepackage{marvosym}
+\usepackage{listings}
+\lstset{frame=lines,basicstyle=\ttfamily,showspaces=true,prebreak={\Righttorque},postbreak={\Lefttorque},breaklines}
+\newcommand{\tl}{\TeX~Live}
+\newcommand{\ctan}{CTAN}
+\newcommand{\tpm}{\texttt{tpm}}
+\newcommand{\tpms}{\tpm{}s}
+\newcommand{\tlpsrc}{\texttt{tlpsrc}}
+\newcommand{\tlpsrcs}{\tlpsrc{}s}
+\newcommand{\tlpobj}{\texttt{tlpobj}}
+\newcommand{\tlpobjs}{\tlpobj{}s}
+\newcommand{\tlpdb}{\texttt{tlpdb}}
+\newcommand{\tlpdbs}{\tlpdb{}s}
+
+\hyphenation{infra-struc-ture}
+\DefineShortVerb{\|}
+
+\usetheme[headheight=10pt,footheight=10pt]{boxes}
+\setbeamercolor*{black on white}{bg=white,fg=black}
+%\setbeamerfont*{black on white}{series=\scshape}
+\addfootbox{black on white}{\hbox{\vbox to 10pt{\hspace{3em}Norbert 
+Preining, \tl's new infrastructure -- {\normalfont Bachotek~2008}
+ \hfill \insertframenumber\hspace{3em}~~\vfill}}}
+\addheadbox{black on white}{\hbox{\vbox to 10pt{~~~\hfill\leavevmode\vfill}}}
+\setbeamertemplate{navigation symbols}{}
+
+\setlength{\parskip}{\medskipamount}
+
+\def\cred#1{{\color{red}#1}}
+\def\prog#1{\texttt{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% here begins the stuff
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\tl's new infrastructure}
+\author{Norbert Preining}
+\institute{Vienna University of Technology, Austria}
+\date{\textsc{Bachotek~2008}
+
+Bachotek, Poland \hspace{\bigskipamount} 30~April 2008}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\begin{frame}
+  \frametitle{The \tl\ distribution}
+
+  \begin{itemize}
+  \item includes all the free stuff from \textsc{ctan}
+  \item available for a wide range of platform--operating system
+    combinations
+  \item currently is replacing te\TeX\ in many (Unix) distributions as
+    default \TeX\ system
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Upstream organization}
+  \begin{itemize}
+  \item \textsc{svn} repository where many people have write permissions
+  \item loads of supporting scripts doing a variety of jobs:
+    \begin{itemize}
+    \item preparing the installation for mastering
+    \item installation from various media
+    \item installation of packages from \textsc{ctan} into the
+      \textsc{svn} repository
+    \item performing various checks on the whole archive (coverage,
+      double inclusion, etc.)
+    \end{itemize}
+  \end{itemize}
+
+  \pause
+  \begin{block}{Problems}
+    \begin{itemize}
+    \item hand-crafted, hard to read
+    \item not easily extensible
+    \item no documentation
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Previous infrastructure: tpms}
+  \TeX\ Package Manage[r/ment] files collected a variety of
+  information into on \textsc{xml} file:
+  \begin{itemize}
+  \item file patterns and file lists
+  \item title, description, license, versions
+  \item activation of map files, formats, hyphenation patterns
+  \end{itemize}
+  \pause
+  \begin{block}{Problems with tpms}
+    \begin{itemize}
+    \item mixture of generated and static information
+    \item duplicated information (version, license, descriptions,
+      \ldots) which were outdated
+    \item hard to parse, thus the necessity to generate another set of
+      files for the installer
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Aims of the new infrastructure}
+  \begin{itemize}
+  \item Separation of static from generated content\\
+    Going from a `source' to the `object' should include automatically
+    data from various other sources (mainly the Catalogue and the
+    repository) \pause
+  \item Getting rid of any `additional' files (list files)\\
+    any additional files tend to be outdated, all the necessary
+    information should be present in \emph{one} place and be easily
+    parseable. \pause
+  \item Single package updates via the web\\
+    updates to single packages (e.g., a new beamer release)\pause
+  \item Better documentation\\
+    since \tl\ is replacing te\TeX\ we want to give people
+    incorporating \tl\ into distributions a better documented and
+    easier to handle system
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{The central \texttt{texlive.tlpdb}}
+  One installation or media is now completely described by one file,
+  the \TeX~Live Database:
+  \begin{itemize}
+  \item simple text file -- easily parseable
+  \item revision number for the single packages
+  \item generated from static content (the tlpsrc files)
+  \item enriched with information from the \TeX~Catalogue
+  \item format documented in detail (\textsc{pod} documentation in the
+    respective perl module)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{How does \texttt{texlive.tlpdb} look like}
+  \begin{lstlisting}[title={texlive.tlpdb}]
+name abbr
+...
+
+name memoir
+...
+
+\end{lstlisting}
+  \begin{itemize}
+  \item sequence of \texttt{key value} pairs
+  \item separated by an empty line (or more)
+  \item one group per package
+  \item some `meta'-packages for configuration options and special
+    purpose packages
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The single package: \tlpobj\ by example I}
+  \begin{lstlisting}[basicstyle=\ttfamily\tiny,title={a0poster.tlpobj},label=a0poster]
+name a0poster
+category Package
+revision 7340
+shortdesc Support for designing posters on large paper.
+longdesc Provides fonts in sizes of 12pt up to 107pt and also makes sure
+longdesc that in math formulas the symbols appear in the right size. Can
+longdesc also create a PostScript header file for dvips which ensures
+longdesc that the poster will be printed in the right size. Supported
+longdesc sizes are DIN A0, DIN A1, DIN A2 and DIN A3.
+docfiles size=47
+ texmf-dist/doc/latex/a0poster/a0.pdf details="Package documentation (German)" language="de"
+ texmf-dist/doc/latex/a0poster/a0.tex
+ texmf-dist/doc/latex/a0poster/a0_eng.pdf details="Package documentation (English)" language="en"
+ texmf-dist/doc/latex/a0poster/a0_eng.tex
+runfiles size=4
+ texmf-dist/tex/latex/a0poster/a0poster.cls
+ texmf-dist/tex/latex/a0poster/a0size.sty
+catalogue-version 1.22b
+catalogue-date 2006-11-28 22:38:04 +0100
+catalogue-ctan /macros/latex/contrib/a0poster
+catalogue-license lppl
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The origin of this \texttt{a0poster.tlpobj}}
+  \begin{lstlisting}[basicstyle=\ttfamily\small,title={a0poster.tlpsrc},label=a0poster.tlpsrc]
+name a0poster
+category Package
+\end{lstlisting}
+  \begin{itemize}
+  \item minimal input file with static data
+  \item rest is generated from actual svn repository (revision, size)
+  \item enriched with information from the \TeX\ Catalogue
+    (catalogue-*, specification of the documentation files)
+  \item tagged documentation files (details, language), information
+    again from the Catalogue
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The single packages: \tlpobj\ by example II}
+  \begin{lstlisting}[basicstyle=\ttfamily\tiny,title={bin-bibtex8 and friends},label=bibtex8]
+name bin-bibtex8
+category TLCore
+revision 7340
+depend bin-bibtex8.ARCH
+docfiles size=15
+ texmf/doc/bibtex8/00readme.txt
+ texmf/doc/bibtex8/HISTORY
+ texmf/doc/bibtex8/csfile.txt
+ texmf/doc/bibtex8/file_id.diz
+runfiles size=10
+ texmf-dist/bibtex/csf/base/88592pl.csf
+ texmf-dist/bibtex/csf/base/cp1250pl.csf
+ texmf-dist/bibtex/csf/base/cp852pl.csf
+ texmf-dist/bibtex/csf/base/iso8859-7.csf
+
+name bin-bibtex8.alpha-linux
+category TLCore
+revision 7340
+shortdesc binary files of bin-bibtex8 for alpha-linux
+binfiles arch=alpha-linux size=62
+ bin/alpha-linux/bibtex8
+
+...
+name bin-bibtex8.win32
+category TLCore
+revision 7340
+shortdesc binary files of bin-bibtex8 for win32
+binfiles arch=win32 size=25
+ bin/win32/bibtex8.exe
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The origin of the above \texttt{bin-bibtex8}}
+  \begin{lstlisting}[basicstyle=\ttfamily\small,title={bin-bibtex8.tlpsrc},label=bin-dvipsk.tlpsrc]
+name bin-bibtex8
+category TLCore
+runpattern d texmf-dist/bibtex/csf/base
+docpattern f texmf/doc/bibtex8/*
+binpattern f bin/${ARCH}/bibtex8
+\end{lstlisting} % for stupid emacs: $
+  \begin{itemize}
+  \item various patterns for capturing files
+  \item tricks to capture binaries on unix and windows
+  \item separate objects for the binary files of the package
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The pattern language}
+  patterns are of the form
+  \begin{center}
+    |[PREFIX]TYPE PAT|
+  \end{center}
+  where |PREFIX| can be |+|, |!+|, or |!|,\pause and |TYPE PAT| can be:
+  \begin{description}
+  \item[f path]
+    includes all files which match |path| where \emph{only} the last
+    component of |path| can contain the usual glob characters * and ?
+    (but no others!).\pause
+  \item[d path]
+    includes all the files in and below the directory specified as
+    |path|. \pause
+  \item[t word1 ... wordN wordL]
+    includes all the files in and below all directories of the form
+    \begin{center}
+      \path{word1/word2/.../wordN/.../any/dirs/.../wordL/}
+    \end{center}\pause
+  \item[r regexp]
+    includes all files matching the Perl regexp \verb+/^regexp$/+
+  \end{description}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Example patterns}
+  \begin{itemize}
+  \item |runpattern f texmf/chktex/*|\\
+    includes all files \emph{in} Master/texmf/chktex/\pause
+  \item |binpattern f bin/${ARCH}/bibtex|\\   % for stupid emacs $
+    includes the bibtex binaries into the bin-bibtex package,
+    depending on the architecture\pause
+  \item |runpattern d texmf/tex/lambda/base|\\
+    includes all files in and under the above path\pause
+  \item |runpattern t texmf-dist omega uni2char|\\
+    includes all files in texmf-dist/omega/\ldots/uni2char/\pause
+  \item |runpattern r .*/foobar|\\
+    includes the files matching the regexp
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Autogenerated patterns}
+  To keep \tlpsrc\ files small, if a pattern section is empty or all
+  patterns are prefixed with |+|, the following patterns are
+  automatically generated:
+  \begin{itemize}
+  \item runpatterns in category Package:
+    \begin{center}
+      |t texmf-dist topdir name|
+    \end{center}
+  \item docpatterns in category Package:
+    \begin{center}
+      |t texmf-dist doc name|
+    \end{center}
+  \item docpatterns in category Documentation:
+    \begin{center}
+      |t texmf-doc doc name|
+    \end{center}
+  \item srcpatterns in category Package:
+    \begin{center}
+      |t texmf-dist source name|
+    \end{center}
+  \item srcpatterns in category Documentation:
+    \begin{center}
+      |t texmf-doc source name|
+    \end{center}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Additional tricks}
+  \begin{description}
+  \item[arch expansion]
+    In case the string \verb+${ARCH}+ occurs in one |binpattern| it is 
+    automatically expanded to the respective architecture.
+  \item[bat/exe/dll/texlua for win32]
+    For |binpatterns| of the form |f bin/win32/foobar| files
+    |foobar.bat|, |foobar.dll|, |foobar.exe|, and |foobar.texlua| are
+    also matched.
+  \end{description}
+  \pause
+  \begin{block}{Effects of auto generation and tricks}
+    total number of tlpsrc files: 1644\\
+    total number of tlpsrc files with patterns: 172\\
+    number of bin- and hyphen- tlpsrc files with patterns: 123\\
+    number of `normal' packages with patterns: 49
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Allowed fields for \tlpobj}
+  \begin{itemize}
+  \item name: identifies the package
+  \item category: one of (currently) |Collection|, |Scheme|, |TLCore|,
+    |Documentation|, |Package|
+  \item shortdesc, longdesc: description of the package
+  \item depend: |Name| (multiple entries possible)
+  \item execute: activating maps, formats, hyphenation patterns
+  \item runfiles, docfiles, srcfiles, binfiles\\
+    every files section has a size attribute, and the
+    binfiles section can occur more then once with different
+    arch tags (see above)
+  \item revision: maximum svn revision number of the 
+    contained files, since version numbers are not
+    parseable, trustworthy, or not even present
+  \item catalogue-* keys: stuff taken from the catalogue\\
+    for example catalogue-version, catalogue-authors, 
+    catalogue-license
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Some special packages}
+  Some packages do not relate to actual files but are used to save
+  options and configurations into the database by putting them into a
+  depend line.
+  \begin{itemize}
+  \item \texttt{00texlive.config} general configuration (release,
+    src/doc container split)
+  \item \texttt{00texlive-installation.config} only present in a final
+    installation and contains the choices the admin made when doing
+    the installation (paper a4/letter, pre-generate formats,
+    installation location, \ldots)
+  \item \texttt{00texlive.core} actually contains files, but those are
+    never installed and this package is only here to collect files
+    which are not contained in any package, thus making the coverage
+    check squeak
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Perl programming \textsc{api}}
+  Important for `users' or integrators
+  \begin{description}
+  \item[TeXLive::TLPOBJ] for \tlpobj\ files, basic
+    functionality like read, write, and member access and change
+    functions, etc.
+  \item[TeXLive::TLPDB] access to the \tl\ database.
+  \item[TeXLive::TLPostInstall] collects post installation actions
+  \end{description}
+  
+  \pause
+  Important for `us' as developer:
+  \begin{description}
+  \item[TeXLive::TLTREE] properties of the subversion 
+    repository, in principle it is |svn status -v| 
+  \item[TeXLive::TeXCatalogue] simple interface to the \TeX\
+    Catalogue
+  \item[TeXLive::TLPSRC] for \tlpsrc\ files, basic
+    functionality like reade, write, etc
+  \item[TeXLive::TLUtils] some handy functions 
+  \item[TeXLive::TLMedia] abstracts an arbitrary installation media
+  \end{description}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Other (planned/wished) \textsc{api}s}
+  \begin{description}
+  \item[texlua] next on the list to be done, would really help us a lot
+  \item[python] minimal code present (by Jim Hefferon)
+  \item[C] some code present, was a \textsc{GSoC} project, but no slot
+    available (code by Jjgod Jiang)
+  \item[bash] maybe, some code present (by the author)
+  \item[\ldots] no idea what else \ldots
+  \end{description}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Documentation}
+  \begin{itemize}
+  \item all modules contain a full documentation in pod format
+  \item additional text \textsc{api} document
+  \item article in Ars\TeX nica, 2007:4, 69--73, and in proceedings of
+    this conference (hopefully)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{What to do with this stuff}
+  \begin{itemize}
+  \item installer: more or less done, see other talk
+  \item distribution inclusion: will hopefully work well
+  \item texdoctk++: tagged documentation files could be used to write
+    a better texdoctk, but depends on the information of the authors
+    in the \TeX~Catalogue
+  \item `\TeX\ Live Manager' \texttt{tlmgr}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\TeX\ Live Manager \texttt{tlmgr}}
+  New program collection several scripts under one hood, currently
+  supports:
+  \begin{itemize}
+  \item installation of additional packages or collections, with or
+    without automatic dependency installation
+  \item same with removal
+  \item update all packages to the newest versions available
+  \item paper configuration like texconfig, but also for Windows
+  \item listing of available and installed architectures, and adding
+    new architectures to the installation
+  \item searching the installed and all available packages
+  \item list all schemes, collections, packages
+  \item setting some default values like the installation location
+  \item regenerate fmtutil.cnf, language.dat, and updmap.cfg from the
+    information stored in the database and local additions
+  \item uninstall the whole installation
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Resources}
+  \begin{itemize}
+    \item \url{tex-live@tug.org} -- main contact point
+  \item \path{www.tug.org/texlive} -- the main entry point, with
+  links to developers' resources, documentation
+\item \path{www.tug.org/svn/texlive/trunk/} -- web view onto the
+  subversion repository;
+\item \path{svn://tug.org/texlive/trunk} -- svn repository, anonymous
+  access
+\item \path{www.tug.org/texlive/pkgupdate.html} -- an
+  explanation how updates from \ctan\ to \tl\ are done.
+  \end{itemize}
+\end{frame}
+\end{document}

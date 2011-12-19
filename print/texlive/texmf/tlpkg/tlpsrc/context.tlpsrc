@@ -1,0 +1,74 @@
+# In order to be able to make formats, we need
+# metapost, pdftex and xetex.  Explicit dependencies in this package are
+# repeated in scheme-context, since package-to-package dependencies
+# can't be relied upon.
+depend metapost
+depend pdftex
+depend xetex
+# luatex is needed to run almost all context scripts
+depend luatex
+# and Latin Modern is the default font (also needed for formats)
+# plus a few more font dependencies (amsfonts are only needed for advanced math)
+depend lm
+depend stmaryrd
+depend amsfonts
+#
+execute AddFormat name=cont-en engine=pdftex \
+        patterns=cont-usr.tex options="-8bit *cont-en.ini"
+execute AddFormat name=cont-en engine=xetex \
+        patterns=cont-usr.tex options="-8bit *cont-en.ini" 
+#
+# disabled context formats:
+execute AddFormat name=cont-de mode=disabled engine=pdftex \
+        patterns=cont-usr.tex options="-8bit *cont-de.ini"
+execute AddFormat name=cont-fr mode=disabled engine=pdftex \
+        patterns=cont-usr.tex options="-8bit *cont-fr.ini"
+execute AddFormat name=cont-it mode=disabled engine=pdftex \
+        patterns=cont-usr.tex options="-8bit *cont-it.ini"
+execute AddFormat name=cont-nl mode=disabled engine=pdftex \
+        patterns=cont-usr.tex options="-8bit *cont-nl.ini"
+execute AddFormat name=cont-ro mode=disabled engine=pdftex \
+        patterns=cont-usr.tex options="-8bit *cont-ro.ini"
+#
+# contnav, hans, hans-sh fonts.
+execute addMap original-context-symbol.map
+#
+runpattern +d texmf-dist/context/data
+runpattern +d texmf-dist/fonts/cid/fontforge
+runpattern +f texmf-dist/tex/mptopdf/config/mptopdf.ini
+#
+# See longdesc in mptopdf.tlpsrc.
+runpattern +!f texmf-dist/tex/context/base/supp-mis.mkii
+runpattern +!f texmf-dist/tex/context/base/supp-mpe.mkii
+runpattern +!f texmf-dist/tex/context/base/supp-pdf.mkii
+runpattern +!f texmf-dist/tex/context/base/syst-tex.mkii
+runpattern +!f texmf-dist/scripts/context/perl/mptopdf.pl
+runpattern +!f texmf-dist/tex/generic/context/mptopdf.tex
+depend mptopdf
+#
+# these have their own TL packages, and are not part of core context.
+runpattern +!d texmf-dist/tex/context/third
+runpattern +!d texmf-dist/tex/context/interface/third
+runpattern +!d texmf-dist/scripts/context/lua/third
+runpattern +!d texmf-dist/metapost/context/third
+runpattern +!d texmf-dist/tex/xetex/zhspacing/context
+#
+srcpattern +!d texmf-dist/source/context/third
+#
+docpattern +!d texmf-dist/doc/context/third
+docpattern +!d texmf-dist/doc/generic/tex-virtual-academy-pl/context
+docpattern +f texmf/doc/man/man1/ctxtools.*
+docpattern +f texmf/doc/man/man1/pstopdf.*
+docpattern +f texmf/doc/man/man1/texexec.*
+docpattern +f texmf/doc/man/man1/texmfstart.*
+#
+binpattern f bin/${ARCH}/context
+binpattern f bin/${ARCH}/ctxtools
+binpattern f bin/${ARCH}/luatools
+binpattern f bin/${ARCH}/mtxrun
+binpattern f bin/${ARCH}/pstopdf
+binpattern f bin/${ARCH}/rlxtools
+binpattern f bin/${ARCH}/texexec
+binpattern f bin/${ARCH}/texmfstart
+#
+binpattern f/win32 bin/win32/mtxrun.lua

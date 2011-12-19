@@ -1,0 +1,12 @@
+category Collection
+shortdesc Recommended generic packages
+longdesc Recommended packages that work with multiple formats.
+depend epsf
+depend fontname
+depend genmisc
+depend kastrup
+depend multido
+depend path
+depend tex-ps
+depend ulem
+depend collection-basic

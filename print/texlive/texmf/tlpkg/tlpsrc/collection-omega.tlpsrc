@@ -1,0 +1,11 @@
+category Collection
+shortdesc Omega
+longdesc Omega, a 16-bit extended TeX by John Plaice and Yannis Haralambous
+depend antomega
+depend lambda
+depend mxedruli
+depend omega
+depend aleph
+depend omegaware
+depend collection-basic
+depend collection-latex

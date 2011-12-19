@@ -1,0 +1,8 @@
+category Collection
+shortdesc Italian
+longdesc Support for typesetting Italian.
+depend collection-basic
+depend hyphen-italian
+depend frontespizio
+depend itnumpar
+depend layaureo

@@ -1,0 +1,25 @@
+execute addMap troff-updmap.map
+#
+depend kpathsea
+#
+srcpattern f ignore
+#
+binpattern f bin/${ARCH}/dvitomp
+binpattern f bin/${ARCH}/mfplain
+binpattern f bin/${ARCH}/mpost
+#
+docpattern d texmf-dist/doc/metapost/base
+docpattern f texmf/doc/man/man1/dvitomp.*
+docpattern f texmf/doc/man/man1/mpost.*
+#
+runpattern d texmf-dist/metapost/base
+runpattern d texmf-dist/metapost/config
+runpattern d texmf-dist/metapost/misc
+runpattern d texmf-dist/metapost/support
+runpattern d texmf-dist/tex/generic/metapost
+#
+runpattern d texmf-dist/fonts/enc/dvips/metapost
+runpattern d texmf-dist/fonts/map/dvips/metapost
+runpattern d texmf-dist/fonts/afm/metapost
+runpattern d texmf-dist/fonts/tfm/metapost
+runpattern d texmf-dist/fonts/type1/metapost

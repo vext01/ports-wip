@@ -1,0 +1,254 @@
+Rational
+--------
+(but note that I believe it is outdated, see below)
+
+  currently there is a mess-up wrt to available and installed architectures.
+  We use 00texlive-installation/available_architectures for both the set
+  of installed archs and the set of available archs.
+  That should be better done as follows:
+  00texlive.config:
+        should contain the available_architectures stuff
+  00texlive-installation.config:
+        should contain *instead* installed_architectures stuff
+  and tlmgr should check:
+    localtlpdb/00texlive-installation.config/installed_architectures
+  for what archs are actually installed, and
+    remotetlpdb/00texlive.config/available_architectures
+  for what can be installed.
+
+  In the texlive-svn both variables would be initialized to the same thing,
+  while others that don't want to be necessary also runable as is (some
+  third party distribution of modules) should only need to set
+    00texlive.config/available_architectures
+
+
+There is some code missing that transfers the one option into the other
+in the case that the other is absent.
+
+I am more and more convinced that this patch should not be included. Because
+we will always have that
+	available_archs == installed_archs
+so that is a bit a strange thing to duplicate it. If we want to use an
+installed system as installation source it makes sense to use the
+available as it is done for now.
+
+
+Index: install-tl
+===================================================================
+--- install-tl	(revision 10389)
++++ install-tl	(working copy)
+@@ -921,7 +921,7 @@
+       if ($vars{$_}) { push @archs, $1; }
+     }
+   }
+-  $localtlpdb->option_available_architectures(@archs);
++  $localtlpdb->option_installed_architectures(@archs);
+   $localtlpdb->save() unless $vars{'from_dvd'};
+ }
+ 
+Index: tlpkg/TeXLive/TLPDB.pm
+===================================================================
+--- tlpkg/TeXLive/TLPDB.pm	(revision 10391)
++++ tlpkg/TeXLive/TLPDB.pm	(working copy)
+@@ -27,6 +27,7 @@
+   $tlpdb->writeout(FILEHANDLE);
+   $tlpdb->save;
+   $tlpdb->available_architectures();
++  $tlpdb->installed_architectures();
+   $tlpdb->add_tlpcontainer($pkg, $ziploc [, $archrefs [, $dest ]] );
+   $tlpdb->add_tlpobj($tlpobj);
+   $tlpdb->needed_by($pkg);
+@@ -141,7 +142,7 @@
+     if ($tlp->category =~ m/$MetaCategoriesRegexp/) {
+       foreach my $d ($tlp->depends) {
+         if ($d =~ m/^(.*)\.win32$/) {
+-          if (member("win32", $self->available_architectures)) {
++          if (member("win32", $self->installed_architectures)) {
+             if ($d eq $pkg) {
+               push @ret, $p;
+               last;
+@@ -311,17 +312,16 @@
+ 
+ =pod
+ 
+-=item C<< $tlpdb->available_architectures >>
++=item C<< $tlpdb->installed_architectures >>
+ 
+-The C<available_architectures> functions returns the list of available 
+-architectures as set in the options section 
+-(i.e., using option_available_architectures)
++The C<installed_architectures> function returns the list of installed
++architectures, as set as variable in 00texlive-installation.config.
+ 
+ =cut
+ 
+-sub available_architectures {
++sub installed_architectures {
+   my $self = shift;
+-  my @archs = $self->option_available_architectures;
++  my @archs = $self->option_installed_architectures;
+   if (! @archs) {
+     # fall back to the old method checking bin-tex\.*
+     my @packs = $self->list_packages;
+@@ -330,8 +330,30 @@
+   return @archs;
+ }
+ 
++
+ =pod
+ 
++=item C<< $tlpdb->available_architectures >>
++
++The C<available_architectures> function returns the list of available 
++architectures as set in the 00texlive.config package.
++
++=cut
++
++sub available_architectures {
++  my $self = shift;
++  if (defined($self->{'tlps'}{'00texlive.config'})) {
++    foreach my $d ($self->{'tlps'}{'00texlive.config'}->depends) {
++      if ($d =~ m!^available_architectures/(.*)$!) {
++        return split ' ', "$1";
++      }
++    }
++  }
++  return;
++}
++
++=pod
++
+ =item C<< $tlpdb->add_tlpcontainer($pkg, $ziploc [, $archrefs [, $dest ]] ) >>
+ 
+ Installs the package C<$pkg> from the container files in C<$ziploc>. If
+@@ -858,10 +880,10 @@
+   return;
+ }
+ 
+-sub option_available_architectures {
++sub option_installed_architectures {
+   my $self = shift;
+-  if (@_) { $self->_set_option_value("available_architectures","@_"); }
+-  my @archs = split ' ', $self->_option_value("available_architectures");
++  if (@_) { $self->_set_option_value("installed_architectures","@_"); }
++  my @archs = split ' ', $self->_option_value("installed_architectures");
+   return @archs;
+ }
+ sub option_create_symlinks { 
+Index: tlpkg/TeXLive/TLMedia.pm
+===================================================================
+--- tlpkg/TeXLive/TLMedia.pm	(revision 10391)
++++ tlpkg/TeXLive/TLMedia.pm	(working copy)
+@@ -68,7 +68,7 @@
+     }
+   }
+   my (@systems);
+-  @systems = $tlpdb->available_architectures;
++  @systems = $tlpdb->installed_architectures;
+   $self->{'media'} = $media;
+   $self->{'location'} = $location;
+   $self->{'tlpdb'} = $tlpdb;
+@@ -210,7 +210,7 @@
+         # we only want to try to install a .ARCH package if it actually contains
+         # files
+         my $foo = $1;
+-        foreach my $a ($totlpdb->available_architectures) {
++        foreach my $a ($totlpdb->installed_architectures) {
+           if (defined($fromtlpdb->get_package("$foo.$a")) &&
+               !defined($totlpdb->get_package("$foo.$a"))) {
+             merge_into(\%ret,
+@@ -219,7 +219,7 @@
+         }
+       } elsif ($d =~ m/^(.*).win32$/) {
+         # install only of win32 is under the available archs
+-        if (TeXLive::TLUtils::member("win32",$totlpdb->available_architectures)) {
++        if (TeXLive::TLUtils::member("win32",$totlpdb->installed_architectures)) {
+           merge_into(\%ret,
+             $self->install_package($d, $totlpdb, $nodepends, $nopostinstall, $fallbackmedia));
+         }
+Index: tlpkg/bin/tlpsrc2tlpdb
+===================================================================
+--- tlpkg/bin/tlpsrc2tlpdb	(revision 10389)
++++ tlpkg/bin/tlpsrc2tlpdb	(working copy)
+@@ -113,6 +113,10 @@
+     if ($tlp->name eq "00texlive.config") {
+       my @bar = $tlp->depends;
+       push @bar, "revision/".$tltree->revision;
++      # add the list of available architectures to 00texlive.config which
++      # is the source of information at installation time
++      my @foo = $tltree->architectures;
++      push @bar, "available_architectures/@foo";
+       $tlp->depends (@bar);
+     }
+     $tldb->add_tlpobj ($tlp);
+@@ -123,7 +127,13 @@
+   if ($opt_all) {
+     $tldb->root ($opt_master);
+     # do set the option_archs from the dirs in Master/bin
+-    $tldb->option_available_architectures ($tltree->architectures);
++    # we have to set two times the list of architectures: Once the list
++    # of available architectures as saved in 00texlive.config, and once
++    # (for running directly from the svn checkout) the list of 
++    # installed packages in 00texlive-installation.config
++    # The former part in 00texlive.config is done above, the later part
++    # is done here:
++    $tldb->option_installed_architectures ($tltree->architectures);
+     $tldb->save;
+     info ("$0: wrote $src_count packages to ". $tldb->root . ".\n");
+   } else {
+Index: texmf/scripts/texlive/tlmgr.pl
+===================================================================
+--- texmf/scripts/texlive/tlmgr.pl	(revision 10391)
++++ texmf/scripts/texlive/tlmgr.pl	(working copy)
+@@ -275,7 +275,7 @@
+     # remove those bin dependencies .ARCH
+     foreach my $d ($tlp->depends) {
+       if ($d eq "$pkg.ARCH") {
+-        foreach my $a ($localtlpdb->available_architectures) {
++        foreach my $a ($localtlpdb->installed_architectures) {
+           if (defined($localtlpdb->get_package("$pkg.$a"))) {
+             merge_into(\%ret,
+                        &remove_package("$pkg.$a", $localtlpdb, $force));
+@@ -884,7 +884,7 @@
+     $tlmediasrc = TeXLive::TLMedia->new($location);
+     die($loadmediasrcerror . $location) unless defined($tlmediasrc);
+     my $mediatlpdb = $tlmediasrc->tlpdb;
+-    my @already_installed_arch = $localtlpdb->available_architectures;
++    my @already_installed_arch = $localtlpdb->installed_architectures;
+     print "Available architectures:\n";
+     foreach my $a ($mediatlpdb->available_architectures) {
+       if (member($a,@already_installed_arch)) {
+@@ -900,7 +900,7 @@
+     $tlmediasrc = TeXLive::TLMedia->new($location);
+     die($loadmediasrcerror . $location) unless defined($tlmediasrc);
+     my $mediatlpdb = $tlmediasrc->tlpdb;
+-    my @already_installed_arch = $localtlpdb->available_architectures;
++    my @already_installed_arch = $localtlpdb->installed_architectures;
+     my @available_arch = $mediatlpdb->available_architectures;
+     my @todoarchs;
+     foreach my $a (@ARGV) {
+@@ -937,9 +937,9 @@
+       merge_into (\%ret, $tlmediasrc->install_package("bin-tlpsv.win32", $localtlpdb, 1, 0));
+     }
+     # update the option_archs list of installed archs
+-    my @larchs = $localtlpdb->option_available_architectures;
++    my @larchs = $localtlpdb->option_installed_architectures;
+     push @larchs, @todoarchs;
+-    $localtlpdb->option_available_architectures(@larchs);
++    $localtlpdb->option_installed_architectures(@larchs);
+     $localtlpdb->save;
+   } else {
+     die "Unknown option for arch: $what";
+Index: texmf/scripts/texlive/tlmgrgui/gui-arch.pl
+===================================================================
+--- texmf/scripts/texlive/tlmgrgui/gui-arch.pl	(revision 10391)
++++ texmf/scripts/texlive/tlmgrgui/gui-arch.pl	(working copy)
+@@ -32,7 +32,7 @@
+   } else {
+     @archsavail = $tlmediatlpdb->available_architectures;
+   }
+-  @archsinstalled = $localtlpdb->available_architectures;
++  @archsinstalled = $localtlpdb->installed_architectures;
+   foreach my $a (@archsavail) {
+     $archs{$a} = 0;
+     if (grep(/^$a$/,@archsinstalled)) {

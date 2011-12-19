@@ -1,0 +1,7 @@
+category Scheme
+shortdesc minimal scheme (plain only)
+longdesc This is the minimal TeX Live scheme, with support for only plain
+longdesc TeX. (No LaTeX macros.)  LuaTeX is included because Lua scripts
+longdesc are used in TeX Live infrastructure.  This scheme corresponds
+longdesc exactly to collection-basic.
+depend collection-basic

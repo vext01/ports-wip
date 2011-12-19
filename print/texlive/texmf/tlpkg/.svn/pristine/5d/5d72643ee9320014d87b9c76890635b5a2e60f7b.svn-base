@@ -1,0 +1,5 @@
+category Collection
+shortdesc Latvian
+longdesc Support for typesetting Latvian.
+depend hyphen-latvian
+depend collection-basic

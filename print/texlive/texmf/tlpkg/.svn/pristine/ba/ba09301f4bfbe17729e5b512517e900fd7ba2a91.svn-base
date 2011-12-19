@@ -1,0 +1,15 @@
+category TLCore
+depend kpathsea
+postaction shortcut type=menu name="TeXdoc GUI" \
+           cmd="TEXDIR/bin/win32/texdoctk.exe"
+runpattern f texmf/scripts/tetex/texdoctk.pl
+runpattern f texmf/scripts/texdoc/*
+runpattern f texmf/texdoctk/*
+runpattern f texmf-dist/texdoc/*
+docpattern f texmf/doc/man/man1/texdoc.*
+docpattern f texmf/doc/man/man1/texdoctk.*
+docpattern f texmf/doc/texdoc/*
+binpattern f bin/${ARCH}/texdoc
+binpattern f bin/${ARCH}/texdoctk
+binpattern f bin/win32/texdocc
+binpattern f bin/win32/tl-w32-texdoc-wrapper.texlua

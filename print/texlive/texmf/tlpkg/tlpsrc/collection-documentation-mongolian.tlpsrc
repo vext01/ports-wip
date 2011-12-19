@@ -1,0 +1,4 @@
+category Collection
+shortdesc Mongolian documentation
+depend lshort-mongol
+depend collection-documentation-base

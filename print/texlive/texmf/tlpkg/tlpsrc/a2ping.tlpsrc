@@ -1,0 +1,4 @@
+category TLCore
+docpattern f texmf/doc/man/man1/a2ping.*
+runpattern f texmf/scripts/a2ping/a2ping.pl
+binpattern f bin/${ARCH}/a2ping

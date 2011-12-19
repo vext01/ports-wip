@@ -1,0 +1,6 @@
+docpattern +f texmf/doc/man/man1/latexdiff-vc.*
+docpattern +f texmf/doc/man/man1/latexrevise.*
+docpattern +f texmf/doc/man/man1/latexdiff.*
+binpattern f bin/${ARCH}/latexdiff
+binpattern f bin/${ARCH}/latexdiff-vc
+binpattern f bin/${ARCH}/latexrevise

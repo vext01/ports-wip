@@ -1,0 +1,14 @@
+% context.top
+\unprotect
+\def\MPOSTformatswitch{-progname=metafun -mem=}
+\setupsystem[\c!n=1,\c!m=1]
+\setupsystem[\c!method=2]
+\setupsystem[\c!type=unix]
+\setupsystem[\c!random=971]
+\setupsystem[inputfile=context.tex]
+\startsetups *runtime:options
+\setupoutput[pdftex]
+\stopsetups
+\startsetups *runtime:modules
+\stopsetups
+\protect \endinput

@@ -1,0 +1,4 @@
+category Collection
+shortdesc Dutch documentation
+depend lshort-dutch
+depend collection-documentation-base

@@ -1,0 +1,7 @@
+category TLCore
+shortdesc top-level TeX Live doc.html, etc.
+longdesc These files are regenerated as needed, which is often,
+longdesc so we make them a separate package.  See the tl-update-auto
+longdesc script for the process.
+docpattern +f doc.html
+docpattern +f texmf/scripts/texlive/var/texcatalogue.keywords

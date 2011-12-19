@@ -1,0 +1,23 @@
+category Scheme
+shortdesc XML scheme
+longdesc This contains the things you need to do XML-related work,
+longdesc including PassiveTeX, JadeTeX, ConTeXt and Omega.
+depend context
+depend jadetex
+depend ltxmisc
+depend marvosym
+depend marvosym
+depend metapost
+depend passivetex
+depend rotating
+depend stmaryrd
+depend tex4ht
+depend tipa
+depend ucs
+depend wasy
+depend wasysym
+depend xmltex
+depend collection-basic
+depend collection-fontsrecommended
+depend collection-latex
+depend collection-omega

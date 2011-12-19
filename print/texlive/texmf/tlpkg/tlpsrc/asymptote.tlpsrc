@@ -1,0 +1,15 @@
+category TLCore
+binpattern f/!\
+mips-irix,\
+powerpc-aix,\
+sparc-linux,\
+sparc-solaris\
+           bin/${ARCH}/*asy
+binpattern f/i386-cygwin bin/i386-cygwin/freeglut.dll
+binpattern d/win32 tlpkg/asymptote
+docpattern f texmf/doc/info/asy*.info
+docpattern f texmf/doc/man/man1/*asy.*
+docpattern d texmf/doc/asymptote
+runpattern d texmf/asymptote
+runpattern d texmf/tex/latex/asymptote
+runpattern d texmf/tex/context/asymptote

@@ -1,0 +1,107 @@
+
+Dealing with translations of TeX Live programs
+==============================================
+
+
+For translators
+---------------
+
+BIG FAT NOTE: Before starting please always fetch the latest NN.po from
+our svn server because we merge new strings into .po files in
+regular intervals.
+
+Here are explanations for gtranslator and poedit. I (np) prefer now
+gtranslator because it keeps the strings where no changes have been
+made in the format as they were, so there will be less commits and
+smaller commits.
+
+Testing your translations: Please call
+	(perl) install-tl --gui --debug-translation [--lang NN]
+	tlmgr --debug-translation gui [--gui-lang NN]
+This will give warnings *in*the*terminal* which strings haven't been 
+translated.
+
+
+using gtranslator (gtranslator.sf.net):
+---------------------------------------
+
+Starting a new translation NN.po:
+- copy messages.pot to NN.po
+- open it with gtranslator
+- select from the menu: Edit -> Header
+  and change the items under "Translator and Language", especially
+  change CHARSET to utf8
+- start translating
+
+The first column gives the status, you can sort by clicking on the head
+of it
+
+
+using poedit (poedit.sf.net):
+-----------------------------
+
+Starting new translation NN.po:
+- start fresh poedit
+- click on "File -> New catalog from POT file"
+- select messages.pot (in tlpkg/translations/messages.pot)
+- A dialog opens that asks for some fields, like
+        Project name and version:
+        Team:
+        Team's email address:
+        Language:
+        Country:
+        Charset: UTF-8
+        Source code charset:
+        Plural Forms:
+  etc all of which is unknown to me, but I filled in at least the Language
+  and the email of myself of tex-live@tug.org
+- click "Ok"
+- select where to save (either in tlpkg/translations/NN.po or somewhere else
+  and send us the file)
+- start translating
+
+Editing an existing NN.po:
+- start poedit
+- open NN.po
+- start translating
+
+
+----------------------------------------------
+
+General remarks concerning translations:
+----------------------------------------
+
+- please use \" instead of ", as can be seen in the original strings
+- several lines in the translations are merged together *without* adding
+  anything. So if you want new lines please use \n in the text
+  (as seen in several original strings)
+- if %s (one or more) are occurring then they are replaced in the
+  final strings with the respective infos. Please keep them.
+
+We do update the messages.pot daily (nightly) and merge the strings into 
+all the .po files (using msgmerge). That means if we change one of the
+english strings the translation will normally be marked as "fuzzy" in the
+.po file.
+
+In poedit those fuzzy translations are shown in red, telling you that those
+have had a change in the original string and the translation should be
+checked.
+
+In gtranslator the first column shows a warning sign if the message is fuzzy.
+
+So before any of you start out with editing a translation, please fetch the
+latest messages.pot and NN.po
+
+-----------------------------------------
+
+For developers
+--------------
+
+Extraction of the messages == update of the po template messages.pot, and
+Merging/updating of the .po files
+  see ../bin/tl-update-message
+
+Statistics:
+  pocount .../Master/tlpkg/translations/*.po
+
+

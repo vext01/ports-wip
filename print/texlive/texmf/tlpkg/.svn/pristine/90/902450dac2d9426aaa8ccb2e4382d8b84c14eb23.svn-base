@@ -1,0 +1,4 @@
+category TLCore
+depend kpathsea
+docpattern f texmf/doc/man/man1/tie.*
+binpattern f bin/${ARCH}/tie

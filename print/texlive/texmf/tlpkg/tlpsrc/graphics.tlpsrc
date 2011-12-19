@@ -1,0 +1,4 @@
+runpattern +!d texmf-dist/scripts/context/ruby/graphics
+#
+docpattern +!d texmf-dist/doc/latex/cookybooky/examples/graphics
+docpattern +!d texmf-dist/doc/latex/tufte-latex/graphics

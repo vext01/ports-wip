@@ -1,0 +1,6 @@
+execute addMap fourier.map
+execute addMap fourier-utopia-expert.map
+# the utopia expert fonts are proprietary, but since we install the
+# other support files (e.g., futb8x.tfm), we may as well install the map
+# entry too. I'd rather not install the support files, but they are
+# mixed together in the source, not easy to separate. --karl, 5aug07.

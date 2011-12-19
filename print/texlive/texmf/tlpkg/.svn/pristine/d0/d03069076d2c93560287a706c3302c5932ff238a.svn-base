@@ -1,0 +1,6 @@
+category Collection
+shortdesc Croatian
+longdesc Support for typesetting Croatian.
+depend hrlatex
+depend hyphen-croatian
+depend collection-basic

@@ -1,0 +1,32 @@
+category TLCore
+shortdesc Unicode and OpenType-enabled TeX engine.
+longdesc See http://tug.org/xetex.
+#
+execute AddFormat name=xetex engine=xetex patterns=language.def \
+                             options="-etex xetex.ini"
+execute AddFormat name=xelatex engine=xetex patterns=language.dat \
+                             options="-etex xelatex.ini" 
+#
+postaction script file=tlpkg/tlpostcode/xetex.pl
+runpattern f tlpkg/tlpostcode/xetex.pl
+binpattern f bin/win32/fc-*
+binpattern f bin/win32/icu*.dll
+#
+# this is only used in windows installation
+binpattern d/win32 tlpkg/tlpostcode/xetex
+#
+# these are only needed for darwin only.
+binpattern f/universal-darwin,x86_64-darwin bin/${ARCH}/T1Wrap
+binpattern f/universal-darwin,x86_64-darwin bin/${ARCH}/xdv2pdf
+#
+docpattern d texmf-dist/doc/xetex/base
+#
+runpattern d texmf-dist/fonts/misc/xetex/fontmapping/base
+runpattern d texmf-dist/scripts/xetex
+#
+binpattern f bin/${ARCH}/xdvipdfmx
+binpattern f bin/${ARCH}/xelatex
+binpattern f bin/${ARCH}/xetex
+binpattern f bin/${ARCH}/teckit_compile
+#
+depend xetexconfig

@@ -1,0 +1,10 @@
+depend latex
+depend plain
+#
+execute AddFormat name=aleph engine=aleph options=*aleph.ini
+execute AddFormat name=lamed engine=aleph patterns=language.dat \
+                  options=*lambda.ini 
+binpattern f bin/${ARCH}/aleph
+binpattern f bin/${ARCH}/lamed
+docpattern +f texmf/doc/man/man1/aleph.*
+docpattern +f texmf/doc/man/man1/lamed.*

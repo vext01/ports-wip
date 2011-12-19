@@ -1,0 +1,44 @@
+category TLCore
+shortdesc TeX Live standalone installer package
+longdesc This package defines the files to go into the installer
+longdesc archives (install-tl-unx.tar.gz, install-tl.zip) built
+longdesc by the tl-make-installer script.  Most of what's here is also
+longdesc included in the texlive.infra package -- ordinarily duplicates
+longdesc are not allowed, but in this case, 00texlive.installer is never
+longdesc used *except* to build the installer archives, so it's ok.
+longdesc
+longdesc For information on the 00texlive prefix see
+longdesc   00texlive.installation(.tlpsrc)
+#
+# The basics:
+runpattern f install-tl
+runpattern d tlpkg/installer
+#
+# but no xz binaries:
+runpattern !d tlpkg/installer/xz
+runpattern !d tlpkg/installer/wget
+# tar.exe is included in the win32 files below
+runpattern !f tlpkg/installer/tar.exe
+#
+# Windows only:
+binpattern d/win32 tlpkg/tlperl
+binpattern f/win32 tlpkg/installer/tar.exe
+binpattern f/win32 install-tl.bat
+binpattern f/win32 install-tl-advanced.bat
+#
+# xz/xzdec binaries for all:
+binpattern f tlpkg/installer/xz/xzdec.${ARCH}
+#
+# list the platforms for which we provide wget:
+binpattern f/\
+amd64-freebsd,amd64-kfreebsd,\
+i386-freebsd,i386-kfreebsd,\
+powerpc-aix,sparc-solaris,\
+universal-darwin,win32,x86_64-darwin \
+  tlpkg/installer/wget/wget.${ARCH}
+#
+# Our ${ARCH} (probably) only works as a directory component, not
+# extensions, so annoyingly list explicit exe's:
+binpattern f/win32 tlpkg/installer/wget/wget.exe
+binpattern f/win32 tlpkg/installer/xz/xzdec.exe
+binpattern f/i386-cygwin tlpkg/installer/xz/xz.i386-cygwin.exe

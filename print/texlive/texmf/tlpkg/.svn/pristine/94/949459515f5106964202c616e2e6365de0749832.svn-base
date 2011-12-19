@@ -1,0 +1,8 @@
+category Collection
+shortdesc African scripts
+longdesc Support for typesetting some African scripts
+depend ethiop
+depend ethiop-t1
+depend fc
+depend hyphen-ethiopic
+depend collection-basic

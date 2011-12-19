@@ -1,0 +1,10 @@
+execute addMap arevvn.map
+execute addMap chartervn.map
+execute addMap cmbrightvn.map
+execute addMap concretevn.map
+execute addMap grotesqvn.map
+execute addMap txttvn.map
+execute addMap urwvn.map
+execute addMixedMap vnrother.map
+execute addMixedMap vnrtext.map
+execute addMap vntopia.map

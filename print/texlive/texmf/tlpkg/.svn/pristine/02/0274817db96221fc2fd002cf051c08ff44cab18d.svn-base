@@ -1,0 +1,6 @@
+category Collection
+shortdesc Turkmen
+longdesc Support for typesetting Turkmen.
+depend turkmen
+depend hyphen-turkmen
+depend collection-basic

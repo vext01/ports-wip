@@ -1,0 +1,13 @@
+category TLCore
+docpattern f texmf/doc/man/man1/t1ascii.*
+docpattern f texmf/doc/man/man1/t1asm.*
+docpattern f texmf/doc/man/man1/t1binary.*
+docpattern f texmf/doc/man/man1/t1disasm.*
+docpattern f texmf/doc/man/man1/t1mac.*
+docpattern f texmf/doc/man/man1/t1unmac.*
+binpattern f bin/${ARCH}/t1ascii
+binpattern f bin/${ARCH}/t1asm
+binpattern f bin/${ARCH}/t1binary
+binpattern f bin/${ARCH}/t1disasm
+binpattern f bin/${ARCH}/t1mac
+binpattern f bin/${ARCH}/t1unmac

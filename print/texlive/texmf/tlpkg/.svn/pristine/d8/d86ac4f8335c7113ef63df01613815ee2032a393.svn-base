@@ -1,0 +1,18 @@
+category Collection
+shortdesc French
+longdesc Support for typesetting French.
+depend aeguill
+depend bib-fr
+depend bibleref-french
+depend booktabs-fr
+depend facture
+depend frenchle
+depend frletter
+depend impnattypo
+depend mafr
+depend tabvar
+depend tdsfrmath
+depend variations
+depend hyphen-basque
+depend hyphen-french
+depend collection-basic

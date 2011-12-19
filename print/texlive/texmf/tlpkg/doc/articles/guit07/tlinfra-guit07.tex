@@ -1,0 +1,595 @@
+%
+% TeX Live's new infrastructure
+% Norbert Preining
+% Article presented on the 4th GuITmeeting, Pisa 13 October 2007
+%
+% Copyright 2007 Norbert Preining
+% You can redistribute and/or modify this document under the terms of the 
+% GNU General Public License as published by the Free Software Foundation; 
+% either version 2 of the License, or (at your option) any later version.
+%
+\documentclass{arstexnica}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{fancyvrb}
+\usepackage{url}
+\usepackage{marvosym}
+\usepackage{listings}
+\lstset{frame=lines,basicstyle=\ttfamily,showspaces=true,prebreak={\Righttorque},postbreak={\Lefttorque},breaklines}
+\newcommand{\tl}{\TeX~Live}
+\newcommand{\ctan}{CTAN}
+\newcommand{\tpm}{\texttt{tpm}}
+\newcommand{\tpms}{\tpm{}s}
+\newcommand{\tlpsrc}{\texttt{tlpsrc}}
+\newcommand{\tlpsrcs}{\tlpsrc{}s}
+\newcommand{\tlpobj}{\texttt{tlpobj}}
+\newcommand{\tlpobjs}{\tlpobj{}s}
+\newcommand{\tlpdb}{\texttt{tlpdb}}
+\newcommand{\tlpdbs}{\tlpdb{}s}
+
+\hyphenation{infra-struc-ture}
+
+%\catcode`>=\active
+%\def>#1<{\texttt{#1}}
+\DefineShortVerb{\|}
+\begin{document}
+\begin{article}
+%\selectlanguage{italian}%
+
+\title{\tl's new infrastructure\thanks{%
+  Article presented on the 4th GuITmeeting, Pisa 13 October 2007}}
+
+\author{Norbert Preining}
+\address{Vienna University of Technology\\
+	Wiedner Hauptstr.\ 10\\
+	1040 Wien, Austria}
+\netaddress{preining@logic.at}
+
+\maketitle
+
+
+\begin{abstract}
+Since the release of \tl~2007 a new infrastructure for \tl\
+distribution and management has been developed. This article presents the
+reasons for this switch, the ideas behind the new infrastructure,
+software developed, and ways to incorporate this new
+infrastructure. We will close with a look at what new features
+this new infrastructure could bring to the \TeX\ (Live) world.
+\end{abstract}
+
+%
+% does not work in normal arstexnika mode, needs standalone, I leave
+% this up to the editors
+%\tableofcontents
+
+\section{Introduction}
+\label{sec:intro}
+
+\tl\ is an easy way to get up and running with \TeX. It provides a
+comprehensive \TeX\ system with binaries for most flavors of Unix,
+including GNU/Linux, and also Windows. It includes all the major
+\TeX-related programs, macro packages, and fonts that are free
+software, including support for many languages around the world. 
+
+Since 1996 it tries to bring to all \TeX-users as much material
+from \ctan\ as possible, packaged for `consumption', i.e., for using it
+as a live system from DVD, or installing it on a variety of operating
+systems/architecture combinations.
+
+These two requirements, incorporating as much as possible from \ctan,
+and providing binaries for a wide range of OS/arch combinations, has led
+to a huge number of supporting scripts, in a wide variety of programming
+languages (Perl, shell, XML, C, \ldots). These scripts were (and are)
+used to generate installation media, check consistency, update
+important files (e.g., for the installer), incorporating packages from
+\ctan, just to name a few. There have been many contributors; Sebastian
+Rahtz, Fabrice Popineau, and Karl Berry are the principal authors.
+
+As always with overload volunteers working on big projects, not much
+was documented, programming was done by trial and error (see for
+example the packaging scripts of Debian, one of my own more horrible
+creations). This wouldn't have been reason enough to change things
+this deep in the intestines of \tl, but other illusions and dreams
+have driven us to rebuild from the ground up.
+
+\section{A world full of TPMs}
+\label{sec:tpm}
+
+Up to \tl~2007 everything in \tl\ was organized in \tpms, an
+acronym for `\TeX\ Package Manage[r/ment]'. One \tpm\ described more
+or less one package from \ctan, containing the list of included
+files, title, description, license information, sometimes version
+numbers, additional information necessary for incorporation
+(activation of map files, hyphenation patterns, and formats).
+
+Maintenance of these \tpms\ was mostly done by a Perl module |Tpm.pm|
+written by Fabrice Popineau, and the accompanying mystical program
+|tpm-factory.pl|, a script so full of possibilities that nobody
+besides Fabrice probably ever understood everything that could be done with
+it. Some of the jobs of this |tpm-factory.pl| were
+\begin{itemize}
+\item regeneration of the \tpms, this included some magic in finding
+  the right files
+\item creation of a new \tpm\ for a newly installed package from \ctan
+\item checking the coverage, i.e., checking that every file present in
+  the repository is actually contained in a \tpm.
+\item duplication and dependency checks
+\end{itemize}
+
+Alas, there have been some problems with all the \tpm-business:
+\begin{itemize}
+\item they contained a mixture of generated (file lists) and static
+  information (actions to be carried out);
+\item they were full of duplicate information: version, license,
+  descriptions were taken now and then from the \TeX\ Catalogue, but
+  were typically horribly out of date or otherwise wrong;
+\item we had to generate so-called `lists' files (line-oriented plain
+  text file lists) from the \tpms\ for the installer
+  because the XML syntax of the \tpms\ is not practical to parse from a simple
+  shell script.
+\end{itemize}
+
+\section{Aims of the new infrastructure}
+\label{sec:aims}
+
+So around mid-2006 discussion of a new infrastructure started, but
+unfortunately, due to the usual time constraints of all involved,
+without much concrete outcome except many emails. At least a preliminary
+catalogue of items to be improved sprang into existence:
+
+
+\paragraph{Separation of static from generated content}
+
+As already mentioned, the \tpms\ contained a wild mixture of stuff from
+various sources (the file itself, the \TeX\ Catalogue, the
+repository). The new infrastructure should have some kind of `source'
+files where {\em only} the necessary information is stored, and all other
+content is added at generation time (of whatever). Naturally that
+could have been done on top of the \tpms, too, but starting from
+scratch seemed to be a better option.
+
+\paragraph{Getting rid of lists files}
+
+Using the \tpms\ and some XSLT processing, the lists files were generated
+before release. These lists files (one for each package, about 2000 in all)
+must be read by the installer from the DVD, which caused a lot of
+headache and slow installations. 
+%Furthermore, these list files often were forgotten, thus out of date.
+%(during development, but not at the end! i hope :) --karl)
+
+The sole reason for the existence of these lists files was the fact
+that the installer, written in shell, couldn't parse the XML \tpms,
+since XML parsing programs cannot be assumed to be present at all
+installations. The new infrastructure should be based on some format
+that is easily parseable using stuff normally already present, or at
+least necessary for \tl\ anyway. 
+
+\paragraph{Single package updates via the web}
+
+Some \TeX\ distributions, notably MiKTeX, already support single package
+updates over the Internet.
+\tl, as big and nice as it is, still lacks this lovely feature. Of course
+it was put high on the priority list to allow for single package
+updates. 
+
+\paragraph{Better documentation}
+
+Last, but not least, we hoped that by rewritting the infrastructure
+and documenting it on the way we could provide a more stable foundation
+for more development and improvement, thus attracting more
+contributors. Furthermore, since te\TeX\ development has been stopped,
+\tl\ is taking the place as the \TeX\ system of choice in many
+GNU/Linux and other free distributions, and better documentation would
+only help providing those distributions with some aid for the migration. 
+
+\section{New infrastructure -- the basics}
+\label{sec:basics}
+
+There are three type of files: \tlpsrc, \tlpobj, \tlpdb. The
+format of these files are very similar to Debian's Package files: a
+simple list of 
+\begin{center}
+  |key    value|
+\end{center}
+(without leading spaces). Empty lines at the beginning and end of a
+\tlpsrc\ or \tlpobj\ file are ignored. Also lines starting with \#\ are
+ignored (to allow for comments). Some special cases apply for \tlpobj\
+files and the \tlpdb\ file, see below.
+
+\subsection{\tlpsrc\ file format}
+\label{sec:tlpsrc}
+
+The possible keys and their respective interpretation for the \tlpsrc\
+files are: 
+\begin{description}
+\item[name] identifies the package, |value| must consist only of
+  \verb+[-_a-zA-Z0-9]+.
+
+\item[category]
+  identifies the category into which this package belongs. Possible
+  categories are |Collection|, |Scheme|, |TLCore|, |Documentation|,
+  |Package|. There are no particular checks as to whether a
+  |tlpsrc| file called |collection-something| actually belongs to the
+  category |Collection|. Most packages will fall into the |Package|
+  category.  These categories were inherited from the \tpm\ world and
+  may be modified at some point; for now, they suffice.
+
+\item[catalogue]
+  identifies the name under which this package can be found in the \TeX\ 
+  Catalogue. If not present the name of the packages is taken as the
+  Catalogue entry.
+
+\item[shortdesc]
+  gives a one line description of the package. Susequent entries will
+  overwrite the former ones. In \tl\ only used for collections and
+  schemes. 
+
+\item[longdesc]
+  gives a long description of the package. Susequent entries are added
+  up to a long text. In \tl\ only used for collections and
+  schemes. 
+
+\item[depend]
+  gives the list of dependencies of the package in the form
+  \begin{center}
+    |Category/Name|
+  \end{center}
+  for |value|. All the depend lines contribute to the dependencies of
+  the package. 
+
+\item[execute]
+  gives a free form entry of install time jobs to be
+  executed. Currently the following values are understood by
+  the installers: 
+  \begin{itemize}
+  \item |execute addMap font.map|\\
+    enables the font map file |font.map| in the |updmap.cfg| file.
+  \item |execute addMixedMap font.map|\\
+    enables the font map file |font.map| for Mixed mode in the
+    |updmap.cfg| file.  By the way,
+    the purpose of MixedMap is to help users with printers that render
+    the Type~1 versions of the fonts worse than the (mode-tuned) 
+    bitmap-based Type~3 fonts. The entries from MixedMap are not
+    added to psfonts\_pk.map; that's the only difference.  It's used for
+    fonts which have both Metafont and (typically) autotraced Type~1
+    instantations.
+
+  \item |execute BuildLanguageDat NN|\\
+    activates all the hyphenation patterns found in
+    \path{Master/texmf/tex/generic/config/language.NN.dat} in the
+    generated |language.dat| file.
+  \item |execute BuildFormat FMTCFG|\\
+    activates all the formats present in
+    \path{Master/texmf/fmtutil/format.FMTCFG.cnf}
+    in the generated |fmtutil.cnf| file.
+  \end{itemize}
+
+{
+\UndefineShortVerb{\|}
+\item[(src|run|doc|bin)pattern pattern]
+  adds a pattern (see below) to the respective list of patterns.
+}
+
+\end{description}
+
+\subsubsection{Patterns}
+\label{sec:patterns}
+
+To automatically generate the file lists in \tlpobjs\ a specific
+pattern language was developed. Patterns can include or exclude files
+or whole sub-directories into the file list of a \tlpobj. Patterns are
+of the form
+\begin{center}
+  |[PREFIX]TYPE PAT|
+\end{center}
+where |PREFIX| can be |+|, |!+|, or |!|, and |TYPE| one of the letters
+|t|, |f|, |d|, |r|. An initial |+| for the pattern indicates that the
+automatically generated pattern should not be cleared (see below),
+while the |!| indicates that the matching files should be excluded.
+
+The meaning of the various pattern types is
+\begin{description}
+\item[f path]
+  includes all files which match |path| where \emph{only} the last
+  component of |path| can contain the usual glob characters * and ?
+  (but no others!).
+\item[d path]
+  includes all the files in and below the directory specified as
+  |path|. 
+\item[t word1 ... wordN wordL]
+  includes all the files in and below all directories of the form
+  \begin{center}
+    \path{word1/word2/.../wordN/.../any/dirs/.../wordL/}
+  \end{center}
+  i.e., all words but the last form the prefix of the path, then
+  there can be an arbitrary nesting of directories, followed by
+  |wordL| as another directory.
+\item[r regexp]
+  includes all files matching the Perl regexp \verb+/^regexp$/+
+\end{description}
+
+
+\subsubsection{Autogenerated patterns}
+\label{sec:autogenpat}
+
+In the case that one of the pattern sections is empty or \emph{all}
+the provided patterns have the prefix |+| (e.g., |+f ...|), then the
+following patterns are \emph{automatically} added at expansion time
+(but never written to the textual representation):
+
+\begin{itemize}
+\item for runpatterns of category |Package|
+  \begin{center}
+    |t texmf-dist topdir name|
+  \end{center}
+  where |topdir| is one of: bibtex, context, dvips, fonts, makeindex,
+  metafont, metapost, mft, omega, scripts, tex, vtex. |name| refers to
+  the name of the package as given by the |name| directive.
+
+  For other categories \emph{no} patterns are automatically added to
+  the list of runpatterns.
+\item for docpattern of category |Package|
+  \begin{center}
+    |t texmf-dist doc name|
+  \end{center}
+  and for docpattern of category |Documentation|
+  \begin{center}
+    |t texmf-doc doc name|
+  \end{center}
+\item for srcpattern of category |Package|
+  \begin{center}
+    |t texmf-dist source name|
+  \end{center}
+  and for srcpattern of category |Documentation|
+  \begin{center}
+    |t texmf-doc source name|
+  \end{center}
+\end{itemize}
+|binpatterns| are never automatically added.
+
+In addition some magic tricks have been added to make writing of
+|binpatterns| easier:
+\begin{description}
+\item[arch expansion]
+  In case the string \verb+${ARCH}+ occurs in one |binpattern| it is 
+  automatically expanded to the respective architecture.
+\item[bat/exe/dll for win32]
+  For |binpatterns| of the form |f bin/win32/foobar| (i.e., also for a
+  binpattern of the form \verb+f bin/${ARCH}/foobar+) files
+  |foobar.bat|, |foobar.dll|, and |foobar.exe| are also matched.
+\end{description}
+The above two properties allows to capture the binaries for all
+architectures in one binpattern:
+\begin{center}
+        \verb+binpattern f bin/${ARCH}/dvips+
+\end{center}
+will include |bin/win32/dvips.exe| in the runfiles when arch=win32. 
+
+Note that the bat/exe expansion \emph{only} works for patterns of the
+|f|-type. 
+
+\subsection{\tlpobj\ file format}
+\label{sec:tlpobj}
+
+These files are structurally similar to \tlpsrc\ files; the
+only difference is that the |*pattern| keys are not allowed, their
+place being taken by |*files| keys having a peculiar syntax (see
+below). Furthermore, an additional key |revision| and all keys
+matching |catalogue-*| are allowed.  
+The |catalogue-*| keys specify information simply copied from the \TeX\
+Catalogue.  We'll discuss the others below.
+
+\subsubsection{The \texttt{revision} entry}
+
+The |revision| key is {\em not} related to the package's version as
+specified by the author.  Those versions are far too random, hard to
+extract, and sometimes not even present, to be a reliable basis for a
+packaging system.  Instead, we look at all the package's files in the
+\tl\ source repository, which is currently Subversion, and use the
+maximum version number found there.  Since Subversion uses simple
+integers for version numbers, this is simple to use in programs, and
+just as important, this whole process of finding the version number can
+be reliably automated.
+
+\subsubsection{The \texttt{*files} entries}
+\label{sec:keyfiles}
+
+While the |tlpsrc| files specify the files to be included using the 
+patterns, the |tlpobj| files contain the already expanded file list.
+All the `files' keys have in common that they are followed by a list of
+files (and possibly additional tags) indented by exactly one (1) space. They
+differ only in the first line itself (described below).
+
+
+
+\begin{description}
+\item[srcfiles, runfiles] each of these lines is (or better should be)
+  tagged with |size=NNNN| where |NNNN| is the sum of sizes of the single 
+  files (currently in bytes), e.g.,
+  \begin{center}
+    |srcfiles size=NNNNNN|
+  \end{center}
+\item[docfiles] The docfiles line itself is similar to the |srcfiles|
+  and |runfiles| lines above:
+  \begin{center}
+    |docfiles size=NNNNNN|
+  \end{center}
+  But the lines listing the files are allowed to have additional tags
+  |details| and |language|:
+  \begin{center}
+    |file detail="foo bar" language="en"|
+  \end{center}
+  For an example see listing~\ref{achemso}. The reason to add these
+  tags is the hope that someone will write a nice replacement for
+  \path{texdoctk}. Note that these tags' source is the \TeX\ Catalogue, 
+  and are in no way obligatory.
+\item[binfiles] Since |binfiles| are different for the different
+  architectures, one \tlpobj\ file can contain |binfiles| lines for
+  different architectures. The architecture is specified on the
+  |binfiles| lines using the |arch=XXX| tag. Thus, |binfiles| lines look like
+  \begin{center}
+    |binfiles arch=XXXX size=NNNNN|
+  \end{center}
+  A more complete example taken from |bin-dvipsk.tlpobj| can be seen
+  in listing~\ref{dvipsk}.
+\end{description}
+
+\begin{lstlisting}[caption={Excerpt from achemso.tlpobj},label=achemso]
+...
+docfiles size=135842
+ texmf-dist/doc/latex/achemso/README details="Package Readme" language="de"
+ texmf-dist/doc/latex/achemso/achemso.pdf details="Package documentation" language="de"
+ ...
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Excerpt from bin-dvipsk.tlpobj},label=dvipsk]
+name bin-dvipsk
+category TLCore
+revision 4427
+docfiles size=959434
+ texmf/doc/dvips/dvips.html
+ ...
+runfiles size=1702468
+ texmf/dvips/base/color.pro
+ ...
+ texmf/scripts/pkfix/pkfix.pl
+binfiles arch=i386-solaris size=329700
+ bin/i386-solaris/afm2tfm
+ bin/i386-solaris/dvips
+ bin/i386-solaris/pkfix
+binfiles arch=win32 size=161280
+ bin/win32/afm2tfm.exe
+ bin/win32/dvips.exe
+ bin/win32/pkfix.exe
+...
+\end{lstlisting}
+
+\subsection{\tlpdb\ file format}
+\label{sec:tlpdb}
+
+A \tlpdb\ file will describe the status of an installation, that is it
+will contain all the installed packages' \tlpobj\ files. Thus,
+the format of a \tlpdb\ file is quite simple. It is the concatenation
+of \tlpobjs\ with (at least) one empty line between different
+\tlpobjs. 
+
+
+\section{Programming APIs}
+
+Wrapping these file formats into a programming API represents
+the actual work of realizing the new infrastructure. On the way we had
+to create not only modules for accessing the content of the above
+files in some object-oriented way, we also created some additional
+modules for interfacing to the Subversion repository and the \TeX\
+Catalogue. 
+
+Currently, the following modules are available in the \tl\ subversion
+repository:
+\begin{description}
+\item[TeXLive::TLTREE] an object that exhibits the properties of the
+  subversion repository in some structured form. In principle it is
+  the scooping up of |svn status -v| output with post-processing
+  for easier and faster searches.
+\item[TeXLive::TeXCatalogue] a very simple interface to the \TeX\
+  Catalogue, barely providing minimal information. Will be used for
+  enriching the final database.
+\item[TeXLive::TLPSRC] provides access to \tlpsrc\ files, basic
+  functionality like reading in, writing out, and member access
+  functions. In addition, it allows to generate, or expand, a |TLPSRC|
+  object to a |TLPOBJ| object using an instance of |TLTREE|. That is,
+  it takes the patterns specified in the \tlpsrc, and tries to find
+  all files matching these patterns. After this it recomputes the size
+  and returns a |TLPOBJ| object.
+\item[TeXLive::TLPOBJ] provides access to \tlpobj\ files, and entries
+  stored in a a |TLPDB| object. As with the \tlpsrc, basic
+  functionalities are exported, and also a function to create a zip
+  file for the |TLPOBJ| (which later should be used for web updates or
+  building the `inst' CD),
+  and together with an instance of a |TeXCatalogue| object some
+  information can be transferred from the \TeX\ Catalogue to the
+  |TLPOBJ| object.
+\item[TeXLive::TLPDB] provides access to the \tl\ database. These
+  files will serve the central purpose of describing the current
+  status of various media, like an installation on a user computer, or
+  the distribution. Comparing these status descriptions, update
+  programs can deduce what packages should be updated.
+\item[TeXLive::TLPUtils] exports some handy functions used in all the
+  other modules.
+\end{description}
+
+The full API documentation is provided in |pod| format within the perl
+modules. A Perl API document
+is available in the \tl\ subversion repository, too.
+
+In addition to the Perl API a start at a shell (sh, bash, etc.)\ API and
+implementation has been created, but it presently lacks several key features,
+and is not up to date. Jim Hef{}feron has contributed a start at a Python API.
+However, we assume that on all computers Perl will be
+available or will be installed during installation.
+
+\section{Integration into current \tl\ development}
+
+Around these modules several day-in-day-out tasks of the \tl\
+developers have been rewritten using the new infrastructure, the most
+important one being the script |ctan2tl|. This is the script responsible for
+transferring a package from \ctan\ into the right places in
+the \tl\ repository, and preparing it for users.
+
+Other things already converted are automatic update of the
+|texlive.tlpdb|, the file containing the |TLPDB|.
+
+On the other hand not everything has been done, the biggest piece for
+sure is the rewrite of the installer. The old installer, relying on
+the lists files we wanted to get rid of, is still the only one we
+have. Furtunately we can generate lists files from the
+|texlive.tlpdb|, but in the not-so-long run, meaning hopefully for
+\tl~2008, we want to have a new installer.
+
+Other things still missing are coverage and duplication checks, but
+those are quite easy to do using the Unix command world (|grep|,
+|sort|, and |uniq| being the magic incantations).
+
+\section{Closing}
+\label{sec:closing}
+
+Although we are quite confident that the new infrastructure will work
+well, only the reality of the next release will prove us right or
+wrong. Many of the key features of the new infrastructure have been
+designed with the \tpm-system in mind, and some `features' carried
+over will probably proven superfluous. Nothing with the current
+infrastructure is written in stone, and we are open for proposals and
+improvements, keeping in mind that releasing \tl\ should not be made
+more difficult. 
+
+That said, we invite contributors and everyone interested to contact
+us at \url{tex-live@tug.org}, or take a look at the following
+resources: 
+\begin{itemize}
+\item \path{http://www.tug.org/texlive} -- the main entry point, with
+  links to developers' resources, documentation
+\item \path{http://www.tug.org/svn/texlive/trunk/} -- web view onto the
+  subversion repository;
+\item \path{svn://tug.org/texlive/trunk} -- svn repository, anonymous
+  access, take care when you checking out the repository, it needs
+  several Gigabyte of disk space;
+\item \path{http://www.tug.org/texlive/pkgupdate.html} -- an
+  explanation how updates from \ctan\ to \tl\ are done.
+\end{itemize}
+
+Finally, I want to thank all the contributors to \tl, there are too
+many to mention. In the course of developing this infrastructure the
+discussions with Karl Berry, Pawe\l{} Jackowski, Reinhard Kotucha,
+Siep Kroonenberg, and Jerzy B. Ludwichowski were very helpful. 
+
+%\bibliographystyle{arstexnica}
+%\bibliography{atsample}
+  
+\end{article}
+
+\end{document}
+
+

@@ -1,0 +1,42 @@
+How to interface tlmgr search with keywords
+
+new search interface:
+
+tlmgr search <options> <literal>
+	searches the normal way, i.e., pkg names, short/long desc
+tlmgr search <options> --file <literal>
+	searches the current --file way, i.e., the list of files of a package
+tlmgr search <options> --taxonomy <literal>
+	searches the taxonomy (keyword, functionality, characterization)
+tlmgr search <options> --extended <terms>
+	allows full searching (will maybe implemented later)
+
+<options> ::= --global | --word | --list [keywords|functions|characterizations]
+
+<terms> ::=  <term> | <term> <terms>
+<term>  ::=  AND  | OR  |  LEFT | RIGHT
+              keyword=<literal> | function=<levels> | 
+	      characterization=<levels> |
+	      package-name=<literal> | title=<literal> |
+	      description=<literal> | file=<literal>
+
+<levels> ::= <level> | <level> " > " <levels>
+<level>  ::= <literal>
+
+
+defaults = package-names=ARG OR titles=ARG OR descriptions=ARG
+AND -> conjunction
+OR  -> disjunction
+LEFT|RIGHT -> parenthesis for grouping of and and or
+
+<literal> may contain wildcards and it is matched in a glob style (no re!!)
+
+
+example
+	tlmgr search keyword=paragraph AND description=dropped
+should give back the lettrine package
+
+	tlmgr search characterization=bibliography
+searches for all packages with characterization containing anywhere the string
+"bibliography" (case insensitive).
+

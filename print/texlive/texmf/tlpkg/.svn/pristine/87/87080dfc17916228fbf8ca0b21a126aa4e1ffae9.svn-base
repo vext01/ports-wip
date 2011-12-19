@@ -1,0 +1,4 @@
+docpattern +!d texmf-dist/doc/latex/tcldoc/tools
+docpattern +!d texmf-dist/doc/fonts/punknova/tools
+docpattern +!d texmf-dist/doc/fonts/amiri/tools
+docpattern +!d texmf-dist/doc/latex/tcldoc/tools

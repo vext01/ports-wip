@@ -1,0 +1,7 @@
+category TLCore
+shortdesc TeX Live documentation (common elements)
+#
+docpattern +f texmf/doc/texlive/index.html
+#
+postaction shortcut type=menu name="TeX Live documentation" \
+	cmd=TEXDIR/texmf/doc/texlive/index.html

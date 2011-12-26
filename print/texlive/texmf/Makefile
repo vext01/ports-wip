@@ -15,8 +15,10 @@ PKGNAME-main =		texlive_texmf-minimal-${V}
 PKGNAME-full =		texlive_texmf-full-${V}
 PKGNAME-docs =		texlive_texmf-docs-${V}
 PKGNAME-context =	texlive_texmf-context-${V}
-REVISION-main =		1
+
+REVISION-docs =		0
 REVISION-full =		0
+REVISION-main =		1
 
 NO_BUILD =		Yes
 NO_REGRESS =		Yes
@@ -31,9 +33,10 @@ MODRUBY_BUILDDEP =	No
 MODRUBY_RUNDEP =	No
 MODPY_BUILDDEP =	No
 MODPY_RUNDEP =		No
-
 RUN_DEPENDS-full +=	lang/python/${MODPY_VERSION}
-RUN_DEPENDS-context +=	lang/ruby/${MODRUBY_REV}
+
+RUN_DEPENDS-context +=	texlive_base-${V}:print/texlive/base \
+			lang/ruby/${MODRUBY_REV}
 RUN_DEPENDS-docs +=	texlive_base-${V}:print/texlive/base \
 			x11/p5-Tk
 

@@ -17,15 +17,16 @@ texmf-full:
   Extra macros (approx 191MB).
 
 texmf-context:
-  Macros for the conTeXt typesetter.
-  This was separated because it maintains it's own hashes separate from
-  that of libkpse. As 99% of users don't use this, these hashes are generated
-  only when the conTeXt macros are installed (approx 7MB).
+  Macros for the conTeXt typesetter (approx 7MB).
+
+  This was separated because conTeXt maintains it's own hashes separate
+  from that of libkpse. As 99% of users don't use this, these hashes are
+  generated only when the conTeXt macros are installed.
 
 texmf-doc:
   Documentation for all of TeX Live (approx 890MB).
 
-All sizes are apprximate compressed package sizes and the texmf package
+All sizes are approximate compressed package sizes and the texmf package
 contents do not overlap.
 
 There is a *lot* of functionality in texmf-full, so before reportng

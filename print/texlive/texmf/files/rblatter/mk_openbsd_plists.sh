@@ -23,26 +23,22 @@ fi
 
 mkdir sets
 
-#echo "\nCalculating PLIST of texlive_texmf-minimal (tetex)..."
-#./rblatter -d -v -n -t ${TMF} -p share/ -o sets/tetex +scheme-tetex,run
-#cat sets/tetex/PLIST | sort > sets/tetex/PLIST_final
+echo "\nCalculating PLIST of texlive_texmf-minimal (tetex)..."
+./rblatter -d -v -n -t ${TMF} -p share/ -o sets/tetex +scheme-tetex,run
+cat sets/tetex/PLIST | sort > sets/tetex/PLIST_final
 
-#echo "\nCalculating PLIST of texlive_texmf-full..."
-#./rblatter -d -v -n -t ${TMF} -p share/ -o sets/full \
-#	+scheme-full,run:-scheme-tetex,doc,src,run
-#cat sets/full/PLIST | sort > sets/full/PLIST_final
+echo "\nCalculating PLIST of texlive_texmf-full..."
+./rblatter -d -v -n -t ${TMF} -p share/ -o sets/full \
+	+scheme-full,run:-scheme-tetex,doc,src,run
+cat sets/full/PLIST | sort > sets/full/PLIST_final
 
-#echo "\nCalculating PLIST of texlive_texmf-docs..."
-#./rblatter -d -v -n -t ${TMF} -p share/ -o sets/docs +scheme-full,doc
-#cat sets/docs/PLIST | sort > sets/docs/PLIST_final
-
-# XXX put back -n
-echo "\nCalculating PLIST of texlive_texmf-context"
-./rblatter -d -v  -t ${TMF} -p share/ -o sets/context +scheme-context,run:-scheme-full,run
-cat sets/context/PLIST | sort > sets/context/PLIST_final
+echo "\nCalculating PLIST of texlive_texmf-docs..."
+./rblatter -d -v -n -t ${TMF} -p share/ -o sets/docs +scheme-full,doc
+cat sets/docs/PLIST | sort > sets/docs/PLIST_final
 
 echo "\ndone - PLISTS in sets/"
 echo "now inspect:"
+echo "  - move conTeXt stuff into it's own packing list"
 echo "  - share/texmf/scripts/texlive/* probably un-needed"
 echo "  - *.exe obviously a waste of space"
 echo "  - search for 'win32' and 'w32' and 'windows'"

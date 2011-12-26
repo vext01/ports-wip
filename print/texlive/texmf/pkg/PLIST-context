@@ -231,6 +231,7 @@ share/texmf-dist/scripts/context/stubs/unix/pstopdf
 share/texmf-dist/scripts/context/stubs/unix/rlxtools
 share/texmf-dist/scripts/context/stubs/unix/texexec
 share/texmf-dist/scripts/context/stubs/unix/texmfstart
+share/texmf-dist/scripts/tex4ht/
 share/texmf-dist/scripts/tex4ht/htcontext.sh
 share/texmf-dist/tex/context/
 share/texmf-dist/tex/context/base/
@@ -2152,6 +2153,7 @@ share/texmf-dist/tex/generic/context/m-metapo.tex
 share/texmf-dist/tex/generic/context/mptopdf.tex
 share/texmf-dist/tex/generic/context/ppchtex.noc
 share/texmf-dist/tex/generic/pgf/utilities/pgfutil-context.def
+share/texmf-dist/tex/generic/tex4ht/
 share/texmf-dist/tex/generic/tex4ht/context.4ht
 share/texmf-dist/tex/latex/context/
 share/texmf-dist/tex/latex/context/m-ch-de.sty

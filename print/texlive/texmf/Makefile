@@ -1,8 +1,9 @@
 # $OpenBSD: Makefile,v 1.24 2011/12/05 23:22:39 sthen Exp $
 
-COMMENT-main =		texlive texmf for laTeX/PdfTeX
-COMMENT-full =		texlive texmf for XeTeX/ConTeXt and extra macros
+COMMENT-context =	texlive texmf for conTeXt
 COMMENT-docs =		texlive documentation
+COMMENT-full =		texlive texmf for extra macros
+COMMENT-main =		texlive texmf for basic functionality
 
 DISTNAME =		texlive-${DIST_V}-texmf
 MASTER_SITES0 =		http://spacehopper.org/mirrors/ \
@@ -13,6 +14,7 @@ DISTFILES =		${DISTNAME}${EXTRACT_SUFX} \
 PKGNAME-main =		texlive_texmf-minimal-${V}
 PKGNAME-full =		texlive_texmf-full-${V}
 PKGNAME-docs =		texlive_texmf-docs-${V}
+PKGNAME-context =	texlive_texmf-context-${V}
 REVISION-main =		1
 REVISION-full =		0
 
@@ -29,15 +31,13 @@ MODRUBY_BUILDDEP =	No
 MODRUBY_RUNDEP =	No
 MODPY_BUILDDEP =	No
 MODPY_RUNDEP =		No
-RUN_DEPENDS-full +=	lang/python/${MODPY_VERSION} \
-			lang/ruby/${MODRUBY_REV}
 
-RUN_DEPENDS-docs =	texlive_base-${V}:print/texlive/base \
+RUN_DEPENDS-full +=	lang/python/${MODPY_VERSION}
+RUN_DEPENDS-context +=	lang/ruby/${MODRUBY_REV}
+RUN_DEPENDS-docs +=	texlive_base-${V}:print/texlive/base \
 			x11/p5-Tk
 
-MULTI_PACKAGES =	-main -full -docs
-
-SUBST_VARS +=		LOCALBASE
+MULTI_PACKAGES =	-context -docs -full -main
 
 do-install:
 	chown -R ${SHAREOWN}:${SHAREGRP} ${WRKDIST}
@@ -71,7 +71,9 @@ do-install:
 	chown -R ${SHAREOWN}:${SHAREGRP} ${WRKDIR}/texmf-var
 	mv ${WRKDIR}/texmf-var ${PREFIX}/share
 
+# selfauto does not work with our legacy texmf paths, patch in paths.
 post-install:
 	${SUBST_CMD} ${PREFIX}/share/texmf/web2c/texmf.cnf
+	${SUBST_CMD} ${PREFIX}/share/texmf/web2c/texmfcnf.lua
 
 .include <bsd.port.mk>

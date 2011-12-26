@@ -24723,5 +24723,5 @@ share/texmf/scripts/texlive/
 share/texmf/scripts/texlive/NEWS
 share/texmf/scripts/texlive/var/
 share/texmf/scripts/texlive/var/texcatalogue.keywords
-@exec mktexlsr > /dev/null 2>&1
-@unexec-delete mktexlsr > /dev/null 2>&1
+@exec %D/bin/mktexlsr > /dev/null 2>&1
+@unexec-delete %D/bin/mktexlsr > /dev/null 2>&1

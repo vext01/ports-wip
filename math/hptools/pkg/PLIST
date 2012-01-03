@@ -1,0 +1,5 @@
+@comment $OpenBSD$
+@bin bin/makerom
+@bin bin/rplcomp
+@bin bin/sasm
+@bin bin/sload

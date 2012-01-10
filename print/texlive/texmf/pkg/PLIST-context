@@ -1,3 +1,4 @@
+@comment $OpenBSD$
 man/man1/context.1
 share/texmf-dist/bibtex/bst/context/
 share/texmf-dist/bibtex/bst/context/cont-ab.bst

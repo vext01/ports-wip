@@ -374,3 +374,6 @@ share/doc/pkg-readmes/${FULLPKGNAME}
 @extra share/texmf-dist/ls-R
 @extra share/texmf-var/ls-R
 @extra share/texmf-config/ls-R
+@unexec-delete rm %D/share/texmf/ls-R
+@unexec-delete rm %D/share/texmf-dist/ls-R
+@unexec-delete rm %D/share/texmf-var/ls-R

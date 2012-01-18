@@ -19,6 +19,7 @@ PKGNAME-context =	texlive_texmf-context-${V}
 REVISION-docs =		0
 REVISION-full =		0
 REVISION-main =		1
+REVISION-context =	0
 
 NO_BUILD =		Yes
 NO_REGRESS =		Yes

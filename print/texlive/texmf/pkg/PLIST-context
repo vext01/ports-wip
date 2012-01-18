@@ -2169,3 +2169,4 @@ share/texmf/web2c/context.cnf
 @comment some of this could be shared with other parts of TL, hash with kpse
 @exec %D/bin/mktexlsr > /dev/null 2>&1
 @unexec-delete %D/bin/mktexlsr > /dev/null 2>&1
+@unexec-delete rm -Rf %D/share/texmf-var/luatex-cache

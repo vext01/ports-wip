@@ -1,4 +1,4 @@
-$OpenBSD: patch-configure,v 1.4 2011/03/08 00:09:42 edd Exp $
+$OpenBSD: patch-configure,v 1.5 2011/11/23 12:00:45 edd Exp $
 --- configure.origy	Mon May  2 14:04:59 2011
 +++ configure	Sat Aug 27 14:12:00 2011
 @@ -19812,9 +19812,10 @@ if test "x$with_gd_libdir" != x && test "x$with_gd_lib

@@ -1,4 +1,4 @@
-$OpenBSD$
+$OpenBSD: patch-texk_web2c_synctexdir_synctex-e-rec_ch0,v 1.1 2011/11/23 12:00:45 edd Exp $
 
 dvips, e-ptex fixes (buffer overflow/memory corruption) on tl11 branch.
 http://tug.org/pipermail/tldistro/2011q4/000149.html

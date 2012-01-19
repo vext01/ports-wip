@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.51 2011/09/16 11:13:41 espie Exp $
+# $OpenBSD: Makefile,v 1.54 2012/01/10 18:04:31 edd Exp $
 
 COMMENT =		base binaries for TeXLive typesetting distribution
 
 DISTNAME = 		texlive-${DIST_V}-source
 PKGNAME =		texlive_base-${V}
+REVISION =		2
 
 SHARED_LIBS =		kpathsea	4.0
 SHARED_LIBS +=		ptexenc		1.0
@@ -26,7 +27,8 @@ LIB_DEPENDS =		devel/t1lib \
 			graphics/png \
 			graphics/gd \
 			print/freetype \
-			print/poppler
+			print/poppler \
+			textproc/libxml
 
 MODULES =		textproc/intltool converters/libiconv
 # These following two modules are just for variable substitution in patches

@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile.inc,v 1.7 2011/06/01 18:53:52 jasper Exp $
+# $OpenBSD: Makefile.inc,v 1.8 2011/11/23 12:00:45 edd Exp $
 
 CATEGORIES ?=	print
 HOMEPAGE ?=	http://tug.org/texlive/

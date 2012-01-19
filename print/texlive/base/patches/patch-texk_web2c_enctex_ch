@@ -1,4 +1,4 @@
-$OpenBSD$
+$OpenBSD: patch-texk_web2c_enctex_ch,v 1.1 2011/11/23 12:00:45 edd Exp $
 
 Reliability fix from texlive 2011 stable branch. Off by one causes segfault:
 http://tug.org/pipermail/tldistro/2011q3/000137.html

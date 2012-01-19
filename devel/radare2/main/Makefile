@@ -15,7 +15,7 @@ SHARED_LIBS+=		${_lib} ${LIBV}
 
 WANTLIB =		c crypto m pthread ssl
 
-# Remember, this is acr, no GNU autotools.
+# remember, this is acr, not GNU autotools.
 CONFIGURE_ARGS +=	--with-libversion=${LIBV} \
 			--mandir=${PREFIX}/man \
 			--without-ewf \

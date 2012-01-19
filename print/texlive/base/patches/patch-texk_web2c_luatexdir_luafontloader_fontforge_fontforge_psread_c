@@ -1,4 +1,4 @@
-$OpenBSD$
+$OpenBSD: patch-texk_web2c_luatexdir_luafontloader_fontforge_fontforge_psread_c,v 1.1 2011/11/23 12:00:45 edd Exp $
 
 luatex psread.c array size fix
 http://tug.org/pipermail/tldistro/2011q4/000152.html

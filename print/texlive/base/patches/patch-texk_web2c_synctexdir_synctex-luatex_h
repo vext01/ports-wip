@@ -1,4 +1,4 @@
-$OpenBSD$
+$OpenBSD: patch-texk_web2c_synctexdir_synctex-luatex_h,v 1.1 2011/11/23 12:00:45 edd Exp $
 
 Fix synctex co-ordinates. Critical patch from tl2011 stable branch:
 http://tug.org/svn/texlive?view=revision&revision=23644

@@ -1,4 +1,4 @@
-$OpenBSD$
+$OpenBSD: patch-texk_web2c_alephdir_eobase_ch,v 1.1 2011/11/23 12:00:45 edd Exp $
 
 line number fix on 2011 stable branch: http://tug.org/pipermail/tldistro/2011q4/000148.html
 

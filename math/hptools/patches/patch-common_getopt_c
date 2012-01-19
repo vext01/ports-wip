@@ -1,0 +1,17 @@
+$OpenBSD$
+--- common/getopt.c.orig	Tue Jan  3 17:38:26 2012
++++ common/getopt.c	Tue Jan  3 17:41:25 2012
+@@ -3,6 +3,8 @@
+ #  include "config.h"
+ #endif
+ 
++#if !defined(HAVE_GETOPT)
++
+ #ifdef	HAVE_STRING_H
+ #  include <string.h>
+ #else
+@@ -82,3 +84,4 @@ int getopt( int argc, char * const argv[], const char 
+   optarg = NULL;
+   return ch;
+ }
++#endif

@@ -1,0 +1,15 @@
+$OpenBSD$
+
+Make joystick devices configurable via config file
+
+--- md.h.orig	Sun Jan 22 16:47:58 2012
++++ md.h	Sun Jan 22 16:48:19 2012
+@@ -356,7 +356,7 @@ class md (public)
+ 
+   // Added by Phillip K. Hornung <redx@pknet.com>
+   // Linux joystick initialization and handling routines
+-  void init_joysticks();
++  void init_joysticks(int, int);
+   void read_joysticks();
+ };
+ 

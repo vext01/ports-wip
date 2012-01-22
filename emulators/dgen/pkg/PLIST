@@ -1,0 +1,6 @@
+@comment $OpenBSD$
+@bin bin/dgen
+@bin bin/dgen_tobin
+@man man/man1/dgen.1
+@man man/man1/dgen_tobin.1
+@man man/man5/dgenrc.5

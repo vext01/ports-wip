@@ -1,0 +1,15 @@
+$OpenBSD$
+
+gens-gs needs access to deprecated fields within gtk headers.
+
+--- configure.ac.orig	Sun Jan 22 12:50:06 2012
++++ configure.ac	Sun Jan 22 12:50:13 2012
+@@ -196,7 +196,7 @@ ifdef(
+ AC_DEFINE(GENS_UI_GTK, 1, Enable the GTK+ UI)
+ 
+ # TODO: Disable deprecated GTK+ features.
+-GTK_CFLAGS="$GTK_CFLAGS -DGTK_DISABLE_DEPRECATED -DDISABLE_DEPRECATED -DGSEAL_ENABLE"
++#GTK_CFLAGS="$GTK_CFLAGS -DGTK_DISABLE_DEPRECATED -DDISABLE_DEPRECATED -DGSEAL_ENABLE"
+ 
+ #elif test x$ui = xqt4; then
+ #

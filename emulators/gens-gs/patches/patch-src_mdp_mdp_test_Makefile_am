@@ -1,0 +1,19 @@
+$OpenBSD$
+
+We don't use libdl in OpenBSD
+
+--- src/mdp/mdp_test/Makefile.am.orig	Sun Jan 22 13:02:42 2012
++++ src/mdp/mdp_test/Makefile.am	Sun Jan 22 13:03:04 2012
+@@ -28,9 +28,9 @@ noinst_HEADERS = \
+ mdp_test_LDADD = $(top_builddir)/src/libgsft/libgsft.la
+ 
+ # UNIX-like systems require libdl for dlopen().
+-if GENS_OS_UNIX
+-mdp_test_LDADD += -ldl
+-endif
++#if GENS_OS_UNIX
++#mdp_test_LDADD += -ldl
++#endif
+ 
+ # Win32 subsystem selection.
+ if GENS_OS_WIN32

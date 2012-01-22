@@ -1,0 +1,15 @@
+$OpenBSD$
+
+sigaction_t is not defined in OpenBSD
+
+--- src/gens/gens_core/misc/cpuflags.c.orig	Sun Jan 22 12:52:06 2012
++++ src/gens/gens_core/misc/cpuflags.c	Sun Jan 22 13:01:24 2012
+@@ -297,7 +297,7 @@ static void check_os_level_sse_sighandler(int signum)
+ static int check_os_level_sse(void)
+ {
+ 	// Set the temporary signal handler.
+-	sighandler_t prev_SIGILL = signal(SIGILL, check_os_level_sse_sighandler);
++	void (*prev_SIGILL)(int) = signal(SIGILL, check_os_level_sse_sighandler);
+ 	
+ 	// Assume SSE is supported initially.
+ 	// If the CPU doesn't support SSE, then the above signal handler

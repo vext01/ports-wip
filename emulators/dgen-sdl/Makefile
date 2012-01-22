@@ -6,11 +6,12 @@ CATEGORIES =		emulators games
 HOMEPAGE =		http://dgen.sourceforge.net/
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
-# 3 clause BSD license
-# musa non-commercial license
-# starscream non-commercial license
-# mz80 non-commercial license
-# cz80 non-commercial license
+# Various parts of dgen are under different licenses
+# Mainly a 3 clause BSD license, but also:
+#  - musa non-commercial license
+#  - starscream non-commercial license
+#  - mz80 non-commercial license
+#  - cz80 non-commercial license
 PERMIT_PACKAGE_CDROM =	No
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =No
@@ -23,7 +24,7 @@ MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=dgen/}
 BUILD_DEPENDS =		devel/sdl
 
 # optimisation for x86 using asm
-.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "amd64"
+.if ${MACHINE_ARCH} == "i386"
 BUILD_DEPENDS +=        devel/nasm
 .endif
 

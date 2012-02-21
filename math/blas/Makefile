@@ -5,23 +5,25 @@ COMMENT=	Basic Linear Algebra Subprograms
 VERSION=	1.0
 DISTNAME=	blas
 PKGNAME=	${DISTNAME}-${VERSION}
-REVISION=	5
+REVISION=	6
 SHARED_LIBS=	blas	2.0
 
-# build with gfortran from GCC4?
 FLAVORS =	gfortran
 
 .include <bsd.port.arch.mk>
 .if ${PROPERTIES:Mgcc4}
-FLAVOR ?= gfortran
+FLAVOR ?=	gfortran
 .else
-FLAVOR ?= 
+FLAVOR ?=
 .endif
 
 .if ${FLAVOR:Mgfortran}
 MODFORTRAN_COMPILER =	gfortran
-FC =			gfortran # does (and should) fortran.port.mk do this? XXX
+FC =			gfortran # XXX make auto
 .endif
+
+# XXX
+#MAKE_FLAGS =		FC=${FC}
 
 CATEGORIES=	math
 DISTFILES=	blas.tgz manpages.tgz:0

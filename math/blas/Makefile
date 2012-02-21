@@ -1,12 +1,27 @@
-# $OpenBSD: Makefile,v 1.19 2011/05/13 14:52:27 sthen Exp $
+# $OpenBSD: Makefile,v 1.20 2011/11/18 11:16:24 espie Exp $
 
 COMMENT=	Basic Linear Algebra Subprograms
 
 VERSION=	1.0
 DISTNAME=	blas
 PKGNAME=	${DISTNAME}-${VERSION}
-REVISION=	6
-SHARED_LIBS=	blas	3.0
+REVISION=	5
+SHARED_LIBS=	blas	2.0
+
+# build with gfortran from GCC4?
+FLAVORS =	gfortran
+
+.include <bsd.port.arch.mk>
+.if ${PROPERTIES:Mgcc4}
+FLAVOR ?= gfortran
+.else
+FLAVOR ?= 
+.endif
+
+.if ${FLAVOR:Mgfortran}
+MODFORTRAN_COMPILER =	gfortran
+FC =			gfortran # does (and should) fortran.port.mk do this? XXX
+.endif
 
 CATEGORIES=	math
 DISTFILES=	blas.tgz manpages.tgz:0
@@ -29,24 +44,17 @@ DIST_SUBDIR=	${DISTNAME}-${VERSION}
 WRKDIST=	${WRKDIR}/BLAS
 
 MODULES=	fortran
-MODFORTRAN_COMPILER = gfortran
+MODFORTRAN_COMPILER = g77
 BUILD_DEPENDS=	${MODFORTRAN_BUILD_DEPENDS}
 
 MAKE_FILE=	${FILESDIR}/Makefile
 MAKE_ENV=	SHLIB_MAJOR=${LIBblas_VERSION:R} \
 		SHLIB_MINOR=${LIBblas_VERSION:E} \
-		FC=${MODFORTRAN_COMPILER}
+		FC=${FC}
 FAKE_FLAGS=	LIBDIR=${LOCALBASE}/lib DEBUGLIBS=no
 USE_GROFF =	Yes
 
 MANSRC=		${WRKDIR}/manpages/blas/man/manl
-
-# See bsd.lib.mk:162
-.if ${MACHINE_ARCH:Mmips64*}
-PKG_ARGS+=	-Dno_mips64=0
-.else
-PKG_ARGS+=	-Dno_mips64=1
-.endif
 
 post-build:
 	@rm -f ${MANSRC}/{lsame,xerbla}.l

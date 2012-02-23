@@ -22,9 +22,6 @@ MODFORTRAN_COMPILER =	gfortran
 FC =			gfortran # XXX make auto
 .endif
 
-# XXX
-#MAKE_FLAGS =		FC=${FC}
-
 CATEGORIES=	math
 DISTFILES=	blas.tgz manpages.tgz:0
 

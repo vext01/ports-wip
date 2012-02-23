@@ -2,8 +2,7 @@
 
 COMMENT =		wxWidgets GUI for the computer algebra system maxima
 
-DISTNAME =		wxMaxima-11.08.0
-REVISION =		0
+DISTNAME =		wxMaxima-12.01.0
 CATEGORIES =		math
 
 HOMEPAGE =		http://wxmaxima.sourceforge.net/

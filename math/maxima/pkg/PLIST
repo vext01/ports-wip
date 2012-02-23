@@ -1,4 +1,4 @@
-@comment $OpenBSD: PLIST,v 1.6 2011/11/14 20:48:43 edd Exp $
+@comment $OpenBSD: PLIST,v 1.7 2012/01/23 09:28:33 edd Exp $
 bin/maxima
 bin/rmaxima
 bin/xmaxima

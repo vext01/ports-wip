@@ -1,0 +1,24 @@
+$OpenBSD$
+--- Makefile.am.origy	Tue Dec 27 18:43:38 2011
++++ Makefile.am	Tue Dec 27 18:43:44 2011
+@@ -211,19 +211,10 @@ $(top_builddir)/rplcas/lib/librplcas.a: \
+ 		$(top_builddir)/tools/@GSL@/.libs/@LIB_PREFIX@gsl.a
+ 	$(MAKE) -C $(top_builddir)/rplcas $(AM_MAKEFLAGS)
+ 
+-all: $(top_builddir)/tools/@NCURSES@/lib/@LIB_PREFIX@ncurses.a \
+-		$(top_builddir)/tools/@READLINE@/@LIB_PREFIX@readline.a \
+-		$(top_builddir)/tools/@READLINE@/@LIB_PREFIX@history.a \
+-		$(top_builddir)/tools/@GSL@/.libs/@LIB_PREFIX@gsl.a \
+-		$(top_builddir)/tools/@SQLITE@/.libs/@LIB_PREFIX@sqlite3.a \
+-		$(top_builddir)/tools/@OPENSSL@/@LIB_PREFIX@crypto.a \
+-		$(top_builddir)/tools/@OPENSSL@/libssl.a \
+-		$(top_builddir)/lapack/lapack/liblapack.a \
++all: $(top_builddir)/lapack/lapack/liblapack.a \
+ 		$(top_builddir)/lapack/blas/libblas.a \
+ 		$(top_builddir)/rpliconv/rpliconv$(EXEEXT) \
+ 		$(top_builddir)/rplawk/rplawk$(EXEEXT) \
+-		$(top_builddir)/tools/@FILE@/src/rplfile$(EXEEXT) \
+-		$(top_builddir)/tools/@FILE@/magic/magic.mgc \
+ 		$(top_builddir)/rplsums/rplmd5sum$(EXEEXT) \
+ 		$(top_builddir)/rplsums/rplsha1sum$(EXEEXT) \
+ 		$(top_builddir)/tools/@GPP@/src/gpp$(EXEEXT) \

@@ -1,0 +1,33 @@
+@comment $OpenBSD$
+@bin bin/advmenu
+@man man/man1/advmenu.1
+share/advance/
+share/doc/advance/
+share/doc/advance/advcfg.html
+share/doc/advance/advcfg.txt
+share/doc/advance/advdev.html
+share/doc/advance/advdev.txt
+share/doc/advance/advmenu.html
+share/doc/advance/advmenu.txt
+share/doc/advance/advv.html
+share/doc/advance/advv.txt
+share/doc/advance/authors.html
+share/doc/advance/authors.txt
+share/doc/advance/build.html
+share/doc/advance/build.txt
+share/doc/advance/carddos.html
+share/doc/advance/carddos.txt
+share/doc/advance/cardlinx.html
+share/doc/advance/cardlinx.txt
+share/doc/advance/cost.html
+share/doc/advance/cost.txt
+share/doc/advance/faq.html
+share/doc/advance/faq.txt
+share/doc/advance/histmenu.html
+share/doc/advance/histmenu.txt
+share/doc/advance/install.html
+share/doc/advance/install.txt
+share/doc/advance/readmenu.html
+share/doc/advance/readmenu.txt
+share/doc/advance/relemenu.html
+share/doc/advance/relemenu.txt

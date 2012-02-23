@@ -1,0 +1,7 @@
+@comment $OpenBSD$
+@lib lib/libag_core.so.${LIBag_core_VERSION}
+@lib lib/libag_dev.so.${LIBag_dev_VERSION}
+@lib lib/libag_gui.so.${LIBag_gui_VERSION}
+@lib lib/libag_math.so.${LIBag_math_VERSION}
+@lib lib/libag_rg.so.${LIBag_rg_VERSION}
+@lib lib/libag_vg.so.${LIBag_vg_VERSION}

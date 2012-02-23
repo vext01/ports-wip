@@ -42,8 +42,8 @@ RUN_DEPENDS=	devel/gmake \
 LIB_DEPENDS=	${MODFORTRAN_LIB_DEPENDS} \
 		math/fftw3 \
 		devel/glpk \
-		lapack-*-gfortran:math/lapack \
-		blas-*-gfortran:math/blas \
+		blas-*-gfortran:math/blas,gfortran \
+		lapack-*-gfortran:math/lapack,gfortran \
 		math/amd \
 		math/umfpack \
 		devel/pcre \
@@ -60,8 +60,8 @@ FC =			gfortran
 CONFIGURE_ARGS=	${CONFIGURE_SHARED} \
 		--with-fftw \
 		--without-mpi \
-		--without-hdf5 \
-		--disable-docs	# texi errors XXX
+		--without-hdf5
+#		--disable-docs	# texi errors XXX
 CONFIGURE_ENV=	CPPFLAGS="-I${LOCALBASE}/include -I${X11BASE}/include" \
 		LDFLAGS="-L${LOCALBASE}/lib -L${X11BASE}/lib" \
 		F77=${FC} \

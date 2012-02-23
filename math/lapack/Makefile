@@ -3,7 +3,7 @@
 COMMENT=	library of Fortran 77 linear algebra subroutines
 
 DISTNAME=	lapack-3.1.1
-REVISION=	3
+REVISION=	4
 
 SHARED_LIBS=	lapack 5.0
 
@@ -31,7 +31,7 @@ FLAVORS =       gfortran
 #.if ${PROPERTIES:Mgcc4}
 #FLAVOR ?=       gfortran
 #.else
-#FLAVOR ?=
+FLAVOR ?=
 #.endif
 
 .if ${FLAVOR:Mgfortran}

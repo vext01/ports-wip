@@ -14,7 +14,7 @@ FLAVORS =	gfortran
 #.if ${PROPERTIES:Mgcc4}
 #FLAVOR ?=	gfortran
 #.else
-#FLAVOR ?=
+FLAVOR ?=
 #.endif
 
 .if ${FLAVOR:Mgfortran}

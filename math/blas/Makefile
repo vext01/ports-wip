@@ -10,12 +10,12 @@ SHARED_LIBS=	blas	2.0
 
 FLAVORS =	gfortran
 
-.include <bsd.port.arch.mk>
-.if ${PROPERTIES:Mgcc4}
-FLAVOR ?=	gfortran
-.else
-FLAVOR ?=
-.endif
+#.include <bsd.port.arch.mk>
+#.if ${PROPERTIES:Mgcc4}
+#FLAVOR ?=	gfortran
+#.else
+#FLAVOR ?=
+#.endif
 
 .if ${FLAVOR:Mgfortran}
 MODFORTRAN_COMPILER =	gfortran

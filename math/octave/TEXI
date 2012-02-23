@@ -1,0 +1,7 @@
+rm -rf $backupdir; exit $rc
+/usr/ports/pobj/octave-3.6.1-rc0/octave-3.6.1-rc0/doc/interpreter//matrix.texi:1300:
+Unknown command `leq'.
+/usr/ports/pobj/octave-3.6.1-rc0/octave-3.6.1-rc0/doc/interpreter//matrix.texi:1300:
+Misplaced {.
+/usr/ports/pobj/octave-3.6.1-rc0/octave-3.6.1-rc0/doc/interpreter//matrix.texi:1300:
+Misplaced }.

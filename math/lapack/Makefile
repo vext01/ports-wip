@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.19 2011/03/08 23:45:47 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.20 2011/11/18 11:16:24 espie Exp $
 
 COMMENT=	library of Fortran 77 linear algebra subroutines
 
 DISTNAME=	lapack-3.1.1
-REVISION=	4
+REVISION=	3
 
-SHARED_LIBS=	lapack 6.0
+SHARED_LIBS=	lapack 5.0
 
 CATEGORIES=	math
 
@@ -25,16 +25,31 @@ EXTRACT_SUFX=	.tgz
 LIB_DEPENDS =	math/blas
 WANTLIB =	blas>=1
 
-MODULES=	fortran
-MODFORTRAN_COMPILER = gfortran
-BUILD_DEPENDS=	${MODFORTRAN_BUILD_DEPENDS}
+FLAVORS =       gfortran
 
-# XXX FC=
-MAKE_ENV=	SHLIB_MAJOR=${LIBlapack_VERSION:R} \
+#.include <bsd.port.arch.mk>
+#.if ${PROPERTIES:Mgcc4}
+#FLAVOR ?=       gfortran
+#.else
+#FLAVOR ?=
+#.endif
+
+.if ${FLAVOR:Mgfortran}
+MODFORTRAN_COMPILER =   gfortran
+FC =                    gfortran # XXX make auto
+MAKE_ENV +=		TIMER=INT_ETIME
+MAKE_ENV +=		FFLAGS=-O0	# XXX find which file causes optimisation bug
+.else
+MODFORTRAN_COMPILER =	g77
+FC =			g77	# XXX make auto
+MAKE_ENV +=		TIMER=EXT_ETIME
+.endif
+
+MODULES=	fortran
+BUILD_DEPENDS=	${MODFORTRAN_BUILD_DEPENDS}
+MAKE_ENV +=	SHLIB_MAJOR=${LIBlapack_VERSION:R} \
 		SHLIB_MINOR=${LIBlapack_VERSION:E} \
-		FC=gfortran \
-		TIMER=INT_ETIME
-#		TIMER=EXT_ETIME \	XXX f77 only????
+		FC=${FC}
 FAKE_FLAGS=	LIBDIR=${LOCALBASE}/lib DEBUGLIBS=no
 USE_GROFF =	Yes
 REGRESS_FLAGS=	PLAT= OPTS= FORTRAN=${FC} LOADER=${FC} \
@@ -43,13 +58,6 @@ REGRESS_FLAGS=	PLAT= OPTS= FORTRAN=${FC} LOADER=${FC} \
 
 MAKE_FILE=	${FILESDIR}/Makefile
 WRKSRC=		${WRKDIST}/SRC
-
-# See bsd.lib.mk:162
-.if ${MACHINE_ARCH:Mmips64*}
-PKG_ARGS+=	-Dno_mips64=0
-.else
-PKG_ARGS+=	-Dno_mips64=1
-.endif
 
 # avoid 'unknown manpage type' errors and move manpages to section 3
 pre-configure:

@@ -29,7 +29,6 @@ LIB_DEPENDS =		devel/sdl \
 			graphics/jpeg \
 			graphics/png
 
-USE_GMAKE =		Yes
 USE_LIBTOOL =		Yes
 CONFIGURE_STYLE =	simple
 CONFIGURE_ARGS =	--prefix=${PREFIX}

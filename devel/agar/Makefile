@@ -5,7 +5,11 @@ COMMENT =		graphical toolkit based on SDL
 DISTNAME =		agar-1.4.1
 
 SHARED_LIBS +=  ag_core                   0.0 # 4.0
-
+SHARED_LIBS +=  ag_dev                    0.0 # 4.0
+SHARED_LIBS +=  ag_gui                    0.0 # 4.0
+SHARED_LIBS +=  ag_math                   0.0 # 4.0
+SHARED_LIBS +=  ag_rg                     0.0 # 4.0
+SHARED_LIBS +=  ag_vg                     0.0 # 4.0
 
 CATEGORIES =		devel graphics
 

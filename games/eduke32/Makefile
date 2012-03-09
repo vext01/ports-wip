@@ -43,6 +43,10 @@ NO_REGRESS =	Yes
 
 WRKDIST =	${WRKDIR}/eduke32_${RDATE}-${RTAG}/
 
+pre-configure:
+	${SUBST_CMD} ${WRKSRC}/source/game.c
+	${SUBST_CMD} ${WRKSRC}/source/astub.c
+
 do-install:
 	${INSTALL_PROGRAM} ${WRKBUILD}/eduke32 ${PREFIX}/bin
 	${INSTALL_PROGRAM} ${WRKBUILD}/mapster32 ${PREFIX}/bin

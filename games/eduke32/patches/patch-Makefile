@@ -1,0 +1,23 @@
+$OpenBSD$
+
+Use default optimisation options.
+
+--- Makefile.orig	Fri Mar  9 01:15:39 2012
++++ Makefile	Fri Mar  9 01:16:02 2012
+@@ -25,16 +25,6 @@ INC=$(SRC)
+ o=o
+ # ENETROOT=$(ESRC)/enet
+ 
+-ifneq (0,$(RELEASE))
+-    # Debugging disabled
+-    debug+= $(F_NO_STACK_PROTECTOR)
+-else
+-    # Debugging enabled
+-    ifneq (0,$(KRANDDEBUG))
+-        debug+= -fno-inline -fno-inline-functions -fno-inline-functions-called-once
+-    endif
+-endif
+-
+ OURCFLAGS=$(BASECFLAGS) \
+     -I$(INC) -I$(EINC) -I$(SRC)/jmact -I$(JAUDIOLIBDIR)/include -I$(ENETDIR)/include
+ 

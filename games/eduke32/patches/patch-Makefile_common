@@ -1,0 +1,28 @@
+$OpenBSD$
+
+Make build honor CC. Use default optimisations.
+
+--- Makefile.common.orig	Sat Jan 28 14:36:52 2012
++++ Makefile.common	Fri Mar  9 01:20:03 2012
+@@ -59,8 +59,6 @@ endif
+ 
+ 
+ # Tools
+-CC=gcc
+-CXX=g++
+ AS=nasm
+ AR=ar
+ RC=windres
+@@ -90,12 +88,6 @@ endif
+ ifneq (0,$(RELEASE))
+     # Debugging disabled
+     debug+= -O$(OPTLEVEL)
+-    ifneq ($(CC),clang)
+-        debug+= -funswitch-loops
+-    endif
+-    ifeq (0,$(DEBUGANYWAY))
+-        debug+= -fomit-frame-pointer -DNDEBUG
+-    endif
+     ifneq (0,$(LTO))
+         LIBS+= -flto
+         debug+= -DUSING_LTO -flto

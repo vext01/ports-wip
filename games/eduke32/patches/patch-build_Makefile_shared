@@ -1,0 +1,37 @@
+$OpenBSD$
+
+Default optimisations.
+
+--- build/Makefile.shared.orig	Fri Mar  9 01:27:06 2012
++++ build/Makefile.shared	Fri Mar  9 01:28:45 2012
+@@ -17,30 +17,6 @@ SDL_FRAMEWORK	= 0
+ STDCPPLIB=-lsupc++
+ BUILDCFLAGS=
+ 
+-# GCC version, for conditional selection of flags.
+-# This is easier than trying to squeeze it out of gcc --version:
+-GCC_MAJOR ?= 4
+-ifeq (4,$(GCC_MAJOR))
+-    F_NO_STACK_PROTECTOR := -fno-stack-protector
+-    # there are some link-time issues with stack protectors, so make it possible to override
+-    F_STACK_PROTECTOR_ALL ?= -fstack-protector-all
+-    ifneq ($(CC),clang)
+-        F_JUMP_TABLES := -fjump-tables
+-    endif
+-    M_TUNE_GENERIC := -mtune=generic
+-    M_STACKREALIGN := -mstackrealign
+-    L_SSP := -lssp
+-endif
+-
+-
+-ifndef ARCH
+-    ifeq ($(findstring i686, $(shell uname -m)), i686)
+-        ARCH=-march=pentium3 $(M_TUNE_GENERIC) -mmmx # -msse2 -mfpmath=sse,387 -malign-double $(M_STACKREALIGN)
+-    else
+-        ARCH=
+-    endif
+-endif
+-
+ # Detect the platform if it wasn't explicitly given to us from
+ # the outside world. This allows cross-compilation by overriding
+ # CC and giving us PLATFORM specifically.

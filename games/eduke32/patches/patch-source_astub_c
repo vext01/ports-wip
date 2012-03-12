@@ -1,0 +1,14 @@
+$OpenBSD$
+
+find data files in ${LOCALBASE}/share/duke3d
+
+--- source/astub.c.orig	Sat Feb 18 17:56:26 2012
++++ source/astub.c	Fri Mar  9 08:57:15 2012
+@@ -10288,6 +10288,7 @@ int32_t ExtInit(void)
+     addsearchpath("/usr/local/share/games/jfduke3d");
+     addsearchpath("/usr/share/games/eduke32");
+     addsearchpath("/usr/local/share/games/eduke32");
++    addsearchpath("${LOCALBASE}/share/duke3d");
+ #elif defined(__APPLE__)
+     addsearchpath("/Library/Application Support/JFDuke3D");
+     addsearchpath("/Library/Application Support/EDuke32");

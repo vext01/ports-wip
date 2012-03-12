@@ -1,0 +1,5 @@
+Source-port of the venerable Duke Nukem 3D, also usable as a homebrew
+game engine. Besides increasing portability, the engine adds new
+renderers, in-game configurability, console, plus extended editing and
+scripting capabilities. Networking for dukematches and coop play is
+fully functional. "EDuke32 makes sandwiches!" 

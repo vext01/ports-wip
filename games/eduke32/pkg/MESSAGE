@@ -1,0 +1,11 @@
+Shareware Duke Nukem 3D data has been installed to: 
+  ${PREFIX}/share/duke3d/
+
+You may also copy your registered version data files (or any other
+Duke Nukem 3D retail copies, such as the Atomic Edition) to a local
+directory such as ~/duke3d, and run eduke32 from within that directory:
+
+  % cd ~/duke3d && eduke32
+
+This will load your registered version data rather than the installed
+shareware.

@@ -1,0 +1,11 @@
+$OpenBSD$
+--- TeXworks.pro.orig	Mon Mar 12 11:39:38 2012
++++ TeXworks.pro	Mon Mar 12 11:40:25 2012
+@@ -122,6 +122,7 @@ openbsd-g++ {
+ 	# Same bug exists in OpenBSD/qt4
+ 	LIBS		+= -lQtDBus
+ 	INCLUDEPATH	+= /usr/local/include/X11/qt4/QtDBus
++	INSTALL_PREFIX	= ${PREFIX}
+ }
+ 
+ win32 { # paths here are specific to my setup

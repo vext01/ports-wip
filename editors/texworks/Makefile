@@ -30,10 +30,18 @@ MODULES =		x11/qt4 \
 			lang/lua
 
 SHARED_ONLY =		Yes
-WANTLIB +=		QtDBus QtGui QtScript QtScriptTools QtXml c \
-			hunspell-1.2 m poppler poppler-qt4 pthread stdc++ z
-WANTLIB-lua =		QtCore QtGui QtXml lua m stdc++
-WANTLIB-python =	QtCore QtGui QtXml ${MODPY_WANTLIB} stdc++ m
+
+WANTLIB += ICE QtDBus QtGui QtScript QtScriptTools QtXml SM X11
+WANTLIB += Xext Xi Xinerama Xrender c fontconfig freetype hunspell-1.2
+WANTLIB += m poppler-qt4 pthread stdc++ z
+
+WANTLIB-lua =	lua
+WANTLIB-lua +=	ICE QtCore QtGui QtXml SM X11 Xext Xi Xinerama Xrender
+WANTLIB-lua +=	fontconfig freetype m stdc++
+
+WANTLIB-python =  ${MODPY_WANTLIB}
+WANTLIB-python += ICE QtCore QtGui QtXml SM X11 Xext Xi Xinerama Xrender
+WANTLIB-python += fontconfig freetype m stdc++
 
 MULTI_PACKAGES =	-main -lua -python
 

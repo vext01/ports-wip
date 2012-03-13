@@ -1,0 +1,12 @@
+$OpenBSD$
+--- TeXworks.pro.orig	Wed Jun 29 18:03:14 2011
++++ TeXworks.pro	Mon Mar 12 12:02:05 2012
+@@ -47,7 +47,7 @@ QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
+ 
+ unix:!macx {
+ 	TARGET	=	texworks
+-	isEmpty(INSTALL_PREFIX):INSTALL_PREFIX = /usr/local
++	isEmpty(INSTALL_PREFIX):INSTALL_PREFIX = ${PREFIX}
+ 	isEmpty(DATA_DIR):DATA_DIR = $$INSTALL_PREFIX/share
+ 	isEmpty(TW_HELPPATH):TW_HELPPATH = $$DATA_DIR/texworks-help
+ 	isEmpty(TW_PLUGINPATH):TW_PLUGINPATH = $$INSTALL_PREFIX/lib/texworks

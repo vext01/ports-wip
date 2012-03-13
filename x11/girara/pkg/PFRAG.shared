@@ -1,0 +1,3 @@
+@comment $OpenBSD$
+lib/libgirara-gtk2.so
+@lib lib/libgirara-gtk2.so.${LIBgirara-gtk2_VERSION}

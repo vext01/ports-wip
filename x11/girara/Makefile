@@ -34,5 +34,6 @@ FAKE_FLAGS +=		DESTDIR=
 
 # XXX needs "check" test suite
 REGRESS_TARGET =	test
+REGRESS_DEPENDS =	devel/check
 
 .include <bsd.port.mk>

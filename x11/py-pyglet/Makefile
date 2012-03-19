@@ -1,0 +1,23 @@
+# $OpenBSD$
+
+COMMENT =		symbolic mathematics for Python
+
+MODPY_EGG_VERSION =	1.1.4
+DISTNAME =		pyglet-${MODPY_EGG_VERSION}
+CATEGORIES =		x11 multimedia
+
+HOMEPAGE =		http://www.pyglet.org
+
+# XXX
+PERMIT_PACKAGE_CDROM =	Yes
+PERMIT_PACKAGE_FTP =	Yes
+PERMIT_DISTFILES_CDROM =Yes
+PERMIT_DISTFILES_FTP =	Yes
+
+MASTER_SITES =		http://pyglet.googlecode.com/files/
+
+MODULES =		lang/python
+
+NO_REGRESS =		Yes
+
+.include <bsd.port.mk>

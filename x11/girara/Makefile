@@ -32,6 +32,8 @@ USE_GMAKE =		Yes
 MAKE_FLAGS +=		QUIET= CPPFLAGS="-I${LOCALBASE}/include -DGETTEXT_PACKAGE=\\\"girara\\\" -DLOCALEDIR=\\\"/usr/share/locale\\\""
 FAKE_FLAGS +=		DESTDIR=
 
-NO_REGRESS =		Yes
+# XXX needs "check" test suite
+REGRESS_TARGET =	test
+REGRESS_DEPENDS =	devel/check
 
 .include <bsd.port.mk>

@@ -1,0 +1,10 @@
+$OpenBSD$
+--- lib/xtra/icon/angband-sdl.desktop.orig	Wed Apr 11 02:21:08 2012
++++ lib/xtra/icon/angband-sdl.desktop	Wed Apr 11 02:21:47 2012
+@@ -4,5 +4,5 @@ Type=Application
+ Comment=A roguelike dungeon exploration game based on the books of J.R.R.Tolkien
+ Exec=angband -msdl
+ TryExec=angband
+-Icon=/usr/share/angband/xtra/icon/att-32.png
++Icon=${TRUEPREFIX}/share/angband/xtra/icon/att-32.png
+ Categories=Game;RolePlaying;

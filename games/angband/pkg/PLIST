@@ -1,0 +1,90 @@
+@comment $OpenBSD: PLIST,v 1.13 2011/10/03 10:59:33 edd Exp $
+%%sdl%%
+@extraunexec rm /var/games/angband/*/* 2>/dev/null || true
+@mode g+s
+@group games
+@bin bin/angband
+@mode
+share/angband/
+share/angband/edit/
+share/angband/edit/artifact.txt
+share/angband/edit/ego_item.txt
+share/angband/edit/flavor.txt
+share/angband/edit/hints.txt
+share/angband/edit/limits.txt
+share/angband/edit/monster.txt
+share/angband/edit/monster_base.txt
+share/angband/edit/names.txt
+share/angband/edit/object.txt
+share/angband/edit/object_base.txt
+share/angband/edit/p_class.txt
+share/angband/edit/p_hist.txt
+share/angband/edit/p_race.txt
+share/angband/edit/pain.txt
+share/angband/edit/pit.txt
+share/angband/edit/shop_own.txt
+share/angband/edit/spell.txt
+share/angband/edit/store.txt
+share/angband/edit/terrain.txt
+share/angband/edit/vault.txt
+share/angband/file/
+share/angband/file/crown.txt
+share/angband/file/dead.txt
+share/angband/file/news.txt
+share/angband/help/
+share/angband/help/330.txt
+share/angband/help/attack.txt
+share/angband/help/birth.txt
+share/angband/help/command.txt
+share/angband/help/debug.txt
+share/angband/help/dungeon.txt
+share/angband/help/general.txt
+share/angband/help/help.hlp
+share/angband/help/option.txt
+share/angband/help/playing.txt
+share/angband/help/version.txt
+share/angband/info/
+share/angband/info/readme.txt
+share/angband/pref/
+share/angband/pref/flvr-dvg.prf
+share/angband/pref/flvr-new.prf
+share/angband/pref/flvr-nmd.prf
+share/angband/pref/flvr-xxx.prf
+share/angband/pref/font-gcu.prf
+share/angband/pref/font-mac.prf
+share/angband/pref/font-sdl.prf
+share/angband/pref/font-win.prf
+share/angband/pref/font-x11.prf
+share/angband/pref/font-xxx.prf
+share/angband/pref/font.prf
+share/angband/pref/graf-dvg.prf
+share/angband/pref/graf-new.prf
+share/angband/pref/graf-nmd.prf
+share/angband/pref/graf-xxx.prf
+share/angband/pref/graf.prf
+share/angband/pref/message.prf
+share/angband/pref/pref.prf
+share/angband/pref/user.prf
+share/angband/pref/xtra-dvg.prf
+share/angband/pref/xtra-new.prf
+share/angband/pref/xtra-nmd.prf
+share/angband/pref/xtra-xxx.prf
+share/angband/xtra/
+share/angband/xtra/icon/
+share/angband/xtra/icon/att-128.png
+share/angband/xtra/icon/att-16.png
+share/angband/xtra/icon/att-256.png
+share/angband/xtra/icon/att-32.png
+share/angband/xtra/icon/att-512.png
+share/applications/
+@comment share/applications/angband-gtk.desktop
+share/applications/angband-x11.desktop
+@mode 775
+@sample /var/games/angband/
+@sample /var/games/angband/apex/
+@sample /var/games/angband/save/
+@sample /var/games/angband/user/
+@mode
+@group
+@exec %D/bin/update-desktop-database
+@unexec-delete %D/bin/update-desktop-database

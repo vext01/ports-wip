@@ -62,8 +62,8 @@ PKG_ARGS +=		-Dsdl=0
 NO_REGRESS =		Yes
 
 pre-configure:
-	${SUBST_CMD} ${WRKSRC}/lib/xtra/icon/angband-sdl.desktop
-	${SUBST_CMD} ${WRKSRC}/lib/xtra/icon/angband-x11.desktop
+	@perl -pi -e "s,/usr/share,${TRUEPREFIX}/share," \
+		${WRKSRC}/lib/xtra/icon/angband*.desktop
 
 post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/applications

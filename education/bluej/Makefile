@@ -1,4 +1,6 @@
 # $OpenBSD: Makefile.template,v 1.61 2012/03/29 13:41:58 sthen Exp $
+#
+# Requires kurt's ld.so patch
 
 COMMENT =		integrated learning environment for Java
 
@@ -35,7 +37,7 @@ MAKE_ENV +=		LC_ALL=en_US.UTF-8 CLASSPATH=${WRKSRC}/lib
 do-extract:
 	mkdir ${WRKDIR}/${DISTNAME} &&cd ${WRKDIR}/${DISTNAME} && ${UNZIP} -qq ${FULLDISTDIR}/${DISTNAME}${EXTRACT_SUFX}
 
-SUBST_VARS +=		JAVA_HOME WRKDIR
+SUBST_VARS +=		JAVA_HOME WRKSRC
 pre-configure:
 	${SUBST_CMD} ${WRKSRC}/build.properties
 

@@ -18,5 +18,5 @@ OpenBSD specific paths
  # Makes it easier if the current directory is not bluej_home
  #####################################################################
 -bluej_home=/home/davmac/workspace/bluej
-+bluej_home=${WRKDIR}
++bluej_home=${WRKSRC}
  #bluej_home=/Users/mik/Development/bluej

@@ -1,0 +1,22 @@
+$OpenBSD$
+
+OpenBSD specific paths
+
+--- build.properties.orig	Fri Apr 13 14:14:03 2012
++++ build.properties	Fri Apr 13 14:16:16 2012
+@@ -20,7 +20,7 @@
+ #build_java_home=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK
+ #build_java_home=c:/Program Files/Java/jdk1.6.0_13
+ #build_java_home=/System/Library/Frameworks/JavaVM.framework/Versions/1.6
+-build_java_home=/usr/lib/jvm/java-6-openjdk
++build_java_home=${JAVA_HOME}
+ 
+ java_command_dir_name=bin
+ #java_command_dir_name=Commands
+@@ -35,5 +35,5 @@ run_java_home=${build_java_home}
+ # Pass this property down to lower build files to find various jars etc
+ # Makes it easier if the current directory is not bluej_home
+ #####################################################################
+-bluej_home=/home/davmac/workspace/bluej
++bluej_home=${WRKDIR}
+ #bluej_home=/Users/mik/Development/bluej

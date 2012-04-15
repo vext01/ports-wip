@@ -36,7 +36,14 @@ pre-configure:
 
 pre-install:
 	touch ${WRKBUILD}/src/ld.conf.dummy
-	mkdir -p ${PREFIX}/lib/ocaml/site-lib/glpk/
+	${INSTALL_DATA_DIR} ${PREFIX}/lib/ocaml/site-lib/glpk/
+	#mkdir -p ${PREFIX}/lib/ocaml/site-lib/glpk/
+
+# installs stub so in the wrong place
+post-install:
+	${INSTALL_DATA_DIR} ${PREFIX}/lib/ocaml/stublibs
+	mv ${PREFIX}/lib/ocaml/site-lib/glpk/dllglpk_stubs.so \
+		${PREFIX}/lib/ocaml/stublibs
 
 # If we had the package installed at regress time, we would have used ocamlfind
 # Eg.

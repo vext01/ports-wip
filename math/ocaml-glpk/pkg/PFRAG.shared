@@ -1,2 +1,2 @@
 @comment $OpenBSD$
-lib/ocaml/site-lib/glpk/dllglpk_stubs.so
+lib/ocaml/stublibs/dllglpk_stubs.so

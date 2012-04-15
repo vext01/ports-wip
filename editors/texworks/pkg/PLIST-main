@@ -12,8 +12,6 @@ share/man/man1/
 @man share/man/man1/texworks.1
 share/pixmaps/
 share/pixmaps/TeXworks.png
-@exec %D/bin/update-desktop-database
-@unexec-delete %D/bin/update-desktop-database
 share/texworks-help/
 share/texworks-help/en/
 share/texworks-help/en/Acknowledgements.html
@@ -104,3 +102,5 @@ share/texworks-help/en/index9.html
 share/texworks-help/en/indexname.html
 share/texworks-help/en/manual.css
 share/texworks-help/en/tw-help-title.txt
+@exec %D/bin/update-desktop-database
+@unexec-delete %D/bin/update-desktop-database

@@ -1,0 +1,14 @@
+$OpenBSD$
+--- plugins-src/TWLuaPlugin/TWLuaPlugin.pro.orig	Mon Mar 12 11:46:27 2012
++++ plugins-src/TWLuaPlugin/TWLuaPlugin.pro	Mon Mar 12 11:47:38 2012
+@@ -44,6 +44,10 @@ macx {
+ 	INCLUDEPATH += /usr/local/include
+ }
+ 
++openbsd-g++* {
++       LIBS    += -L${LOCALBASE}/lib -llua
++}
++
+ unix:!macx { # on Unix-ish platforms we rely on pkgconfig
+ 	CONFIG		+= link_pkgconfig
+ 	PKGCONFIG	+= lua5.1

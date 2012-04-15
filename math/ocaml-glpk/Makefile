@@ -38,6 +38,9 @@ pre-install:
 	touch ${WRKBUILD}/src/ld.conf.dummy
 	mkdir -p ${PREFIX}/lib/ocaml/site-lib/glpk/
 
+# If we had the package installed at regress time, we would have used ocamlfind
+# Eg.
+# ocamlfind ocamlc -package glpk -linkpkg example.ml -o example
 do-regress:
 	cd ${WRKSRC}/src && ocamlc -ccopt -L.  glpk.cma ../examples/example.ml -o example && \
 		./example | grep -e '^Z: ' > example.actual && \

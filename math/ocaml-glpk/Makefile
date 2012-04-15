@@ -2,7 +2,8 @@
 
 COMMENT =		glpk bindings for OCaml
 
-DISTNAME =		ocaml-glpk-0.1.6
+V =			0.1.6
+DISTNAME =		ocaml-glpk-${V}
 
 CATEGORIES =		math
 
@@ -25,12 +26,22 @@ LIB_DEPENDS =		devel/glpk
 BUILD_DEPENDS =		sysutils/findlib
 
 USE_GMAKE =		Yes
-NO_REGRESS =		Yes
 
 MAKE_ENV +=		"CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib"
+
+# name and version number incorrect in META
+pre-configure:
+	@perl -pi -e "s,version=\".*\",version=\"${V}\"," ${WRKSRC}/src/META
+	@perl -pi -e "s,name=\".*\",name=\"Glpk\"," ${WRKSRC}/src/META
 
 pre-install:
 	touch ${WRKBUILD}/src/ld.conf.dummy
 	mkdir -p ${PREFIX}/lib/ocaml/site-lib/glpk/
 
+do-regress:
+	cd ${WRKSRC}/src && ocamlc -ccopt -L.  glpk.cma ../examples/example.ml -o example && \
+		./example | grep -e '^Z: ' > example.actual && \
+		test -z "`diff -u ${FILESDIR}/example.expected example.actual`" || \
+		echo "Test failed: "; diff -u ${FILESDIR}/example.expected example.actual
+		
 .include <bsd.port.mk>

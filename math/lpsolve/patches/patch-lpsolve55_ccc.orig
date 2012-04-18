@@ -2,9 +2,18 @@ $OpenBSD$
 
 * We don't use -ldl
 * Don't use platform specific paths
+* Honour CFLAGS and CC
 
 --- lpsolve55/ccc.orig	Wed Mar 25 00:27:18 2009
-+++ lpsolve55/ccc	Wed Apr 18 15:35:10 2012
++++ lpsolve55/ccc	Wed Apr 18 16:31:04 2012
+@@ -1,6 +1,6 @@
+ :
+ src='../lp_MDO.c ../shared/commonlib.c ../shared/mmio.c ../shared/myblas.c ../ini.c ../fortify.c ../colamd/colamd.c ../lp_rlp.c ../lp_crash.c ../bfp/bfp_LUSOL/lp_LUSOL.c ../bfp/bfp_LUSOL/LUSOL/lusol.c ../lp_Hash.c ../lp_lib.c ../lp_wlp.c ../lp_matrix.c ../lp_mipbb.c ../lp_MPS.c ../lp_params.c ../lp_presolve.c ../lp_price.c ../lp_pricePSE.c ../lp_report.c ../lp_scale.c ../lp_simplex.c ../lp_SOS.c ../lp_utils.c ../yacc_read.c'
+-c=cc
++c=${CC}
+ 
+ #determine platform (32/64 bit)
+ >/tmp/platform.c
 @@ -11,7 +11,7 @@ $c /tmp/platform.c -o /tmp/platform
  PLATFORM=`/tmp/platform`
  rm /tmp/platform /tmp/platform.c >/dev/null 2>&1
@@ -23,7 +32,8 @@ $OpenBSD$
       so=y
  fi
  
- opts='-O3'
+-opts='-O3'
++opts='${CFLAGS}'
  
  $c -s -c -I.. -I../shared -I../bfp -I../bfp/bfp_LUSOL -I../bfp/bfp_LUSOL/LUSOL -I../colamd $opts $def $NOISNAN -DYY_NEVER_INTERACTIVE -DPARSER_LP -DINVERSE_ACTIVE=INVERSE_LUSOL -DRoleIsExternalInvEngine $src
 -ar rv bin/$PLATFORM/liblpsolve55.a `echo $src|sed s/[.]c/.o/g|sed 's/[^ ]*\///g'`
@@ -35,7 +45,7 @@ $OpenBSD$
  then
    $c -fpic -s -c -I.. -I../shared -I../bfp -I../bfp/bfp_LUSOL -I../bfp/bfp_LUSOL/LUSOL -I../colamd -I. $opts $NOISNAN -DYY_NEVER_INTERACTIVE -DPARSER_LP -DINVERSE_ACTIVE=INVERSE_LUSOL -DRoleIsExternalInvEngine $src
 -  $c -shared -Wl,-Bsymbolic -Wl,-soname,liblpsolve55.so -o bin/$PLATFORM/liblpsolve55.so `echo $src|sed s/[.]c/.o/g|sed 's/[^ ]*\///g'` -lc -lm -ldl
-+  $c -shared -Wl,-Bsymbolic -Wl,-soname,liblpsolve55.so -o bin/liblpsolve55.so `echo $src|sed s/[.]c/.o/g|sed 's/[^ ]*\///g'` -lc -lm 
++  $c -shared -Wl,-Bsymbolic -Wl,-soname,liblpsolve55.so.${LIBlpsolve55_VERSION} -o bin/liblpsolve55.so.${LIBlpsolve55_VERSION} `echo $src|sed s/[.]c/.o/g|sed 's/[^ ]*\///g'` -lc -lm 
  fi
  
  rm *.o 2>/dev/null

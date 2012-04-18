@@ -25,11 +25,17 @@ PERMIT_DISTFILES_FTP =	Yes
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lpsolve/}
 
+# Docs are distributed separately
+DOCDISTFILE =		lp_solve_5.5.2.0_doc${EXTRACT_SUFX}
+DISTFILES +=		${DOCDISTFILE}
+EXTRACT_ONLY =		${DISTNAME}${EXTRACT_SUFX}
+
 # Build is a series of shell scripts
+MAKE_ENV +=	CC=${CC} LIBlpsolve55_VERSION=${LIBlpsolve55_VERSION}
 do-build:
 	cd ${WRKSRC}/lpsolve55 && \
-		LIBlpsolve55_VERSION=${LIBlpsolve55_VERSION} sh ccc
-	cd ${WRKSRC}/lp_solve && sh ccc
+		${MAKE_ENV} sh -x ccc
+	cd ${WRKSRC}/lp_solve && ${MAKE_ENV} sh -x ccc
 
 do-install:
 	@# Libs
@@ -44,6 +50,11 @@ do-install:
 .endfor
 	@# Standalone solver
 	${INSTALL_PROGRAM} ${WRKSRC}/lp_solve/bin/lp_solve ${PREFIX}/bin/
+
+DOCDIR =	${PREFIX}/share/doc/lpsolve
+post-install:
+	${INSTALL_DATA_DIR} ${DOCDIR}
+	${TAR} zxf ${DISTDIR}/${DOCDISTFILE} -C ${DOCDIR}
 
 NO_REGRESS =		Yes
 

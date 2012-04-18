@@ -21,7 +21,7 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-#WANTLIB =		???
+WANTLIB +=		c m
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lpsolve/}
 
@@ -51,10 +51,12 @@ do-install:
 	@# Standalone solver
 	${INSTALL_PROGRAM} ${WRKSRC}/lp_solve/bin/lp_solve ${PREFIX}/bin/
 
+# Install docs from separate docs tarball
 DOCDIR =	${PREFIX}/share/doc/lpsolve
 post-install:
 	${INSTALL_DATA_DIR} ${DOCDIR}
 	${TAR} zxf ${DISTDIR}/${DOCDISTFILE} -C ${DOCDIR}
+	chown -R ${SHAREOWN}:${SHAREGRP} ${DOCDIR}
 
 NO_REGRESS =		Yes
 

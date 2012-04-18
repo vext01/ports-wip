@@ -395,3 +395,5 @@ share/doc/lpsolve/write_lp.htm
 share/doc/lpsolve/write_mps.htm
 share/doc/lpsolve/write_params.htm
 share/doc/lpsolve/xli_MPS.htm
+share/examples/lpsolve/
+share/examples/lpsolve/demo.c

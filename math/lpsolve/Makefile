@@ -40,6 +40,7 @@ do-build:
 	cd ${WRKSRC}/lp_solve && ${MAKE_ENV} sh -x ccc
 	cd ${WRKSRC}/demo && ${MAKE_ENV} sh -x ccc
 
+EXAMPLEDIR =	${PREFIX}/share/examples/lpsolve
 do-install:
 	@# Libs
 	${INSTALL_DATA} ${WRKSRC}/lpsolve55/bin/liblpsolve55.a ${PREFIX}/lib/
@@ -55,6 +56,8 @@ do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/lp_solve/bin/lp_solve ${PREFIX}/bin/
 	@# Demo program
 	${INSTALL_PROGRAM} ${WRKSRC}/demo/demo ${PREFIX}/bin/lp_solve_demo
+	${INSTALL_DATA_DIR} ${EXAMPLEDIR}
+	${INSTALL_DATA} ${WRKSRC}/demo/demo.c ${EXAMPLEDIR}
 
 # Install docs from separate docs tarball
 DOCDIR =	${PREFIX}/share/doc/lpsolve

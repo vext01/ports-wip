@@ -1,0 +1,12 @@
+$OpenBSD$
+--- lp_solve/ccc.orig	Wed Apr 18 14:47:01 2012
++++ lp_solve/ccc	Wed Apr 18 14:47:12 2012
+@@ -35,7 +35,7 @@ if [ "$PLATFORM" = "SCO_UNIX" ]
+ then opts='-O0'
+      def='-dy -K PIC -DLLONG=long'
+      dl=-ldl
+-else dl=-ldl
++else dl=-lcompat
+ fi
+ 
+ $c -I.. -I../bfp -I../bfp/bfp_LUSOL -I../bfp/bfp_LUSOL/LUSOL -I../colamd -I../shared $opts $def $NOISNAN -DYY_NEVER_INTERACTIVE -DPARSER_LP -DINVERSE_ACTIVE=INVERSE_LUSOL -DRoleIsExternalInvEngine $src -o bin/$PLATFORM/lp_solve $math $dl

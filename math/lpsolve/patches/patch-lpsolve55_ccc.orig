@@ -1,0 +1,21 @@
+$OpenBSD$
+--- lpsolve55/ccc.orig	Wed Apr 18 14:44:11 2012
++++ lpsolve55/ccc	Wed Apr 18 14:44:20 2012
+@@ -31,7 +31,7 @@ so=
+ if [ "$PLATFORM" = "SCO_UNIX" ]
+ then def='-dy -K PIC -DNOLONGLONG'
+      dl=-lc
+-else dl=-ldl
++else dl=
+      so=y
+ fi
+ 
+@@ -44,7 +44,7 @@ ranlib bin/$PLATFORM/liblpsolve55.a
+ if [ "$so" != "" ]
+ then
+   $c -fpic -s -c -I.. -I../shared -I../bfp -I../bfp/bfp_LUSOL -I../bfp/bfp_LUSOL/LUSOL -I../colamd -I. $opts $NOISNAN -DYY_NEVER_INTERACTIVE -DPARSER_LP -DINVERSE_ACTIVE=INVERSE_LUSOL -DRoleIsExternalInvEngine $src
+-  $c -shared -Wl,-Bsymbolic -Wl,-soname,liblpsolve55.so -o bin/$PLATFORM/liblpsolve55.so `echo $src|sed s/[.]c/.o/g|sed 's/[^ ]*\///g'` -lc -lm -ldl
++  $c -shared -Wl,-Bsymbolic -Wl,-soname,liblpsolve55.so -o bin/$PLATFORM/liblpsolve55.so `echo $src|sed s/[.]c/.o/g|sed 's/[^ ]*\///g'` -lc -lm 
+ fi
+ 
+ rm *.o 2>/dev/null

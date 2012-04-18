@@ -1,6 +1,7 @@
 @comment $OpenBSD$
 %%SHARED%%
 @bin bin/lp_solve
+@bin bin/lp_solve_demo
 include/lpsolve/
 include/lpsolve/declare.h
 include/lpsolve/fortify.h

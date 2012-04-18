@@ -38,6 +38,7 @@ do-build:
 	cd ${WRKSRC}/lpsolve55 && \
 		${MAKE_ENV} sh -x ccc
 	cd ${WRKSRC}/lp_solve && ${MAKE_ENV} sh -x ccc
+	cd ${WRKSRC}/demo && ${MAKE_ENV} sh -x ccc
 
 do-install:
 	@# Libs
@@ -52,6 +53,8 @@ do-install:
 .endfor
 	@# Standalone solver
 	${INSTALL_PROGRAM} ${WRKSRC}/lp_solve/bin/lp_solve ${PREFIX}/bin/
+	@# Demo program
+	${INSTALL_PROGRAM} ${WRKSRC}/demo/demo ${PREFIX}/bin/lp_solve_demo
 
 # Install docs from separate docs tarball
 DOCDIR =	${PREFIX}/share/doc/lpsolve

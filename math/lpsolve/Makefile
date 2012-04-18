@@ -2,10 +2,11 @@
 
 COMMENT =		mixed integer linear programming solver
 
-V =			5.5.2.0
+V_MAJOR =		5.5
+V =			${V_MAJOR}.2.0
 DISTNAME =		lp_solve_${V}_source
 PKGNAME =		lpsolve-${V}
-WRKDIST =		${WRKDIR}/lp_solve_5.5
+WRKDIST =		${WRKDIR}/lp_solve_${V_MAJOR}
 
 SHARED_LIBS =		lpsolve55	0.0	# unversioned upstream
 

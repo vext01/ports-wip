@@ -45,11 +45,9 @@ post-install:
 	mv ${PREFIX}/lib/ocaml/site-lib/glpk/dllglpk_stubs.so \
 		${PREFIX}/lib/ocaml/stublibs
 
-# If we had the package installed at regress time, we would have used ocamlfind
-# Eg.
-# ocamlfind ocamlc -package glpk -linkpkg example.ml -o example
+REGRESS_DEPENDS =	math/ocaml-glpk
 do-regress:
-	cd ${WRKSRC}/src && ocamlc -ccopt -L.  glpk.cma ../examples/example.ml -o example && \
+	cd ${WRKSRC}/examples &&  ocamlfind ocamlc -package glpk -linkpkg example.ml -o example && \
 		./example | grep -e '^Z: ' > example.actual && \
 		test -z "`diff -u ${FILESDIR}/example.expected example.actual`" || \
 		echo "Test failed: "; diff -u ${FILESDIR}/example.expected example.actual

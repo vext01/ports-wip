@@ -59,5 +59,12 @@ do-regress:
 		./example | grep -e '^Z: ' > example.actual && \
 		test -z "`diff -u ${FILESDIR}/example.expected example.actual`" || \
 		echo "Test failed: "; diff -u ${FILESDIR}/example.expected example.actual
-		
+#.if ${MODOCAML_NATIVE} == "Yes"
+#	cd ${WRKDIR} &&  ocamlfind ocamlopt -package glpk -linkpkg \
+#		${WRKSRC}/examples/example.ml -o example && \
+#		./example | grep -e '^Z: ' > example.actual && \
+#		test -z "`diff -u ${FILESDIR}/example.expected example.actual`" || \
+#		echo "Test failed: "; diff -u ${FILESDIR}/example.expected example.actual
+#.endif
+
 .include <bsd.port.mk>

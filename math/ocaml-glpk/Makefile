@@ -26,6 +26,7 @@ LIB_DEPENDS =		devel/glpk
 BUILD_DEPENDS =		sysutils/findlib
 
 USE_GMAKE =		Yes
+ALL_TARGET =		all
 
 MAKE_ENV +=		"CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib"
 

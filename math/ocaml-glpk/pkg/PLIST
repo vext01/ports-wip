@@ -4,8 +4,10 @@ lib/ocaml/
 lib/ocaml/site-lib/
 lib/ocaml/site-lib/glpk/
 lib/ocaml/site-lib/glpk/META
+lib/ocaml/site-lib/glpk/glpk.a
 lib/ocaml/site-lib/glpk/glpk.cma
 lib/ocaml/site-lib/glpk/glpk.cmi
+lib/ocaml/site-lib/glpk/glpk.cmxa
 lib/ocaml/site-lib/glpk/glpk.mli
 lib/ocaml/site-lib/glpk/libglpk_stubs.a
 lib/ocaml/stublibs/

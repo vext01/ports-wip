@@ -29,19 +29,8 @@ USE_GMAKE =		Yes
 
 MAKE_ENV +=		"CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib"
 
-# native code lib on these arches only
-.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "sparc" || \
-	${MACHINE_ARCH} == "alpha" || ${MACHINE_ARCH} == "amd64" || \
-	${MACHINE_ARCH} == "powerpc"
-ALL_TARGET =	opt
-PKG_ARGS +=	-Dnative=1
-.else
-PKG_ARGS +=	-Dnative=0
-ALL_TARGET =
-.endif
-
-# Always build byte code
-ALL_TARGET +=	byte
+# Can only build native pkg on arches that support ocamlopt
+ALL_TARGET =		${MODOCAML_NATIVE:S,Yes,byte opt,:S,No,byte,}
 
 # name and version number incorrect in META
 pre-configure:
@@ -59,10 +48,14 @@ post-install:
 		${PREFIX}/lib/ocaml/stublibs
 	cp -r ${WRKSRC}/doc/html ${PREFIX}/share/doc/ocaml-glpk
 	chown -R ${SHAREOWN}:${SHAREGRP} ${PREFIX}/share/doc/ocaml-glpk
+	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/ocaml-glpk/
+	${INSTALL_DATA} ${WRKSRC}/examples/example.ml ${PREFIX}/share/examples/ocaml-glpk/
 
 REGRESS_DEPENDS =	math/ocaml-glpk
+# build a bytecode example program
 do-regress:
-	cd ${WRKSRC}/examples &&  ocamlfind ocamlc -package glpk -linkpkg example.ml -o example && \
+	cd ${WRKDIR} &&  ocamlfind ocamlc -package glpk -linkpkg \
+		${WRKSRC}/examples/example.ml -o example && \
 		./example | grep -e '^Z: ' > example.actual && \
 		test -z "`diff -u ${FILESDIR}/example.expected example.actual`" || \
 		echo "Test failed: "; diff -u ${FILESDIR}/example.expected example.actual

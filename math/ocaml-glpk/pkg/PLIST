@@ -1,5 +1,6 @@
 @comment $OpenBSD$
 %%SHARED%%
+%%native%%
 lib/ocaml/
 lib/ocaml/site-lib/
 lib/ocaml/site-lib/glpk/
@@ -7,7 +8,6 @@ lib/ocaml/site-lib/glpk/META
 lib/ocaml/site-lib/glpk/glpk.a
 lib/ocaml/site-lib/glpk/glpk.cma
 lib/ocaml/site-lib/glpk/glpk.cmi
-lib/ocaml/site-lib/glpk/glpk.cmxa
 lib/ocaml/site-lib/glpk/glpk.mli
 lib/ocaml/site-lib/glpk/libglpk_stubs.a
 lib/ocaml/stublibs/
@@ -25,3 +25,5 @@ share/doc/ocaml-glpk/index_types.html
 share/doc/ocaml-glpk/index_values.html
 share/doc/ocaml-glpk/style.css
 share/doc/ocaml-glpk/type_Glpk.html
+share/examples/ocaml-glpk/
+share/examples/ocaml-glpk/example.ml

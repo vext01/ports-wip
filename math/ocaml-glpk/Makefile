@@ -26,9 +26,22 @@ LIB_DEPENDS =		devel/glpk
 BUILD_DEPENDS =		sysutils/findlib
 
 USE_GMAKE =		Yes
-ALL_TARGET =		all
 
 MAKE_ENV +=		"CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib"
+
+# native code lib on these arches only
+.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "sparc" || \
+	${MACHINE_ARCH} == "alpha" || ${MACHINE_ARCH} == "amd64" || \
+	${MACHINE_ARCH} == "powerpc"
+ALL_TARGET =	opt
+PKG_ARGS +=	-Dnative=1
+.else
+PKG_ARGS +=	-Dnative=0
+ALL_TARGET =
+.endif
+
+# Always build byte code
+ALL_TARGET +=	byte
 
 # name and version number incorrect in META
 pre-configure:
@@ -38,13 +51,14 @@ pre-configure:
 pre-install:
 	touch ${WRKBUILD}/src/ld.conf.dummy
 	${INSTALL_DATA_DIR} ${PREFIX}/lib/ocaml/site-lib/glpk/
-	#mkdir -p ${PREFIX}/lib/ocaml/site-lib/glpk/
 
 # installs stub so in the wrong place
 post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/lib/ocaml/stublibs
 	mv ${PREFIX}/lib/ocaml/site-lib/glpk/dllglpk_stubs.so \
 		${PREFIX}/lib/ocaml/stublibs
+	cp -r ${WRKSRC}/doc/html ${PREFIX}/share/doc/ocaml-glpk
+	chown -R ${SHAREOWN}:${SHAREGRP} ${PREFIX}/share/doc/ocaml-glpk
 
 REGRESS_DEPENDS =	math/ocaml-glpk
 do-regress:

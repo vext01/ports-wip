@@ -11,3 +11,17 @@ lib/ocaml/site-lib/glpk/glpk.cmxa
 lib/ocaml/site-lib/glpk/glpk.mli
 lib/ocaml/site-lib/glpk/libglpk_stubs.a
 lib/ocaml/stublibs/
+share/doc/ocaml-glpk/
+share/doc/ocaml-glpk/Glpk.html
+share/doc/ocaml-glpk/index.html
+share/doc/ocaml-glpk/index_attributes.html
+share/doc/ocaml-glpk/index_class_types.html
+share/doc/ocaml-glpk/index_classes.html
+share/doc/ocaml-glpk/index_exceptions.html
+share/doc/ocaml-glpk/index_methods.html
+share/doc/ocaml-glpk/index_module_types.html
+share/doc/ocaml-glpk/index_modules.html
+share/doc/ocaml-glpk/index_types.html
+share/doc/ocaml-glpk/index_values.html
+share/doc/ocaml-glpk/style.css
+share/doc/ocaml-glpk/type_Glpk.html

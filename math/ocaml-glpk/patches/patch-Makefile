@@ -1,12 +1,8 @@
 $OpenBSD$
 --- Makefile.orig	Fri Jul  2 16:23:36 2010
-+++ Makefile	Thu Apr 19 19:52:24 2012
-@@ -7,10 +7,10 @@ DISTFILES = CHANGES COPYING Makefile README VERSION \
-             doc/html
- VERSION := $(shell cat VERSION)
- 
--all: byte
-+all: opt byte
++++ Makefile	Thu Apr 19 19:59:39 2012
+@@ -10,7 +10,7 @@ VERSION := $(shell cat VERSION)
+ all: byte
  
  byte opt clean install uninstall:
 -	make -C src $@

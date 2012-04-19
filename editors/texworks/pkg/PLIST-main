@@ -7,9 +7,7 @@ share/doc/texworks/
 share/doc/texworks/COPYING
 share/doc/texworks/NEWS
 share/doc/texworks/README
-share/man/
-share/man/man1/
-@man share/man/man1/texworks.1
+@man man/man1/texworks.1
 share/pixmaps/
 share/pixmaps/TeXworks.png
 share/texworks-help/

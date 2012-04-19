@@ -1,6 +1,6 @@
 $OpenBSD$
 --- TeXworks.pro.orig	Wed Jun 29 18:03:14 2011
-+++ TeXworks.pro	Thu Mar 29 09:43:08 2012
++++ TeXworks.pro	Thu Apr 19 17:10:51 2012
 @@ -47,11 +47,11 @@ QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
  
  unix:!macx {
@@ -15,3 +15,12 @@ $OpenBSD$
  } else {
  	TARGET	=	TeXworks
      QMAKE_CXXFLAGS += -fexceptions
+@@ -243,7 +243,7 @@ unix:!macx { # installation on Unix-ish platforms
+ 	isEmpty(BIN_DIR):BIN_DIR = $$INSTALL_PREFIX/bin
+ 	isEmpty(DOCS_DIR):DOCS_DIR = $$DATA_DIR/doc/texworks
+ 	isEmpty(ICON_DIR):ICON_DIR = $$DATA_DIR/pixmaps
+-	isEmpty(MAN_DIR):MAN_DIR = $$DATA_DIR/man/man1
++	isEmpty(MAN_DIR):MAN_DIR = $$INSTALL_PREFIX/man/man1
+ 	isEmpty(DESKTOP_DIR):DESKTOP_DIR = $$DATA_DIR/applications
+ 
+ 	target.path = $$BIN_DIR

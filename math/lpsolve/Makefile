@@ -16,8 +16,8 @@ HOMEPAGE =		http://lpsolve.sourceforge.net
 
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
-# LGPL
-# Also contains static LUSOL library which is also LGPL2
+# LGPLv2.1
+# Also contains static LUSOL library which is also LGPLv2.1
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes

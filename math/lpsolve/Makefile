@@ -34,7 +34,8 @@ DISTFILES =		${DISTNAME}${EXTRACT_SUFX} \
 EXTRACT_ONLY =		${DISTNAME}${EXTRACT_SUFX}
 
 # Build is a series of shell scripts
-MAKE_ENV +=	CC=${CC} LIBlpsolve55_VERSION=${LIBlpsolve55_VERSION} WRKDIR=${WRKDIR}
+MAKE_ENV +=	CC=${CC} LIBlpsolve55_VERSION=${LIBlpsolve55_VERSION} \
+		WRKDIR=${WRKDIR}
 do-build:
 	mkdir ${WRKDIR}/tmp	# builds programs here to check for features
 	cd ${WRKSRC}/lpsolve55 && \

@@ -29,7 +29,8 @@ MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lpsolve/}
 
 # Docs are distributed separately
 DOCDISTFILE =		lp_solve_5.5.2.0_doc${EXTRACT_SUFX}
-DISTFILES +=		${DOCDISTFILE}
+DISTFILES =		${DISTNAME}${EXTRACT_SUFX} \
+			${DOCDISTFILE}
 EXTRACT_ONLY =		${DISTNAME}${EXTRACT_SUFX}
 
 # Build is a series of shell scripts

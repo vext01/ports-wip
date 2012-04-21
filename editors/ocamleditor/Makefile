@@ -20,12 +20,20 @@ PERMIT_DISTFILES_FTP =	Yes
 
 #WANTLIB =		???
 
-MASTER_SITES =		http://forge.ocamlcore.org/frs/download.php/844/
+# Needs it's own source and parts of the ocaml compiler tree too
+OCAML_V =	3.12	#must be the same as lang/ocaml
+MASTER_SITES =	http://forge.ocamlcore.org/frs/download.php/844/
+MASTER_SITES0 =	http://caml.inria.fr/pub/distrib/ocaml-${OCAML_V}/
+
+DISTFILES =	${DISTNAME}${EXTRACT_SUFX} \
+		ocaml-${OCAML_V}.1${EXTRACT_SUFX}:0
+WRKDIST =	${WRKDIR}/ocamleditor
 
 # Dependencies
 #
 #MODULES =		???
-#BUILD_DEPENDS =	???
+BUILD_DEPENDS =		textproc/ocaml-xml-light \
+			x11/lablgtk2
 #RUN_DEPENDS =		???
 #LIB_DEPENDS =		???
 #REGRESS_DEPENDS =	???

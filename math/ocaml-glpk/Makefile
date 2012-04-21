@@ -52,7 +52,8 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/examples/example.ml \
 		${PREFIX}/share/examples/ocaml-glpk/
 
-REGRESS_DEPENDS =	math/ocaml-glpk
+REGRESS_DEPENDS =	math/ocaml-glpk \
+			sysutils/findlib
 # build a bytecode example program
 do-regress:
 	cd ${WRKDIR} &&  ocamlfind ocamlc -package glpk -linkpkg \

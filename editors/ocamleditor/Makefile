@@ -46,13 +46,15 @@ do-build:
 		cp -r ${OCAML_SOURCES}/$$i ${WRKSRC}/src/ocaml-src; done && \
 		cd ${WRKBUILD} && ocaml build.ml -with-compiler-libs
 
-# spits out binaries or bytecodes depending upon arch - unify names so
-# we dont have to do special PLIST dances.
+# spits out binaries (postfixed .opt) or bytecodes (no postfix)
+# depending upon arch - unify names so we dont have to do
+# special PLIST dances.
 post-build:
 	if [ -e ${WRKBUILD}/src/ocamleditor.opt ]; then \
-		mv ${WRKBUILD}/src/ocamleditor.opt ${WRKBUILD}/src/ocamleditor; \
-		mv ${WRKBUILD}/src/oebuild/oebuild.opt ${WRKBUILD}/src/oebuild/oebuild; fi
-
+		mv ${WRKBUILD}/src/ocamleditor.opt \
+		${WRKBUILD}/src/ocamleditor; \
+		mv ${WRKBUILD}/src/oebuild/oebuild.opt \
+		${WRKBUILD}/src/oebuild/oebuild; fi
 
 PIXMAP_DIR =	${PREFIX}/share/pixmaps/ocamleditor
 do-install:

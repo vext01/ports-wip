@@ -49,22 +49,28 @@ post-install:
 	cp -r ${WRKSRC}/doc/html ${PREFIX}/share/doc/ocaml-glpk
 	chown -R ${SHAREOWN}:${SHAREGRP} ${PREFIX}/share/doc/ocaml-glpk
 	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/ocaml-glpk/
-	${INSTALL_DATA} ${WRKSRC}/examples/example.ml ${PREFIX}/share/examples/ocaml-glpk/
+	${INSTALL_DATA} ${WRKSRC}/examples/example.ml \
+		${PREFIX}/share/examples/ocaml-glpk/
 
-REGRESS_DEPENDS =	math/ocaml-glpk
+REGRESS_DEPENDS =	math/ocaml-glpk \
+			sysutils/findlib
 # build a bytecode example program
 do-regress:
 	cd ${WRKDIR} &&  ocamlfind ocamlc -package glpk -linkpkg \
 		${WRKSRC}/examples/example.ml -o example && \
 		./example | grep -e '^Z: ' > example.actual && \
-		test -z "`diff -u ${FILESDIR}/example.expected example.actual`" || \
-		echo "Test failed: "; diff -u ${FILESDIR}/example.expected example.actual
-#.if ${MODOCAML_NATIVE} == "Yes"
-#	cd ${WRKDIR} &&  ocamlfind ocamlopt -package glpk -linkpkg \
-#		${WRKSRC}/examples/example.ml -o example && \
-#		./example | grep -e '^Z: ' > example.actual && \
-#		test -z "`diff -u ${FILESDIR}/example.expected example.actual`" || \
-#		echo "Test failed: "; diff -u ${FILESDIR}/example.expected example.actual
-#.endif
+		test -z \
+		"`diff -u ${FILESDIR}/example.expected example.actual`" || \
+		echo "Test failed: "; \
+		diff -u ${FILESDIR}/example.expected example.actual
+	@# crappy hack to work around make limitations
+	${MODOCAML_NATIVE:L:Mno:S/no/#/}cd ${WRKDIR} && \
+	cd ${WRKDIR} &&  ocamlfind ocamlopt -package glpk -linkpkg \
+		${WRKSRC}/examples/example.ml -o example && \
+		./example | grep -e '^Z: ' > example.actual && \
+		test -z \
+		"`diff -u ${FILESDIR}/example.expected example.actual`" || \
+		echo "Test failed: "; \
+		diff -u ${FILESDIR}/example.expected example.actual
 
 .include <bsd.port.mk>

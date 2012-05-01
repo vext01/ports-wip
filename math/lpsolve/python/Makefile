@@ -2,7 +2,7 @@
 
 COMMENT =		Python bindings for lpsolve
 DISTNAME =		lp_solve_5.5.2.0_Python_source
-MODPY_EGG_VERSION =	5.5.0.9	# interface version differs from release version
+MODPY_EGG_VERSION =	5.5.0.9	# interface version differs from release vers
 PKGNAME =		py-lpsolve-${V}
 
 LIB_DEPENDS +=		math/lpsolve/core
@@ -12,7 +12,6 @@ RUN_DEPENDS +=		math/py-numpy
 MODULES =		lang/python
 
 WRKDIST =		${WRKDIR}/lp_solve_${V_MAJOR}/extra/Python
-BUILD_ENV +=		CFLAGS=-I/usr/local/include/lpsolve
 
 # LGPLv2.1
 PERMIT_PACKAGE_CDROM =	Yes

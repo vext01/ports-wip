@@ -1,7 +1,7 @@
 # $OpenBSD: Makefile,v 1.1.1.1 2012/04/20 09:54:11 edd Exp $
 
 COMMENT =		Python bindings for lpsolve
-DISTNAME =		lp_solve_5.5.2.0_Python_source
+DISTNAME =		lp_solve_${V}_Python_source
 MODPY_EGG_VERSION =	5.5.0.9	# interface version differs from release vers
 PKGNAME =		py-lpsolve-${V}
 

@@ -19,7 +19,7 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB += lpsolve55 python2.7
+WANTLIB += lpsolve55 python${MODPY_VERSION}
 
 NUMPY_PATH =		${MODPY_LIBDIR}/site-packages/numpy/core/include
 SUBST_VARS +=		NUMPY_PATH

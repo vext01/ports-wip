@@ -1,2 +1,0 @@
-@comment $OpenBSD$
-@lib lib/liblpsolve55.so.${LIBlpsolve55_VERSION}

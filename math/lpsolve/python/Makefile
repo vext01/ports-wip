@@ -2,6 +2,7 @@
 
 COMMENT =		Python bindings for lpsolve
 DISTNAME =		lp_solve_5.5.2.0_Python_source
+MODPY_EGG_VERSION =	5.5.0.9	# interface version differs from release version
 PKGNAME =		py-lpsolve-${V}
 
 LIB_DEPENDS +=		math/lpsolve/core
@@ -21,6 +22,8 @@ PERMIT_DISTFILES_FTP =	Yes
 
 WANTLIB += lpsolve55 python2.7
 
+NUMPY_PATH =		${MODPY_LIBDIR}/site-packages/numpy/core/include
+SUBST_VARS +=		NUMPY_PATH
 pre-configure:
 	${SUBST_CMD} ${WRKBUILD}/setup.py
 

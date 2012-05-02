@@ -7,7 +7,11 @@ PKGNAME =		lpsolve-${V}
 WRKDIST =		${WRKDIR}/lp_solve_${V_MAJOR}
 
 SHARED_LIBS =		lpsolve55	0.0	# unversioned upstream
-WANTLIB +=		c m
+
+MODULES =		fortran
+MODFORTRAN_COMPILER =	gfortran
+WANTLIB +=		c m ${MODFORTRAN_WANTLIB}
+LIB_DEPENDS =		${MODFORTRAN_LIB_DEPENDS}
 
 # Docs are distributed separately
 DOCDISTFILE =		lp_solve_5.5.2.0_doc${EXTRACT_SUFX}
@@ -15,9 +19,14 @@ DISTFILES =		${DISTNAME}${EXTRACT_SUFX} \
 			${DOCDISTFILE}
 EXTRACT_ONLY =		${DISTNAME}${EXTRACT_SUFX}
 
+
 # Build is a series of shell scripts
 MAKE_ENV +=	CC=${CC} LIBlpsolve55_VERSION=${LIBlpsolve55_VERSION} \
 		WRKDIR=${WRKDIR}
+SUBST_VARS +=		MODFORTRAN_WANTLIB
+pre-configure:
+	${SUBST_CMD} ${WRKBUILD}/lpsolve55/ccc
+
 do-build:
 	mkdir ${WRKDIR}/tmp	# builds programs here to check for features
 	cd ${WRKSRC}/lpsolve55 && \

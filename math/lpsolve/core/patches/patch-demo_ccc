@@ -1,4 +1,4 @@
-$OpenBSD$
+$OpenBSD: patch-demo_ccc,v 1.1.1.1 2012/04/20 09:54:11 edd Exp $
 --- demo/ccc.orig	Thu Jun 23 20:52:04 2005
 +++ demo/ccc	Wed Apr 18 17:20:18 2012
 @@ -1,5 +1,5 @@

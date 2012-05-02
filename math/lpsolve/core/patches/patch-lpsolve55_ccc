@@ -1,4 +1,4 @@
-$OpenBSD$
+$OpenBSD: patch-lpsolve55_ccc,v 1.1.1.1 2012/04/20 09:54:11 edd Exp $
 
 * We don't use -ldl
 * Don't use platform specific paths

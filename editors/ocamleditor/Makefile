@@ -2,7 +2,7 @@
 
 COMMENT =		source code editor and build tool for OCaml
 
-DISTNAME =		ocamleditor-1.7.0	
+DISTNAME =		ocamleditor-1.7.1
 
 #SHARED_LIBS =		???
 
@@ -19,14 +19,16 @@ PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
 # Needs it's own source and parts of the ocaml compiler tree too
-OCAML_V =	3.12	#must be the same as lang/ocaml
+OCAML_V =	3.12	# must be the same as lang/ocaml
 OCAML_MINOR_V =	1
-MASTER_SITES =	http://forge.ocamlcore.org/frs/download.php/844/
+# Not when updating, it is not enough to bump DISTNAME version
+# the url suffix changes per release.
+MASTER_SITES =	http://forge.ocamlcore.org/frs/download.php/852/
 MASTER_SITES0 =	http://caml.inria.fr/pub/distrib/ocaml-${OCAML_V}/
 
 DISTFILES =	${DISTNAME}${EXTRACT_SUFX} \
 		ocaml-${OCAML_V}.${OCAML_MINOR_V}${EXTRACT_SUFX}:0
-WRKDIST =	${WRKDIR}/ocamleditor
+#WRKDIST =	${WRKDIR}/ocamleditor
 
 LIB_DEPENDS =		textproc/ocaml-xml-light \
 			x11/lablgtk2 \

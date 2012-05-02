@@ -7,14 +7,6 @@ PKGNAME =		lpsolve-${V}
 WRKDIST =		${WRKDIR}/lp_solve_${V_MAJOR}
 
 SHARED_LIBS =		lpsolve55	0.0	# unversioned upstream
-
-# LGPLv2.1
-# Also contains static LUSOL library which is also LGPLv2.1
-PERMIT_PACKAGE_CDROM =	Yes
-PERMIT_PACKAGE_FTP =	Yes
-PERMIT_DISTFILES_CDROM =Yes
-PERMIT_DISTFILES_FTP =	Yes
-
 WANTLIB +=		c m
 
 # Docs are distributed separately

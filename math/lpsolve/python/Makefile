@@ -13,13 +13,7 @@ MODULES =		lang/python
 
 WRKDIST =		${WRKDIR}/lp_solve_${V_MAJOR}/extra/Python
 
-# LGPLv2.1
-PERMIT_PACKAGE_CDROM =	Yes
-PERMIT_PACKAGE_FTP =	Yes
-PERMIT_DISTFILES_CDROM =Yes
-PERMIT_DISTFILES_FTP =	Yes
-
-WANTLIB += lpsolve55 python${MODPY_VERSION}
+WANTLIB +=		lpsolve55 ${MODPY_WANTLIB}
 
 NUMPY_PATH =		${MODPY_LIBDIR}/site-packages/numpy/core/include
 SUBST_VARS +=		NUMPY_PATH

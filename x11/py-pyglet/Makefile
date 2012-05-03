@@ -1,6 +1,6 @@
 # $OpenBSD$
 
-COMMENT =		symbolic mathematics for Python
+COMMENT =		windowing and multimedia library for Python
 
 MODPY_EGG_VERSION =	1.1.4
 DISTNAME =		pyglet-${MODPY_EGG_VERSION}

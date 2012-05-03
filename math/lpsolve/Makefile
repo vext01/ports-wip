@@ -3,6 +3,5 @@
 SUBDIR =
 SUBDIR += core
 SUBDIR += python
-# more bindings may come later
 
 .include <bsd.port.subdir.mk>

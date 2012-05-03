@@ -1,23 +1,26 @@
 $OpenBSD: patch-configure,v 1.29 2012/04/28 08:41:32 ajacoutot Exp $
---- configure.orig	Sat Apr 21 23:53:38 2012
-+++ configure	Sun Apr 22 00:50:49 2012
-@@ -1092,7 +1092,6 @@ HAVE_LIST="
-     lzo1x_999_compress
+--- configure.orig	Sat Apr 28 14:47:33 2012
++++ configure	Sat Apr 28 15:46:58 2012
+@@ -1204,7 +1204,6 @@ HAVE_LIST="
      machine_ioctl_bt848_h
      machine_ioctl_meteor_h
+     makeinfo
 -    malloc_h
      MapViewOfFile
      memalign
      mkstemp
-@@ -2425,6 +2424,7 @@ case $target_os in
+@@ -2617,8 +2616,8 @@ case $target_os in
          enable pic
          disable symver
          SHFLAGS='-shared'
+-        oss_indev_extralibs="-lossaudio"
+-        oss_outdev_extralibs="-lossaudio"
 +        SLIBNAME_WITH_MAJOR='$(SLIBNAME).$(LIBVERSION)'
-         oss_indev_extralibs="-lossaudio"
-         oss_outdev_extralibs="-lossaudio"
++        SLIB_INSTALL_LINKS=
          ;;
-@@ -2601,7 +2601,7 @@ die_license_disabled version3 libvo_amrwbenc
+     dragonfly)
+         enable malloc_aligned
+@@ -2799,7 +2798,7 @@ die_license_disabled version3 libvo_amrwbenc
  
  enabled version3 && { enabled gpl && enable gplv3 || enable lgplv3; }
  
@@ -26,7 +29,7 @@ $OpenBSD: patch-configure,v 1.29 2012/04/28 08:41:32 ajacoutot Exp $
  
  enable_pic() {
      enable pic
-@@ -2797,8 +2797,6 @@ if enabled asm; then
+@@ -2980,8 +2979,6 @@ if enabled asm; then
          $nogas "GNU assembler not found, install gas-preprocessor"
  fi
  
@@ -35,26 +38,26 @@ $OpenBSD: patch-configure,v 1.29 2012/04/28 08:41:32 ajacoutot Exp $
  if check_func dlopen; then
      ldl=
  elif check_func dlopen -ldl; then
-@@ -2931,7 +2929,7 @@ enabled libdirac   && require_pkg_config dirac        
+@@ -3136,7 +3133,7 @@ enabled libdirac   && require_pkg_config dirac        
      "dirac_decoder_init dirac_encoder_init"
  enabled libfaac    && require2 libfaac "stdint.h faac.h" faacEncGetVersion -lfaac
  enabled libfreetype && require_pkg_config freetype2 "ft2build.h freetype/freetype.h" FT_Init_FreeType
 -enabled libgsm     && require  libgsm gsm/gsm.h gsm_create -lgsm
 +enabled libgsm     && require  libgsm gsm.h gsm_create -lgsm
+ enabled libmodplug && require  libmodplug libmodplug/modplug.h ModPlug_Load -lmodplug
  enabled libmp3lame && require  "libmp3lame >= 3.98.3" lame/lame.h lame_set_VBR_quality -lmp3lame
  enabled libnut     && require  libnut libnut.h nut_demuxer_init -lnut
- enabled libopencore_amrnb  && require libopencore_amrnb opencore-amrnb/interf_dec.h Decoder_Interface_init -lopencore-amrnb
-@@ -3057,7 +3055,6 @@ enabled extra_warnings && check_cflags -Winline
+@@ -3288,7 +3285,6 @@ enabled extra_warnings && check_cflags -Winline
  
  # add some linker flags
  check_ldflags -Wl,--warn-common
--check_ldflags -Wl,-rpath-link,libpostproc -Wl,-rpath-link,libswscale -Wl,-rpath-link,libavfilter -Wl,-rpath-link,libavdevice -Wl,-rpath-link,libavformat -Wl,-rpath-link,libavcodec -Wl,-rpath-link,libavutil
+-check_ldflags -Wl,-rpath-link=libpostproc:libswresample:libswscale:libavfilter:libavdevice:libavformat:libavcodec:libavutil
  test_ldflags -Wl,-Bsymbolic && append SHFLAGS -Wl,-Bsymbolic
  
  echo "X{};" > $TMPV
-@@ -3075,10 +3072,6 @@ fi
- 
- if enabled small; then
+@@ -3308,10 +3304,6 @@ if [ -n "$optflags" ]; then
+     add_cflags $optflags
+ elif enabled small; then
      add_cflags $size_cflags
 -elif enabled optimizations; then
 -    add_cflags $speed_cflags
@@ -63,7 +66,7 @@ $OpenBSD: patch-configure,v 1.29 2012/04/28 08:41:32 ajacoutot Exp $
  fi
  check_cflags -fno-math-errno
  check_cflags -fno-signed-zeros
-@@ -3519,8 +3512,7 @@ Version: $version
+@@ -3726,8 +3718,7 @@ Version: $version
  Requires: $(enabled shared || echo $requires)
  Requires.private: $(enabled shared && echo $requires)
  Conflicts:
@@ -73,7 +76,7 @@ $OpenBSD: patch-configure,v 1.29 2012/04/28 08:41:32 ajacoutot Exp $
  Cflags: -I\${includedir}
  EOF
  cat <<EOF > $name/$name-uninstalled.pc
-@@ -3539,10 +3531,10 @@ Cflags: -I\${includedir}
+@@ -3746,11 +3737,11 @@ Cflags: -I\${includedir}
  EOF
  }
  
@@ -82,8 +85,9 @@ $OpenBSD: patch-configure,v 1.29 2012/04/28 08:41:32 ajacoutot Exp $
 -pkgconfig_generate libavformat "FFmpeg container format library" "$LIBAVFORMAT_VERSION" "$extralibs" "libavcodec = $LIBAVCODEC_VERSION"
 -pkgconfig_generate libavdevice "FFmpeg device handling library" "$LIBAVDEVICE_VERSION" "$extralibs" "libavformat = $LIBAVFORMAT_VERSION"
 -pkgconfig_generate libavfilter "FFmpeg video filtering library" "$LIBAVFILTER_VERSION" "$extralibs"
--pkgconfig_generate libpostproc "FFmpeg post processing library" "$LIBPOSTPROC_VERSION" "" "libavutil = $LIBAVUTIL_VERSION"
+-pkgconfig_generate libpostproc "FFmpeg postprocessing library" "$LIBPOSTPROC_VERSION" "" "libavutil = $LIBAVUTIL_VERSION"
 -pkgconfig_generate libswscale "FFmpeg image rescaling library" "$LIBSWSCALE_VERSION" "$LIBM" "libavutil = $LIBAVUTIL_VERSION"
+-pkgconfig_generate libswresample "FFmpeg audio rescaling library" "$LIBSWRESAMPLE_VERSION" "$LIBM" "libavutil = $LIBAVUTIL_VERSION"
 +pkgconfig_generate libavutil "FFmpeg utility library" "$LIBAVUTIL_VERSION" "$LIBavutil_EXTRALIBS"
 +pkgconfig_generate libavcodec "FFmpeg codec library" "$LIBAVCODEC_VERSION" "$LIBavcodec_EXTRALIBS" "libavutil"
 +pkgconfig_generate libavformat "FFmpeg container format library" "$LIBAVFORMAT_VERSION" "$LIBavformat_EXTRALIBS" "libavcodec libavutil"
@@ -91,3 +95,4 @@ $OpenBSD: patch-configure,v 1.29 2012/04/28 08:41:32 ajacoutot Exp $
 +pkgconfig_generate libavfilter "FFmpeg video filtering library" "$LIBAVFILTER_VERSION" "$LIBavfilter_EXTRALIBS" "libavformat libavcodec libavutil libswscale"
 +pkgconfig_generate libpostproc "FFmpeg post processing library" "$LIBPOSTPROC_VERSION" "$LIBpostproc_EXTRALIBS" "libavutil"
 +pkgconfig_generate libswscale "FFmpeg image rescaling library" "$LIBSWSCALE_VERSION" "$LIBswscale_EXTRALIBS" "libavutil"
++pkgconfig_generate libswresample "FFmpeg audio rescaling library" "$LIBSWRESAMPLE_VERSION" "$LIBswresample_EXTRALIBS" "libavutil"

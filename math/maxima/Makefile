@@ -2,7 +2,7 @@
 
 COMMENT=		GPL computer algebra system based on DOE Macsyma
 
-VERSION=		5.26.0
+VERSION=		5.27.0
 DISTNAME=		maxima-${VERSION}
 CATEGORIES=		math
 

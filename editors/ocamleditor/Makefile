@@ -2,7 +2,7 @@
 
 COMMENT =		source code editor and build tool for OCaml
 
-DISTNAME =		ocamleditor-1.7.1
+DISTNAME =		ocamleditor-1.7.2
 
 #SHARED_LIBS =		???
 
@@ -23,7 +23,7 @@ OCAML_V =	3.12	# must be the same as lang/ocaml
 OCAML_MINOR_V =	1
 # Not when updating, it is not enough to bump DISTNAME version
 # the url suffix changes per release.
-MASTER_SITES =	http://forge.ocamlcore.org/frs/download.php/852/
+MASTER_SITES =	https://forge.ocamlcore.org/frs/download.php/858/
 MASTER_SITES0 =	http://caml.inria.fr/pub/distrib/ocaml-${OCAML_V}/
 
 DISTFILES =	${DISTNAME}${EXTRACT_SUFX} \

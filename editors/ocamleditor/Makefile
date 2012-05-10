@@ -23,7 +23,6 @@ MASTER_SITES0 =	http://caml.inria.fr/pub/distrib/ocaml-${OCAML_V}/
 
 DISTFILES =	${DISTNAME}${EXTRACT_SUFX} \
 		ocaml-${OCAML_V}.${OCAML_MINOR_V}${EXTRACT_SUFX}:0
-#WRKDIST =	${WRKDIR}/ocamleditor
 
 LIB_DEPENDS =		textproc/ocaml-xml-light \
 			x11/lablgtk2 \

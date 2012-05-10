@@ -36,8 +36,10 @@ MAKE_FLAGS +=		SOMAJOR=${GIRARA_SOMAJOR} SOMINOR=${GIRARA_SOMINOR}
 
 FAKE_FLAGS +=		DESTDIR=
 
-# XXX needs "check" test suite
+# XXX one failing test to do with $HOME
+PORTHOME =		${WRKDIR}
 REGRESS_TARGET =	test
 REGRESS_DEPENDS =	devel/check
+REGRESS_FLAGS +=	QUIET=
 
 .include <bsd.port.mk>

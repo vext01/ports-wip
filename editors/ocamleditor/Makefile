@@ -3,13 +3,8 @@
 COMMENT =		source code editor and build tool for OCaml
 
 DISTNAME =		ocamleditor-1.7.2
-
-#SHARED_LIBS =		???
-
 CATEGORIES =		editors devel
-
 HOMEPAGE =		http://ocamleditor.forge.ocamlcore.org
-
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
 # GPLv3

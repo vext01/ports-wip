@@ -2,10 +2,11 @@
 
 COMMENT =		user interface library from pwmt
 
-# http://pwmt.org/projects/girara/download/girara-0.1.1.tar.gz
-DISTNAME =		girara-0.1.1
+DISTNAME =		girara-0.1.2
 
-SHARED_LIBS +=		girara-gtk2	0.0 # 0.0
+GIRARA_SOMAJOR = 0
+GIRARA_SOMINOR = 0
+SHARED_LIBS +=		girara-gtk2 ${GIRARA_SOMAJOR}.${GIRARA_SOMINOR} # 0.1
 
 CATEGORIES =		x11
 
@@ -17,19 +18,22 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-WANTLIB += GL X11 Xcomposite Xcursor Xdamage Xext Xfixes Xi Xinerama
-WANTLIB += Xrandr Xrender atk-1.0 cairo expat fontconfig freetype
-WANTLIB += gdk-x11-2.0 gdk_pixbuf-2.0 gio-2.0 glib-2.0 gmodule-2.0
-WANTLIB += gobject-2.0 gthread-2.0 gtk-x11-2.0 iconv intl m pango-1.0
-WANTLIB += pangocairo-1.0 pangoft2-1.0 pixman-1 png pthread-stubs
-WANTLIB += xcb xcb-render xcb-shm z
-
 MASTER_SITES =		http://pwmt.org/projects/girara/download/
 
 LIB_DEPENDS =		x11/gtk+2
 
+WANTLIB += GL X11 Xcomposite Xcursor Xdamage Xext Xfixes Xi Xinerama
+WANTLIB += Xrandr Xrender atk-1.0 cairo expat fontconfig freetype
+WANTLIB += gdk-x11-2.0 gdk_pixbuf-2.0 gio-2.0 glib-2.0 gobject-2.0
+WANTLIB += gtk-x11-2.0 iconv intl m pango-1.0 pangocairo-1.0 pangoft2-1.0
+WANTLIB += pixman-1 png pthread-stubs xcb xcb-render xcb-shm z
+
 USE_GMAKE =		Yes
-MAKE_FLAGS +=		QUIET= CPPFLAGS="-I${LOCALBASE}/include -DGETTEXT_PACKAGE=\\\"girara\\\" -DLOCALEDIR=\\\"/usr/share/locale\\\""
+
+MAKE_FLAGS +=		QUIET=
+MAKE_FLAGS +=		CPPFLAGS="-I${LOCALBASE}/include -DGETTEXT_PACKAGE=\\\"girara\\\" -DLOCALEDIR=\\\"/usr/share/locale\\\""
+MAKE_FLAGS +=		SOMAJOR=${GIRARA_SOMAJOR} SOMINOR=${GIRARA_SOMINOR}
+
 FAKE_FLAGS +=		DESTDIR=
 
 # XXX needs "check" test suite

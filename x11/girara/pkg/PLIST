@@ -24,4 +24,4 @@ lib/pkgconfig/girara-gtk2.pc
 share/locale/
 share/locale/de/
 share/locale/de/LC_MESSAGES/
-share/locale/de/LC_MESSAGES/girara.mo
+share/locale/de/LC_MESSAGES/libgirara-gtk2-0.mo

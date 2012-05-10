@@ -1,0 +1,12 @@
+$OpenBSD$
+--- config.mk.orig	Thu May 10 18:10:49 2012
++++ config.mk	Thu May 10 18:11:43 2012
+@@ -11,8 +11,6 @@ VERSION = ${GIRARA_VERSION_MAJOR}.${GIRARA_VERSION_MIN
+ # * If any of the exported datastructures have changed in a incompatible way
+ # 	bump SOMAJOR and set SOMINOR to 0.
+ # * If a function has been added bump SOMINOR.
+-SOMAJOR = 0
+-SOMINOR = 1
+ SOVERSION = ${SOMAJOR}.${SOMINOR}
+ 
+ # paths

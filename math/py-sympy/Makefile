@@ -11,7 +11,7 @@ HOMEPAGE =		http://sympy.org
 
 MAINTAINER =		Wen Heping <wenheping@gmail.com>
 
-# BSD
+# New BSD
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes

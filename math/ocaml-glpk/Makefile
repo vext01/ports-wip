@@ -30,7 +30,7 @@ USE_GMAKE =		Yes
 MAKE_ENV +=		"CPPFLAGS=-I${LOCALBASE}/include LDFLAGS=-L${LOCALBASE}/lib"
 
 # Can only build native pkg on arches that support ocamlopt
-ALL_TARGET =		${MODOCAML_NATIVE:S,Yes,byte opt,:S,No,byte,}
+ALL_TARGET =		${MODOCAML_NATIVE:L:S/yes/byte opt/:S/no/byte/}
 
 # name and version number incorrect in META
 pre-configure:

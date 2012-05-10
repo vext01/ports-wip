@@ -1,0 +1,12 @@
+$OpenBSD$
+--- document.c.orig	Thu May 10 18:28:14 2012
++++ document.c	Thu May 10 18:28:34 2012
+@@ -4,6 +4,8 @@
+ #define _XOPEN_SOURCE 700
+ // TODO: Implement realpath
+ 
++#include <sys/wait.h>
++
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <string.h>

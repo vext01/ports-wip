@@ -8,10 +8,7 @@ WRKDIST =		${WRKDIR}/lp_solve_${V_MAJOR}
 
 SHARED_LIBS =		lpsolve55	0.0	# unversioned upstream
 
-MODULES =		fortran
-MODFORTRAN_COMPILER =	gfortran
-WANTLIB +=		c m ${MODFORTRAN_WANTLIB}
-LIB_DEPENDS =		${MODFORTRAN_LIB_DEPENDS}
+WANTLIB +=		c m
 
 # Docs are distributed separately
 DOCDISTFILE =		lp_solve_5.5.2.0_doc${EXTRACT_SUFX}
@@ -23,7 +20,6 @@ EXTRACT_ONLY =		${DISTNAME}${EXTRACT_SUFX}
 # Build is a series of shell scripts
 MAKE_ENV +=	CC=${CC} LIBlpsolve55_VERSION=${LIBlpsolve55_VERSION} \
 		WRKDIR=${WRKDIR}
-SUBST_VARS +=		MODFORTRAN_WANTLIB
 pre-configure:
 	${SUBST_CMD} ${WRKBUILD}/lpsolve55/ccc
 

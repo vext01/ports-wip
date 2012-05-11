@@ -1,6 +1,6 @@
 $OpenBSD$
 --- setup.py.orig	Mon Feb  1 20:57:56 2010
-+++ setup.py	Wed May  2 14:51:41 2012
++++ setup.py	Fri May 11 15:02:36 2012
 @@ -3,15 +3,8 @@ from os import getenv
  import sys
  import os
@@ -19,14 +19,12 @@ $OpenBSD$
  windir = getenv('windir')
  if windir == None:
    WIN32 = 'NOWIN32'
-@@ -29,8 +22,8 @@ setup (name = "lpsolve55",
+@@ -29,7 +22,7 @@ setup (name = "lpsolve55",
         ext_modules = [Extension("lpsolve55",
  				["lpsolve.c", "hash.c", "pythonmod.c"],
                                  define_macros=[('PYTHON', '1'), (WIN32, '1'), ('NODEBUG', '1'), ('DINLINE', 'static'), (NUMPY, '1'), ('_CRT_SECURE_NO_WARNINGS', '1')],
 -                                include_dirs=['../..', NUMPYPATH],
 +                                include_dirs=['../..', NUMPYPATH, '${LOCALBASE}/include/lpsolve'],
                                  library_dirs=[LPSOLVE55],
--				libraries = ["lpsolve55"])
-+                                libraries = ["lpsolve55", "${MODFORTRAN_WANTLIB}"])
+ 				libraries = ["lpsolve55"])
  		      ]
- )

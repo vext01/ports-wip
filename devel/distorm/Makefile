@@ -2,7 +2,7 @@
 
 COMMENT =		lightweight disassembler library for x86/AMD64
 
-MODPY_EGG_VERSION =	1.0
+MODPY_EGG_VERSION =	2
 DISTNAME =		distorm3-${MODPY_EGG_VERSION}
 PKGNAME =		py-${DISTNAME}
 CATEGORIES =		devel

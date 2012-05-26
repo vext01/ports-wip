@@ -1,0 +1,18 @@
+$OpenBSD$
+
+Macro clash:
+/usr/include/i386/trap.h:#define        T_RESERVED      20
+
+--- src/libs/glsl/glslparsertable_p.h.orig	Sat May 26 17:29:45 2012
++++ src/libs/glsl/glslparsertable_p.h	Sat May 26 17:30:57 2012
+@@ -45,6 +45,10 @@
+ #ifndef GLSLPARSERTABLE_P_H
+ #define GLSLPARSERTABLE_P_H
+ 
++#if defined(__OpenBSD__)
++#undef T_RESERVED
++#endif
++
+ #include <qglobal.h>
+ 
+ QT_BEGIN_NAMESPACE

@@ -1,0 +1,14 @@
+$OpenBSD: patch-src_libs_utils_process_stub_unix_c,v 1.2 2010/05/28 12:12:05 espie Exp $
+--- src/libs/utils/process_stub_unix.c.orig	Wed May  9 14:13:18 2012
++++ src/libs/utils/process_stub_unix.c	Sat May 26 16:47:39 2012
+@@ -48,6 +48,10 @@
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <errno.h>
++#include <signal.h>
++
++/* EPROTO is not defined on OpenBSD */
++#define EPROTO ENOPROTOOPT
+ 
+ /* For OpenBSD */
+ #ifndef EPROTO

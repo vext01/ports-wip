@@ -1,0 +1,11 @@
+$OpenBSD$
+--- src/libs/zeroconf/syssocket.h.orig	Sat May 26 17:42:52 2012
++++ src/libs/zeroconf/syssocket.h	Sat May 26 17:43:11 2012
+@@ -50,6 +50,7 @@
+ #  endif
+ # endif
+ #else
++#include <sys/types.h>
+ # include <sys/socket.h>
+ #endif
+ 

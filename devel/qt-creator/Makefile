@@ -29,7 +29,15 @@ MAKE_FLAGS += 	LIBAggregation_VERSION=${LIBAggregation_VERSION} \
 		LIBDebuggingHelper_VERSION=${LIBDebuggingHelper_VERSION} \
 		LIBExtensionSystem_VERSION=${LIBExtensionSystem_VERSION} \
 		LIBQtConcurrent_VERSION=${LIBQtConcurrent_VERSION} \
-		LIBUtils_VERSION=${LIBUtils_VERSION}
+		LIBUtils_VERSION=${LIBUtils_VERSION} \
+		LIBBotan_VERSION=${LIBBotan_VERSION} \
+		LIBGLSL_VERSION=${LIBGLSL_VERSION} \
+		LIBLanguageUtils_VERSION=${LIBLanguageUtils_VERSION} \
+		LIBQmlEditorWidgets_VERSION=${LIBQmlEditorWidgets_VERSION} \
+		LIBQmlJS_VERSION=${LIBQmlJS_VERSION} \
+		LIBQmlJSDebugClient_VERSION=${LIBQmlJSDebugClient_VERSION} \
+		LIBsymbianutils_VERSION=${LIBsymbianutils_VERSION} \
+		LIBzeroconf_VERSION=${LIBzeroconf_VERSION}
 
 CATEGORIES =		devel editors
 
@@ -41,16 +49,10 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-#WANTLIB +=	c m pthread stdc++ sqlite3
-#WANTLIB +=	QtDBus QtWebKit QtXmlPatterns QtDesigner>=7 
-#WANTLIB +=	QtDesignerComponents>=7 QtGui>=8 QtHelp QtNetwork>=7 
-#WANTLIB +=	QtScript QtSql>=7 QtSvg>=7 QtXml>=7 phonon
-
 WANTLIB += ICE QtDeclarative QtDesigner QtDesignerComponents QtGui
 WANTLIB += QtHelp QtNetwork QtScript QtSql QtSvg QtWebKit QtXml
 WANTLIB += QtXmlPatterns SM X11 Xext Xi Xinerama Xrender c fontconfig
 WANTLIB += freetype m pthread stdc++
-
 
 MASTER_SITES =	http://get.qt.nokia.com/qtcreator/
 

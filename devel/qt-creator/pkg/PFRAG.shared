@@ -1,14 +1,25 @@
 @comment $OpenBSD: PFRAG.shared,v 1.1.1.1 2010/05/27 12:30:14 espie Exp $
 @lib lib/qtcreator/libAggregation.so.${LIBAggregation_VERSION}
+@lib lib/qtcreator/libBotan.so.${LIBBotan_VERSION}
 @lib lib/qtcreator/libCPlusPlus.so.${LIBCPlusPlus_VERSION}
 @lib lib/qtcreator/libDebuggingHelper.so.${LIBDebuggingHelper_VERSION}
 @lib lib/qtcreator/libExtensionSystem.so.${LIBExtensionSystem_VERSION}
-@lib lib/qtcreator/libQtConcurrent.so.${LIBQtConcurrent_VERSION}
+@lib lib/qtcreator/libGLSL.so.${LIBGLSL_VERSION}
+@lib lib/qtcreator/libLanguageUtils.so.${LIBLanguageUtils_VERSION}
+@lib lib/qtcreator/libQmlEditorWidgets.so.${LIBQmlEditorWidgets_VERSION}
+@lib lib/qtcreator/libQmlJS.so.${LIBQmlJS_VERSION}
+@lib lib/qtcreator/libQmlJSDebugClient.so.${LIBQmlJSDebugClient_VERSION}
 @lib lib/qtcreator/libUtils.so.${LIBUtils_VERSION}
+@lib lib/qtcreator/libsymbianutils.so.${LIBsymbianutils_VERSION}
+@lib lib/qtcreator/libzeroconf.so.${LIBzeroconf_VERSION}
+lib/qtcreator/plugins/Nokia/libAnalyzerBase.so
+lib/qtcreator/plugins/Nokia/libAutotoolsProjectManager.so
+lib/qtcreator/plugins/Nokia/libBazaar.so
 lib/qtcreator/plugins/Nokia/libBinEditor.so
 lib/qtcreator/plugins/Nokia/libBookmarks.so
 lib/qtcreator/plugins/Nokia/libCMakeProjectManager.so
 lib/qtcreator/plugins/Nokia/libCVS.so
+lib/qtcreator/plugins/Nokia/libClassView.so
 lib/qtcreator/plugins/Nokia/libCodePaster.so
 lib/qtcreator/plugins/Nokia/libCore.so
 lib/qtcreator/plugins/Nokia/libCppEditor.so
@@ -17,18 +28,33 @@ lib/qtcreator/plugins/Nokia/libDebugger.so
 lib/qtcreator/plugins/Nokia/libDesigner.so
 lib/qtcreator/plugins/Nokia/libFakeVim.so
 lib/qtcreator/plugins/Nokia/libFind.so
+lib/qtcreator/plugins/Nokia/libGLSLEditor.so
 lib/qtcreator/plugins/Nokia/libGenericProjectManager.so
+lib/qtcreator/plugins/Nokia/libGit.so
+lib/qtcreator/plugins/Nokia/libHelloWorld.so
 lib/qtcreator/plugins/Nokia/libHelp.so
+lib/qtcreator/plugins/Nokia/libImageViewer.so
 lib/qtcreator/plugins/Nokia/libLocator.so
+lib/qtcreator/plugins/Nokia/libMacros.so
+lib/qtcreator/plugins/Nokia/libMadde.so
+lib/qtcreator/plugins/Nokia/libMercurial.so
 lib/qtcreator/plugins/Nokia/libPerforce.so
 lib/qtcreator/plugins/Nokia/libProjectExplorer.so
-lib/qtcreator/plugins/Nokia/libQmlEditor.so
+lib/qtcreator/plugins/Nokia/libQmlJSEditor.so
+lib/qtcreator/plugins/Nokia/libQmlJSInspector.so
+lib/qtcreator/plugins/Nokia/libQmlJSTools.so
+lib/qtcreator/plugins/Nokia/libQmlProfiler.so
 lib/qtcreator/plugins/Nokia/libQmlProjectManager.so
 lib/qtcreator/plugins/Nokia/libQt4ProjectManager.so
-lib/qtcreator/plugins/Nokia/libQtScriptEditor.so
+lib/qtcreator/plugins/Nokia/libQtSupport.so
+lib/qtcreator/plugins/Nokia/libRemoteLinux.so
 lib/qtcreator/plugins/Nokia/libResourceEditor.so
-lib/qtcreator/plugins/Nokia/libScmGit.so
 lib/qtcreator/plugins/Nokia/libSubversion.so
+lib/qtcreator/plugins/Nokia/libTaskList.so
 lib/qtcreator/plugins/Nokia/libTextEditor.so
-lib/qtcreator/plugins/Nokia/libVCSBase.so
+lib/qtcreator/plugins/Nokia/libTodo.so
+lib/qtcreator/plugins/Nokia/libUpdateInfo.so
+lib/qtcreator/plugins/Nokia/libValgrind.so
+lib/qtcreator/plugins/Nokia/libVcsBase.so
 lib/qtcreator/plugins/Nokia/libWelcome.so
+lib/qtcreator/qtcomponents/plugin/libstyleplugin.so

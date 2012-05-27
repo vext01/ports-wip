@@ -11,11 +11,18 @@ EXTRACT_SUFX = 		.zip
 ONLY_FOR_ARCHS =	${GCC4_ARCHS}
 
 SHARED_LIBS =		Aggregation 1.0 \
+			Botan 0.0 \
 			CPlusPlus 1.0 \
 			DebuggingHelper 1.0 \
 			ExtensionSystem 1.0 \
-			QtConcurrent 1.0 \
-			Utils 1.0
+			GLSL 0.0 \
+			LanguageUtils 0.0 \
+			QmlEditorWidgets 0.0 \
+			QmlJS 0.0 \
+			QmlJSDebugClient 0.0 \
+			symbianutils 0.0 \
+			Utils 1.0 \
+			zeroconf 0.0
 
 MAKE_FLAGS += 	LIBAggregation_VERSION=${LIBAggregation_VERSION} \
 		LIBCPlusPlus_VERSION=${LIBCPlusPlus_VERSION} \

@@ -8,7 +8,7 @@ CATEGORIES =		x11 multimedia
 
 HOMEPAGE =		http://www.pyglet.org
 
-# XXX
+# BSD
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes

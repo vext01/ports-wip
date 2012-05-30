@@ -22,12 +22,9 @@ MASTER_SITES =		${MASTER_SITE_PYPI:=s/sympy/} \
 
 MODULES =		lang/python
 RUN_DEPENDS =		devel/ipython
+PATCHORIG =		.origy
 
 do-regress:
 	        cd ${WRKSRC} && ${MODPY_BIN} setup.py test
-
-post-install:
-	mv ${PREFIX}/share/man/man1/isympy.1 ${PREFIX}/man/man1/
-
 
 .include <bsd.port.mk>

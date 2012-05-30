@@ -1,6 +1,6 @@
 # $OpenBSD$
 
-COMMENT =		Computer algebra system (CAS) in Python
+COMMENT =		computer algebra system (CAS) in Python
 
 MODPY_EGG_VERSION =	0.7.1
 DISTNAME =		sympy-${MODPY_EGG_VERSION}

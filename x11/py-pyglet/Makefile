@@ -7,6 +7,7 @@ DISTNAME =		pyglet-${MODPY_EGG_VERSION}
 CATEGORIES =		x11 multimedia
 
 HOMEPAGE =		http://www.pyglet.org
+MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
 # BSD
 PERMIT_PACKAGE_CDROM =	Yes

@@ -1,4 +1,5 @@
 @comment $OpenBSD$
+%%native%%
 @bin bin/ocamleditor
 @bin bin/oebuild
 share/pixmaps/

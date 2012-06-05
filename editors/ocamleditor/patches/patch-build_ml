@@ -1,0 +1,30 @@
+$OpenBSD$
+--- build.ml.orig	Mon Jun  4 19:43:36 2012
++++ build.ml	Mon Jun  4 19:44:23 2012
+@@ -337,13 +337,13 @@ let install () =
+   if not is_win32 then begin
+     let pixmaps = sprintf "%s/share/pixmaps/ocamleditor" !prefix in
+     mkdir_p pixmaps;
+-    kprintf run "cp -vru ../pixmaps/* %s" pixmaps;
++    kprintf run "cp -r ../pixmaps/* %s" pixmaps;
+     let bin = sprintf "%s/bin" !prefix in
+     mkdir_p bin;
+-    kprintf run "cp -v ocamleditor%s %s/ocamleditor" (if !can_compile_native then ".opt" else "") bin;
+-    kprintf run "cp -v oebuild/oebuild%s %s" ext bin;
++    kprintf run "cp ocamleditor%s %s/ocamleditor" (if !can_compile_native then ".opt" else "") bin;
++    kprintf run "cp oebuild/oebuild%s %s" ext bin;
+     if !can_compile_native then begin
+-      kprintf run "cp -v oebuild/oebuild%s.opt %s" ext bin;
++      kprintf run "cp oebuild/oebuild%s.opt %s" ext bin;
+     end;
+   end
+ 
+@@ -386,7 +386,7 @@ let release () =
+   kprintf run "mv -f %s/%s.tmp.xml %s/%s.xml" name name name name;
+   kprintf Sys.chdir "%s/src" name;
+   kprintf run "mkdir ocaml-src";
+-  kprintf run "cp -ru ..\\..\\ocaml-src .";
++  kprintf run "cp -r ..\\..\\ocaml-src .";
+   with_compiler_libs()
+ 
+ (** all *)

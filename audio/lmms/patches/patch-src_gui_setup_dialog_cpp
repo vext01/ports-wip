@@ -1,0 +1,44 @@
+$OpenBSD: patch-src_gui_setup_dialog_cpp,v 1.1.1.1 2010/10/28 22:33:41 jakemsr Exp $
+--- src/gui/setup_dialog.cpp.orig	Thu Feb  2 22:27:03 2012
++++ src/gui/setup_dialog.cpp	Thu Jun  7 19:58:44 2012
+@@ -55,6 +55,7 @@
+ #include "AudioPortAudio.h"
+ #include "AudioPulseAudio.h"
+ #include "AudioSdl.h"
++#include "AudioSndio.h"
+ #include "AudioDummy.h"
+ 
+ // platform-specific midi-interface-classes
+@@ -62,6 +63,7 @@
+ #include "MidiAlsaSeq.h"
+ #include "MidiOss.h"
+ #include "MidiWinMM.h"
++#include "MidiSndio.h"
+ #include "MidiDummy.h"
+ 
+ 
+@@ -557,6 +559,12 @@ setupDialog::setupDialog( ConfigTabs _tab_to_open ) :
+ 	m_audioIfaceSetupWidgets[AudioOss::name()] =
+ 					new AudioOss::setupWidget( asw );
+ #endif
++
++#ifdef LMMS_HAVE_SNDIO
++	m_audioIfaceSetupWidgets[AudioSndio::name()] =
++					new AudioSndio::setupWidget( asw );
++#endif
++
+ 	m_audioIfaceSetupWidgets[AudioDummy::name()] =
+ 					new AudioDummy::setupWidget( asw );
+ 
+@@ -635,6 +643,11 @@ setupDialog::setupDialog( ConfigTabs _tab_to_open ) :
+ #ifdef LMMS_BUILD_WIN32
+ 	m_midiIfaceSetupWidgets[MidiWinMM::name()] =
+ 					new MidiWinMM::setupWidget( msw );
++#endif
++
++#ifdef LMMS_HAVE_SNDIO
++	m_midiIfaceSetupWidgets[MidiSndio::name()] =
++					new MidiSndio::setupWidget( msw );
+ #endif
+ 
+ 	m_midiIfaceSetupWidgets[MidiDummy::name()] =

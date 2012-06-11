@@ -1,0 +1,12 @@
+$OpenBSD$
+--- Makefile.orig	Mon Jun 11 14:19:32 2012
++++ Makefile	Mon Jun 11 14:19:46 2012
+@@ -121,7 +121,7 @@ install: all
+ 	@ install -d "$(DESTDIR)$(PIXMAP_PATH)"
+ 	@ install -m 644 icons/hicolor/256x256/apps/non-sequencer.png "$(DESTDIR)$(PIXMAP_PATH)"/icon-256x256.png
+ 	@ install -d "$(DESTDIR)$(ICON_PATH)/hicolor"
+-	@ cp -au icons/hicolor/ "$(DESTDIR)$(ICON_PATH)"
++	@ cp -r icons/hicolor/ "$(DESTDIR)$(ICON_PATH)"
+ 	@ install -d "$(DESTDIR)$(DESKTOP_PATH)"
+ 	@ sed 's:@BIN_PATH@:$(prefix)/bin:' non-sequencer.desktop.in > "$(DESTDIR)$(DESKTOP_PATH)/non-sequencer.desktop"
+ 	@ echo "$(DONE)"

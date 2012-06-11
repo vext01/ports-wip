@@ -1,0 +1,12 @@
+$OpenBSD$
+--- src/phrase.C.orig	Mon Jun 11 14:12:06 2012
++++ src/phrase.C	Mon Jun 11 14:12:17 2012
+@@ -24,7 +24,7 @@
+ #include "common.h"
+ 
+ vector <phrase*> phrase::_phrases;
+-signal <void> phrase::signal_create_destroy;
++sigc::signal <void> phrase::signal_create_destroy;
+ 
+ phrase::phrase ( void )
+ {

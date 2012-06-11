@@ -1,0 +1,18 @@
+$OpenBSD$
+--- src/canvas.H.orig	Mon Jun 11 14:00:47 2012
++++ src/canvas.H	Mon Jun 11 14:01:02 2012
+@@ -114,10 +114,10 @@ class Canvas : public trackable (public)
+ 
+     enum { OFF, ON, TOGGLE };
+ 
+-    signal <void> signal_settings_change;
+-    signal <void> signal_draw;
+-    signal <void> signal_resize;
+-    signal <void> signal_pan;
++    sigc::signal <void> signal_settings_change;
++    sigc::signal <void> signal_draw;
++    sigc::signal <void> signal_resize;
++    sigc::signal <void> signal_pan;
+ 
+     Canvas ( );
+ 

@@ -1,0 +1,12 @@
+$OpenBSD$
+--- src/phrase.H.orig	Mon Jun 11 14:01:59 2012
++++ src/phrase.H	Mon Jun 11 14:02:28 2012
+@@ -36,7 +36,7 @@ class phrase : public Grid
+ 
+ public:
+ 
+-    static signal <void> signal_create_destroy;
++    static sigc::signal <void> signal_create_destroy;
+ 
+     int draw_shape ( void ) const { return SQUARE; }
+ 

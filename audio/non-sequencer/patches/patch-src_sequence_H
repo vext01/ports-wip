@@ -1,0 +1,12 @@
+$OpenBSD$
+--- src/sequence.H.orig	Mon Jun 11 14:02:31 2012
++++ src/sequence.H	Mon Jun 11 14:02:55 2012
+@@ -59,7 +59,7 @@ class sequence : public trackable {
+ 
+ public:
+ 
+-    signal <void> signal_new_song;
++    sigc::signal <void> signal_new_song;
+ 
+     sequence( void );
+ 

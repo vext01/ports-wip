@@ -1,0 +1,14 @@
+$OpenBSD$
+--- src/grid.H.orig	Mon Jun 11 13:59:47 2012
++++ src/grid.H	Mon Jun 11 14:00:07 2012
+@@ -146,8 +146,8 @@ class Grid : public trackable (private)
+ 
+ public:
+ 
+-    signal <void> signal_events_change;
+-    signal <void> signal_settings_change;
++    sigc::signal <void> signal_events_change;
++    sigc::signal <void> signal_settings_change;
+ 
+     Viewport viewport;                                          /* used by the Canvas */
+ 

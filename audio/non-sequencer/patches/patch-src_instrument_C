@@ -1,0 +1,15 @@
+$OpenBSD$
+--- src/instrument.C.orig	Mon Jun 11 14:05:55 2012
++++ src/instrument.C	Mon Jun 11 14:10:20 2012
+@@ -239,7 +239,11 @@ Instrument::save ( void ) const
+ }
+ 
+ static int
++#ifdef __OpenBSD__
++instrument_filter ( struct dirent *d )
++#else
+ instrument_filter ( const struct dirent *d )
++#endif
+ {
+     char suffix[] = "*.inst";
+ 

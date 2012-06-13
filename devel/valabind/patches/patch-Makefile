@@ -1,0 +1,27 @@
+$OpenBSD$
+--- Makefile.orig	Wed Jun 13 15:35:14 2012
++++ Makefile	Wed Jun 13 15:35:38 2012
+@@ -48,18 +48,18 @@ c:
+ 
+ install_dirs:
+ 	mkdir -p ${DESTDIR}${PREFIX}/bin
+-	mkdir -p ${DESTDIR}${PREFIX}/share/man/man1
++	mkdir -p ${DESTDIR}${PREFIX}/man/man1
+ 
+ install: install_dirs
+-	cp ${BIN}.1 ${DESTDIR}${PREFIX}/share/man/man1
+-	cp ${BIN}-cc.1 ${DESTDIR}${PREFIX}/share/man/man1
++	cp ${BIN}.1 ${DESTDIR}${PREFIX}/man/man1
++	cp ${BIN}-cc.1 ${DESTDIR}${PREFIX}/man/man1
+ 	cp ${BIN} ${DESTDIR}${PREFIX}/bin
+ 	cp ${BIN}-cc ${DESTDIR}${PREFIX}/bin
+ 
+ symstall: install_dirs
+ 	chmod +x ${PWD}/${BIN}-cc
+-	ln -fs ${PWD}/${BIN}.1 ${DESTDIR}${PREFIX}/share/man/man1
+-	ln -fs ${PWD}/${BIN}-cc.1 ${DESTDIR}${PREFIX}/share/man/man1
++	ln -fs ${PWD}/${BIN}.1 ${DESTDIR}${PREFIX}/man/man1
++	ln -fs ${PWD}/${BIN}-cc.1 ${DESTDIR}${PREFIX}/man/man1
+ 	ln -fs ${PWD}/${BIN} ${DESTDIR}${PREFIX}/bin
+ 	ln -fs ${PWD}/${BIN}-cc ${DESTDIR}${PREFIX}/bin
+ 

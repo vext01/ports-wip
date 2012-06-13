@@ -1,0 +1,5 @@
+@comment $OpenBSD$
+@bin bin/valabind
+bin/valabind-cc
+@man man/man1/valabind-cc.1
+@man man/man1/valabind.1

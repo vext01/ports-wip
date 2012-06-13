@@ -1,0 +1,6 @@
+Valabind is a program written in Vala that aims to generate SWIG
+interfaces (.i) from a vala-generated or hand-made vapi files.
+
+Create bindings for many programming languages (like Python, Perl, Ruby,
+Lua, ..) interfacing with C or Vala code.
+

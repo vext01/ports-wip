@@ -1,0 +1,15 @@
+$OpenBSD$
+--- check-langs.sh.orig	Wed Jun 13 16:27:03 2012
++++ check-langs.sh	Wed Jun 13 16:27:31 2012
+@@ -9,8 +9,9 @@ LANGS="python perl ruby lua go java guile php5"
+ 
+ if [ "$1" = "force-all" ]; then
+   :> supported.langs
+-  PYTHONCONFIG=`./python-config-wrapper -n`
+-  if [ -n "${PYTHONCONFIG}" ]; then
++  PYTHON_CONFIG=`./python-config-wrapper -n`
++  export PYTHON_CONFIG
++  if [ -n "${PYTHON_CONFIG}" ]; then
+       echo "check-langs.sh: Detected python"
+       echo python >> supported.langs
+   fi

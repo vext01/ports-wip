@@ -26,11 +26,3 @@ $OpenBSD$
  if test "x$ac_uic" = "xno"; then
     AC_MSG_ERROR([uic $ac_errmsg])
  fi
-@@ -333,6 +333,7 @@ if test "x$ac_stacktrace" = "xyes"; then
-    AC_DEFINE(CONFIG_STACKTRACE, 1, [Define if debugger stack-trace is enabled.])
- fi
- 
-+ac_incpath="${ac_incpath} ${CPPFLAGS} ${CXXFLAGS}"
- AC_SUBST(ac_incpath)
- 
- 

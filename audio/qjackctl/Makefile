@@ -1,11 +1,7 @@
 # $OpenBSD: Makefile.template,v 1.61 2012/03/29 13:41:58 sthen Exp $
 
-COMMENT =		XXX
-
+COMMENT =		application to control the JACK sound server
 DISTNAME =		qjackctl-0.3.9
-
-#SHARED_LIBS =		???
-
 CATEGORIES =		audio x11
 
 HOMEPAGE =		http://qjackctl.sourceforge.net
@@ -18,16 +14,15 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-#WANTLIB =		???
+WANTLIB += ICE QtDBus QtGui QtXml SM X11 Xext Xi Xinerama Xrender
+WANTLIB += c fontconfig freetype jack m portaudio pthread stdc++
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=qjackctl/}
 
 
 MODULES =		x11/qt4
-#BUILD_DEPENDS =	???
-#RUN_DEPENDS =		???
-#LIB_DEPENDS =		???
-#REGRESS_DEPENDS =	???
+LIB_DEPENDS =		audio/jack \
+			audio/portaudio-svn
 
 AUTOCONF_VERSION =	2.68
 CONFIGURE_STYLE =	autoconf
@@ -51,7 +46,6 @@ pre-configure:
 	${SUBST_CMD} ${WRKSRC}/src/src.pro
 	${SUBST_CMD} ${WRKSRC}/configure.ac
 
-#NO_BUILD =		Yes
-#NO_REGRESS =		Yes
+NO_REGRESS =		Yes
 
 .include <bsd.port.mk>

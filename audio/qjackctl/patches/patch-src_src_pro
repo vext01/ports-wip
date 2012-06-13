@@ -1,12 +1,13 @@
 $OpenBSD$
---- src/src.pro.orig	Mon Jun 11 15:46:06 2012
-+++ src/src.pro	Mon Jun 11 15:46:16 2012
-@@ -4,7 +4,7 @@ TARGET = qjackctl
+--- src/src.pro.orig	Wed Nov 23 09:49:15 2011
++++ src/src.pro	Wed Jun 13 22:55:29 2012
+@@ -4,7 +4,8 @@ TARGET = qjackctl
  
  TEMPLATE = app
  DEPENDPATH += .
 -INCLUDEPATH += .
 +INCLUDEPATH += . ${CXXFLAGS} ${CPPFLAGS}
++QMAKE_CXXFLAGS += ${CXXFLAGS} ${CPPFLAGS}
  
  include(src.pri)
  

@@ -1,0 +1,22 @@
+@comment $OpenBSD$
+@bin bin/qjackctl
+@man man/man1/qjackctl.1
+share/applications/
+share/applications/qjackctl.desktop
+share/icons/
+share/icons/hicolor/
+share/icons/hicolor/32x32/
+share/icons/hicolor/32x32/apps/
+share/icons/hicolor/32x32/apps/qjackctl.png
+share/locale/
+share/locale/qjackctl_cs.qm
+share/locale/qjackctl_de.qm
+share/locale/qjackctl_es.qm
+share/locale/qjackctl_fr.qm
+share/locale/qjackctl_it.qm
+share/locale/qjackctl_nl.qm
+share/locale/qjackctl_ru.qm
+@exec %D/bin/update-desktop-database                                                                                         
+@unexec-delete %D/bin/update-desktop-database
+@exec %D/bin/gtk-update-icon-cache -q %D/share/icons/hicolor 2>/dev/null || true                                             
+@unexec-delete %D/bin/gtk-update-icon-cache -q %D/share/icons/hicolor 2>/dev/null || true       

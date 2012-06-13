@@ -1,0 +1,36 @@
+$OpenBSD$
+--- configure.ac.orig	Fri May 18 15:27:46 2012
++++ configure.ac	Mon Jun 11 15:53:22 2012
+@@ -174,21 +174,21 @@ AC_CACHE_CHECK([for Qt library version >= 4.2],
+ ac_errmsg="not found in current PATH. Maybe QT development environment isn't available (qt-devel)."
+ 
+ # Check for Qt qmake utility.
+-AC_PATH_PROG(ac_qmake, qmake, [no], $ac_path)
++AC_PATH_PROG(ac_qmake, `basename ${MODQT_QMAKE}`, [no], $ac_path)
+ if test "x$ac_qmake" = "xno"; then
+    AC_MSG_ERROR([qmake $ac_errmsg])
+ fi
+ AC_SUBST(ac_qmake)
+ 
+ # Check for Qt moc utility.
+-AC_PATH_PROG(ac_moc, moc, [no], $ac_path)
++AC_PATH_PROG(ac_moc, `basename ${MODQT_MOC}`, [no], $ac_path)
+ if test "x$ac_moc" = "xno"; then
+    AC_MSG_ERROR([moc $ac_errmsg])
+ fi
+ AC_SUBST(ac_moc)
+ 
+ # Check for Qt uic utility.
+-AC_PATH_PROG(ac_uic, uic, [no], $ac_path)
++AC_PATH_PROG(ac_uic, `basename ${MODQT_UIC}`, [no], $ac_path)
+ if test "x$ac_uic" = "xno"; then
+    AC_MSG_ERROR([uic $ac_errmsg])
+ fi
+@@ -333,6 +333,7 @@ if test "x$ac_stacktrace" = "xyes"; then
+    AC_DEFINE(CONFIG_STACKTRACE, 1, [Define if debugger stack-trace is enabled.])
+ fi
+ 
++ac_incpath="${ac_incpath} ${CPPFLAGS} ${CXXFLAGS}"
+ AC_SUBST(ac_incpath)
+ 
+ 

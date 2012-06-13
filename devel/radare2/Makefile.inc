@@ -6,8 +6,10 @@ ONLY_FOR_ARCHS ?=	amd64 i386
 # that don't. We know powerpc is busted.
 #ONLY_FOR_ARCHS ?=	arm mips64 mips64el powerpc sparc sparc64
 
-V ?=			0.9
+V ?=			20120613
 SUBST_VARS +=		V
+
+DISTNAME ?=		radare2-${V}
 
 CATEGORIES ?=		devel
 HOMEPAGE ?=		http://radare.nopcode.org/
@@ -19,7 +21,8 @@ PERMIT_PACKAGE_FTP ?=		Yes
 PERMIT_DISTFILES_CDROM ?=	Yes
 PERMIT_DISTFILES_FTP ?=		Yes
 
-MASTER_SITES ?=		${HOMEPAGE}/get/
+#MASTER_SITES ?=		${HOMEPAGE}/get/
+MASTER_SITES ?=			http://theunixzoo.co.uk/files/
 
 USE_GMAKE ?=		Yes
 CONFIGURE_STYLE ?=	simple # acr

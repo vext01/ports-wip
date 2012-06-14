@@ -6,7 +6,7 @@ ONLY_FOR_ARCHS ?=	amd64 i386
 # that don't. We know powerpc is busted.
 #ONLY_FOR_ARCHS ?=	arm mips64 mips64el powerpc sparc sparc64
 
-V ?=			20120613
+V ?=			20120614
 SUBST_VARS +=		V
 
 DISTNAME ?=		radare2-${V}

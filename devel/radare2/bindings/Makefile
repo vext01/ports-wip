@@ -7,7 +7,8 @@ PKGNAME =		radare-bindings2-${V}
 # XXX multipackage this
 MODULES =		lang/python
 LIB_DEPENDS =		devel/radare2/main>=${V}
-BUILD_DEPENDS =		devel/radare2/main>=${V}
+BUILD_DEPENDS =		devel/radare2/main>=${V} \
+			devel/valabind # XXX not for release
 RUN_DEPENDS =		lang/vala		# vala bindings only
 
 WANTLIB += m python2.7 r_anal r_asm r_bin r_bp r_cmd r_config

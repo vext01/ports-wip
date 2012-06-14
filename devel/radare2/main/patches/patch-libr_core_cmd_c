@@ -1,0 +1,23 @@
+$OpenBSD$
+--- libr/core/cmd.c.orig	Thu Jun 14 11:06:13 2012
++++ libr/core/cmd.c	Thu Jun 14 15:15:51 2012
+@@ -30,7 +30,8 @@ static void cmd_debug_reg(RCore *core, const char *str
+ 
+ // TODO: move somewhere else
+ R_API RAsmOp *r_core_disassemble (RCore *core, ut64 addr) {
+-	ut8 buf[4096];
++	int delta;
++	ut8 buf[128];
+ 	static RBuffer *b = NULL; // XXX: never freed and non-thread safe. move to RCore
+ 	RAsmOp *op = R_NEW (RAsmOp);
+ 	if (b == NULL) {
+@@ -47,7 +48,8 @@ R_API RAsmOp *r_core_disassemble (RCore *core, ut64 ad
+ 			} else return NULL;
+ 		}
+ 	}
+-	if (r_asm_disassemble (core->assembler, op, b->buf, b->length)<1) {
++	delta = addr - b->base;
++	if (r_asm_disassemble (core->assembler, op, b->buf+delta, b->length)<1) {
+ 		free (op);
+ 		return NULL;
+ 	}

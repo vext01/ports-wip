@@ -2,16 +2,11 @@
 
 
 COMMENT =		vala to swig interface convertor
-
-DISTNAME =		valabind-20120613
-
-#SHARED_LIBS =		???
-
+DISTNAME =		valabind-20120614
 CATEGORIES =		devel
 
 HOMEPAGE =		http://hg.youterm.com/valabind
-
-#MAINTAINER =		???
+MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
 # GPLv2
 PERMIT_PACKAGE_CDROM =	Yes
@@ -27,10 +22,9 @@ BUILD_DEPENDS =		lang/vala
 LIB_DEPENDS =		lang/vala
 
 USE_GMAKE =		Yes
-#USE_GROFF =		Yes
 
 # prevents double prefixing
-FAKE_FLAGS =		DESTDIR=
+FAKE_FLAGS =		DESTDIR= MANDIR=${DESTDIR}${PREFIX}/man
 
 #NO_REGRESS =		Yes
 

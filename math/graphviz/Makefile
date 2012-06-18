@@ -84,7 +84,7 @@ CONFIGURE_ARGS=	${CONFIGURE_SHARED} \
 		--with-gd
 
 CONFIGURE_ENV=	CPPFLAGS="-I${X11BASE}/include -I${LOCALBASE}/include" \
-		LDFLAGS="-L${X11BASE}/lib -L${LOCALBASE}/lib -pthread"
+		LDFLAGS="-L${X11BASE}/lib -L${LOCALBASE}/lib"
 
 DOCBASE=	${PREFIX}/share/doc/graphviz
 EXBASE=		${PREFIX}/share/examples/graphviz
@@ -98,12 +98,12 @@ FAKE_FLAGS=	htmldir="${DOCBASE}/html" \
 		pathplanexampledir="${EXBASE}/demo/pathplan_data" \
 		undirecteddir="${EXBASE}/graphs/undirected"
 
-#post-build:
-#.for CMD in dotty lneato
-#	echo "#! /bin/ksh" >${WRKBUILD}/cmd/${CMD}/${CMD}
-#	echo ': $${LEFTYPATH:=$(LOCALBASE)/share/examples/graphviz/lefty}' >>${WRKBUILD}/cmd/${CMD}/${CMD}
-#	echo 'export LEFTYPATH' >>${WRKBUILD}/cmd/${CMD}/${CMD}
-#	cat ${WRKBUILD}/cmd/${CMD}/${CMD}.ksh >>${WRKBUILD}/cmd/${CMD}/${CMD}
-#.endfor
+post-build:
+.for CMD in dotty lneato
+	echo "#! /bin/ksh" >${WRKBUILD}/cmd/${CMD}/${CMD}
+	echo ': $${LEFTYPATH:=$(LOCALBASE)/share/examples/graphviz/lefty}' >>${WRKBUILD}/cmd/${CMD}/${CMD}
+	echo 'export LEFTYPATH' >>${WRKBUILD}/cmd/${CMD}/${CMD}
+	cat ${WRKBUILD}/cmd/${CMD}/${CMD}.ksh >>${WRKBUILD}/cmd/${CMD}/${CMD}
+.endfor
 
 .include <bsd.port.mk>

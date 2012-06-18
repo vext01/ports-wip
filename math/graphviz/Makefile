@@ -1,10 +1,14 @@
 # $OpenBSD: Makefile,v 1.46 2011/11/03 20:28:09 jasper Exp $
 
-COMMENT=	graph drawing software
+COMMENT-main=	graph drawing software
 
 DISTNAME=	graphviz-2.28.0
-PKGNAME=	${DISTNAME}
+PKGNAME-main=	${DISTNAME}
 CATEGORIES=	math devel graphics
+
+# there is only one multi-package due to legacy, but maybe more
+# will appear in the form of language bindings.
+MULTI_PACKAGES=	-main
 
 # to let update-patches work in a simpler way
 PATCHORIG=	.orig2

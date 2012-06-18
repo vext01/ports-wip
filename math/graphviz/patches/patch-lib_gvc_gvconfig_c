@@ -1,6 +1,6 @@
 $OpenBSD$
 
-Plugin scanner fails to find our libs because we overide lib version
+Plugin scanner fails to find our libs because we overide lib version.
 
 --- lib/gvc/gvconfig.c.orig2	Mon Jun 18 11:57:45 2012
 +++ lib/gvc/gvconfig.c	Mon Jun 18 11:59:53 2012

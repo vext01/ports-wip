@@ -1,4 +1,7 @@
 $OpenBSD$
+
+A construction that is not compatible with BSD grep.
+
 --- Makefile.in.orig2	Sun Jun 17 22:55:39 2012
 +++ Makefile.in	Sun Jun 17 22:56:39 2012
 @@ -1179,7 +1179,7 @@ dist-hook:

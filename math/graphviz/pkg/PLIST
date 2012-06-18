@@ -105,19 +105,6 @@ lib/graphviz/python27/
 lib/graphviz/ruby/
 lib/graphviz/sharp/
 lib/graphviz/tcl/
-lib/graphviz/tcl/libgdtclft.a
-lib/graphviz/tcl/libgdtclft.la
-lib/graphviz/tcl/libgv_tcl.a
-lib/graphviz/tcl/libgv_tcl.la
-lib/graphviz/tcl/libtcldot.a
-lib/graphviz/tcl/libtcldot.la
-lib/graphviz/tcl/libtcldot_builtin.a
-lib/graphviz/tcl/libtcldot_builtin.la
-lib/graphviz/tcl/libtclplan.a
-lib/graphviz/tcl/libtclplan.la
-lib/graphviz/tcl/libtkspline.a
-lib/graphviz/tcl/libtkspline.la
-lib/graphviz/tcl/pkgIndex.tcl
 lib/libcdt.a
 lib/libcdt.la
 lib/libcgraph.a
@@ -139,8 +126,6 @@ lib/pkgconfig/libgvc.pc
 lib/pkgconfig/libgvpr.pc
 lib/pkgconfig/libpathplan.pc
 lib/pkgconfig/libxdot.pc
-lib/tcl8.5/
-lib/tcl8.5/graphviz
 @man man/man1/acyclic.1
 @man man/man1/bcomps.1
 @man man/man1/ccomps.1
@@ -180,15 +165,11 @@ lib/tcl8.5/graphviz
 @man man/man3/cdt.3
 @man man/man3/cgraph.3
 @man man/man3/expr.3
-man/man3/gdtclft.3tcl
 @man man/man3/graph.3
 man/man3/gv.3guile
-man/man3/gv.3tcl
 @man man/man3/gvc.3
 @man man/man3/pack.3
 @man man/man3/pathplan.3
-man/man3/tcldot.3tcl
-man/man3/tkspline.3tk
 @man man/man3/xdot.3
 @man man/man7/graphviz.7
 share/doc/graphviz/
@@ -323,7 +304,6 @@ share/doc/graphviz/html/septagon.gif
 share/doc/graphviz/html/shapes.html
 share/doc/graphviz/html/square.gif
 share/doc/graphviz/html/tab.gif
-share/doc/graphviz/html/tcldot.html
 share/doc/graphviz/html/todo.html
 share/doc/graphviz/html/trapezium.gif
 share/doc/graphviz/html/triangle.gif
@@ -347,11 +327,9 @@ share/doc/graphviz/pdf/dottyguide.pdf
 share/doc/graphviz/pdf/expr.3.pdf
 share/doc/graphviz/pdf/fdp.1.pdf
 share/doc/graphviz/pdf/gc.1.pdf
-share/doc/graphviz/pdf/gdtclft.3tcl.pdf
 share/doc/graphviz/pdf/gml2gv.1.pdf
 share/doc/graphviz/pdf/graph.3.pdf
 share/doc/graphviz/pdf/gv.3guile.pdf
-share/doc/graphviz/pdf/gv.3tcl.pdf
 share/doc/graphviz/pdf/gv2gxl.1.pdf
 share/doc/graphviz/pdf/gvc.3.pdf
 share/doc/graphviz/pdf/gvcolor.1.pdf
@@ -379,8 +357,6 @@ share/doc/graphviz/pdf/sccmap.1.pdf
 share/doc/graphviz/pdf/sfdp.1.pdf
 share/doc/graphviz/pdf/smyrna.1.pdf
 share/doc/graphviz/pdf/smyrna.pdf
-share/doc/graphviz/pdf/tcldot.3tcl.pdf
-share/doc/graphviz/pdf/tkspline.3tk.pdf
 share/doc/graphviz/pdf/tred.1.pdf
 share/doc/graphviz/pdf/twopi.1.pdf
 share/doc/graphviz/pdf/unflatten.1.pdf
@@ -388,30 +364,7 @@ share/doc/graphviz/pdf/vimdot.1.pdf
 share/doc/graphviz/pdf/xdot.3.pdf
 share/examples/graphviz/
 share/examples/graphviz/demo/
-share/examples/graphviz/demo/doted.tcl
-share/examples/graphviz/demo/doted.tcl.README
-share/examples/graphviz/demo/entities.tcl
-share/examples/graphviz/demo/entities.tcl.README
-share/examples/graphviz/demo/entities.tcl.html
-share/examples/graphviz/demo/gcat.tcl
-share/examples/graphviz/demo/gcat.tcl.README
-share/examples/graphviz/demo/pathplan.tcl
-share/examples/graphviz/demo/pathplan.tcl.README
 share/examples/graphviz/demo/pathplan_data/
-share/examples/graphviz/demo/pathplan_data/boxes.dat
-share/examples/graphviz/demo/pathplan_data/dpd.dat
-share/examples/graphviz/demo/pathplan_data/funny.dat
-share/examples/graphviz/demo/pathplan_data/maze.dat
-share/examples/graphviz/demo/pathplan_data/nested.dat
-share/examples/graphviz/demo/pathplan_data/northo.dat
-share/examples/graphviz/demo/pathplan_data/obs.dat
-share/examples/graphviz/demo/pathplan_data/other.dat
-share/examples/graphviz/demo/pathplan_data/paths.dat
-share/examples/graphviz/demo/pathplan_data/rotor.dat
-share/examples/graphviz/demo/pathplan_data/u.dat
-share/examples/graphviz/demo/pathplan_data/unknown.dat
-share/examples/graphviz/demo/spline.tcl
-share/examples/graphviz/demo/spline.tcl.README
 share/examples/graphviz/graphs/
 share/examples/graphviz/graphs/directed/
 share/examples/graphviz/graphs/directed/KW91.gv
@@ -490,7 +443,6 @@ share/examples/graphviz/lefty/tree.lefty
 @exec %D/bin/dot -c
 share/graphviz/
 share/graphviz/demo/
-share/graphviz/demo/modgraph.tcl
 share/graphviz/doc/
 share/graphviz/doc/html/
 share/graphviz/doc/html/schema/

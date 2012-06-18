@@ -1,11 +1,12 @@
 /patch-cmd_dot_Makefile_in/1.1/Sun Jun 17 21:31:30 2012//
-/patch-cmd_lefty_ws_x11_libfilereq_Draw_c/1.1/Sun Jun 17 21:31:30 2012//
-/patch-contrib_diffimg_Makefile_in/1.1/Sun Jun 17 21:31:30 2012//
-/patch-lib_gd_gd_gif_in_c/1.2/Sun Jun 17 21:31:30 2012//
 /patch-lib_gvc_gvconfig_c/1.2/Sun Jun 17 21:31:30 2012//
-/patch-plugin_xlib_gvdevice_xlib_c/1.2/Sun Jun 17 21:31:30 2012//
-/patch-tclpkg_gv_Makefile_am/1.1/Sun Jun 17 21:31:30 2012//
-/patch-tclpkg_gv_Makefile_in/1.1/Sun Jun 17 21:31:30 2012//
-/patch-tclpkg_tclstubs_Makefile_in/1.1/Sun Jun 17 21:31:30 2012//
-/patch-tclpkg_tkstubs_Makefile_in/1.1/Sun Jun 17 21:31:30 2012//
+/patch-Makefile_in/0/dummy timestamp//
+/patch-cmd_lefty_ws_x11_libfilereq_Draw_c/-1.1/dummy timestamp//
+/patch-contrib_diffimg_Makefile_in/-1.1/dummy timestamp//
+/patch-lib_gd_gd_gif_in_c/-1.2/dummy timestamp//
+/patch-plugin_xlib_gvdevice_xlib_c/-1.2/dummy timestamp//
+/patch-tclpkg_gv_Makefile_am/-1.1/dummy timestamp//
+/patch-tclpkg_gv_Makefile_in/-1.1/dummy timestamp//
+/patch-tclpkg_tclstubs_Makefile_in/-1.1/dummy timestamp//
+/patch-tclpkg_tkstubs_Makefile_in/-1.1/dummy timestamp//
 D

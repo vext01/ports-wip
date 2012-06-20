@@ -32,6 +32,12 @@ SHARED_LIBS += gvc			1.0 # 6.0
 SHARED_LIBS += cgraph			0.0 # 6.0
 SHARED_LIBS += gvpr			0.0 # 2.0
 SHARED_LIBS += xdot			0.0 # 4.0
+SHARED_LIBS += gdtclft			2.0 # unknown
+SHARED_LIBS += tcldot			2.0 # unknown
+SHARED_LIBS += tcldot_builtin		2.0 # unknown
+SHARED_LIBS += tclplan			2.0 # unknown
+SHARED_LIBS += tkspline			2.0 # unknown
+
 
 HOMEPAGE=	http://www.graphviz.org/
 
@@ -43,7 +49,9 @@ PERMIT_DISTFILES_CDROM=	Yes
 PERMIT_PACKAGE_FTP=	Yes
 PERMIT_PACKAGE_CDROM=	Yes
 
-MODULES=	devel/gettext
+MODULES=	devel/gettext \
+		lang/tcl \
+		perl
 LIB_DEPENDS=	graphics/jpeg \
 		graphics/png \
 		devel/libtool,-ltdl \
@@ -53,6 +61,7 @@ LIB_DEPENDS=	graphics/jpeg \
 		www/libcroco \
 		x11/gnome/librsvg
 RUN_DEPENDS=	lang/guile
+BUILD_DEPENDS=	devel/swig
 
 WANTLIB += GL ICE SM X11 Xau Xaw Xcomposite Xcursor Xdamage Xdmcp
 WANTLIB += Xext Xfixes Xi Xinerama Xmu Xpm Xrandr Xrender Xt Xxf86vm
@@ -67,16 +76,18 @@ USE_LIBTOOL=	Yes
 USE_GROFF =	Yes
 CONFIGURE_STYLE=gnu
 CONFIGURE_ARGS=	${CONFIGURE_SHARED} \
+		--enable-tcl=yes \
+		--enable-perl \
+		--enable-guile \
+		--with-tcl=${MODTCL_BIN} \
 		--disable-lua \
 		--disable-io \
 		--disable-java \
 		--disable-ocaml \
 		--disable-php \
-		--disable-perl \
 		--disable-python \
 		--disable-ruby \
 		--disable-rpath \
-		--disable-tcl \
 		--disable-sharp \
 		--disable-R \
 		--disable-gts \
@@ -87,8 +98,12 @@ CONFIGURE_ARGS=	${CONFIGURE_SHARED} \
 		--without-glut \
 		--with-gd
 
-CONFIGURE_ENV=	CPPFLAGS="-I${X11BASE}/include -I${LOCALBASE}/include" \
-		LDFLAGS="-L${X11BASE}/lib -L${LOCALBASE}/lib"
+# XXX perl version
+# XXX perl hack should not be needed, should come from config/config_perl.pl
+CONFIGURE_ENV=	CPPFLAGS="-I${X11BASE}/include -I${LOCALBASE}/include -I/usr/libdata/perl5/${MACHINE_ARCH}-openbsd/5.12.2/CORE/" \
+		LDFLAGS="-L${X11BASE}/lib -L${LOCALBASE}/lib" \
+		TCLCONFIG=${LOCALBASE}/lib/tcl/tcl${MODTCL_VERSION}/tclConfig.sh \
+		TKCONFIG=${LOCALBASE}/lib/tcl/tk${MODTCL_VERSION}/tkConfig.sh
 
 DOCBASE=	${PREFIX}/share/doc/graphviz
 EXBASE=		${PREFIX}/share/examples/graphviz

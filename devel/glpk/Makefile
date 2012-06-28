@@ -2,8 +2,8 @@
 
 COMMENT=	GNU Linear Programming Kit
 
-DISTNAME=	glpk-4.44
-SHARED_LIBS=	glpk		6.0	# 29.0
+DISTNAME=	glpk-4.47
+SHARED_LIBS=	glpk		7.0	# 32.0
 
 CATEGORIES=	devel
 HOMEPAGE=	http://www.gnu.org/software/glpk/index.html
@@ -17,7 +17,7 @@ PERMIT_PACKAGE_FTP=	Yes
 PERMIT_DISTFILES_CDROM=	Yes
 PERMIT_DISTFILES_FTP=	Yes
 
-WANTLIB=		c m gmp>=7 z
+WANTLIB=		c m gmp>=7
 
 LIB_DEPENDS=		devel/gmp
 
@@ -25,8 +25,7 @@ USE_LIBTOOL=		Yes
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS=		${CONFIGURE_SHARED} \
-			--with-gmp \
-			--with-zlib
+			--with-gmp
 CONFIGURE_ENV=		CPPFLAGS="-I${LOCALBASE}/include" \
 			LDFLAGS="-L${LOCALBASE}/lib"
 

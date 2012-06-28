@@ -5,6 +5,7 @@ include/glpk.h
 lib/libglpk.a
 lib/libglpk.la
 share/doc/glpk/
+share/doc/glpk/cnfsat.pdf
 share/doc/glpk/glpk.pdf
 share/doc/glpk/glpk_faq.txt
 share/doc/glpk/gmpl.pdf
@@ -16,9 +17,5 @@ share/doc/glpk/notes/
 share/doc/glpk/notes/dfeas.pdf
 share/doc/glpk/notes/gomory.pdf
 share/doc/glpk/notes/keller.pdf
-share/doc/glpk/notes/prepro.pdf
 share/doc/glpk/notes/scaling.pdf
-share/doc/glpk/notes/subset.pdf
 share/doc/glpk/notes/updating.pdf
-share/doc/glpk/opb.txt
-share/doc/glpk/tables.pdf

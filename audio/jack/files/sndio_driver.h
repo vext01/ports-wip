@@ -34,6 +34,9 @@
 #define SNDIO_DRIVER_DEF_INS		2
 #define SNDIO_DRIVER_DEF_OUTS		2
 
+#define SNDIO_MAX_MIDI_DEVS			16
+#define SNDIO_MIDI_BUFSZ			1024
+
 typedef jack_default_audio_sample_t jack_sample_t;
 
 typedef struct _sndio_driver
@@ -70,5 +73,8 @@ typedef struct _sndio_driver
 	jack_client_t *client;
 
 } sndio_driver_t;
+
+/* sndio_midi.c */
+int			sndio_midi_add_ports(sndio_driver_t *dri);
 
 #endif

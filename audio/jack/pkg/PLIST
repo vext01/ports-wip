@@ -54,8 +54,6 @@ lib/jack/jack_net.la
 lib/jack/jack_net.so
 lib/jack/jack_sndio.la
 lib/jack/jack_sndio.so
-lib/jack/jack_sndio_midi.la
-lib/jack/jack_sndio_midi.so
 lib/libjack.la
 @lib lib/libjack.so.${LIBjack_VERSION}
 lib/libjackserver.la

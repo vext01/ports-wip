@@ -58,9 +58,8 @@ CONFIGURE_ARGS +=	--enable-debug
 
 post-extract:
 	mkdir -p ${WRKSRC}/drivers/sndio
-	cp ${FILESDIR}/Makefile.am ${FILESDIR}/sndio_driver.{c,h} \
+	cp ${FILESDIR}/Makefile.am ${FILESDIR}/*.{c,h} \
 		${WRKSRC}/drivers/sndio
-	cp -r ${FILESDIR}/sndio-midi ${WRKSRC}/drivers/
 
 AUTO_ENV=	AUTOMAKE_VERSION=${AUTOMAKE_VERSION} \
 		AUTOCONF_VERSION=${AUTOCONF_VERSION}

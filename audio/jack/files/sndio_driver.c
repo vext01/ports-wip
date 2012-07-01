@@ -42,7 +42,6 @@
 
 #include "sndio_driver.h"
 
-
 #define SNDIO_DRIVER_N_PARAMS	10
 const static jack_driver_param_desc_t sndio_params[SNDIO_DRIVER_N_PARAMS] = {
 	{ "rate",
@@ -597,6 +596,9 @@ sndio_driver_attach (sndio_driver_t *driver)
 		driver->playback_ports =
 			jack_slist_append(driver->playback_ports, port);
 	}
+
+	/* add ports for midi */
+	sndio_midi_add_ports(driver);
 
 	return jack_activate(driver->client);
 }

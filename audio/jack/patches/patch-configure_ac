@@ -1,6 +1,6 @@
 $OpenBSD: patch-configure_ac,v 1.7 2012/01/24 08:03:52 ajacoutot Exp $
---- configure.ac.orig	Wed Sep 28 14:09:59 2011
-+++ configure.ac	Sun Jul  1 14:53:58 2012
+--- configure.ac.orig	Wed Sep 28 15:09:59 2011
++++ configure.ac	Mon Jan 23 14:21:11 2012
 @@ -765,7 +765,7 @@ AC_SUBST(NETJACK_CFLAGS)
  
  # Check which backend drivers can be built.  The last one successfully
@@ -10,7 +10,7 @@ $OpenBSD: patch-configure_ac,v 1.7 2012/01/24 08:03:52 ajacoutot Exp $
  
  JACK_DEFAULT_DRIVER=\"dummy\"
  
-@@ -825,6 +825,23 @@ then
+@@ -825,6 +825,20 @@ then
  fi
  AM_CONDITIONAL(HAVE_SUN, $HAVE_SUN)
  
@@ -28,18 +28,10 @@ $OpenBSD: patch-configure_ac,v 1.7 2012/01/24 08:03:52 ajacoutot Exp $
 +fi
 +AM_CONDITIONAL(HAVE_SNDIO, $HAVE_SNDIO)
 +
-+HAVE_SNDIO_MIDI=$HAVE_SNDIO
-+AM_CONDITIONAL(HAVE_SNDIO_MIDI, $HAVE_SNDIO_MIDI)
-+
  AC_ARG_ENABLE(freebob, AC_HELP_STRING([--disable-freebob],[ignore FreeBob driver ]),
  			TRY_FREEBOB=$enableval , TRY_FREEBOB=yes ) 
  HAVE_FREEBOB="false"
-@@ -953,10 +970,12 @@ doc/reference.doxygen
- drivers/Makefile
- drivers/alsa/Makefile
- drivers/alsa-midi/Makefile
-+drivers/sndio-midi/Makefile
- drivers/a2j/Makefile
+@@ -957,6 +971,7 @@ drivers/a2j/Makefile
  drivers/dummy/Makefile
  drivers/oss/Makefile
  drivers/sun/Makefile
@@ -47,12 +39,11 @@ $OpenBSD: patch-configure_ac,v 1.7 2012/01/24 08:03:52 ajacoutot Exp $
  drivers/portaudio/Makefile
  drivers/coreaudio/Makefile
  drivers/freebob/Makefile
-@@ -987,6 +1006,8 @@ echo \| Build with old FireWire \(FreeBob\) support...
+@@ -987,6 +1002,7 @@ echo \| Build with old FireWire \(FreeBob\) support...
  echo \| Build with new FireWire \(FFADO\) support............... : $HAVE_FIREWIRE
  echo \| Build with OSS support................................ : $HAVE_OSS
  echo \| Build with Sun audio support.......................... : $HAVE_SUN
 +echo \| Build with sndio support.............................. : $HAVE_SNDIO
-+echo \| Build with sndio MIDI support......................... : $HAVE_SNDIO_MIDI
  echo \| Build with CoreAudio support.......................... : $HAVE_COREAUDIO
  echo \| Build with PortAudio support.......................... : $HAVE_PA
  echo \| Build with Celt support............................... : $HAVE_CELT

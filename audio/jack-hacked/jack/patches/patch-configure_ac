@@ -1,0 +1,49 @@
+$OpenBSD: patch-configure_ac,v 1.7 2012/01/24 08:03:52 ajacoutot Exp $
+--- configure.ac.orig	Wed Sep 28 15:09:59 2011
++++ configure.ac	Mon Jan 23 14:21:11 2012
+@@ -765,7 +765,7 @@ AC_SUBST(NETJACK_CFLAGS)
+ 
+ # Check which backend drivers can be built.  The last one successfully
+ # configured becomes the default JACK driver; so the order of
+-# precedence is: alsa, sun, oss, coreaudio, portaudio, dummy.
++# precedence is: alsa, sun, sndio, oss, coreaudio, portaudio, dummy.
+ 
+ JACK_DEFAULT_DRIVER=\"dummy\"
+ 
+@@ -825,6 +825,20 @@ then
+ fi
+ AM_CONDITIONAL(HAVE_SUN, $HAVE_SUN)
+ 
++AC_ARG_ENABLE(sndio, AC_HELP_STRING([--disable-sndio],[ignore sndio driver ]),
++			TRY_SNDIO=$enableval , TRY_SNDIO=yes ) 
++HAVE_SNDIO="false"
++if test "x$TRY_SNDIO" = "xyes"
++then
++	# check for sndio audio API
++	AC_CHECK_HEADER([sndio.h],
++	     [HAVE_SNDIO="true"
++              JACK_DEFAULT_DRIVER=\"sndio\"])
++	SNDIO_LIBS="-lsndio"
++	AC_SUBST([SNDIO_LIBS])
++fi
++AM_CONDITIONAL(HAVE_SNDIO, $HAVE_SNDIO)
++
+ AC_ARG_ENABLE(freebob, AC_HELP_STRING([--disable-freebob],[ignore FreeBob driver ]),
+ 			TRY_FREEBOB=$enableval , TRY_FREEBOB=yes ) 
+ HAVE_FREEBOB="false"
+@@ -957,6 +971,7 @@ drivers/a2j/Makefile
+ drivers/dummy/Makefile
+ drivers/oss/Makefile
+ drivers/sun/Makefile
++drivers/sndio/Makefile
+ drivers/portaudio/Makefile
+ drivers/coreaudio/Makefile
+ drivers/freebob/Makefile
+@@ -987,6 +1002,7 @@ echo \| Build with old FireWire \(FreeBob\) support...
+ echo \| Build with new FireWire \(FFADO\) support............... : $HAVE_FIREWIRE
+ echo \| Build with OSS support................................ : $HAVE_OSS
+ echo \| Build with Sun audio support.......................... : $HAVE_SUN
++echo \| Build with sndio support.............................. : $HAVE_SNDIO
+ echo \| Build with CoreAudio support.......................... : $HAVE_COREAUDIO
+ echo \| Build with PortAudio support.......................... : $HAVE_PA
+ echo \| Build with Celt support............................... : $HAVE_CELT

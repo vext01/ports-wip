@@ -6,7 +6,7 @@ V =			0.13
 DISTNAME =		mlgmp-${V}
 PKGNAME =		ocaml-gmp-${V}
 
-CATEGORIES =		math
+CATEGORIES =		devel math
 HOMEPAGE =		http://caml.inria.fr/cgi-bin/hump.en.cgi?contrib=278
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
 

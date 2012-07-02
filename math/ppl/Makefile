@@ -1,5 +1,7 @@
 # $OpenBSD: Makefile.template,v 1.61 2012/03/29 13:41:58 sthen Exp $
 
+# XXX SUBPACKAGE THIS
+
 COMMENT =		numerical abstractions library and tools
 DISTNAME =		ppl-1.0
 
@@ -17,13 +19,14 @@ PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
 MODULES =		lang/ocaml
-WANTLIB =		glpk gmp gmpxx m stdc++
+WANTLIB =		c glpk gmp gmpxx m stdc++
 
 MASTER_SITES =		ftp://ftp.cs.unipr.it/pub/ppl/releases/1.0/
 
 BUILD_DEPENDS +=	${MODOCAML_BUILD_DEPENDS}
 LIB_DEPENDS =		devel/gmp \
 			devel/glpk
+RUN_DEPENDS =		devel/ocaml-gmp # XXX ocaml only
 
 USE_GMAKE =		Yes
 USE_LIBTOOL =		Yes

@@ -1,0 +1,12 @@
+$OpenBSD: patch-jackd_jackd_c,v 1.2 2012/01/24 08:03:52 ajacoutot Exp $
+--- jackd/jackd.c.orig	Thu Jun  9 01:54:48 2011
++++ jackd/jackd.c	Mon Jan 23 14:22:51 2012
+@@ -399,7 +399,7 @@ static void usage (FILE *file) 
+ #ifdef __APPLE__
+ "             Available backends may include: coreaudio, dummy, net, portaudio.\n\n"
+ #else 
+-"             Available backends may include: alsa, dummy, freebob, firewire, net, oss, sun, or portaudio.\n\n"
++"             Available backends may include: alsa, dummy, freebob, firewire, net, oss, sun, sndio, or portaudio.\n\n"
+ #endif
+ "       jackd -d backend --help\n"
+ "             to display options for each backend\n\n");

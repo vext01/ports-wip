@@ -1,7 +1,7 @@
 @comment $OpenBSD$
-usr/local/lib/ipe/7.1.2/ipelets/image.so
-@lib usr/local/lib/libipe.so.${LIBipe_VERSION}
-@lib usr/local/lib/libipecairo.so.${LIBipecairo_VERSION}
-@lib usr/local/lib/libipecanvas.so.${LIBipecanvas_VERSION}
-@lib usr/local/lib/libipelua.so.${LIBipelua_VERSION}
-@lib usr/local/lib/libipeui.so.${LIBipeui_VERSION}
+lib/ipe/7.1.2/ipelets/image.so
+@lib lib/libipe.so.${LIBipe_VERSION}
+@lib lib/libipecairo.so.${LIBipecairo_VERSION}
+@lib lib/libipecanvas.so.${LIBipecanvas_VERSION}
+@lib lib/libipelua.so.${LIBipelua_VERSION}
+@lib lib/libipeui.so.${LIBipeui_VERSION}

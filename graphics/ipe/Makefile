@@ -27,7 +27,10 @@ PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
 PERMIT_DISTFILES_FTP =	Yes
 
-#WANTLIB =		???
+WANTLIB += GL QtGui X11 Xrender c cairo expat fontconfig freetype
+WANTLIB += glib-2.0 gobject-2.0 iconv intl lua m pixman-1 png
+WANTLIB += pthread pthread-stubs stdc++ xcb xcb-render xcb-shm
+WANTLIB += z
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=ipe7/}
 
@@ -38,24 +41,25 @@ LIB_DEPENDS =		${MODLUA_LIB_DEPENDS} \
 			${MODQT4_LIB_DEPENDS} \
 			converters/libiconv
 
-#MAKE_FLAGS +=		IPEPREFIX=${PREFIX} IPE_USE_ICONV=-DIPE_USE_ICONV CPPFLAGS+=-I${LOCALBASE}/include
+# XXX IPE_USE_ICONV=-DIPE_USE_ICONV
 MAKE_FLAGS +=		IPEPREFIX=${PREFIX} \
 			OPENBSD_SO_VERSION=${OPENBSD_SO_VERSION}
 MAKE_ENV +=		PKG_CONFIG_PATH=${LOCALBASE}/lib/qt4/pkgconfig
-FAKE_FLAGS +=		INSTALL_ROOT=${WRKINST}/${PREFIX} \
+FAKE_FLAGS +=		INSTALL_ROOT=${WRKINST} \
 			OPENBSD_SO_VERSION=${OPENBSD_SO_VERSION}
-#REGRESS_DEPENDS =	???
 
 USE_GMAKE =		Yes
 #USE_GROFF =		Yes
-#USE_LIBTOOL =		Yes
-#CONFIGURE_STYLE =	gnu
 
-#IS_INTERACTIVE =		Yes
-#REGRESS_IS_INTERACTIVE =	Yes
-
-#NO_REGRESS =		Yes
+NO_REGRESS =		Yes
 
 WRKDIST = ${WRKDIR}/${PKGNAME}/src
+
+# XXX get rid of ../
+post-install:
+	perl -pi -e "s,/usr/share/,${LOCALBASE}/share/," \
+		${WRKDIST}/../fontmaps/texlive-fontmap.xml
+	${INSTALL_DATA} -c ${WRKDIST}/../fontmaps/texlive-fontmap.xml \
+		${PREFIX}/share/ipe/7.1.2/fontmap.xml
 
 .include <bsd.port.mk>

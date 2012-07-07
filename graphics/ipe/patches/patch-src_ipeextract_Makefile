@@ -1,0 +1,12 @@
+$OpenBSD$
+--- src/ipeextract/Makefile.orig	Sat Jul  7 15:41:41 2012
++++ src/ipeextract/Makefile	Sat Jul  7 15:41:56 2012
+@@ -16,7 +16,7 @@ sources	= ipeextract.cpp
+ 
+ $(TARGET): $(objects)
+ 	$(MAKE_BINDIR)
+-	$(CXX) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CXX) $(LDFLAGS) ${ICONV_LIBS} -o $@ $^ $(LIBS)
+ 
+ clean:
+ 	@-rm -f $(objects) $(TARGET) $(DEPEND)

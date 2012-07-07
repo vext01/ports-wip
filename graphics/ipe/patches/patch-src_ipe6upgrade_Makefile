@@ -1,0 +1,12 @@
+$OpenBSD$
+--- src/ipe6upgrade/Makefile.orig	Sat Jul  7 15:41:07 2012
++++ src/ipe6upgrade/Makefile	Sat Jul  7 15:41:20 2012
+@@ -17,7 +17,7 @@ sources	= ipe6upgrade.cpp
+ 
+ $(TARGET): $(objects)
+ 	$(MAKE_BINDIR)
+-	$(CXX) $(LDFLAGS) -o $@ $^ $(LIBS)
++	$(CXX) $(LDFLAGS) ${ICONV_LIBS} -o $@ $^ $(LIBS)
+ 
+ clean:
+ 	@-rm -f $(objects) $(TARGET) $(DEPEND)

@@ -1,0 +1,22 @@
+$OpenBSD$
+--- common.mak.orig	Sat Jul  7 14:29:47 2012
++++ common.mak	Sat Jul  7 14:31:23 2012
+@@ -137,13 +137,13 @@ else
+     soname      = -Wl,-dylib_install_name,$(IPELIBDIRINFO)/lib$1.so.$(IPEVERS)
+   else	
+     DLL_LDFLAGS	+= -shared 
+-    soname      = -Wl,-soname,lib$1.so.$(IPEVERS)
++    soname      = -Wl,-soname,lib$1.so.${OPENBSD_SO_VERSION}
+   endif
+   buildlib	= $(BUILDDIR)/lib
+-  dll_target    = $(buildlib)/lib$1.so.$(IPEVERS)
+-  dll_symlinks  = ln -sf lib$1.so.$(IPEVERS) $(buildlib)/lib$1.so
+-  install_symlinks = ln -sf lib$1.so.$(IPEVERS) \
+-		$(INSTALL_ROOT)$(IPELIBDIR)/lib$1.so
++  dll_target    = $(buildlib)/lib$1.so.${OPENBSD_SO_VERSION}
++  dll_symlinks  = true #ln -sf lib$1.so.$(IPEVERS) $(buildlib)/lib$1.so
++  install_symlinks = true# ln -sf lib$1.so.$(IPEVERS) \
++		#$(INSTALL_ROOT)$(IPELIBDIR)/lib$1.so
+   ipelet_target = $(BUILDDIR)/ipelets/$1.so
+   exe_target	= $(BUILDDIR)/bin/$1
+ endif

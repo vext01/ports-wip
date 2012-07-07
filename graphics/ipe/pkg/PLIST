@@ -50,6 +50,12 @@ lib/ipe/7.1.2/ipelets/image.lua
 lib/ipe/7.1.2/ipelets/move.lua
 lib/ipe/7.1.2/ipelets/search-replace.lua
 lib/ipe/7.1.2/ipelets/symbols.lua
+man/ipe.1
+man/ipe6upgrade.1
+man/ipeextract.1
+man/iperender.1
+man/ipescript.1
+man/ipetoipe.1
 share/ipe/
 share/ipe/7.1.2/
 share/ipe/7.1.2/doc/
@@ -505,11 +511,3 @@ share/ipe/7.1.2/styles/basic.isy
 share/ipe/7.1.2/styles/beamer.isy
 share/ipe/7.1.2/styles/colors.isy
 share/ipe/7.1.2/styles/presentation.isy
-share/man/
-share/man/man1/
-@man share/man/man1/ipe.1
-@man share/man/man1/ipe6upgrade.1
-@man share/man/man1/ipeextract.1
-@man share/man/man1/iperender.1
-@man share/man/man1/ipescript.1
-@man share/man/man1/ipetoipe.1

@@ -49,7 +49,8 @@ MAKE_FLAGS +=		IPEPREFIX=${PREFIX} \
 			OPENBSD_SO_VERSION=${OPENBSD_SO_VERSION}
 MAKE_ENV +=		PKG_CONFIG_PATH=${LOCALBASE}/lib/qt4/pkgconfig
 FAKE_FLAGS +=		INSTALL_ROOT=${WRKINST} \
-			OPENBSD_SO_VERSION=${OPENBSD_SO_VERSION}
+			OPENBSD_SO_VERSION=${OPENBSD_SO_VERSION} \
+			IPEMANDIR=${PREFIX}/man
 
 USE_GMAKE =		Yes
 #XXX manual paths
@@ -63,7 +64,7 @@ WRKSRC = ${WRKDIST}/src
 # XXX get rid of ../
 post-install:
 	perl -pi -e "s,/usr/share/,${LOCALBASE}/share/," \
-		${WRKSRC}/fontmaps/texlive-fontmap.xml
+		${WRKDIST}/fontmaps/texlive-fontmap.xml
 	${INSTALL_DATA} -c ${WRKDIST}/fontmaps/texlive-fontmap.xml \
 		${PREFIX}/share/ipe/7.1.2/fontmap.xml
 

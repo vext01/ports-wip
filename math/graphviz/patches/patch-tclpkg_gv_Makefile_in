@@ -1,0 +1,12 @@
+$OpenBSD$
+--- tclpkg/gv/Makefile.in.orig2	Sat Jul  7 21:03:27 2012
++++ tclpkg/gv/Makefile.in	Sat Jul  7 21:03:44 2012
+@@ -940,7 +940,7 @@ nodist_libgv_perl_la_SOURCES = gv_perl.cpp $(PERL_data
+ libgv_perl_la_SOURCES = $(BASESOURCES) gv_dummy_init.c
+ libgv_perl_la_LIBADD = $(BASELIBS) $(PERL_LIBS)
+ libgv_perl_la_LDFLAGS = -module -avoid-version $(PERL_LD)
+-libgv_perl_la_CPPFLAGS = $(BASECPPFLAGS) $(PERL_CC)
++libgv_perl_la_CPPFLAGS = $(BASECPPFLAGS) $(PERL_CC) $(PERL_INCLUDES)
+ pkgphpdir = $(pkglibdir)/php
+ PHP_data = gv.php
+ nodist_libgv_php_la_SOURCES = gv_php.cpp php_gv.h

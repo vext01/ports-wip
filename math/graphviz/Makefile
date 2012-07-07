@@ -98,9 +98,7 @@ CONFIGURE_ARGS=	${CONFIGURE_SHARED} \
 		--without-glut \
 		--with-gd
 
-# XXX perl version
-# XXX perl hack should not be needed, should come from config/config_perl.pl
-CONFIGURE_ENV=	CPPFLAGS="-I${X11BASE}/include -I${LOCALBASE}/include -I/usr/libdata/perl5/${MACHINE_ARCH}-openbsd/5.12.2/CORE/" \
+CONFIGURE_ENV=	CPPFLAGS="-I${X11BASE}/include -I${LOCALBASE}/include" \
 		LDFLAGS="-L${X11BASE}/lib -L${LOCALBASE}/lib" \
 		TCLCONFIG=${LOCALBASE}/lib/tcl/tcl${MODTCL_VERSION}/tclConfig.sh \
 		TKCONFIG=${LOCALBASE}/lib/tcl/tk${MODTCL_VERSION}/tkConfig.sh

@@ -6,7 +6,7 @@ V =			7.1.2
 DISTNAME =		ipe-7.1.2-src
 PKGNAME =		ipe-${V}
 
-# their libraries would be install as libxxx.so.${V}, overide this.
+# their libraries would be installed as libxxx.so.${V}, overide this.
 OPENBSD_SO_VERSION =	0.0
 
 SHARED_LIBS +=		ipe		${OPENBSD_SO_VERSION}
@@ -16,9 +16,7 @@ SHARED_LIBS +=		ipelua		${OPENBSD_SO_VERSION}
 SHARED_LIBS +=		ipeui		${OPENBSD_SO_VERSION}
 
 CATEGORIES =		graphics math
-
 HOMEPAGE =		http://ipe7.sourceforge.net/
-
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
 # GPLv3+
@@ -40,7 +38,8 @@ MODULES =		lang/lua \
 LIB_DEPENDS =		${MODLUA_LIB_DEPENDS} \
 			${MODQT4_LIB_DEPENDS} \
 			converters/libiconv
-RUN_DEPENDS =		print/texlive/base
+RUN_DEPENDS =		print/texlive/base \
+			x11/xvkbd
 
 MAKE_FLAGS +=		IPEPREFIX=${PREFIX} \
 			IPE_USE_ICONV=-DIPE_USE_ICONV \

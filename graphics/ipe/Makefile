@@ -40,6 +40,7 @@ MODULES =		lang/lua \
 LIB_DEPENDS =		${MODLUA_LIB_DEPENDS} \
 			${MODQT4_LIB_DEPENDS} \
 			converters/libiconv
+RUN_DEPENDS =		print/texlive/base
 
 # XXX IPE_USE_ICONV=-DIPE_USE_ICONV
 MAKE_FLAGS +=		IPEPREFIX=${PREFIX} \
@@ -53,13 +54,14 @@ USE_GMAKE =		Yes
 
 NO_REGRESS =		Yes
 
-WRKDIST = ${WRKDIR}/${PKGNAME}/src
+WRKDIST = ${WRKDIR}/${PKGNAME}
+WRKSRC = ${WRKDIST}/src
 
 # XXX get rid of ../
 post-install:
 	perl -pi -e "s,/usr/share/,${LOCALBASE}/share/," \
-		${WRKDIST}/../fontmaps/texlive-fontmap.xml
-	${INSTALL_DATA} -c ${WRKDIST}/../fontmaps/texlive-fontmap.xml \
+		${WRKSRC}/fontmaps/texlive-fontmap.xml
+	${INSTALL_DATA} -c ${WRKDIST}/fontmaps/texlive-fontmap.xml \
 		${PREFIX}/share/ipe/7.1.2/fontmap.xml
 
 .include <bsd.port.mk>

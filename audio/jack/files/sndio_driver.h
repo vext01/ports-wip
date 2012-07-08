@@ -39,6 +39,18 @@
 
 typedef jack_default_audio_sample_t jack_sample_t;
 
+#define MAX_MIDI_PORTS	8
+#define MAX_MIDI_DEV_NAME	16
+#define MAX_MIDI_PORT_NAME	32
+
+/* midi ports and their correposponding mio_* handles (if opened) */
+typedef struct _sndio_midi_dev
+{
+	char		*device_name;
+	struct mio_hdl  *mio_rw_handle;
+	jack_port_t	*in_port, *out_port;
+} sndio_midi_dev_t;
+
 typedef struct _sndio_driver
 {
 	JACK_DRIVER_NT_DECL
@@ -71,6 +83,9 @@ typedef struct _sndio_driver
 	jack_time_t poll_next;
 
 	jack_client_t *client;
+
+	/* midi */
+	JSList *midi_devs;
 
 } sndio_driver_t;
 

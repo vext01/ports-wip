@@ -887,6 +887,8 @@ sndio_driver_new (char *dev, jack_client_t *client,
 
 	driver->poll_next = 0;
 
+	driver->midi_devs = NULL;
+
 	if (sndio_driver_set_parameters(driver) < 0)
 	{
 		free(driver);

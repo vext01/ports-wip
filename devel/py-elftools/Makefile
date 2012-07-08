@@ -20,11 +20,14 @@ MASTER_SITES =		${MASTER_SITE_PYPI:=p/pyelftools/}
 MODULES =		lang/python
 #NO_REGRESS =		Yes
 
-#EXAMPLEDIR =	${PREFIX}/share/examples/distorm
-#post-install:
-#	${INSTALL_DATA_DIR} ${EXAMPLEDIR}
-##	mv ${PREFIX}/lib/python${MODPY_VERSION}/site-packages/distorm3/sample.py \
-#		${EXAMPLEDIR}
-#	rm ${PREFIX}/lib/python${MODPY_VERSION}/site-packages/distorm3/sample.py{c,o}
+EXAMPLEDIR =	${PREFIX}/share/examples/distorm
+post-install:
+	${INSTALL_DATA_DIR} ${EXAMPLEDIR}
+	cd ${WRKSRC}/examples &&  \
+	for i in *.py; do \
+		echo ${EXAMPLEDIR}; \
+		echo ${WRKSRC}/examples/$$i; \
+		${INSTALL_SCRIPT} $$i ${EXAMPLEDIR}; \
+	done
 
 .include <bsd.port.mk>

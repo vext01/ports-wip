@@ -6,15 +6,11 @@ DISTNAME =		non-sequencer-20120611
 EXTRACT_SUFX =		.tgz
 WRKDIST =		${WRKDIR}/sequencer
 
-#SHARED_LIBS =		???
-
 CATEGORIES =		audio
-
 HOMEPAGE =		http://non-sequencer.tuxfamily.org/
+MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
-#MAINTAINER =		???
-
-# XXX
+# GPLv2
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
@@ -25,20 +21,14 @@ WANTLIB += lo m png pthread sigc-2.0 stdc++ z
 
 MASTER_SITES =		http://theunixzoo.co.uk/files/
 
-#MODULES =		???
-#BUILD_DEPENDS =	???
-#RUN_DEPENDS =		???
 LIB_DEPENDS =		audio/fluidsynth \
 			audio/liblo \
 			x11/fltk \
 			audio/jack \
 			devel/libsigc++-2
 
-#REGRESS_DEPENDS =	???
-
 USE_GMAKE =		Yes
 #USE_GROFF =		Yes
-#USE_LIBTOOL =		Yes
 CONFIGURE_STYLE =	simple
 CONFIGURE_ARGS +=	--prefix=${PREFIX}
 PORTHOME =		${WRKDIR}
@@ -47,6 +37,6 @@ PORTHOME =		${WRKDIR}
 CONFIGURE_ENV +=	TERM=wsvt25
 MAKE_ENV +=		TERM=wsvt25
 
-#NO_REGRESS =		Yes
+NO_REGRESS =		Yes
 
 .include <bsd.port.mk>

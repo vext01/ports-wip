@@ -25,6 +25,7 @@
 #include <jack/jslist.h>
 #include <jack/driver.h>
 #include <jack/jack.h>
+#include <jack/ringbuffer.h>
 
 #define SNDIO_DRIVER_DEF_DEV		"default"
 #define SNDIO_DRIVER_DEF_FS		44100
@@ -34,21 +35,24 @@
 #define SNDIO_DRIVER_DEF_INS		2
 #define SNDIO_DRIVER_DEF_OUTS		2
 
-#define SNDIO_MAX_MIDI_DEVS			16
-#define SNDIO_MIDI_BUFSZ			1024
-
 typedef jack_default_audio_sample_t jack_sample_t;
 
-#define MAX_MIDI_PORTS	8
+#define MAX_MIDI_PORTS		8
 #define MAX_MIDI_DEV_NAME	16
 #define MAX_MIDI_PORT_NAME	32
+
+#define MAX_EVENTS		4096,
+#define	MAX_DATA		64*1024,
 
 /* midi ports and their correposponding mio_* handles (if opened) */
 typedef struct _sndio_midi_dev
 {
-	char		*device_name;
-	struct mio_hdl  *mio_rw_handle;
-	jack_port_t	*in_port, *out_port;
+	char			device_name[MAX_MIDI_DEV_NAME];
+	struct mio_hdl		*mio_rw_handle;
+	jack_port_t		*in_port;
+	jack_port_t		*out_port;
+	jack_ringbuffer_t	*event_ring;
+	jack_ringbuffer_t	*data_ring;
 } sndio_midi_dev_t;
 
 typedef struct _sndio_driver
@@ -85,11 +89,13 @@ typedef struct _sndio_driver
 	jack_client_t *client;
 
 	/* midi */
-	JSList *midi_devs;
+	sndio_midi_dev_t	*midi_devs[MAX_MIDI_PORTS];
+	int num_midi_devs;
 
 } sndio_driver_t;
 
 /* sndio_midi.c */
 int			sndio_midi_add_ports(sndio_driver_t *dri);
+void			sndio_midi_write(sndio_driver_t *driver, jack_nframes_t nframes);
 
 #endif

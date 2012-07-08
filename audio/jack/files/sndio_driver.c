@@ -599,6 +599,7 @@ sndio_driver_attach (sndio_driver_t *driver)
 
 	/* add ports for midi */
 	sndio_midi_add_ports(driver);
+	printf("CHECK 0th midi_dev: %p\n", driver->midi_devs[0]);
 
 	return jack_activate(driver->client);
 }
@@ -709,6 +710,9 @@ sndio_driver_write (sndio_driver_t *driver, jack_nframes_t nframes)
 	jack_sample_t *portbuf;
 	JSList *node;
 	jack_port_t *port;
+
+	/* service midi writes */
+	sndio_midi_write(driver, nframes);
 
 	if (driver->engine->freewheeling || driver->playback_channels == 0)
 		return 0;
@@ -887,7 +891,7 @@ sndio_driver_new (char *dev, jack_client_t *client,
 
 	driver->poll_next = 0;
 
-	driver->midi_devs = NULL;
+	driver->num_midi_devs = 0;
 
 	if (sndio_driver_set_parameters(driver) < 0)
 	{

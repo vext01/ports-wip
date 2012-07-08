@@ -4,8 +4,8 @@ COMMENT-main =		easy to use LaTeX and ConTeXt editor
 COMMENT-python =	Python scripting for TeXworks
 COMMENT-lua =		Lua scripting for TeXworks
 
-V =			0.4.3
-R =			858
+V =			0.4.4
+R =			1004
 DISTNAME =		texworks-${V}-r${R}
 
 PKGNAME-main =		texworks-${V}
@@ -61,7 +61,6 @@ RUN_DEPENDS-main = 	print/texlive/base \
 RUN_DEPENDS-lua =	editors/texworks,-main
 RUN_DEPENDS-python =	editors/texworks,-main
 
-USE_GMAKE =		Yes
 NO_REGRESS =		Yes
 VMEM_WARNING = 		Yes
 

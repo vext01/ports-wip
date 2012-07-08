@@ -18,7 +18,6 @@ PERMIT_DISTFILES_FTP =	Yes
 
 MASTER_SITES =		${MASTER_SITE_PYPI:=p/pyelftools/}
 MODULES =		lang/python
-#NO_REGRESS =		Yes
 
 EXAMPLEDIR =	${PREFIX}/share/examples/distorm
 post-install:
@@ -29,5 +28,8 @@ post-install:
 		echo ${WRKSRC}/examples/$$i; \
 		${INSTALL_SCRIPT} $$i ${EXAMPLEDIR}; \
 	done
+
+do-regress:
+	cd ${WRKSRC} && ${MODPY_BIN} test/run_all_unittests.py
 
 .include <bsd.port.mk>

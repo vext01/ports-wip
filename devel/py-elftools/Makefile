@@ -10,7 +10,7 @@ CATEGORIES =		devel
 HOMEPAGE =		http://ragestorm.net/distorm/
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
-# GPLv2 - or commercial license if consumer is not GPLv2 XXX
+# Public domain
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes

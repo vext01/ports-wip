@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2012 Edd Barrett <edd@openbsd.org>
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -14,7 +30,8 @@
 #include "sndio_driver.h"
 
 /*
- * Create jack ports for the OpenBSD rmidi* devices
+ * Create jack ports for the OpenBSD rmidi* devices.
+ * The devname parameter is a sndio(7) device string.
  */
 void
 sndio_midi_add_dev(sndio_driver_t *driver, char *devname)
@@ -22,7 +39,7 @@ sndio_midi_add_dev(sndio_driver_t *driver, char *devname)
 	struct mio_hdl		*hdl;
 	sndio_midi_dev_t	*midi_dev = NULL;
 
-	printf("Checking: %s\n", devname);
+	printf("Initialising MIDI port: %s\n", devname);
 
 	/* sanity */
 	if (driver->num_midi_devs >= MAX_MIDI_DEVS - 1) {
@@ -51,61 +68,12 @@ sndio_midi_add_dev(sndio_driver_t *driver, char *devname)
 
 	midi_dev->mio_rw_handle = hdl;
 	strlcpy(midi_dev->device_name, devname, MAX_MIDI_DEV_NAME);
-
-	/* we cannot make jack ports yet until the driver is registered */
-
-#if 0
-	/* make port names */
-	if ((snprintf(portname_in, MAX_MIDI_PORT_NAME, "%s_in", devname)) < 0) {
-		fprintf(stderr, "%s: could not malloc\n", __func__);
-		free(midi_dev);
-		exit(1);
-	}
-
-	if ((snprintf(portname_out, MAX_MIDI_PORT_NAME, "%s_out", devname)) < 0) {
-		fprintf(stderr, "%s: could not malloc\n", __func__);
-		free(midi_dev);
-		exit(1);
-	}
-
-	/* create jack ports */
-	printf("making port: %s\n", portname_in);
-	midi_dev->in_port = jack_port_register(
-	    driver->client,
-	    portname_in,
-	    JACK_DEFAULT_MIDI_TYPE,
-	    JackPortIsOutput | JackPortIsPhysical,
-	    MAX_MIDI_BUFFER
-	    );
-
-	if (midi_dev->in_port == NULL) {
-		jack_error("could not make output port for %s: %s@%i\n",
-		    devname, __FILE__, __LINE__);
-		free(midi_dev);
-		exit(1);
-	}
-
-	printf("making port: %s\n", portname_out);
-	midi_dev->out_port = jack_port_register(
-	    driver->client,
-	    portname_out,
-	    JACK_DEFAULT_MIDI_TYPE,
-	    JackPortIsInput | JackPortIsPhysical,
-	    MAX_MIDI_BUFFER
-	    );
-
-	if (midi_dev->out_port == NULL) {
-		jack_error("could not make input port for %s: %s@%i\n",
-		    devname, __FILE__, __LINE__);
-		free(midi_dev);
-		exit(1);
-	}
-#endif
-
 	driver->midi_devs[driver->num_midi_devs] = midi_dev;
 	driver->num_midi_devs++;
+	/* NB: we cannot make jack ports yet until the driver is registered */
 }
 
+/* Create jack ports for our midi devices */
 void
 sndio_midi_create_ports(sndio_driver_t *driver)
 {
@@ -166,6 +134,7 @@ sndio_midi_create_ports(sndio_driver_t *driver)
 	}
 }
 
+/* Print a midi event (just for debugging) */
 void
 sndio_debug_print_midi_event(jack_midi_event_t *ev)
 {
@@ -180,6 +149,7 @@ sndio_debug_print_midi_event(jack_midi_event_t *ev)
 		    byte, (unsigned int) ev->buffer[byte], ev->buffer[byte]);
 }
 
+/* Write a jack midi events to a mio handles */
 void
 sndio_midi_write(sndio_driver_t *driver, jack_nframes_t nframes)
 {
@@ -196,7 +166,7 @@ sndio_midi_write(sndio_driver_t *driver, jack_nframes_t nframes)
 		num_events = jack_midi_get_event_count(buf);
 
 		if (num_events == 0)
-			continue;
+			continue; /* no work for this port */
 
 		for (ev_no = 0; ev_no < num_events; ev_no++) {
 			if (jack_midi_event_get(&midi_event, buf, ev_no) != 0) {

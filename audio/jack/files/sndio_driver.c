@@ -42,7 +42,7 @@
 
 #include "sndio_driver.h"
 
-#define SNDIO_DRIVER_N_PARAMS	10
+#define SNDIO_DRIVER_N_PARAMS	11
 const static jack_driver_param_desc_t sndio_params[SNDIO_DRIVER_N_PARAMS] = {
 	{ "rate",
 	  'r',
@@ -123,8 +123,17 @@ const static jack_driver_param_desc_t sndio_params[SNDIO_DRIVER_N_PARAMS] = {
 	  NULL,
 	  "system playback latency",
 	  "system playback latency"
-	}
+	},
+	{ "midi device",
+	  'm',
+	  JackDriverParamString,
+	  { },
+	  NULL,
+	  "midi device (multiple -m may be specified)",
+	  "midi device"
+	},
 };
+
 
 
 /* internal functions */
@@ -597,13 +606,10 @@ sndio_driver_attach (sndio_driver_t *driver)
 			jack_slist_append(driver->playback_ports, port);
 	}
 
-	/* add ports for midi */
-	sndio_midi_add_ports(driver);
-	printf("CHECK 0th midi_dev: %p\n", driver->midi_devs[0]);
+	sndio_midi_create_ports(driver);
 
 	return jack_activate(driver->client);
 }
-
 
 static int
 sndio_driver_detach (sndio_driver_t *driver)
@@ -842,9 +848,10 @@ sndio_driver_new (char *dev, jack_client_t *client,
 	jack_nframes_t nperiods, int bits,
 	int capture_channels, int playback_channels,
 	jack_nframes_t cap_latency, jack_nframes_t play_latency,
-	int ignorehwbuf)
+	int ignorehwbuf, char *midi_dev_names[])
 {
 	sndio_driver_t *driver;
+	char **midi_dev_np;
 
 	driver = (sndio_driver_t *)malloc(sizeof(sndio_driver_t));
 	if (driver == NULL)
@@ -891,8 +898,6 @@ sndio_driver_new (char *dev, jack_client_t *client,
 
 	driver->poll_next = 0;
 
-	driver->num_midi_devs = 0;
-
 	if (sndio_driver_set_parameters(driver) < 0)
 	{
 		free(driver);
@@ -900,6 +905,14 @@ sndio_driver_new (char *dev, jack_client_t *client,
 	}
 
 	driver->client = client;
+
+	/* add midi devices */
+	driver->num_midi_devs = 0;
+	for (midi_dev_np = midi_dev_names; *midi_dev_np != NULL; midi_dev_np++) {
+		printf("I SAW %s\n", *midi_dev_np);
+		sndio_midi_add_dev(driver, *midi_dev_np);
+		free(*midi_dev_np);
+	}
 
 	return (jack_driver_t *)driver;
 }
@@ -957,6 +970,10 @@ driver_initialize (jack_client_t *client, JSList * params)
 	const jack_driver_param_t *param;
 	char *dev = NULL;
 	int ignorehwbuf = 0;
+	char *midi_dev_names[MAX_MIDI_DEVS + 1]; /* sentinal terminated */
+	int num_midi_devs = 0;
+
+	memset(midi_dev_names, 0, sizeof(midi_dev_names));
 
 	pnode = params;
 	while (pnode != NULL)
@@ -995,11 +1012,23 @@ driver_initialize (jack_client_t *client, JSList * params)
 			case 'O':
 				play_latency = param->value.ui;
 				break;
+			case 'm':
+				printf("ADD MIDI: %s\n", param->value.str);
+				if (num_midi_devs >= MAX_MIDI_DEVS - 1) {
+					jack_error("too many midi devices: %s@%i\n",
+					    __FILE__, __LINE__);
+				}
+				if ((midi_dev_names[num_midi_devs] = strdup(param->value.str)) == NULL) {
+					jack_error("could not strdup: %s@%i\n", __FILE__, __LINE__);
+					exit(1);
+				}
+				num_midi_devs++;
+				break;
 		}
 		pnode = jack_slist_next(pnode);
 	}
 
 	return sndio_driver_new(dev, client, sample_rate, period_size,
 		nperiods, bits, capture_channels, playback_channels,
-		cap_latency, play_latency, ignorehwbuf);
+		cap_latency, play_latency, ignorehwbuf, midi_dev_names);
 }

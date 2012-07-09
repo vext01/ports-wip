@@ -11,12 +11,7 @@ lib/graphviz/guile/libgv_guile.so
 @lib lib/graphviz/libgvplugin_xlib.so.${LIBgvplugin_xlib_VERSION}
 lib/graphviz/perl/gv.so
 lib/graphviz/perl/libgv_perl.so
-@lib lib/graphviz/tcl/libgdtclft.so.${LIBgdtclft_VERSION}
-lib/graphviz/tcl/libgv_tcl.so
-@lib lib/graphviz/tcl/libtcldot.so.${LIBtcldot_VERSION}
 @lib lib/graphviz/tcl/libtcldot_builtin.so.${LIBtcldot_builtin_VERSION}
-@lib lib/graphviz/tcl/libtclplan.so.${LIBtclplan_VERSION}
-@lib lib/graphviz/tcl/libtkspline.so.${LIBtkspline_VERSION}
 @lib lib/libcdt.so.${LIBcdt_VERSION}
 @lib lib/libcgraph.so.${LIBcgraph_VERSION}
 @lib lib/libgraph.so.${LIBgraph_VERSION}

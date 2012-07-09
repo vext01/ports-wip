@@ -38,7 +38,6 @@ SHARED_LIBS += tcldot_builtin		2.0 # unknown
 SHARED_LIBS += tclplan			2.0 # unknown
 SHARED_LIBS += tkspline			2.0 # unknown
 
-
 HOMEPAGE=	http://www.graphviz.org/
 
 MAINTAINER=	Marc Espie <espie@openbsd.org>
@@ -73,6 +72,7 @@ WANTLIB += png pthread pthread-stubs rsvg-2 stdc++ xcb xcb-render
 WANTLIB += xcb-shm xml2 z
 
 USE_LIBTOOL=	Yes
+USE_GMAKE =	Yes
 USE_GROFF =	Yes
 CONFIGURE_STYLE=gnu
 CONFIGURE_ARGS=	${CONFIGURE_SHARED} \

@@ -7,7 +7,7 @@ DISTNAME =		pyelftools-${MODPY_EGG_VERSION}
 PKGNAME =		py-elftools-${MODPY_EGG_VERSION}
 CATEGORIES =		devel
 
-HOMEPAGE =		http://ragestorm.net/distorm/
+HOMEPAGE =		https://bitbucket.org/eliben/pyelftools
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
 # Public domain
@@ -19,7 +19,7 @@ PERMIT_DISTFILES_FTP =	Yes
 MASTER_SITES =		${MASTER_SITE_PYPI:=p/pyelftools/}
 MODULES =		lang/python
 
-EXAMPLEDIR =	${PREFIX}/share/examples/distorm
+EXAMPLEDIR =	${PREFIX}/share/examples/py-elftools
 post-install:
 	${INSTALL_DATA_DIR} ${EXAMPLEDIR}
 	cd ${WRKSRC}/examples &&  \

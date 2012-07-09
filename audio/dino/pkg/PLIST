@@ -1,0 +1,6 @@
+@comment $OpenBSD$
+@bin bin/dino
+share/dino/
+share/dino/dino.glade
+share/dino/head.png
+share/dino/midisaurus.png

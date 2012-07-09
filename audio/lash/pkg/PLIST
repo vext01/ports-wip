@@ -1,0 +1,28 @@
+@comment $OpenBSD$
+%%SHARED%%
+@bin bin/lash_control
+@bin bin/lash_panel
+@bin bin/lash_save_button
+@bin bin/lashd
+include/lash-1.0/
+include/lash-1.0/lash/
+include/lash-1.0/lash/client_interface.h
+include/lash-1.0/lash/config.h
+include/lash-1.0/lash/event.h
+include/lash-1.0/lash/lash.h
+include/lash-1.0/lash/protocol.h
+include/lash-1.0/lash/types.h
+lib/liblash.a
+lib/liblash.la
+lib/pkgconfig/
+lib/pkgconfig/lash-1.0.pc
+share/lash/
+share/lash/dtds/
+share/lash/dtds/lash-project-1.0.dtd
+share/lash/icons/
+share/lash/icons/lash.svg
+share/lash/icons/lash.xcf
+share/lash/icons/lash_16px.png
+share/lash/icons/lash_24px.png
+share/lash/icons/lash_48px.png
+share/lash/icons/lash_96px.png

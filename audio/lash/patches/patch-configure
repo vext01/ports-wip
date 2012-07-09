@@ -1,0 +1,21 @@
+$OpenBSD$
+--- configure.orig	Mon Jul  9 10:54:38 2012
++++ configure	Mon Jul  9 10:56:29 2012
+@@ -20163,7 +20163,7 @@ if test "${ac_cv_lib_uuid_uuid_generate+set}" = set; t
+   echo $ECHO_N "(cached) $ECHO_C" >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-luuid  $LIBS"
++LIBS="-le2fs-uuid  $LIBS"
+ cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+ _ACEOF
+@@ -20229,7 +20229,7 @@ if test x$UUID_FOUND = xno; then
+ echo "$as_me: error: libuuid, from the e2fsprogs prackage, is required for lashd. see http://e2fsprogs.sourceforge.net/" >&2;}
+    { (exit 1); exit 1; }; }
+ fi
+-UUID_LIBS="-luuid"
++UUID_LIBS="-le2fs-uuid"
+ 
+ 
+ 

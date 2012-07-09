@@ -1,5 +1,5 @@
 @comment $OpenBSD$
-lib/ipe/7.1.2/ipelets/image.so
+lib/ipe/${V}/ipelets/image.so
 @lib lib/libipe.so.${LIBipe_VERSION}
 @lib lib/libipecairo.so.${LIBipecairo_VERSION}
 @lib lib/libipecanvas.so.${LIBipecanvas_VERSION}

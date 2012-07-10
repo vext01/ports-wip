@@ -18,7 +18,6 @@ include/girara/types.h
 include/girara/utils.h
 include/girara/version.h
 lib/libgirara-gtk2.a
-lib/libgirara-gtk2.so.0
 lib/pkgconfig/
 lib/pkgconfig/girara-gtk2.pc
 share/locale/

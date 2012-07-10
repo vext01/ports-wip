@@ -4,6 +4,8 @@ CATEGORIES ?=		textproc x11
 
 MAINTAINER ?=		Abel Abraham Camarillo Ojeda <acamari@the00z.org>
 
+MASTER_SITES_PLUGINS =	https://pwmt.org/projects/zathura/plugins/download/
+
 # MIT
 PERMIT_PACKAGE_CDROM ?=	Yes
 PERMIT_PACKAGE_FTP ?=	Yes

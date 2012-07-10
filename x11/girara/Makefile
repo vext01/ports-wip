@@ -27,7 +27,7 @@ WANTLIB += gdk-x11-2.0 gdk_pixbuf-2.0 gio-2.0 glib-2.0 gobject-2.0
 WANTLIB += gtk-x11-2.0 iconv intl m pango-1.0 pangocairo-1.0 pangoft2-1.0
 WANTLIB += pixman-1 png pthread-stubs xcb xcb-render xcb-shm z
 
-USE_GMAKE =		Yes
+USE_GMAKE =	Yes
 
 MAKE_FLAGS +=	QUIET=
 MAKE_FLAGS +=	CPPFLAGS="-I${LOCALBASE}/include -DGETTEXT_PACKAGE=\\\"girara\\\" -DLOCALEDIR=\\\"/usr/share/locale\\\""

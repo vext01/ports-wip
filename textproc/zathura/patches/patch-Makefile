@@ -1,0 +1,12 @@
+$OpenBSD$
+--- Makefile.orig	Tue Jul 10 16:49:29 2012
++++ Makefile	Tue Jul 10 16:50:22 2012
+@@ -171,6 +171,8 @@ install-headers: ${PROJECT}.pc
+ 	$(QUIET)install -m 644 ${PROJECT}.pc ${DESTDIR}${LIBDIR}/pkgconfig
+ 
+ install: all install-headers install-manpages
++	@echo "PREFIX is '${PREFIX}'"
++	@echo "DESTDIR is '${DESTDIR}'"
+ 	$(ECHO) installing executable file
+ 	$(QUIET)mkdir -m 755 -p ${DESTDIR}${PREFIX}/bin
+ 	$(QUIET)install -m 755 ${PROJECT} ${DESTDIR}${PREFIX}/bin

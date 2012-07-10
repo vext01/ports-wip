@@ -1,0 +1,3 @@
+libsigrokdecode is a shared library written in C which provides the
+basic API for running sigrok protocol decoders. The protocol decoders
+themselves are written in Python.

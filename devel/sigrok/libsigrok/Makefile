@@ -15,8 +15,6 @@ LIB_DEPENDS =		devel/libftdi \
 			devel/libusb1 \
 			archivers/libzip
 
-#USE_LIBTOOL =		Yes
-
 CONFIGURE_STYLE =	gnu
 
 .include <bsd.port.mk>

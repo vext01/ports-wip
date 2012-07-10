@@ -1,0 +1,8 @@
+@comment $OpenBSD$
+%%SHARED%%
+include/sigrok-proto.h
+include/sigrok.h
+lib/libsigrok.a
+lib/libsigrok.la
+lib/pkgconfig/
+lib/pkgconfig/libsigrok.pc

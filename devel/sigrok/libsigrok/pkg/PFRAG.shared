@@ -1,0 +1,2 @@
+@comment $OpenBSD$
+@lib lib/libsigrok.so.${LIBsigrok_VERSION}

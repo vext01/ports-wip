@@ -1,0 +1,12 @@
+$OpenBSD$
+--- hardware/common/serial.c.orig	Mon Jul  9 22:14:27 2012
++++ hardware/common/serial.c	Mon Jul  9 22:14:57 2012
+@@ -38,6 +38,8 @@
+ static HANDLE hdl;
+ #endif
+ 
++#define B460800	460800
++
+ static const char *serial_port_glob[] = {
+ 	/* Linux */
+ 	"/dev/ttyS*",

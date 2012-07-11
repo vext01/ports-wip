@@ -12,4 +12,10 @@ PERMIT_DISTFILES_CDROM ?=Yes
 PERMIT_DISTFILES_FTP ?=	Yes
 
 RUN_DEPENDS ?=	textproc/zathura
+LIB_DEPENDS ?=	x11/girara
+BUILD_DEPENDS ?=${RUN_DEPENDS} # just to satisfy dep checks
+
+MAKE_FLAGS ?=	VERBOSE=1
+
+NO_REGRESS ?=	Yes
 USE_GMAKE ?=	Yes

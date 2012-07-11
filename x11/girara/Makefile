@@ -8,7 +8,6 @@ GIRARA_SOMINOR = 0
 SHARED_LIBS +=		girara-gtk2 ${GIRARA_SOMAJOR}.${GIRARA_SOMINOR} # 1.0
 
 CATEGORIES =		x11
-
 HOMEPAGE =		http://pwmt.org/projects/girara/
 
 # zlib

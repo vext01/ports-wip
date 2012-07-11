@@ -42,6 +42,7 @@ typedef jack_default_audio_sample_t jack_sample_t;
 #define MAX_MIDI_DEV_NAME	16
 #define MAX_MIDI_PORT_NAME	32
 #define MAX_MIDI_BUFFER		1024
+#define MIO_NONBLOCK		1
 
 /* midi ports and their correposponding mio_* handles (if opened) */
 typedef struct _sndio_midi_dev

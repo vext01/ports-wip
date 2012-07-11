@@ -48,12 +48,17 @@ sndio_midi_add_dev(sndio_driver_t *driver, char *devname)
 		exit(1);
 	}
 
-	/*  open the mio device */
-	if ((hdl = mio_open(devname, MIO_IN | MIO_OUT, 0)) == NULL) {
+	/*
+	 * Open the mio device, must be non-blocking for input, we
+	 * can not afford to wait.
+	 */
+	if ((hdl = mio_open(devname, MIO_IN | MIO_OUT, MIO_NONBLOCK)) == NULL) {
 		jack_error("%s not usable: %s@%i\n",
 		    devname, __FILE__, __LINE__);
 		exit(1);
 	}
+
+	/* XXX mio_pollfd? XXX */
 
 	/*
 	 * Stuff everything into a sndio_midi_t and append to the

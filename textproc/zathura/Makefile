@@ -39,6 +39,8 @@ MAKE_FLAGS =	MANPREFIX=${PREFIX}/man \
 		VERBOSE=1
 FAKE_FLAGS =	PREFIX=${TRUEPREFIX}
 
+NO_REGRESS =	Yes
+
 pre-configure:
 	${SUBST_CMD} ${WRKSRC}/config.mk
 

@@ -12,7 +12,8 @@ WANTLIB += gobject-2.0 gtk-x11-2.0 iconv intl m pango-1.0 pangocairo-1.0
 WANTLIB += pangoft2-1.0 pixman-1 png poppler-glib pthread-stubs
 WANTLIB += xcb xcb-render xcb-shm z
 
-LIB_DEPENDS =	print/poppler
+LIB_DEPENDS +=	x11/girara	\
+		print/poppler
 
 .include <bsd.port.mk>
 

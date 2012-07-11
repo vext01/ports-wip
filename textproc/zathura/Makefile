@@ -30,7 +30,6 @@ BUILD_DEPENDS =	textproc/py-docutils
 RUN_DEPENDS =	devel/desktop-file-utils
 LIB_DEPENDS =	devel/atk \
 		graphics/gdk-pixbuf2 \
-		print/poppler \
 		x11/gtk+2 \
 		x11/girara
 

@@ -2,19 +2,19 @@
 
 COMMENT =		pdf viewer with vi-like keybindings
 DISTNAME =		zathura-0.2.0
+CATEGORIES =		textproc x11
 
 HOMEPAGE =		http://pwmt.org/projects/zathura/
-CATEGORIES =		textproc x11
 MAINTAINER =		Abel Abraham Camarillo Ojeda <acamari@the00z.org>
 
 # MIT
-PERMIT_PACKAGE_CDROM = Yes
-PERMIT_PACKAGE_FTP =   Yes
+PERMIT_PACKAGE_CDROM =	Yes
+PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
-PERMIT_DISTFILES_FTP = Yes
+PERMIT_DISTFILES_FTP =	Yes
 
 USE_GMAKE =    Yes
-USE_GROFF =    Yes
+#USE_GROFF =    Yes
 
 WANTLIB += GL X11 Xcomposite Xcursor Xdamage Xext Xfixes Xi Xinerama
 WANTLIB += Xrandr Xrender atk-1.0 c cairo expat fontconfig freetype

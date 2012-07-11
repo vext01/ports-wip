@@ -30,7 +30,6 @@ WANTLIB += pixman-1 png pthread-stubs xcb xcb-render xcb-shm z
 USE_GMAKE =	Yes
 
 MAKE_FLAGS +=	QUIET=
-MAKE_FLAGS +=	CPPFLAGS="-I${LOCALBASE}/include -DGETTEXT_PACKAGE=\\\"girara\\\" -DLOCALEDIR=\\\"/usr/share/locale\\\""
 MAKE_FLAGS +=	SOMAJOR=${GIRARA_SOMAJOR} SOMINOR=${GIRARA_SOMINOR}
 
 FAKE_FLAGS +=	DESTDIR=

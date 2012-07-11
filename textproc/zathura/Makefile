@@ -25,6 +25,7 @@ WANTLIB += sqlite3 xcb xcb-render xcb-shm z
 
 MASTER_SITES =	https://pwmt.org/projects/zathura/download/
 
+MODULES =	devel/gettext
 BUILD_DEPENDS =	textproc/py-docutils
 RUN_DEPENDS =	devel/desktop-file-utils
 LIB_DEPENDS =	devel/atk \

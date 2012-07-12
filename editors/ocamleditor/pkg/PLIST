@@ -1,7 +1,7 @@
 @comment $OpenBSD$
 %%native%%
 @bin bin/ocamleditor
-@bin bin/oebuild
+bin/oebuild
 share/pixmaps/
 share/pixmaps/ocamleditor/
 share/pixmaps/ocamleditor/arrow_last_14.png

@@ -41,6 +41,9 @@ WANTLIB += gtk-x11-2.0 iconv intl m pango-1.0 pangocairo-1.0 pangoft2-1.0
 WANTLIB += pixman-1 png pthread pthread-stubs xcb xcb-render xcb-shm
 WANTLIB += z
 
+# ocamleditor makes either a bytecode or a binary
+PKG_ARGS += -Dbyte=${MODOCAML_NATIVE:L:S/yes/0/:S/no/1/}
+
 post-extract:
 	mkdir ${WRKBUILD}/src/ocaml-src && \
 	for i in utils parsing typing; do \

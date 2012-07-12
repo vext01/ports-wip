@@ -2,7 +2,7 @@
 
 COMMENT =		source code editor and build tool for OCaml
 
-DISTNAME =		ocamleditor-1.7.2
+DISTNAME =		ocamleditor-1.7.3
 CATEGORIES =		editors devel
 HOMEPAGE =		http://ocamleditor.forge.ocamlcore.org
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
@@ -19,7 +19,9 @@ OCAML_BASEVERSION = \
 
 # When updating, it is not enough to bump DISTNAME version since
 # the url suffix changes per release.
-MASTER_SITES =	https://forge.ocamlcore.org/frs/download.php/858/
+# XXX - temp url
+MASTER_SITES =	https://forge.ocamlcore.org/tracker/download.php/141/646/1187/185/
+#MASTER_SITES =	https://forge.ocamlcore.org/frs/download.php/858/
 MASTER_SITES0 =	http://caml.inria.fr/pub/distrib/ocaml-${OCAML_BASEVERSION}/
 
 DISTFILES =	${DISTNAME}${EXTRACT_SUFX} \
@@ -48,7 +50,8 @@ post-extract:
 	done
 
 do-build:
-	cd ${WRKBUILD} && ocaml build.ml -with-compiler-libs
+	cd ${WRKBUILD} && ocaml build.ml -with-compiler-libs \
+		${MODOCAML_NATIVE:L:S/yes//:S/no/-byt/}
 
 do-install:
 	cd ${WRKBUILD} && ocaml build.ml -install -prefix ${PREFIX}

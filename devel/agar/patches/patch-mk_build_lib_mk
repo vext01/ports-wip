@@ -1,0 +1,12 @@
+$OpenBSD$
+--- mk/build.lib.mk.orig	Mon Mar  5 09:42:34 2012
++++ mk/build.lib.mk	Mon Mar  5 09:42:45 2012
+@@ -54,7 +54,7 @@ LIB_XOBJS?=
+ LIB_GUID?=
+ 
+ USE_LIBTOOL?=	Yes
+-LIBTOOL?=	${TOP}/mk/libtool/libtool
++LIBTOOL?=	${OUR_LIBTOOL}
+ LIBTOOL_COOKIE?=${TOP}/mk/libtool.ok
+ LTCONFIG?=	${TOP}/mk/libtool/ltconfig
+ LTCONFIG_GUESS?=${TOP}/mk/libtool/config.guess

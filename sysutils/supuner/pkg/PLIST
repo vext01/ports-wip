@@ -1,3 +1,0 @@
-@comment $OpenBSD$
-bin/supuner
-@man man/man1/supuner.1

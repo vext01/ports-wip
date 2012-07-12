@@ -16,6 +16,7 @@ PERMIT_DISTFILES_FTP =	Yes
 # Needs it's own source and parts of the ocaml compiler tree too
 OCAML_BASEVERSION = \
 	${OCAML_VERSION:C/([[:digit:]]+\.[[:digit:]]+)\.[[:digit:]]+/\1/}
+
 # When updating, it is not enough to bump DISTNAME version since
 # the url suffix changes per release.
 MASTER_SITES =	https://forge.ocamlcore.org/frs/download.php/858/

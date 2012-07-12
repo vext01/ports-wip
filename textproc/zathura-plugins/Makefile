@@ -1,3 +1,5 @@
+# $OpenBSD$
+
 SUBDIR =
 SUBDIR +=	zathura-pdf-poppler
 

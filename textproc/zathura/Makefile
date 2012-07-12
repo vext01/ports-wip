@@ -2,19 +2,18 @@
 
 COMMENT =		pdf viewer with vi-like keybindings
 DISTNAME =		zathura-0.2.0
+CATEGORIES =		textproc x11
 
 HOMEPAGE =		http://pwmt.org/projects/zathura/
-CATEGORIES =		textproc x11
 MAINTAINER =		Abel Abraham Camarillo Ojeda <acamari@the00z.org>
 
-# MIT
-PERMIT_PACKAGE_CDROM = Yes
-PERMIT_PACKAGE_FTP =   Yes
-PERMIT_DISTFILES_CDROM =Yes
-PERMIT_DISTFILES_FTP = Yes
+MODULES =		devel/gettext
 
-USE_GMAKE =    Yes
-USE_GROFF =    Yes
+# MIT
+PERMIT_PACKAGE_CDROM =	Yes
+PERMIT_PACKAGE_FTP =	Yes
+PERMIT_DISTFILES_CDROM =Yes
+PERMIT_DISTFILES_FTP =	Yes
 
 WANTLIB += GL X11 Xcomposite Xcursor Xdamage Xext Xfixes Xi Xinerama
 WANTLIB += Xrandr Xrender atk-1.0 c cairo expat fontconfig freetype
@@ -25,7 +24,6 @@ WANTLIB += sqlite3 xcb xcb-render xcb-shm z
 
 MASTER_SITES =	https://pwmt.org/projects/zathura/download/
 
-MODULES =	devel/gettext
 BUILD_DEPENDS =	textproc/py-docutils
 RUN_DEPENDS =	devel/desktop-file-utils
 LIB_DEPENDS =	devel/atk \
@@ -39,7 +37,11 @@ MAKE_FLAGS =	MANPREFIX=${PREFIX}/man \
 		VERBOSE=1
 FAKE_FLAGS =	PREFIX=${TRUEPREFIX}
 
-NO_REGRESS =	Yes
+USE_GMAKE =	Yes
+
+REGRESS_DEPENDS =	devel/check
+REGRESS_TARGET =	test
+REGRESS_IS_INTERACTIVE =X11
 
 pre-configure:
 	${SUBST_CMD} ${WRKSRC}/config.mk

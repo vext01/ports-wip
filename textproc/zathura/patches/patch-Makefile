@@ -1,6 +1,26 @@
 $OpenBSD$
---- Makefile.orig	Tue Jul 10 16:49:29 2012
-+++ Makefile	Tue Jul 10 16:50:22 2012
+--- Makefile.orig	Sat Jun  9 22:37:42 2012
++++ Makefile	Wed Jul 11 11:03:36 2012
+@@ -78,8 +78,8 @@ clean:
+ 		${DOBJECTS} ${PROJECT}-debug .depend ${PROJECT}.pc doc version.h \
+ 		*gcda *gcno $(PROJECT).info gcov *.tmp \
+ 		girara-version-check
+-	$(QUIET)make -C tests clean
+-	$(QUIET)make -C po clean
++	$(QUIET)${MAKE} -C tests clean
++	$(QUIET)${MAKE} -C po clean
+ 
+ ${PROJECT}-debug: ${DOBJECTS}
+ 	$(ECHO) CC -o $@
+@@ -105,7 +105,7 @@ gdb: debug
+ 	$(QUIET)cgdb ${PROJECT}-debug
+ 
+ test: ${OBJECTS}
+-	$(QUIET)make -C tests run
++	$(QUIET)${MAKE} -C tests run
+ 
+ dist: clean build-manpages
+ 	$(QUIET)mkdir -p ${PROJECT}-${VERSION}
 @@ -171,6 +171,8 @@ install-headers: ${PROJECT}.pc
  	$(QUIET)install -m 644 ${PROJECT}.pc ${DESTDIR}${LIBDIR}/pkgconfig
  

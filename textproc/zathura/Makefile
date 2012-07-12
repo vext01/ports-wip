@@ -1,7 +1,9 @@
 # $OpenBSD: Makefile,v 1.17 2012/02/21 22:34:19 sthen Exp $
 
+V =			0.2.0
 COMMENT =		pdf viewer with vi-like keybindings
-DISTNAME =		zathura-0.2.0
+DISTNAME =		zathura-${V}
+PKGNAME =		zathura-core-${V}
 CATEGORIES =		textproc x11
 
 HOMEPAGE =		http://pwmt.org/projects/zathura/

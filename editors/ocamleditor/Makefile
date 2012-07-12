@@ -54,6 +54,7 @@ do-build:
 		${MODOCAML_NATIVE:L:S/yes//:S/no/-byt/}
 
 do-install:
-	cd ${WRKBUILD} && ocaml build.ml -install -prefix ${PREFIX}
+	cd ${WRKBUILD} && ocaml build.ml -install -prefix ${PREFIX} \
+		${MODOCAML_NATIVE:L:S/yes//:S/no/-byt/}
 
 .include <bsd.port.mk>

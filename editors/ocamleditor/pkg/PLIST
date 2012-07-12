@@ -1,6 +1,6 @@
 @comment $OpenBSD$
 %%native%%
-@bin bin/ocamleditor
+%%byte%%
 bin/oebuild
 share/pixmaps/
 share/pixmaps/ocamleditor/

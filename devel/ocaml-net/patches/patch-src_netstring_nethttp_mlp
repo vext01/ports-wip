@@ -1,4 +1,8 @@
 $OpenBSD$
+
+Committed upstream:
+Improve Nethttp.Header.best_media_type: sort result by preference and
+specificness
 --- src/netstring/nethttp.mlp.orig	Wed Feb 29 19:02:52 2012
 +++ src/netstring/nethttp.mlp	Sun Jun 17 14:59:40 2012
 @@ -988,43 +988,31 @@ module Header = struct

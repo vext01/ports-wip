@@ -1,4 +1,9 @@
 $OpenBSD$
+
+Committed upstream:
+Netcgi connectors (SCGI, AJP, FCGI): unifying the ~sockaddr
+and ~port arguments. ~port now also assumes a loopback binding.
+(Suggested by Christopher Zimmermann).
 --- src/netcgi2/netcgi_ajp.ml.orig	Wed Feb 29 19:02:53 2012
 +++ src/netcgi2/netcgi_ajp.ml	Wed May 30 10:46:32 2012
 @@ -776,10 +776,13 @@ let run

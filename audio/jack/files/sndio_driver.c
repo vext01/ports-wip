@@ -369,24 +369,29 @@ static jack_nframes_t
 sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 {
 	struct pollfd	*pfds = NULL; /* if not NULL, we should free */
-	struct pollfd	*pfds_cur;
 	nfds_t num_sio_fds, nfds;
 	jack_time_t poll_ret;
 	int need_capture, need_playback;
+	int midi_needs_either;
 	int events, revents;
 	int midi_dno, num_mio_fds = 0;
 	int total_fds, pfds_filled;
+	int all_midi_idle;
+	int modulo = 0;
 
 	*status = 0;
 	*iodelay = 0;
 
-	need_capture = need_playback = 0;
+	need_capture = need_playback = midi_needs_either = 0;
 
 	if (driver->capture_channels > 0)
 		need_capture = 1;
 
 	if (driver->playback_channels > 0)
 		need_playback = 1;
+
+	if (driver->num_mio_devs > 0)
+		midi_needs_either = 1;
 
 	if (jack_get_microseconds() > driver->poll_next)
 	{
@@ -413,7 +418,7 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 
 	/* num_sio_fds and num_mio_fds are re-purposed from here on */
 
-	while (need_capture || need_playback)
+	while (need_capture || need_playback || midi_needs_either)
 	{
 		events = 0;
 		if (need_capture)
@@ -423,26 +428,27 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 			events |= POLLOUT;
 
 		/* fill the poll fd structs: first with sio */
-		pfds_cur = pfds;
+		//pfds_cur = pfds;
 		pfds_filled = 0;
 
-		if (num_sio_fds != sio_pollfd(driver->hdl, pfds, events)) {
+		if (num_sio_fds != sio_pollfd(
+			    driver->hdl, &pfds[pfds_filled], events)) {
 			jack_error("sndio_driver: sio_pollfd failed: %s@%i",
 				__FILE__, __LINE__);
 			goto fail;
 		}
-		pfds_cur += num_sio_fds;
+		//pfds_cur += num_sio_fds;
 		pfds_filled += num_sio_fds;
 
 		/* now fill the rest with mio */
 		for (midi_dno = 0; midi_dno < driver->num_mio_devs; midi_dno++) {
 			if (num_mio_fds !=
-			    mio_pollfd(driver->midi_devs[midi_dno]->mio_rw_handle, pfds, events)) {
+			    mio_pollfd(driver->midi_devs[midi_dno]->mio_rw_handle, &pfds[pfds_filled], events)) {
 				jack_error("sndio_driver: mio_pollfd failed: %s@%i",
 				    __FILE__, __LINE__);
 				goto fail;
 			}
-			pfds_cur += num_mio_fds;
+			//pfds_cur += num_mio_fds;
 			pfds_filled += num_mio_fds;
 		}
 
@@ -456,6 +462,7 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 
 		/* do the poll for sio */
 		nfds = poll(pfds, total_fds, 1000);
+		/* MIDI NEEDS A SEPARATE POLL XXX */
 		if (nfds == -1)
 		{
 			jack_error("sndio_driver: poll() error: %s: %s@%i",  
@@ -470,7 +477,6 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 		}
 
 		/* check which events occurred */
-		/* XXX midi */
 		revents = sio_revents(driver->hdl, pfds);
 		if (revents & (POLLERR | POLLHUP | POLLNVAL))
 		{
@@ -492,10 +498,14 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 			goto fail;
 		}
 
-
 		/* now do midi polls */
-		for (midi_dno = 0; midi_dno < driver->num_mio_devs; midi_dno++) {
-			revents = mio_revents(driver->hdl, pfds);
+		all_midi_idle = 1;
+		for (midi_dno = 0;
+		    midi_dno < driver->num_mio_devs; midi_dno++) {
+
+			revents = mio_revents(
+			    driver->midi_devs[midi_dno]->mio_rw_handle, pfds);
+
 			if (revents & (POLLERR | POLLHUP | POLLNVAL))
 			{
 				jack_error("sndio_driver: poll() error: %s@%i", 
@@ -503,20 +513,34 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 				goto fail;
 			}
 
-			if (revents & POLLIN)
-				printf("MIDI IN READY\n");
+			if ((revents & POLLIN) == 0)
+				all_midi_idle = 0;
 
-			if (revents & POLLOUT)
-				printf("MIDI OUT READY\n");
+			if ((revents & POLLOUT) == 0)
+				all_midi_idle = 0;
 
-			if (mio_eof(driver->hdl))
+			if (mio_eof(driver->midi_devs[midi_dno]->mio_rw_handle))
 			{
 				jack_error("sndio_driver: mio_eof(): %s@%i",
 				    __FILE__, __LINE__);
 				goto fail;
 			}
+
 		}
+		if (all_midi_idle)
+			midi_needs_either = 0;
+
+		modulo++;
+
+#if 0
+		if (modulo % 250 == 0)
+			printf("%d %d %d\n",
+			    need_capture, need_playback, midi_needs_either);
+#endif
 	}
+
+	printf("LALAL\n");
+
 	poll_ret = jack_get_microseconds();
 
 	if (driver->poll_next && poll_ret > driver->poll_next)

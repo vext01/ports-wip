@@ -90,7 +90,7 @@ typedef struct _sndio_driver
 
 	/* midi */
 	sndio_midi_dev_t	*midi_devs[MAX_MIDI_DEVS];
-	int num_midi_devs;
+	int num_mio_devs;
 
 } sndio_driver_t;
 

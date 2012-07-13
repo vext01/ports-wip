@@ -368,12 +368,14 @@ sndio_driver_stop (sndio_driver_t *driver)
 static jack_nframes_t
 sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 {
-	struct pollfd *pfds; /* for sio and all mio */
+	struct pollfd	*pfds = NULL; /* if not NULL, we should free */
+	struct pollfd	*pfds_cur;
 	nfds_t num_sio_fds, nfds;
 	jack_time_t poll_ret;
 	int need_capture, need_playback;
 	int events, revents;
 	int midi_dno, num_mio_fds = 0;
+	int total_fds, pfds_filled;
 
 	*status = 0;
 	*iodelay = 0;
@@ -395,18 +397,21 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 	/* count fds for sound and midi */
 	num_sio_fds = sio_nfds(driver->hdl);
 
-	for (midi_dno = 0; midi_dno < driver->num_midi_devs; midi_dno++) {
+	for (midi_dno = 0; midi_dno < driver->num_mio_devs; midi_dno++) {
 		num_mio_fds +=
 		    mio_nfds(driver->midi_devs[midi_dno]->mio_rw_handle);
 	}
 
 	/* allocate space for pollfds */
-	pfds = calloc(num_sio_fds + num_mio_fds, sizeof(*pfds));
+	total_fds = num_sio_fds + num_mio_fds;
+	pfds = calloc(total_fds, sizeof(*pfds));
 	if (pfds == NULL) {
 		jack_error("failed to allocate: %s@%i\n", __FILE__, __LINE__);
 		*status = -1;
 		return 0;
 	}
+
+	/* num_sio_fds and num_mio_fds are re-purposed from here on */
 
 	while (need_capture || need_playback)
 	{
@@ -417,34 +422,61 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 		if (need_playback)
 			events |= POLLOUT;
 
+		/* fill the poll fd structs: first with sio */
+		pfds_cur = pfds;
+		pfds_filled = 0;
+
 		if (num_sio_fds != sio_pollfd(driver->hdl, pfds, events)) {
 			jack_error("sndio_driver: sio_pollfd failed: %s@%i",
 				__FILE__, __LINE__);
-			*status = -1;
-			return 0;
+			goto fail;
 		}
-		nfds = poll(pfds, num_sio_fds, 1000);
+		pfds_cur += num_sio_fds;
+		pfds_filled += num_sio_fds;
+
+		/* now fill the rest with mio */
+		for (midi_dno = 0; midi_dno < driver->num_mio_devs; midi_dno++) {
+			if (num_mio_fds !=
+			    mio_pollfd(driver->midi_devs[midi_dno]->mio_rw_handle, pfds, events)) {
+				jack_error("sndio_driver: mio_pollfd failed: %s@%i",
+				    __FILE__, __LINE__);
+				goto fail;
+			}
+			pfds_cur += num_mio_fds;
+			pfds_filled += num_mio_fds;
+		}
+
+		/* Be certain we filled all pfds */
+		/* XXX can remove once we are happy */
+		if (pfds_filled != total_fds) {
+			jack_error("sndio_driver: short pfd fill: %s@%i",
+			    __FILE__, __LINE__);
+			goto fail;
+		}
+
+		/* do the poll */
+		nfds = poll(pfds, total_fds, 1000);
 		if (nfds == -1)
 		{
 			jack_error("sndio_driver: poll() error: %s: %s@%i",  
 				strerror(errno), __FILE__, __LINE__);
-			*status = -1;
-			return 0;
+			goto fail;
 		}
 		else if (nfds == 0)
 		{
 			jack_error("sndio_driver: poll() time out: %s@%i",  
 				__FILE__, __LINE__);
-			*status = -1;
-			return 0;
+			goto fail;
 		}
+
+		/* check which events occurred */
+		/* XXX midi */
 		revents = sio_revents(driver->hdl, pfds);
 		if (revents & (POLLERR | POLLHUP | POLLNVAL))
 		{
 			jack_error("sndio_driver: poll() error: %s@%i",  
 				__FILE__, __LINE__);
-			*status = -1;
-			return 0;
+			goto fail;
 		}
 
 		if (revents & POLLIN)
@@ -457,8 +489,7 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 		{
 			jack_error("sndio_driver: sio_eof(): %s@%i",
 				__FILE__, __LINE__);
-			*status = -1;
-			return 0;
+			goto fail;
 		}
 	}
 	poll_ret = jack_get_microseconds();
@@ -471,7 +502,13 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 
 	driver->last_wait_ust = poll_ret;
 
+	/* success */
+	free(pfds);
 	return driver->period_size;
+fail:
+	free(pfds);
+	*status = -1;
+	return (0);
 }
 
 
@@ -922,7 +959,7 @@ sndio_driver_new (char *dev, jack_client_t *client,
 	driver->client = client;
 
 	/* add midi devices */
-	driver->num_midi_devs = 0;
+	driver->num_mio_devs = 0;
 	for (midi_dev_np = midi_dev_names; *midi_dev_np != NULL; midi_dev_np++) {
 		printf("I SAW %s\n", *midi_dev_np);
 		sndio_midi_add_dev(driver, *midi_dev_np);
@@ -986,7 +1023,7 @@ driver_initialize (jack_client_t *client, JSList * params)
 	char *dev = NULL;
 	int ignorehwbuf = 0;
 	char *midi_dev_names[MAX_MIDI_DEVS + 1]; /* sentinal terminated */
-	int num_midi_devs = 0;
+	int num_mio_devs = 0;
 
 	memset(midi_dev_names, 0, sizeof(midi_dev_names));
 
@@ -1029,15 +1066,15 @@ driver_initialize (jack_client_t *client, JSList * params)
 				break;
 			case 'm':
 				printf("ADD MIDI: %s\n", param->value.str);
-				if (num_midi_devs >= MAX_MIDI_DEVS - 1) {
+				if (num_mio_devs >= MAX_MIDI_DEVS - 1) {
 					jack_error("too many midi devices: %s@%i\n",
 					    __FILE__, __LINE__);
 				}
-				if ((midi_dev_names[num_midi_devs] = strdup(param->value.str)) == NULL) {
+				if ((midi_dev_names[num_mio_devs] = strdup(param->value.str)) == NULL) {
 					jack_error("could not strdup: %s@%i\n", __FILE__, __LINE__);
 					exit(1);
 				}
-				num_midi_devs++;
+				num_mio_devs++;
 				break;
 		}
 		pnode = jack_slist_next(pnode);

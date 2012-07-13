@@ -42,7 +42,7 @@ sndio_midi_add_dev(sndio_driver_t *driver, char *devname)
 	printf("Initialising MIDI port: %s\n", devname);
 
 	/* sanity */
-	if (driver->num_midi_devs >= MAX_MIDI_DEVS - 1) {
+	if (driver->num_mio_devs >= MAX_MIDI_DEVS - 1) {
 		jack_error("too many midi devices: %s@%i\n",
 		    __FILE__, __LINE__);
 		exit(1);
@@ -73,8 +73,8 @@ sndio_midi_add_dev(sndio_driver_t *driver, char *devname)
 
 	midi_dev->mio_rw_handle = hdl;
 	strlcpy(midi_dev->device_name, devname, MAX_MIDI_DEV_NAME);
-	driver->midi_devs[driver->num_midi_devs] = midi_dev;
-	driver->num_midi_devs++;
+	driver->midi_devs[driver->num_mio_devs] = midi_dev;
+	driver->num_mio_devs++;
 	/* NB: we cannot make jack ports yet until the driver is registered */
 }
 
@@ -87,7 +87,7 @@ sndio_midi_create_ports(sndio_driver_t *driver)
 	char			portname_in[MAX_MIDI_PORT_NAME];
 	char			portname_out[MAX_MIDI_PORT_NAME];
 
-	for (i = 0; i < driver->num_midi_devs; i++) {
+	for (i = 0; i < driver->num_mio_devs; i++) {
 
 		midi_dev = driver->midi_devs[i];
 
@@ -164,7 +164,7 @@ sndio_midi_write(sndio_driver_t *driver, jack_nframes_t nframes)
 	jack_nframes_t		num_events;
 	jack_midi_event_t	midi_event;
 
-	for (m_dev_no = 0; m_dev_no < driver->num_midi_devs; m_dev_no++) {
+	for (m_dev_no = 0; m_dev_no < driver->num_mio_devs; m_dev_no++) {
 		midi_dev = driver->midi_devs[m_dev_no];
 
 		buf = jack_port_get_buffer(midi_dev->out_port, nframes);

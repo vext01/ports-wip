@@ -2,12 +2,12 @@
 
 COMMENT =		source code editor and build tool for OCaml
 
-DISTNAME =		ocamleditor-1.7.3
+DISTNAME =		ocamleditor-1.7.4
 CATEGORIES =		editors devel
 HOMEPAGE =		http://ocamleditor.forge.ocamlcore.org
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
 
-# GPLv3
+# GPLv3+
 PERMIT_PACKAGE_CDROM =	Yes
 PERMIT_PACKAGE_FTP =	Yes
 PERMIT_DISTFILES_CDROM =Yes
@@ -19,9 +19,7 @@ OCAML_BASEVERSION = \
 
 # When updating, it is not enough to bump DISTNAME version since
 # the url suffix changes per release.
-# XXX - temp url
-MASTER_SITES =	https://forge.ocamlcore.org/tracker/download.php/141/646/1187/185/
-#MASTER_SITES =	https://forge.ocamlcore.org/frs/download.php/858/
+MASTER_SITES =	https://forge.ocamlcore.org/frs/download.php/931/
 MASTER_SITES0 =	http://caml.inria.fr/pub/distrib/ocaml-${OCAML_BASEVERSION}/
 
 DISTFILES =	${DISTNAME}${EXTRACT_SUFX} \

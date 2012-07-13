@@ -368,11 +368,12 @@ sndio_driver_stop (sndio_driver_t *driver)
 static jack_nframes_t
 sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 {
-	struct pollfd pfd;
-	nfds_t snfds, nfds;
+	struct pollfd *pfds; /* for sio and all mio */
+	nfds_t num_sio_fds, nfds;
 	jack_time_t poll_ret;
 	int need_capture, need_playback;
 	int events, revents;
+	int midi_dno, num_mio_fds = 0;
 
 	*status = 0;
 	*iodelay = 0;
@@ -391,7 +392,21 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 		driver->poll_next = 0;
 	}
 
-	snfds = sio_nfds(driver->hdl);
+	/* count fds for sound and midi */
+	num_sio_fds = sio_nfds(driver->hdl);
+
+	for (midi_dno = 0; midi_dno < driver->num_midi_devs; midi_dno++) {
+		num_mio_fds +=
+		    mio_nfds(driver->midi_devs[midi_dno]->mio_rw_handle);
+	}
+
+	/* allocate space for pollfds */
+	pfds = calloc(num_sio_fds + num_mio_fds, sizeof(*pfds));
+	if (pfds == NULL) {
+		jack_error("failed to allocate: %s@%i\n", __FILE__, __LINE__);
+		*status = -1;
+		return 0;
+	}
 
 	while (need_capture || need_playback)
 	{
@@ -402,13 +417,13 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 		if (need_playback)
 			events |= POLLOUT;
 
-		if (snfds != sio_pollfd(driver->hdl, &pfd, events)) {
+		if (num_sio_fds != sio_pollfd(driver->hdl, pfds, events)) {
 			jack_error("sndio_driver: sio_pollfd failed: %s@%i",
 				__FILE__, __LINE__);
 			*status = -1;
 			return 0;
 		}
-		nfds = poll(&pfd, snfds, 1000);
+		nfds = poll(pfds, num_sio_fds, 1000);
 		if (nfds == -1)
 		{
 			jack_error("sndio_driver: poll() error: %s: %s@%i",  
@@ -423,7 +438,7 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 			*status = -1;
 			return 0;
 		}
-		revents = sio_revents(driver->hdl, &pfd);
+		revents = sio_revents(driver->hdl, pfds);
 		if (revents & (POLLERR | POLLHUP | POLLNVAL))
 		{
 			jack_error("sndio_driver: poll() error: %s@%i",  

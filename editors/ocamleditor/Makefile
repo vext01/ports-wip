@@ -59,5 +59,6 @@ do-build:
 do-install:
 	cd ${WRKBUILD} && ocaml build.ml -install -prefix ${PREFIX} \
 		${MODOCAML_NATIVE:L:S/yes//:S/no/-byt/}
+	chmod -R 755 ${PREFIX}/share/pixmaps/ocamleditor
 
 .include <bsd.port.mk>

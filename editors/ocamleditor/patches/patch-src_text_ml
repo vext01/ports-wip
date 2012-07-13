@@ -1,12 +1,12 @@
 $OpenBSD$
---- src/text.ml.orig	Fri Jul 13 09:57:30 2012
-+++ src/text.ml	Fri Jul 13 09:58:03 2012
-@@ -617,7 +617,7 @@ object (self)
-                     if iter#equal buffer#end_iter && iter#line_index = 0 then begin
-                       (* Fix for draw_current_line_background *)
-                       drawable#set_foreground current_line_bg_color;
--                      drawable#rectangle ~x:self#left_margin ~y ~filled:true ~width:w0 ~height:h ();
-+                      drawable#rectangle ~x:(self#left_margin - 2) ~y ~filled:true ~width:w0 ~height:h ();
-                     end;
+--- src/text.ml.orig	Fri Jul 13 12:26:18 2012
++++ src/text.ml	Fri Jul 13 12:27:59 2012
+@@ -622,7 +622,7 @@ object (self)
                      drawable#set_line_attributes ~width:1 ~style:`ON_OFF_DASH ();
                      drawable#set_foreground current_line_border_color;
+                     Gdk.GC.set_dashes drawable#gc ~offset:1 [1; 2];
+-                    drawable#rectangle ~x:(self#left_margin - 1) ~y ~filled:false
++                    drawable#rectangle ~x:(self#left_margin - 2) ~y ~filled:false
+                       ~width:(w0 - adjust - self#left_margin) ~height:(h - adjust) ();
+                   | _ -> ()
+               end;

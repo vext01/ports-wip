@@ -454,7 +454,7 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 			goto fail;
 		}
 
-		/* do the poll */
+		/* do the poll for sio */
 		nfds = poll(pfds, total_fds, 1000);
 		if (nfds == -1)
 		{
@@ -492,12 +492,13 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 			goto fail;
 		}
 
-		/* Check if midi work is queued */
+
+		/* now do midi polls */
 		for (midi_dno = 0; midi_dno < driver->num_mio_devs; midi_dno++) {
 			revents = mio_revents(driver->hdl, pfds);
 			if (revents & (POLLERR | POLLHUP | POLLNVAL))
 			{
-				jack_error("sndio_driver: poll() error: %s@%i",  
+				jack_error("sndio_driver: poll() error: %s@%i", 
 				    __FILE__, __LINE__);
 				goto fail;
 			}

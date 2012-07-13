@@ -1,0 +1,4 @@
+@comment $OpenBSD$
+lib/ocaml/stublibs/dllnetaccel_c.so
+lib/ocaml/stublibs/dllnetsys.so
+lib/ocaml/stublibs/dllrpc_auth_local.so

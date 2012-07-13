@@ -491,6 +491,30 @@ sndio_driver_wait (sndio_driver_t *driver, int *status, float *iodelay)
 				__FILE__, __LINE__);
 			goto fail;
 		}
+
+		/* Check if midi work is queued */
+		for (midi_dno = 0; midi_dno < driver->num_mio_devs; midi_dno++) {
+			revents = mio_revents(driver->hdl, pfds);
+			if (revents & (POLLERR | POLLHUP | POLLNVAL))
+			{
+				jack_error("sndio_driver: poll() error: %s@%i",  
+				    __FILE__, __LINE__);
+				goto fail;
+			}
+
+			if (revents & POLLIN)
+				printf("MIDI IN READY\n");
+
+			if (revents & POLLOUT)
+				printf("MIDI OUT READY\n");
+
+			if (mio_eof(driver->hdl))
+			{
+				jack_error("sndio_driver: mio_eof(): %s@%i",
+				    __FILE__, __LINE__);
+				goto fail;
+			}
+		}
 	}
 	poll_ret = jack_get_microseconds();
 

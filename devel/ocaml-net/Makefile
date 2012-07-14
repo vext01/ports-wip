@@ -36,6 +36,8 @@ ALL_TARGET =	all ${MODOCAML_NATIVE:S/Yes/opt/:S/No//}
 pre-fake:
 	${INSTALL_DATA_DIR} ${PREFIX}/lib/ocaml/site-lib
 	${INSTALL_DATA_DIR} ${PREFIX}/lib/ocaml/stublibs
+	# trick ocamlfind into installing shared objects into
+	# /usr/local/lib/ocaml/ld.conf registered directory
 	ln -s ../stublibs ${PREFIX}/lib/ocaml/site-lib/
 
 post-install:

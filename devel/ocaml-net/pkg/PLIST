@@ -396,6 +396,7 @@ lib/ocaml/site-lib/netstring/xdr_mstring.cmi
 lib/ocaml/site-lib/netstring/xdr_mstring.mli
 lib/ocaml/site-lib/netsys/
 lib/ocaml/site-lib/netsys/META
+lib/ocaml/site-lib/netsys/libnetsys.a
 lib/ocaml/site-lib/netsys/netexn.cmi
 lib/ocaml/site-lib/netsys/netexn.mli
 lib/ocaml/site-lib/netsys/netlog.cmi

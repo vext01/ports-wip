@@ -514,6 +514,10 @@ lib/ocaml/site-lib/smtp/META
 lib/ocaml/site-lib/smtp/netsmtp.cmi
 lib/ocaml/site-lib/smtp/netsmtp.mli
 lib/ocaml/site-lib/smtp/smtp.cma
+@comment lib/ocaml/site-lib/stublibs
+@comment lib/ocaml/stublibs/dllnetaccel_c.so.owner
+@comment lib/ocaml/stublibs/dllnetsys.so.owner
+@comment lib/ocaml/stublibs/dllrpc_auth_local.so.owner
 share/doc/ocamlnet/
 share/doc/ocamlnet/ChangeLog
 share/doc/ocamlnet/LICENSE

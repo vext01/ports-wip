@@ -471,8 +471,10 @@ sndio_driver_run_cycle (sndio_driver_t *driver)
 		return -1;
 
 	/* service midi */
+#if 0
 	sndio_midi_read(driver, nframes);
 	sndio_midi_write(driver, nframes);
+#endif
 
 	return driver->engine->run_cycle(driver->engine, nframes, iodelay);
 }
@@ -718,6 +720,11 @@ sndio_driver_write (sndio_driver_t *driver, jack_nframes_t nframes)
 	jack_sample_t *portbuf;
 	JSList *node;
 	jack_port_t *port;
+
+
+	/* service midi */
+	sndio_midi_read(driver, nframes);
+	sndio_midi_write(driver, nframes);
 
 	if (driver->engine->freewheeling || driver->playback_channels == 0)
 		return 0;

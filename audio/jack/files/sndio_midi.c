@@ -203,7 +203,7 @@ sndio_midi_read(sndio_driver_t *driver, jack_nframes_t nframes)
 		if (bytes_read == 0)
 			continue; /* no midi in work for that dev*/
 
-		printf("MIDI READ of %u bytes\n", bytes_read);
+		printf("MIDI READ of %lu bytes\n", bytes_read);
 
 		/* otherwise we are throwing bytes into the jack port */
 		port_buf = jack_port_get_buffer(midi_dev->in_port, nframes);

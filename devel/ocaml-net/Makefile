@@ -36,10 +36,9 @@ ALL_TARGET =	all ${MODOCAML_NATIVE:S/Yes/opt/:S/No//}
 pre-fake:
 	${INSTALL_DATA_DIR} ${PREFIX}/lib/ocaml/site-lib
 	${INSTALL_DATA_DIR} ${PREFIX}/lib/ocaml/stublibs
-	# trick ocamlfind into installing shared objects into
-	# /usr/local/lib/ocaml/ld.conf registered directory
 	ln -s ../stublibs ${PREFIX}/lib/ocaml/site-lib/
 
+EXAMPLEDIR =	${PREFIX}/share/examples/ocaml-net
 post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/ocamlnet/html
 	${INSTALL_DATA} ${WRKSRC}/LICENSE ${PREFIX}/share/doc/ocamlnet/
@@ -47,5 +46,8 @@ post-install:
 	${INSTALL_DATA} \
 	    ${WRKSRC}/doc/html-main/* \
 	    ${PREFIX}/share/doc/ocamlnet/html/
+	${INSTALL_DATA_DIR} ${EXAMPLEDIR}
+	cp -r ${WRKSRC}/examples/* ${EXAMPLEDIR}
+	chown -R ${SHAREOWN}:${SHAREGRP} ${EXAMPLEDIR}
 
 .include <bsd.port.mk>

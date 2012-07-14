@@ -34,7 +34,7 @@ MAKE_FLAGS += CFLAGS_MISC="${CFLAGS}"
 LIBS_NATIVE =	gmp.a gmp.cmxa
 LIBS_OTHER =	libmlgmp.a gmp.cma gmp.cmi
 MAKE_FLAGS +=	LIBS="${LIBS_OTHER} ${MODOCAML_NATIVE:L:S/yes/${LIBS_NATIVE}/:S/no//}"
-MAKE_FLAGS +=	TESTS="test_suite ${MODOCAML_NATIVE:L:S/yes/testsuite.opt/:S/no//}"
+MAKE_FLAGS +=	TESTS="test_suite ${MODOCAML_NATIVE:L:S/yes/test_suite.opt/:S/no//}"
 MAKE_FLAGS +=	TESTS_RUN="tests-nonative ${MODOCAML_NATIVE:L:S/yes/tests-native/:S/no//}"
 
 REGRESS_TARGET =	tests

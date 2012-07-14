@@ -23,10 +23,11 @@ WANTLIB =		c glpk gmp gmpxx m stdc++
 
 MASTER_SITES =		ftp://ftp.cs.unipr.it/pub/ppl/releases/1.0/
 
-BUILD_DEPENDS +=	${MODOCAML_BUILD_DEPENDS}
+BUILD_DEPENDS +=	${MODOCAML_BUILD_DEPENDS} \
+			devel/ocaml-mlgmp
 LIB_DEPENDS =		devel/gmp \
 			devel/glpk
-RUN_DEPENDS =		devel/ocaml-gmp # XXX ocaml only
+RUN_DEPENDS =		devel/ocaml-mlgmp
 
 USE_GMAKE =		Yes
 USE_LIBTOOL =		Yes

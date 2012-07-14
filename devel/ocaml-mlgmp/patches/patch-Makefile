@@ -1,8 +1,9 @@
 $OpenBSD$
 
  - Allow overide of includes and libs.
- - Fix DESTDIR clash
- - Honour CFLAGS
+ - Fix DESTDIR clash.
+ - Honour CFLAGS.
+ - Allow bytecode-only compilation.
 
 --- Makefile.orig	Fri Feb 24 08:17:29 2012
 +++ Makefile	Sat Jul 14 15:46:26 2012

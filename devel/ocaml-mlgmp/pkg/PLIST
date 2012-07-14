@@ -1,0 +1,9 @@
+@comment $OpenBSD$
+lib/ocaml/
+lib/ocaml/gmp/
+lib/ocaml/gmp/gmp.a
+lib/ocaml/gmp/gmp.cma
+lib/ocaml/gmp/gmp.cmi
+lib/ocaml/gmp/gmp.cmxa
+lib/ocaml/gmp/gmp.mli
+lib/ocaml/gmp/libmlgmp.a

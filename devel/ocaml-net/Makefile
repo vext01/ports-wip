@@ -1,6 +1,6 @@
 # $OpenBSD$
 
-COMMENT =	OCaml Internet protocols and helper data structures
+COMMENT =	Ocamlnet: foundation library focused on internet protocols
 CATEGORIES =	devel www mail
 
 V =		3.5.1
@@ -9,6 +9,8 @@ PKGNAME =	ocaml-net-${V}
 
 MASTER_SITES =	http://download.camlcity.org/download/
 HOMEPAGE =	http://projects.camlcity.org/projects/ocamlnet.html
+
+MAINTAINER =	Christopher Zimmermann <madroach@zakweb.de>
 
 # Mostly zlib/png, http server module is GPL
 PERMIT_PACKAGE_FTP =		Yes

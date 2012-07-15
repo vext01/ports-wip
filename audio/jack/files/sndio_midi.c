@@ -50,7 +50,7 @@ sndio_midi_add_dev(sndio_driver_t *driver, char *devname)
 
 	/*
 	 * Open the mio device, must be non-blocking for input, we
-	 * can not afford to wait.
+	 * can not afford to wait as we are interleaved with audio
 	 */
 	if ((hdl = mio_open(devname, MIO_IN | MIO_OUT, MIO_NONBLOCK)) == NULL) {
 		jack_error("%s not usable: %s@%i\n",
@@ -182,5 +182,33 @@ sndio_midi_write(sndio_driver_t *driver, jack_nframes_t nframes)
 			sndio_debug_print_midi_event(&midi_event);
 			mio_write(midi_dev->mio_rw_handle, midi_event.buffer, midi_event.size);
 		}
+	}
+}
+
+
+void
+sndio_midi_read(sndio_driver_t *driver, jack_nframes_t nframes)
+{
+	int			 m_dev_no = 0;
+	sndio_midi_dev_t	*midi_dev;
+	size_t			 bytes_read;
+	void			*port_buf;
+	unsigned char		 mio_in_buf[MAX_MIDI_BUFFER];
+
+	for (m_dev_no = 0; m_dev_no < driver->num_mio_devs; m_dev_no++) {
+		midi_dev = driver->midi_devs[m_dev_no];
+		bytes_read = mio_read(
+		    midi_dev->mio_rw_handle, mio_in_buf, MAX_MIDI_BUFFER);
+
+		if (bytes_read == 0)
+			continue; /* no midi in work for that dev*/
+
+		printf("MIDI READ of %lu bytes\n", bytes_read);
+
+		/* otherwise we are throwing bytes into the jack port */
+		port_buf = jack_port_get_buffer(midi_dev->in_port, nframes);
+		if (jack_midi_event_write(
+		    port_buf, nframes, mio_in_buf, bytes_read) != 0)
+			jack_error("midi input under-run\n");
 	}
 }

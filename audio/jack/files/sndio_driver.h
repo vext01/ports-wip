@@ -95,8 +95,9 @@ typedef struct _sndio_driver
 } sndio_driver_t;
 
 /* sndio_midi.c */
-void		sndio_midi_add_dev(sndio_driver_t *driver, char *devname);
-void		sndio_midi_write(sndio_driver_t *driver, jack_nframes_t nframes);
-void		sndio_midi_create_ports(sndio_driver_t *driver);
+void	sndio_midi_add_dev(sndio_driver_t *driver, char *devname);
+void	sndio_midi_write(sndio_driver_t *driver, jack_nframes_t nframes);
+void	sndio_midi_read(sndio_driver_t *driver, jack_nframes_t nframes);
+void	sndio_midi_create_ports(sndio_driver_t *driver);
 
 #endif

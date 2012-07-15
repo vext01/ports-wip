@@ -1,6 +1,5 @@
 @comment $OpenBSD$
 %%native%%
-lib/ocaml/
 lib/ocaml/gmp/
 lib/ocaml/gmp/gmp.cma
 lib/ocaml/gmp/gmp.cmi

@@ -1,6 +1,6 @@
 # $OpenBSD$
 
-COMMENT =	Ocamlnet: foundation library focused on internet protocols
+COMMENT =	the Ocamlnet internet protocol foundation library
 CATEGORIES =	devel www mail
 
 V =		3.5.1

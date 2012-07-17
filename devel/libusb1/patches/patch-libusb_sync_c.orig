@@ -1,0 +1,37 @@
+$OpenBSD$
+--- libusb/sync.c.orig	Tue Jul 17 17:01:41 2012
++++ libusb/sync.c	Tue Jul 17 17:03:48 2012
+@@ -157,6 +157,8 @@ static int do_sync_bulk_transfer(struct libusb_device_
+ 	unsigned char endpoint, unsigned char *buffer, int length,
+ 	int *transferred, unsigned int timeout, unsigned char type)
+ {
++	printf("EDDD: do_sync_bulk_transfer\n");
++
+ 	struct libusb_transfer *transfer = libusb_alloc_transfer(0);
+ 	int completed = 0;
+ 	int r;
+@@ -170,6 +172,7 @@ static int do_sync_bulk_transfer(struct libusb_device_
+ 
+ 	r = libusb_submit_transfer(transfer);
+ 	if (r < 0) {
++		printf("libusb_submit_transfer failed\n");
+ 		libusb_free_transfer(transfer);
+ 		return r;
+ 	}
+@@ -177,6 +180,7 @@ static int do_sync_bulk_transfer(struct libusb_device_
+ 	while (!completed) {
+ 		r = libusb_handle_events_completed(HANDLE_CTX(dev_handle), &completed);
+ 		if (r < 0) {
++			printf("libusb_handle_events_completed failed");
+ 			if (r == LIBUSB_ERROR_INTERRUPTED)
+ 				continue;
+ 			libusb_cancel_transfer(transfer);
+@@ -212,6 +216,8 @@ static int do_sync_bulk_transfer(struct libusb_device_
+ 	}
+ 
+ 	libusb_free_transfer(transfer);
++	if (r != 0)
++		printf("Something else failed\n");
+ 	return r;
+ }
+ 

@@ -1,0 +1,40 @@
+$OpenBSD$
+--- libusb/io.c.orig	Tue Jul 17 17:07:50 2012
++++ libusb/io.c	Tue Jul 17 17:10:24 2012
+@@ -1285,6 +1285,7 @@ void API_EXPORTED libusb_free_transfer(struct libusb_t
+  * by the operating system.
+  * \returns another LIBUSB_ERROR code on other failure
+  */
++#include <stdio.h>
+ int API_EXPORTED libusb_submit_transfer(struct libusb_transfer *transfer)
+ {
+ 	struct libusb_context *ctx = TRANSFER_CTX(transfer);
+@@ -1298,6 +1299,7 @@ int API_EXPORTED libusb_submit_transfer(struct libusb_
+ 	itransfer->flags = 0;
+ 	r = calculate_timeout(itransfer);
+ 	if (r < 0) {
++		printf("calculate_timeout failed\n");
+ 		r = LIBUSB_ERROR_OTHER;
+ 		goto out;
+ 	}
+@@ -1317,8 +1319,10 @@ int API_EXPORTED libusb_submit_transfer(struct libusb_
+ 			{ itransfer->timeout.tv_sec, itransfer->timeout.tv_usec * 1000 } };
+ 		usbi_dbg("arm timerfd for timeout in %dms (first in line)", transfer->timeout);
+ 		r = timerfd_settime(ctx->timerfd, TFD_TIMER_ABSTIME, &it, NULL);
+-		if (r < 0)
++		if (r < 0) {
++			printf("timerfd_settime failed\n");
+ 			r = LIBUSB_ERROR_OTHER;
++		}
+ 	}
+ #else
+ 	(void)first;
+@@ -1326,6 +1330,8 @@ int API_EXPORTED libusb_submit_transfer(struct libusb_
+ 
+ out:
+ 	usbi_mutex_unlock(&itransfer->lock);
++	if (r != 0)
++		printf("usbi_backend->submit_transfer failed");
+ 	return r;
+ }
+ 
